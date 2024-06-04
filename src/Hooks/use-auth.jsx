@@ -24,20 +24,16 @@ const useAuth = () => {
   const isSignUpError = useSelector(selectStudentIsSignUpError);
   const navigate=useNavigate()
   const handleLogin =  (data) => {
-   
+
     dispatch(studentLogin(data)).then(()=>{
       if (isLoggedIn) {
         navigate("/");
       }
     })
-    
+
   };
   const handleSignUp=(data)=>{
-    dispatch(studentSignUp(data)).then(()=>{
-      if (isLoggedIn) {
-        navigate("/");
-      }
-    })
+    dispatch(studentSignUp(data))
   }
 
   return {

@@ -3,7 +3,7 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("student", "profile", axiosInstance);
+const apiFeature = new ApiFeatures("users", "profile", axiosInstance);
 
 // Async thunk for student login
 export const studentLogin = createAsyncThunk(
@@ -57,7 +57,7 @@ export const studentSlice = createSlice({
       state.studentInfo = null;
       state.isLoggedIn = false;
       state.studentToken = null;
-    
+
     },
   },
   extraReducers: (builder) => {
