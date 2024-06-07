@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useAuth from "../../Hooks/use-auth";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -26,43 +27,64 @@ function Copyright() {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export const SignUp = () => {
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    countryCode: "",
+    phoneNumber: "",
+    city: "",
+    state: "",
+    country: "",
+    street: "",
+    postalCode: ""
+  });
 
-  const handlePhoneNumberChange = (event) => {
-    const value = event.target.value;
-    const phoneNumberPattern = /^[0-9]*$/;
-    setPhoneNumberError(!phoneNumberPattern.test(value));
-  };
+  const { isLoading, errorMessage, isError, handleSignUp } = useAuth();
 
-  const handleEmailChange = (event) => {
-    const value = event.target.value;
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    setEmailError(!emailPattern.test(value));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      firstname: data.get("firstName"),
-      lastname: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      gender: data.get("gender"),
-      countryCode: data.get("countryCode"),
-      phoneNumber: data.get("phoneNumber"),
-      city: data.get("city"),
-      state: data.get("state"),
-      country: data.get("country"),
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
 
-    if (phoneNumberError || emailError) {
-      alert("Please correct the errors before submitting the form.");
-      return;
+    // Validation
+    if (name === "email") {
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      setEmailError(!emailValid);
+    }
+    if (name === "phoneNumber") {
+      const phoneValid = /^[0-9]*$/.test(value);
+      setPhoneNumberError(!phoneValid);
     }
   };
+  const signUpObj = {
+    email: formData.email,
+    password: formData.password,
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    gender: formData.gender,
+    countryCode: formData.countryCode,
+    phoneNumber: formData.phoneNumber,
+    address: {
+      city: formData.city,
+      state: formData.state,
+      country: formData.country,
+      street: formData.street,
+      postalCode: formData.postalCode
+    }
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+   handleSignUp(signUpObj)
+    }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,7 +106,7 @@ export default function SignUp() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            
             noValidate
             sx={{ mt: 3 }}
           >
@@ -98,6 +120,10 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.firstName}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -108,6 +134,10 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.lastName}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -119,9 +149,10 @@ export default function SignUp() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  onChange={handleEmailChange}
                   error={emailError}
                   helperText={emailError ? "Invalid email format" : ""}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,6 +164,10 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -144,6 +179,10 @@ export default function SignUp() {
                   label="Gender"
                   name="gender"
                   SelectProps={{ native: true }}
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.gender}
+                  onChange={handleChange}
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -159,6 +198,10 @@ export default function SignUp() {
                   label="Country Code"
                   name="countryCode"
                   SelectProps={{ native: true }}
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.countryCode}
+                  onChange={handleChange}
                 >
                   <option value="+91">+91</option>
                   <option value="+1">+1</option>
@@ -176,9 +219,26 @@ export default function SignUp() {
                   type="tel"
                   autoComplete="tel"
                   inputProps={{ pattern: "[0-9]*" }}
-                  onChange={handlePhoneNumberChange}
                   error={phoneNumberError}
-                  helperText={phoneNumberError ? "Phone number must be numeric" : ""}
+                  helperText={
+                    phoneNumberError ? "Phone number must be numeric" : ""
+                  }
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="street"
+                  label="Street"
+                  name="street"
+                  autoComplete="address-line1"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.street}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -189,6 +249,10 @@ export default function SignUp() {
                   label="City"
                   name="city"
                   autoComplete="address-level2"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.city}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -199,6 +263,24 @@ export default function SignUp() {
                   label="State/Province"
                   name="state"
                   autoComplete="address-level1"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.state}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="postalCode"
+                  label="Postal Code"
+                  name="postalCode"
+                  autoComplete="postal-code"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.postalCode}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -209,6 +291,10 @@ export default function SignUp() {
                   label="Country"
                   name="country"
                   autoComplete="country"
+                  error={isError}
+                  helperText={errorMessage}
+                  value={formData.country}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
@@ -217,12 +303,13 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
+              onClick={(e)=>handleSubmit(e)}
             >
-              Sign Up
+              {isLoading ? "Signing up..." : "Sign Up"}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                
                 <Link to="/signin" style={{ textDecoration: "none" }}>
                   <Typography variant="body2" color="primary">
                     Already have an account? Sign in
@@ -238,4 +325,4 @@ export default function SignUp() {
       </Container>
     </ThemeProvider>
   );
-}
+};
