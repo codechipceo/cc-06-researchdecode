@@ -3,7 +3,7 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("users", "profile", axiosInstance);
+const apiFeature = new ApiFeatures("user", "student", axiosInstance);
 
 // Async thunk for student login
 export const studentLogin = createAsyncThunk(
@@ -22,10 +22,10 @@ export const studentLogin = createAsyncThunk(
 
 // Async thunk for student signup
 export const studentSignUp = createAsyncThunk(
-  "student/signUp",
+  "student/create",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("signUp", payload);
+      const { data, msg } = await apiFeature.create("create", payload);
       localStorage.setItem("studentToken", data.token);
       return { data, msg };
     } catch (error) {
