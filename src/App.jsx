@@ -1,44 +1,37 @@
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import { useResponsive } from "./Hooks/use-responsive";
-import {  SignIn, SignUp } from "./Pages/indexPages";
+import "./App.css";
+import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
+import { Home } from "./Pages/Home/Home";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
-import SignIn from "./Pages/SignIn/SignIn";
-import SignUp from "./Pages/SingUp/SignUp";
-import ResponsiveAppBar from "./Components/Navbar/Navbar";
-
+import { SignIn, SignUp } from "./Pages/indexPages";
 export default function App() {
   return (
     <>
-      <ResponsiveAppBar />
-    <>
+
       <BrowserRouter>
-       <Routes>
-              <Route
-                path='/signin'
-                element={<GuardComponents component={SignIn} />}
-              />
-              <Route
-                path='/signup'
-                element={<GuardComponents component={SignUp} />}
-              />
-              <Route
-                path='/searchPaper'
-                element={<GuardComponents component={SearchPapers} />}
-              />
-
-
-            </Routes>
-
-      </BrowserRouter>
-    </>
+          <Routes>
+            <Route
+              path='/'
+              element={<GuardComponents component={Home} />}
+            />
+            <Route
+              path='/signin'
+              element={<GuardComponents component={SignIn} />}
+            />
+            <Route
+              path='/signup'
+              element={<GuardComponents component={SignUp} />}
+            />
+            <Route
+              path='/searchPaper'
+              element={<GuardComponents component={SearchPapers} />}
+            />
+          </Routes>
+        </BrowserRouter>
     </>
   );
 }
-
-export default App;
 
 function GuardComponents({ component: Component }) {
   // const token = useSelector(selectAdminToken);
@@ -53,7 +46,11 @@ function GuardComponents({ component: Component }) {
   //   userRole: "ADMIN",
   // };
 
-  return <Component  />;
+  return (
+    <DefaultLayout>
+      <Component />
+    </DefaultLayout>
+  );
 }
 GuardComponents.propTypes = {
   component: PropTypes.func,
