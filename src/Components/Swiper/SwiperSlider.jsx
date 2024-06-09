@@ -10,11 +10,11 @@ export const SwiperSlider = ({ slidesArr, Card }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
-    <Container>
+    <Container maxWidth={'auto'}>
       <swiper-container
         navigation='true'
         slides-per-view={isSmallScreen ? "1" : "4"}
-        space-between='0'
+        space-between='20'
         breakpoints={JSON.stringify({
           640: {
             slidesPerView: 1,

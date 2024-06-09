@@ -5,30 +5,27 @@ import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import { Home } from "./Pages/Home/Home";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import ResponsiveAppBar from "./Components/Navbar/Navbar";
 export default function App() {
   return (
     <>
-
       <BrowserRouter>
-          <Routes>
-            <Route
-              path='/'
-              element={<GuardComponents component={Home} />}
-            />
-            <Route
-              path='/signin'
-              element={<GuardComponents component={SignIn} />}
-            />
-            <Route
-              path='/signup'
-              element={<GuardComponents component={SignUp} />}
-            />
-            <Route
-              path='/searchPaper'
-              element={<GuardComponents component={SearchPapers} />}
-            />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path='/' element={<GuardComponents component={Home} />} />
+          <Route
+            path='/signin'
+            element={<GuardComponents component={SignIn} />}
+          />
+          <Route
+            path='/signup'
+            element={<GuardComponents component={SignUp} />}
+          />
+          <Route
+            path='/searchPaper'
+            element={<GuardComponents component={SearchPapers} />}
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

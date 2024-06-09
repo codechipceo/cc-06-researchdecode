@@ -2,8 +2,9 @@ import { Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { SwiperSlider } from "../../Components/Swiper/SwiperSlider";
 import { TeacherCard } from "../../Components/Cards/TeacherCard";
-
+import { useTeacher } from "../../Hooks/use-teacher";
 export const OurExperts = () => {
+  const { teacherData } = useTeacher();
   return (
     <>
       <Grid2 my={10}>
@@ -13,10 +14,10 @@ export const OurExperts = () => {
         <Typography variant='h3' align='center' color={"dark"}>
           Hire Experts For Consultancy
         </Typography>
-        <SwiperSlider
-          slidesArr={["data", "data", "data", "data", "data", "data"]}
-          Card={TeacherCard}
-        />
+        { teacherData && 
+
+        <SwiperSlider slidesArr={teacherData} Card={TeacherCard} />
+        }
       </Grid2>
     </>
   );
