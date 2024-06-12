@@ -7,7 +7,7 @@ export const AboutOne = () => {
       <Container maxWidth={"auto"}>
         <Grid2 container columns={{ xs: 1, sm: 1, md: 2 }}>
           <Grid2 item xs={2} sm={2} md={1}>
-            test
+          
           </Grid2>
 
           <Grid2 item xs={2} sm={2} md={1}>

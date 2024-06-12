@@ -3,11 +3,11 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("admin", "teacher", axiosInstance);
+const apiFeature = new ApiFeatures("user", "course", axiosInstance);
 
 // GET ALL TEACHER
-export const getAllTeachers = createAsyncThunk(
-  "teacher/getall",
+export const getAllCourses = createAsyncThunk(
+  "course/getall",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg, count } = await apiFeature.create("getAll", payload);
@@ -20,8 +20,8 @@ export const getAllTeachers = createAsyncThunk(
 );
 
 // GET BY ID
-export const getByIdTeacher = createAsyncThunk(
-  "teacher/getById",
+export const getCourseById = createAsyncThunk(
+  "course/getById",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("getById", payload);
@@ -35,41 +35,43 @@ export const getByIdTeacher = createAsyncThunk(
 
 const initialState = {
   totalCount: 0,
-  teachers: [],
-  teacherById: {},
+  courses: [],
+  courseById: {},
   isLoading: false,
   isError: false,
   errorMessage: "",
 };
 
-export const teacherSlice = createSlice({
-  name: "teacher",
+export const courseSlice = createSlice({
+  name: "course",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
 
-      .addCase(getAllTeachers.pending, (state) => {
+      .addCase(getAllCourses.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllTeachers.fulfilled, (state, action) => {
+      .addCase(getAllCourses.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.teachers = action.payload.data;
+        state.courses = action.payload.data;
         state.totalCount = action.payload.count;
       })
-      .addCase(getAllTeachers.rejected, (state, action) => {
+      .addCase(getAllCourses.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
-      .addCase(getByIdTeacher.pending, (state) => {
+
+      // get by id
+      .addCase(getCourseById.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getByIdTeacher.fulfilled, (state, action) => {
+      .addCase(getCourseById.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.teacherById = action.payload.data;
+        state.courseById = action.payload.data;
       })
-      .addCase(getByIdTeacher.rejected, (state, action) => {
+      .addCase(getCourseById.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
@@ -77,13 +79,13 @@ export const teacherSlice = createSlice({
   },
 }).reducer;
 
-// export const {} = teacherSlice.actions;
+// export const {} = courseslice.actions;
 
-export const selectTeachers = (state) => state.teachers.teachers;
-export const selectTeacherById = (state) => state.teachers.teacherById;
-export const teacherTotalCount = (state) => state.teachers.totalCount;
-export const selectTeacherLoadingStatus = (state) => state.teachers.isLoading;
-export const selectTeacherErrorStatus = (state) => state.teachers.isError;
-export const selectTeacherErrorMessage = (state) => state.teachers.errorMessage;
+export const selectCourses = (state) => state.course.courses;
+export const selectCourseById = (state) => state.course.teacherById;
+export const courseTotalCount = (state) => state.course.totalCount;
+export const selectCourseLoadingStatus = (state) => state.course.isLoading;
+export const selectCourseErrorStatus = (state) => state.course.isError;
+export const selectCourseErrorMessage = (state) => state.course.errorMessage;
 
 
