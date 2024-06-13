@@ -10,7 +10,7 @@ export const getAllCourses = createAsyncThunk(
   "course/getall",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg, count } = await apiFeature.create("getAll", payload);
+      const { data, msg, count } = await apiFeature.getAll("getAll", payload);
       return { data, msg, count };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -24,7 +24,7 @@ export const getCourseById = createAsyncThunk(
   "course/getById",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("getById", payload);
+      const { data, msg } = await apiFeature.getById("getById", payload);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -79,7 +79,6 @@ export const courseSlice = createSlice({
   },
 }).reducer;
 
-// export const {} = courseslice.actions;
 
 export const selectCourses = (state) => state.course.courses;
 export const selectCourseById = (state) => state.course.teacherById;

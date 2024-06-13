@@ -42,7 +42,7 @@ const initialState = {
   errorMessage: "",
 };
 
-export const teacherSlice = createSlice({
+const teacherSlice = createSlice({
   name: "teacher",
   initialState,
   reducers: {},
@@ -75,7 +75,7 @@ export const teacherSlice = createSlice({
         state.errorMessage = action.payload;
       });
   },
-}).reducer;
+});
 
 // export const {} = teacherSlice.actions;
 
@@ -86,4 +86,4 @@ export const selectTeacherLoadingStatus = (state) => state.teachers.isLoading;
 export const selectTeacherErrorStatus = (state) => state.teachers.isError;
 export const selectTeacherErrorMessage = (state) => state.teachers.errorMessage;
 
-
+export default teacherSlice.reducer;

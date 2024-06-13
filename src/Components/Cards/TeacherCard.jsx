@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 export const TeacherCard = ({ data }) => {
   const navigate = useNavigate();
   const {
-    id,
+    _id,
     profileImage,
     experience,
     name,
@@ -26,7 +26,7 @@ export const TeacherCard = ({ data }) => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 350,
         minWidth: 300,
         boxShadow: 3,
         transition: 'transform 0.3s ease',
@@ -34,7 +34,7 @@ export const TeacherCard = ({ data }) => {
           transform: 'scale(1.05)',
         },
       }}
-      onClick={() => navigate(`/teacher/${id}`)}
+      onClick={() => navigate(`/teacher/${_id}`)}
     >
       <CardMedia
         component='img'
@@ -72,18 +72,14 @@ export const TeacherCard = ({ data }) => {
           Qualification: {qualification}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size='small' fullWidth variant='contained'>
-          Hire for Consultancy
-        </Button>
-      </CardActions>
+      
     </Card>
   );
 };
 
 TeacherCard.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     profileImage: PropTypes.string,
     experience: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

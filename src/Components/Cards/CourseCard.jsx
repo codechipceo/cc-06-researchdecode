@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-  Card, CardContent, CardMedia, Typography, Button, IconButton, Box, Link,
+  Card, CardContent, CardMedia, Typography, Button, IconButton, Box
 } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from 'react-router-dom';
 
 export const CourseCard = ({ course }) => {
+  const navigate=useNavigate()
   if (!course) {
     return null; // Return null if course is undefined
   }
@@ -17,8 +19,8 @@ export const CourseCard = ({ course }) => {
         maxWidth: '345px',
         margin: '20px',
       }}
+      onClick={() => navigate(`/course/${course._id}`)}
     >
-      <Link to={`/course-details/${course._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Card
           sx={{
             maxWidth: 345,
@@ -79,7 +81,6 @@ export const CourseCard = ({ course }) => {
             </div>
           </CardContent>
         </Card>
-      </Link>
     </Box>
   );
 };
