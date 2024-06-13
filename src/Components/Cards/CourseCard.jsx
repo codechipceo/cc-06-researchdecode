@@ -1,31 +1,86 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-export const CourseCard = () => {
+import React from 'react';
+import {
+  Card, CardContent, CardMedia, Typography, Button, IconButton, Box
+} from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from 'react-router-dom';
+
+export const CourseCard = ({ course }) => {
+  const navigate=useNavigate()
+  if (!course) {
+    return null; // Return null if course is undefined
+  }
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component='img'
-        alt='green iguana'
-        height='180'
-        image='https://eduvibe.react.devsvibe.com/images/course/course-01/course-01.jpg'
-      />
-      <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
-          Lizard
-        </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size='small'>Share</Button>
-        <Button size='small'>Learn More</Button>
-      </CardActions>
-    </Card>
+    <Box
+      style={{
+        transition: 'transform 0.3s ease',
+        maxWidth: '345px',
+        margin: '20px',
+      }}
+      onClick={() => navigate(`/course/${course._id}`)}
+    >
+        <Card
+          sx={{
+            maxWidth: 345,
+            position: 'relative',
+            '&:hover': {
+              transform: 'scale(1.05)',
+            },
+          }}
+        >
+          <CardMedia
+            component="img"
+            alt={course.courseName}
+            height="250"
+            image={course.courseThumbnail}
+            className="w-100"
+          />
+          <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
+            <IconButton size="small">
+              <FavoriteBorderIcon />
+            </IconButton>
+          </div>
+          <CardContent>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={course.instructorImage} alt="Instructor" style={{ width: '30px', borderRadius: '50%' }} />
+                <Typography variant="body2" color="text.secondary" sx={{ marginLeft: '10px' }}>
+                  {course.instructorName}
+                </Typography>
+              </div>
+              <Typography variant="body2" color="text.secondary">
+                {course.lessons} Lessons
+              </Typography>
+            </div>
+            <Typography variant="h6" component="div" sx={{ marginTop: '10px' }}>
+              {course.courseName}
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+              <div>
+                <Typography variant="body1" color="text.primary">
+                  ${course.price}
+                </Typography>
+                {course.oldPrice && (
+                  <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
+                    ${course.oldPrice}
+                  </Typography>
+                )}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', color: '#FFD700' }}>
+                  {[...Array(5)].map((_, i) => (
+                    <StarIcon key={i} />
+                  ))}
+                </div>
+                <Typography variant="body2" color="text.secondary" sx={{ marginLeft: '5px' }}>
+                  ({course.rating})
+                </Typography>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+    </Box>
   );
 };

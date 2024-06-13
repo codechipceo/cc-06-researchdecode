@@ -1,3 +1,5 @@
 import { studentSlice } from "./Slices/studentSlice";
 import teacherSlice from "./Slices/teacherSlice";
-export { studentSlice , teacherSlice};
+import { courseSlice } from "./Slices/courseSlice";
+
+export { studentSlice , teacherSlice ,courseSlice };

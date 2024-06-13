@@ -17,6 +17,16 @@ import {
   selectTeachers,
   teacherTotalCount,
 } from "./Slices/teacherSlice";
+import {
+  getAllCourses,
+  getCourseById,
+  selectCourseById,
+  selectCourseErrorMessage,
+  selectCourseErrorStatus,
+  selectCourseLoadingStatus,
+  selectCourses,
+  courseTotalCount,
+} from "./Slices/courseSlice";
 
 const reduxStore = {
   states: {
@@ -25,17 +35,29 @@ const reduxStore = {
     StudentErrorMsg: selectStudentErrorMsg,
     StudentIsError: selectStudentIsError,
     StudentIsLoggedIn: selectStudentIsLoggedIn,
+
     selectTeacherById,
     selectTeacherErrorMessage,
     teacherTotalCount,
     selectTeacherErrorStatus,
     selectTeacherLoadingStatus,
     selectTeachers,
+
+    selectCourseById,
+    selectCourseErrorMessage,
+    selectCourseErrorStatus,
+    selectCourseLoadingStatus,
+    selectCourses,
+    courseTotalCount,
+
+
   },
   sliceMethods: {
     studentLogin,
     getAllTeachers,
     getByIdTeacher,
+    getAllCourses,
+    getCourseById,
   },
 };
 
