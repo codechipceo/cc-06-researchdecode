@@ -27,8 +27,8 @@ const pages = [
     navPath: "/lab-request",
   },
   {
-    navLink: "FInd Papers",
-    navPath: "/courses",
+    navLink: "Find Papers",
+    navPath: "/searchPaper",
   },
   {
     navLink: "Request Data",
