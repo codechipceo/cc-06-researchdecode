@@ -67,7 +67,6 @@ import {
 } from "@mui/material";
 import PaperCard from "../../Components/card";
 import { useResearchPaper } from "../../Hooks/use-researchPaper";
-
 import StatusHandler from "../../Components/statusHandler";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import RequestLink from "../../Components/requestLink";
@@ -90,6 +89,7 @@ export const SearchPapers = () => {
       author: "Author 1",
       doi: "10.1000/xyz123",
       link: "https://example.com/paper1",
+      userId: "user1", // Ensure userId is defined
     },
     {
       id: 2,
@@ -97,12 +97,14 @@ export const SearchPapers = () => {
       author: "Author 2",
       doi: "10.1000/xyz456",
       link: "https://example.com/paper2",
+      userId: "user2", // Ensure userId is defined
     },
   ]);
 
-  const handleSendPaper = (paperId) => {
+  const handleSendPaper = (userId) => {
     // Implement the logic to send the paper
-    console.log(`Send paper with ID: ${paperId}`);
+    console.log(`Send paper to user with ID: ${userId}`);
+    // navigate(`/inbox/${userId}`); // Uncomment this if you have the navigation logic in place
   };
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
