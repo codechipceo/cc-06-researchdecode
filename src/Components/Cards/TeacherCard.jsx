@@ -1,27 +1,18 @@
-import React from 'react';
+import StarIcon from "@mui/icons-material/Star";
 import {
-  Button,
+  Avatar,
+  Box,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Typography,
-  Box,
-  Avatar,
-} from '@mui/material';
-import PropTypes from 'prop-types';
-import StarIcon from '@mui/icons-material/Star';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export const TeacherCard = ({ data }) => {
   const navigate = useNavigate();
-  const {
-    _id,
-    profileImage,
-    experience,
-    name,
-    qualification,
-  } = data;
+  const { _id, profileImage, experience, name, qualification } = data;
 
   return (
     <Card
@@ -29,9 +20,9 @@ export const TeacherCard = ({ data }) => {
         maxWidth: 350,
         minWidth: 300,
         boxShadow: 3,
-        transition: 'transform 0.3s ease',
-        '&:hover': {
-          transform: 'scale(1.05)',
+        transition: "transform 0.3s ease",
+        "&:hover": {
+          transform: "scale(1.05)",
         },
       }}
       onClick={() => navigate(`/teacher/${_id}`)}
@@ -43,7 +34,7 @@ export const TeacherCard = ({ data }) => {
         image={
           profileImage
             ? profileImage
-            : 'https://eduvibe.react.devsvibe.com/images/course/course-01/course-01.jpg'
+            : "https://eduvibe.react.devsvibe.com/images/course/course-01/course-01.jpg"
         }
       />
       <CardContent>
@@ -63,7 +54,7 @@ export const TeacherCard = ({ data }) => {
               display='flex'
               alignItems='center'
             >
-              <StarIcon sx={{ color: '#FFD700', mr: 0.5 }} />
+              <StarIcon sx={{ color: "#FFD700", mr: 0.5 }} />
               {experience} years experience
             </Typography>
           </Box>
@@ -72,7 +63,6 @@ export const TeacherCard = ({ data }) => {
           Qualification: {qualification}
         </Typography>
       </CardContent>
-      
     </Card>
   );
 };

@@ -1,9 +1,9 @@
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
-import { Grid, Box, Container, Typography } from "@mui/material";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import { CourseCard } from "../../Components/Cards/CourseCard";
-import { useCourse } from "../../Hooks/use-course";
+import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import StatusHandler from "../../Components/statusHandler";
+import { useCourse } from "../../Hooks/use-course";
 
 const CoursePage = () => {
   const {
@@ -17,7 +17,7 @@ const CoursePage = () => {
       <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
       <Container maxWidth="lg" sx={{ marginTop: "40px" }}>
         <Box sx={{ flexGrow: 1, margin: "20px" }}>
-          <StatusHandler 
+          <StatusHandler
             isLoading={isLoading}
             isError={isError}
             errorMessage="Error loading courses"
