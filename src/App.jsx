@@ -6,7 +6,12 @@ import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
 import { Home } from "./Pages/Home/Home";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
-import { SignIn, SignUp } from "./Pages/indexPages";
+import {  SignIn, SignUp } from "./Pages/indexPages";
+import ResponsiveAppBar from "./Components/Navbar/Navbar";
+import Courses from "./Pages/Courses/Courses";
+import Experts from "./Pages/Experts/Experts";
+import Inbox from "./Pages/Inbox/Inbox";
+
 export default function App() {
   return (
     <>
@@ -32,6 +37,10 @@ export default function App() {
           <Route
             path='/experts'
             element={<GuardComponents component={Experts} />}
+          />
+          <Route
+            path='/inbox/:userId'
+            element={<GuardComponents component={Inbox} />}
           />
         </Routes>
       </BrowserRouter>

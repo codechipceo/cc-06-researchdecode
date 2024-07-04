@@ -1,23 +1,75 @@
-// import { Fragment } from "react";
+// import React from "react";
+// import { Box, TextField, Button, Container } from "@mui/material";
+// import PaperCard from "../../Components/card";
 // import { useResearchPaper } from "../../Hooks/use-researchPaper";
+// import ResponsiveAppBar from "../../Components/Navbar/Navbar";
+// import StatusHandler from "../../Components/statusHandler";
+// import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 
 // export const SearchPapers = () => {
-//   const { doiNumber, setDoiNumber, handleSearch } = useResearchPaper();
+//   const {
+//     doiNumber,
+//     setDoiNumber,
+//     researchPaper,
+//     isLoading,
+//     isError,
+//     handleSearch,
+//   } = useResearchPaper();
+
+//   const breadcrumbPath = [{ label: "Home", path: "/" }];
+
 //   return (
-//     <Fragment>
-//       <input
-//         type='text'
-//         value={doiNumber}
-//         onChange={(e) => setDoiNumber(e.target.value)}
-//       />
-//       <button onClick={(e) => handleSearch(e, doiNumber)}>Search</button>
-//     </Fragment>
+//     <div>
+//       <HeaderTwo title="RESEARCH PAPER" breadcrumbPath={breadcrumbPath} />
+//       <Container maxWidth="md" sx={{ marginTop: "40px" }}>
+//         <Box component="form" onSubmit={(e) => handleSearch(e, doiNumber)} sx={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+//           <TextField
+//             label="DOI Number"
+//             variant="outlined"
+//             value={doiNumber}
+//             onChange={(e) => setDoiNumber(e.target.value)}
+//             fullWidth
+//           />
+//           <Button variant="contained" color="primary" type="submit">
+//             Search
+//           </Button>
+//         </Box>
+
+//         <StatusHandler
+//           isLoading={isLoading}
+//           isError={isError}
+//           errorMessage="Error fetching research paper"
+//         />
+
+//         {!isLoading && !isError && researchPaper && (
+//           <PaperCard
+//             title={researchPaper.title}
+//             author={researchPaper.author}
+//             publishedDate={researchPaper.publishedDate}
+//             doi={researchPaper.DOI}
+//             language={researchPaper.language}
+//             abstract={researchPaper.abstract}
+//           />
+//         )}
+//       </Container>
+//     </div>
 //   );
 // };
 
-import React from "react";
+import React, { useState } from "react";
+import {
+  Box,
+  TextField,
+  Button,
+  Container,
+  List,
+  Typography,
+} from "@mui/material";
 import PaperCard from "../../Components/card";
 import { useResearchPaper } from "../../Hooks/use-researchPaper";
+import StatusHandler from "../../Components/statusHandler";
+import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
+import RequestLink from "../../Components/requestLink";
 
 export const SearchPapers = () => {
   const {
@@ -29,32 +81,96 @@ export const SearchPapers = () => {
     handleSearch,
   } = useResearchPaper();
 
+  const [paperRequests, setPaperRequests] = useState([
+    // Example paper requests
+    {
+      id: 1,
+      title: "Paper 1",
+      author: "Author 1",
+      doi: "10.1000/xyz123",
+      link: "https://example.com/paper1",
+      userId: "user1", // Ensure userId is defined
+    },
+    {
+      id: 2,
+      title: "Paper 2",
+      author: "Author 2",
+      doi: "10.1000/xyz456",
+      link: "https://example.com/paper2",
+      userId: "user2", // Ensure userId is defined
+    },
+  ]);
+
+  const handleSendPaper = (userId) => {
+    // Implement the logic to send the paper
+    console.log(`Send paper to user with ID: ${userId}`);
+    // navigate(`/inbox/${userId}`); // Uncomment this if you have the navigation logic in place
+  };
+
+  const breadcrumbPath = [{ label: "Home", path: "/" }];
+
   return (
     <div>
-      <form onSubmit={(e) => handleSearch(e, doiNumber)}>
-        <input
-          type="text"
-          value={doiNumber}
-          onChange={(e) => setDoiNumber(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <HeaderTwo title="RESEARCH PAPER" breadcrumbPath={breadcrumbPath} />
+      <Container maxWidth="md" sx={{ marginTop: "40px" }}>
+        <Box
+          component="form"
+          onSubmit={(e) => handleSearch(e, doiNumber)}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <TextField
+            label="DOI Number"
+            variant="outlined"
+            value={doiNumber}
+            onChange={(e) => setDoiNumber(e.target.value)}
+            fullWidth
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Search
+          </Button>
+        </Box>
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : isError ? (
-        <p>Error fetching research paper</p>
-      ) : researchPaper ? (
-        <PaperCard
-        title={researchPaper.title}
-        author={researchPaper.author}
-        publishedDate={researchPaper.publishedDate}
-        doi={researchPaper.DOI}
-        language={researchPaper.language}
-        abstract={researchPaper.abstract}
-      />
-      ) : null}
+        <StatusHandler
+          isLoading={isLoading}
+          isError={isError}
+          errorMessage="Error fetching research paper"
+        />
+
+        {!isLoading && !isError && researchPaper && (
+          <PaperCard
+            title={researchPaper.title}
+            author={researchPaper.author}
+            publishedDate={researchPaper.publishedDate}
+            doi={researchPaper.DOI}
+            language={researchPaper.language}
+            abstract={researchPaper.abstract}
+          />
+        )}
+
+        <Container>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ marginTop: "30px", marginBottom: "20px" }}
+          >
+            Pending Requests
+          </Typography>
+          <List>
+            {paperRequests.map((request) => (
+              <RequestLink
+                key={request.id}
+                request={request}
+                onSend={handleSendPaper}
+              />
+            ))}
+          </List>
+        </Container>
+      </Container>
     </div>
   );
 };
-
