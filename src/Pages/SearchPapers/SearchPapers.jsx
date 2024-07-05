@@ -56,7 +56,7 @@
 //   );
 // };
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -66,7 +66,7 @@ import {
   Typography,
 } from "@mui/material";
 import PaperCard from "../../Components/card";
-import { useResearchPaper } from "../../Hooks/use-researchPaper";
+import { usePendingRequests, useResearchPaper } from "../../Hooks/use-researchPaper";
 import StatusHandler from "../../Components/statusHandler";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import RequestLink from "../../Components/requestLink";
@@ -80,7 +80,9 @@ export const SearchPapers = () => {
     isError,
     handleSearch,
   } = useResearchPaper();
+  const { pendingRequests} =usePendingRequests();
 
+  console.log(pendingRequests)
   const [paperRequests, setPaperRequests] = useState([
     // Example paper requests
     {
@@ -111,10 +113,10 @@ export const SearchPapers = () => {
 
   return (
     <div>
-      <HeaderTwo title="RESEARCH PAPER" breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth="md" sx={{ marginTop: "40px" }}>
+      <HeaderTwo title='RESEARCH PAPER' breadcrumbPath={breadcrumbPath} />
+      <Container maxWidth='md' sx={{ marginTop: "40px" }}>
         <Box
-          component="form"
+          component='form'
           onSubmit={(e) => handleSearch(e, doiNumber)}
           sx={{
             display: "flex",
@@ -124,13 +126,13 @@ export const SearchPapers = () => {
           }}
         >
           <TextField
-            label="DOI Number"
-            variant="outlined"
+            label='DOI Number'
+            variant='outlined'
             value={doiNumber}
             onChange={(e) => setDoiNumber(e.target.value)}
             fullWidth
           />
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant='contained' color='primary' type='submit'>
             Search
           </Button>
         </Box>
@@ -138,7 +140,7 @@ export const SearchPapers = () => {
         <StatusHandler
           isLoading={isLoading}
           isError={isError}
-          errorMessage="Error fetching research paper"
+          errorMessage='Error fetching research paper'
         />
 
         {!isLoading && !isError && researchPaper && (
@@ -149,21 +151,22 @@ export const SearchPapers = () => {
             doi={researchPaper.DOI}
             language={researchPaper.language}
             abstract={researchPaper.abstract}
+            paperDetail={researchPaper}
           />
         )}
 
         <Container>
           <Typography
-            variant="h5"
-            component="div"
+            variant='h5'
+            component='div'
             sx={{ marginTop: "30px", marginBottom: "20px" }}
           >
             Pending Requests
           </Typography>
           <List>
-            {paperRequests.map((request) => (
+            {pendingRequests && pendingRequests?.map((request) => (
               <RequestLink
-                key={request.id}
+                key={request._id}
                 request={request}
                 onSend={handleSendPaper}
               />
