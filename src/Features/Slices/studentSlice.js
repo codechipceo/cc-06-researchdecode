@@ -57,14 +57,13 @@ export const studentSlice = createSlice({
       state.studentInfo = null;
       state.isLoggedIn = false;
       state.studentToken = null;
-
     },
   },
   extraReducers: (builder) => {
     builder
       // Login reducers
       .addCase(studentLogin.fulfilled, (state, { payload }) => {
-        state.studentInfo = payload.data;
+        state.studentInfo = payload.data.user;
         state.studentToken = payload.data.token;
         state.isLoggedIn = true;
         state.isLoading = false;
@@ -93,7 +92,7 @@ export const studentSlice = createSlice({
         state.isSignUpLoading = false;
       });
   },
-}).reducer
+}).reducer;
 
 export const selectStudentInfo = (state) => state.student.studentInfo;
 export const selectStudentLoading = (state) => state.student.isLoading;
@@ -101,7 +100,9 @@ export const selectStudentErrorMsg = (state) => state.student.errorMessage;
 export const selectStudentIsError = (state) => state.student.isError;
 export const selectStudentIsLoggedIn = (state) => state.student.isLoggedIn;
 export const selectStudentToken = (state) => state.student.studentToken;
-export const selectStudentSignUpLoading = (state) => state.student.isSignUpLoading;
-export const selectStudentSignUpErrorMsg = (state) => state.student.signUpErrorMessage;
-export const selectStudentIsSignUpError = (state) => state.student.isSignUpError;
-
+export const selectStudentSignUpLoading = (state) =>
+  state.student.isSignUpLoading;
+export const selectStudentSignUpErrorMsg = (state) =>
+  state.student.signUpErrorMessage;
+export const selectStudentIsSignUpError = (state) =>
+  state.student.isSignUpError;

@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
-import { Home } from "./Pages/Home/Home";
-import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
-import { SignIn, SignUp } from "./Pages/indexPages";
-import ResponsiveAppBar from "./Components/Navbar/Navbar";
+import { selectStudentToken } from "./Features/Slices/studentSlice";
 import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
+import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
+import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
+import { SignIn, SignUp } from "./Pages/indexPages";
 
 export default function App() {
   return (
@@ -47,21 +48,14 @@ export default function App() {
 }
 
 function GuardComponents({ component: Component }) {
-  // const token = useSelector(selectAdminToken);
-
-  // // if (!token) {
-  // //   return <Login />;
-  // // }
-
-  // // condition
-  // const rest = {
-  //   token: token,
-  //   userRole: "ADMIN",
-  // };
+  const token = useSelector(selectStudentToken);
+  if (!token) {
+    return <SignIn />;
+  }
 
   return (
     <DefaultLayout>
-      <Component />
+      <Component token={token} />
     </DefaultLayout>
   );
 }

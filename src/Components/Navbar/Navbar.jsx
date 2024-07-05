@@ -11,8 +11,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-const token = "static";
+import { selectStudentToken } from "../../Features/Slices/studentSlice";
 const pages = [
   {
     navLink: "Hire Expert",
@@ -35,9 +36,11 @@ const pages = [
     navPath: "/courses",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard","Inbox", "Logout"];
+const settings = ["Profile", "Account", "Dashboard", "Inbox", "Logout"];
 
 function ResponsiveAppBar() {
+  const token = useSelector(selectStudentToken);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -168,7 +171,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          {true ? (
+          {token ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
