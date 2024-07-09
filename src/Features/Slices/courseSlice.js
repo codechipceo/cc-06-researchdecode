@@ -5,7 +5,7 @@ import { ApiFeatures } from "../../Api/ApiRepo";
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "course", axiosInstance);
 
-// GET ALL TEACHER
+// GET ALL Courses
 export const getAllCourses = createAsyncThunk(
   "course/getall",
   async (payload, { rejectWithValue }) => {
@@ -51,6 +51,8 @@ export const courseSlice = createSlice({
 
       .addCase(getAllCourses.pending, (state) => {
         state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
       })
       .addCase(getAllCourses.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -81,7 +83,7 @@ export const courseSlice = createSlice({
 
 
 export const selectCourses = (state) => state.course.courses;
-export const selectCourseById = (state) => state.course.teacherById;
+export const selectCourseById = (state) => state.course.courseById;
 export const courseTotalCount = (state) => state.course.totalCount;
 export const selectCourseLoadingStatus = (state) => state.course.isLoading;
 export const selectCourseErrorStatus = (state) => state.course.isError;

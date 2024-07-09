@@ -1,3 +1,4 @@
+
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,8 +11,16 @@ import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import CourseDetail from "./Pages/CourseDetail/CourseDetail";
+import { useCourse } from "./Hooks/use-course";
 
 export default function App() {
+  const {
+    courseData: courses,
+    isCourseLoading: isLoading,
+    isCourseError: isError,
+  } = useCourse();
+
   return (
     <>
       <BrowserRouter>
@@ -34,6 +43,10 @@ export default function App() {
             element={<GuardComponents component={Courses} />}
           />
           <Route
+            path="/course/:courseId"
+            element={<GuardComponents component={(props) => <CourseDetail {...props} courses={courses} />} />}
+          />
+          <Route
             path='/experts'
             element={<GuardComponents component={Experts} />}
           />
@@ -47,7 +60,7 @@ export default function App() {
   );
 }
 
-function GuardComponents({ component: Component }) {
+function GuardComponents({ component: Component, ...rest }) {
   const token = useSelector(selectStudentToken);
   if (!token) {
     return <SignIn />;
@@ -55,7 +68,7 @@ function GuardComponents({ component: Component }) {
 
   return (
     <DefaultLayout>
-      <Component token={token} />
+      <Component {...rest} token={token} />
     </DefaultLayout>
   );
 }
