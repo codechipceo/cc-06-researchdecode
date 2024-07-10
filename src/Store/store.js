@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   courseSlice,
+  videoSlice,
   studentSlice,
   teacherSlice,
   paperRequestSlice,
@@ -10,6 +11,7 @@ const reducers = combineReducers({
   student: studentSlice,
   teachers: teacherSlice,
   course: courseSlice,
+  video:videoSlice,
   paperRequest: paperRequestSlice,
 });
 

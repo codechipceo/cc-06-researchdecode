@@ -4,7 +4,7 @@ import { Container, Grid, Typography, List, ListItem, ListItemText, Box, Paper, 
 import { styled } from '@mui/system';
 import ReactPlayer from 'react-player';
 import { HeaderTwo } from '../../Components/Headers/HeaderTwo';
-
+import {useVideo} from "../../Hooks/use-video"
 const VideoContainer = styled(Box)({
   position: 'relative',
   paddingTop: '56.25%', // 16:9 aspect ratio
@@ -43,6 +43,12 @@ const assignments = [
 
 const LecturePage = () => {
   const { courseId, lectureId } = useParams();
+  const {
+    videoData: videos,
+    isVideoLoading: isLoading,
+    isVideoError: isError,
+  } = useVideo();
+  
   const currentLecture = lectures.find((lecture) => lecture.id === lectureId) || lectures[0];
   const breadcrumbPath = [{ label: "Home", path: "/" }];
   

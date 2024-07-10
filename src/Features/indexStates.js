@@ -27,6 +27,16 @@ import {
   selectCourses,
   courseTotalCount,
 } from "./Slices/courseSlice";
+import {
+  getAllVideos,
+  getVideoById,
+  selectVideoById,
+  selectVideoErrorMessage,
+  selectVideoErrorStatus,
+  selectVideoLoadingStatus,
+  selectVideos,
+  videoTotalCount,
+} from "./Slices/videoSlice";
 
 const reduxStore = {
   states: {
@@ -50,6 +60,13 @@ const reduxStore = {
     selectCourses,
     courseTotalCount,
 
+    selectVideoById,
+    selectVideoErrorMessage,
+    selectVideoErrorStatus,
+    selectVideoLoadingStatus,
+    selectVideos,
+    videoTotalCount,
+
 
   },
   sliceMethods: {
@@ -58,6 +75,9 @@ const reduxStore = {
     getByIdTeacher,
     getAllCourses,
     getCourseById,
+    getAllVideos,
+    getVideoById,
+  
   },
 };
 

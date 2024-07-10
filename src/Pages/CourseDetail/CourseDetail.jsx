@@ -41,7 +41,7 @@ const CourseDetail = ({ courses }) => {
 
   return (
     <div>
-      <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
+      <HeaderTwo title="COURSE" breadcrumbPath={breadcrumbPath} />
       <Container maxWidth="lg" sx={{ marginTop: "40px" }}>
         {/* <Banner src={course.courseBanner} alt={course.courseName} /> */}
         <Banner src={"https://eduvibe.react.devsvibe.com/images/course/course-details/course-01.jpg"} alt={course.courseName} />
