@@ -24,8 +24,8 @@ const Banner = styled("img")({
 const CourseDetail = ({ courses }) => {
   const { courseId } = useParams();
 
-const course = courses.find(course => course._id === courseId);
-
+  const course = courses.find(course => course._id === courseId);
+  console.log(course);
 
   if (!course) {
     return <Typography variant="h5">Course not found</Typography>;
@@ -43,7 +43,11 @@ const course = courses.find(course => course._id === courseId);
     <div>
       <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
       <Container maxWidth="lg" sx={{ marginTop: "40px" }}>
-        <Banner src={course.courseBanner} alt={course.courseName} />
+        {/* <Banner src={course.courseBanner} alt={course.courseName} /> */}
+        <Banner src={"https://eduvibe.react.devsvibe.com/images/course/course-details/course-01.jpg"} alt={course.courseName} />
+        <Typography variant="h4" gutterBottom>
+          {course.instructor}
+        </Typography>
         <Typography variant="h4" gutterBottom>
           {course.courseName}
         </Typography>
