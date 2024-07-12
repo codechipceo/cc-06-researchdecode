@@ -10,8 +10,18 @@ import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import CourseDetail from "./Pages/CourseDetail/CourseDetail";
+import LecturePage from "./Pages/LecturePage/LecturePage"; // Import LecturePage
+import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
+import { useCourse } from "./Hooks/use-course";
 
 export default function App() {
+  const {
+    courseData: courses,
+    isCourseLoading: isLoading,
+    isCourseError: isError,
+  } = useCourse();
+
   return (
     <>
       <BrowserRouter>
@@ -34,6 +44,14 @@ export default function App() {
             element={<GuardComponents component={Courses} />}
           />
           <Route
+            path="/course/:courseId"
+            element={<GuardComponents component={(props) => <CourseDetail {...props} courses={courses} />} />}
+          />
+          <Route
+            path="/course/:courseId/lectures/:lectureId"
+            element={<GuardComponents component={LecturePage} />}
+          />
+          <Route
             path='/experts'
             element={<GuardComponents component={Experts} />}
           />
@@ -41,13 +59,17 @@ export default function App() {
             path='/inbox/:userId'
             element={<GuardComponents component={Inbox} />}
           />
+          <Route
+            path='/payment/:courseId'
+            element={<GuardComponents component={PaymentPage} />}
+          />
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-function GuardComponents({ component: Component }) {
+function GuardComponents({ component: Component, ...rest }) {
   const token = useSelector(selectStudentToken);
   if (!token) {
     return <SignIn />;
@@ -55,7 +77,7 @@ function GuardComponents({ component: Component }) {
 
   return (
     <DefaultLayout>
-      <Component token={token} />
+      <Component {...rest} token={token} />
     </DefaultLayout>
   );
 }

@@ -10,35 +10,28 @@ import { useNavigate } from "react-router-dom";
 
 const RequestLink = ({ request }) => {
   const navigate = useNavigate();
-
+console.log(request);
   const handleSend = () => {
-    navigate(`/inbox/${request.userId}`);
+    navigate(`/inbox/${request.requestBy}`);
   };
 
   return (
     <ListItem alignItems='flex-start' sx={{ borderBottom: "1px solid #ddd" }}>
       <ListItemText>
         <Typography variant='h6' component='div'>
-          {request.title[0]}
+          Request ID: {request._id}
         </Typography>
         <Typography variant='subtitle1' component='div'>
-          Author: {request.author}
+          Request By: {request.requestBy}
         </Typography>
         <Typography variant='body2' component='div'>
-          DOI:{" "}
-          <a
-            href={`https://doi.org/${request.doi}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {request.doi}
-          </a>
+          Status: {request.requestStatus}
         </Typography>
         <Typography variant='body2' component='div'>
-          PDF Link:{" "}
-          <a href={request.link} target='_blank' rel='noopener noreferrer'>
-            View PDF
-          </a>
+          Created At: {new Date(request.createdAt).toLocaleString()}
+        </Typography>
+        <Typography variant='body2' component='div'>
+          Updated At: {new Date(request.updatedAt).toLocaleString()}
         </Typography>
       </ListItemText>
       <ListItemSecondaryAction>
