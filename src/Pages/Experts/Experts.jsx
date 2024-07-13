@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, Box, Container } from "@mui/material";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import { useTeacher } from "../../Hooks/use-teacher";
