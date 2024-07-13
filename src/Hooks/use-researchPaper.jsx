@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../axios/axios";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getPendingRequests, selectPendingRequests } from "../Features/Slices/requestResearchPaper";
+import {
+  getPendingRequests,
+  getRequestById,
+  selectPendingRequests,
+  selectRequestDetail,
+} from "../Features/Slices/requestResearchPaper";
 // export const useResearchPaper = () => {
 //   const [doiNumber, setDoiNumber] = useState("");
 
@@ -67,12 +72,16 @@ export const useResearchPaper = () => {
 export const usePendingRequests = () => {
   const dispatch = useDispatch();
   const pendingRequests = useSelector(selectPendingRequests);
-  
+
+
+
   useEffect(() => {
     dispatch(getPendingRequests());
   }, [dispatch]);
 
   return {
     pendingRequests,
+
+
   };
 };

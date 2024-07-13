@@ -1,0 +1,7 @@
+.rpv-default-layout__toolbar-button {
+  display: none;
+}
+
+.rpv-default-layout__toolbar-button[data-testid='download'] {
+  display: none;
+}

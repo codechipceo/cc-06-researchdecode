@@ -12,6 +12,8 @@ export const studentLogin = createAsyncThunk(
     try {
       const { data, msg } = await apiFeature.create("signIn", payload);
       localStorage.setItem("studentToken", data.token);
+      console.log(data)
+      localStorage.setItem("studentInfo",JSON.stringify( data.user));
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -35,9 +37,23 @@ export const studentSignUp = createAsyncThunk(
   }
 );
 
+// Async get all students
+export const getAllStudents = createAsyncThunk(
+  "student/getAll",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create("getAll", payload);
+      return { data, msg };
+    } catch (error) {
+      const errMessage = error.response.data.msg;
+      return rejectWithValue(errMessage);
+    }
+  }
+);
 // Initial state for student login slice
 const initialState = {
-  studentInfo: null,
+  studentInfo:JSON.parse( localStorage.getItem("studentInfo")),
+  studentData: [],
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -49,7 +65,7 @@ const initialState = {
 };
 
 // Create student slice with reducers and extraReducers
-export const studentSlice = createSlice({
+const studentSlice = createSlice({
   name: "student",
   initialState,
   reducers: {
@@ -90,10 +106,14 @@ export const studentSlice = createSlice({
         state.signUpErrorMessage = payload;
         state.isSignUpError = true;
         state.isSignUpLoading = false;
+      })
+      .addCase(getAllStudents.fulfilled, (state, { payload }) => {
+        state.studentData = payload.data;
       });
   },
-}).reducer;
+});
 
+export const selectStudentData = (state) => state.student.studentData;
 export const selectStudentInfo = (state) => state.student.studentInfo;
 export const selectStudentLoading = (state) => state.student.isLoading;
 export const selectStudentErrorMsg = (state) => state.student.errorMessage;
@@ -106,3 +126,6 @@ export const selectStudentSignUpErrorMsg = (state) =>
   state.student.signUpErrorMessage;
 export const selectStudentIsSignUpError = (state) =>
   state.student.isSignUpError;
+
+export const { logout} = studentSlice.actions
+export default studentSlice.reducer;

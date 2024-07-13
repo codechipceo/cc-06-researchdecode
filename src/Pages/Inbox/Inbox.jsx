@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import { Grid } from '@mui/material';
-import UserList from '../../Components/Messaging/UserList';
-import Chat from '../../Components/Messaging/Chat';
-import ResponsiveAppBar from '../../Components/Navbar/Navbar';
+import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import UserList from "../../Components/Messaging/UserList";
+import Chat from "../../Components/Messaging/Chat";
+import ResponsiveAppBar from "../../Components/Navbar/Navbar";
+import { useStudents } from "../../Hooks/useStudents";
+import { useLocation } from "react-router-dom";
 
 const Inbox = () => {
-  const [users] = useState([
-    { id: 'user1', name: 'User 1' },
-    { id: 'user2', name: 'User 2' },
-    { id: 'user3', name: 'User 3' },
-  ]);
-
+  const { data } = useStudents();
+  const { state } = useLocation();
+  const request = state?.request ?? {};
   return (
     <Grid container spacing={2}>
       <ResponsiveAppBar />
       <Grid item xs={12} md={4} lg={3}>
-        <UserList users={users} />
+        {data && <UserList users={data} />}
       </Grid>
-      <Grid item xs={12} md={8} lg={9}>
-        <Chat users={users} />
+      <Grid item xs={12} md={8} mx={"auto"} >
+        {data && <Chat users={data} request={request} />}
       </Grid>
     </Grid>
   );
