@@ -3,11 +3,11 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("user", "course", axiosInstance);
+const apiFeature = new ApiFeatures("user", "video", axiosInstance);
 
-// GET ALL Courses
-export const getAllCourses = createAsyncThunk(
-  "course/getall",
+// GET ALL videos
+export const getAllVideos = createAsyncThunk(
+  "video/getall",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg, count } = await apiFeature.getAll("getAll", payload);
@@ -20,8 +20,8 @@ export const getAllCourses = createAsyncThunk(
 );
 
 // GET BY ID
-export const getCourseById = createAsyncThunk(
-  "course/getById",
+export const getVideoById = createAsyncThunk(
+  "video/getById",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.getById("getById", payload);
@@ -35,45 +35,45 @@ export const getCourseById = createAsyncThunk(
 
 const initialState = {
   totalCount: 0,
-  courses: [],
-  courseById: {},
+  videos: [],
+  videoById: {},
   isLoading: false,
   isError: false,
   errorMessage: "",
 };
 
-export const courseSlice = createSlice({
-  name: "course",
+export const videoSlice = createSlice({
+  name: "video",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
 
-      .addCase(getAllCourses.pending, (state) => {
+      .addCase(getAllVideos.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
       })
-      .addCase(getAllCourses.fulfilled, (state, action) => {
+      .addCase(getAllVideos.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses = action.payload.data;
+        state.videos = action.payload.data;
         state.totalCount = action.payload.count;
       })
-      .addCase(getAllCourses.rejected, (state, action) => {
+      .addCase(getAllVideos.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
       })
 
       // get by id
-      .addCase(getCourseById.pending, (state) => {
+      .addCase(getVideoById.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCourseById.fulfilled, (state, action) => {
+      .addCase(getVideoById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.courseById = action.payload.data;
       })
-      .addCase(getCourseById.rejected, (state, action) => {
+      .addCase(getVideoById.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
@@ -82,11 +82,11 @@ export const courseSlice = createSlice({
 }).reducer;
 
 
-export const selectCourses = (state) => state.course.courses;
-export const selectCourseById = (state) => state.course.courseById;
-export const courseTotalCount = (state) => state.course.totalCount;
-export const selectCourseLoadingStatus = (state) => state.course.isLoading;
-export const selectCourseErrorStatus = (state) => state.course.isError;
-export const selectCourseErrorMessage = (state) => state.course.errorMessage;
+export const selectVideos = (state) => state.video.videos;
+export const selectVideoById = (state) => state.video.videoById;
+export const videoTotalCount = (state) => state.video.totalCount;
+export const selectVideoLoadingStatus = (state) => state.video.isLoading;
+export const selectVideoErrorStatus = (state) => state.video.isError;
+export const selectVideoErrorMessage = (state) => state.video.errorMessage;
 
 

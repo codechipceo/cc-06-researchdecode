@@ -19,6 +19,22 @@ export const createPaperRequest = createAsyncThunk(
   }
 );
 
+export const sendPaper = createAsyncThunk(
+  "requestPaper/sendPaper",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create(
+        "uploadRequestPaper",
+        payload
+      );
+      return { data, msg };
+    } catch (error) {
+      const errMessage = error.response.data.msg;
+      return rejectWithValue(errMessage);
+    }
+  }
+);
+
 export const getPendingRequests = createAsyncThunk(
   "requestPaper/pending",
   async (payload, { rejectWithValue }) => {
@@ -32,10 +48,42 @@ export const getPendingRequests = createAsyncThunk(
   }
 );
 
+export const getRequestById = createAsyncThunk(
+  "requestPaper/getSingle",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.getById(
+        "getPendingRequestById",
+        payload
+      );
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getRequestByUserId = createAsyncThunk();
+
+export const approvePaper = createAsyncThunk(
+  "requestPaper/approve",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create("approveRequest", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   pendingRequests: [],
+  uploadPaper: "",
   newRequest: "",
+  isRequestApproved: "",
   isRequestCreated: false,
+  requestDetail: "",
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -47,6 +95,18 @@ const paperRequestSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getRequestById.fulfilled, (state, { payload }) => {
+        state.requestDetail = payload.data;
+      })
+      .addCase(approvePaper.fulfilled, (state, { payload }) => {
+        state.isRequestApproved = payload.data;
+      })
+      .addCase(approvePaper.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(sendPaper.fulfilled, (state, { payload }) => {
+        state.uploadPaper = payload.data;
+      })
       // create paper request
       .addCase(createPaperRequest.pending, (state) => {
         state.isLoading = true;
@@ -88,5 +148,6 @@ export const selectIsRequestCreated = (state) =>
 export const selectIsLoading = (state) => state.paperRequest.isLoading;
 export const selectIsError = (state) => state.paperRequest.isError;
 export const selectErrorMessage = (state) => state.paperRequest.errorMessage;
+export const selectRequestDetail = (state) => state.paperRequest.requestDetail;
 
 export default paperRequestSlice.reducer;

@@ -1,5 +1,4 @@
 import { Box, Container, Grid } from "@mui/material";
-import React from "react";
 import { CourseCard } from "../../Components/Cards/CourseCard";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import StatusHandler from "../../Components/statusHandler";

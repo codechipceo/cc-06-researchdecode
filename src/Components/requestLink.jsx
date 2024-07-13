@@ -11,36 +11,31 @@ import { useNavigate } from "react-router-dom";
 const RequestLink = ({ request }) => {
   const navigate = useNavigate();
   console.log(request);
-  const { DOI_number, paperDetail, requestBy } = request;
-  const { title, author } = paperDetail;
   const handleSend = () => {
-    navigate(`/inbox/${request.requestBy}`);
+    navigate(`/pending-request/${request._id}`);
   };
 
   return (
     <ListItem alignItems='flex-start' sx={{ borderBottom: "1px solid #ddd" }}>
       <ListItemText>
         <Typography variant='h6' component='div'>
-          {title[0]}
+          Request ID: {request._id}
+        </Typography>
+        <Typography variant='subtitle1' component='div'>
+          Request By: {request.requestBy}
         </Typography>
         {/* <Typography variant='subtitle1' component='div'>
           Author: {author[0]}
         </Typography> */}
         <Typography variant='body2' component='div'>
-          DOI:{" "}
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {DOI_number}
-          </a>
+          Status: {request.requestStatus}
         </Typography>
-        {/* <Typography variant='body2' component='div'>
-          PDF Link:{" "}
-          <a href={} target='_blank' rel='noopener noreferrer'>
-            View PDF
-          </a>
-        </Typography> */}
+        <Typography variant='body2' component='div'>
+          Created At: {new Date(request.createdAt).toLocaleString()}
+        </Typography>
+        <Typography variant='body2' component='div'>
+          Updated At: {new Date(request.updatedAt).toLocaleString()}
+        </Typography>
       </ListItemText>
       <ListItemSecondaryAction>
         <IconButton edge='end' aria-label='send' onClick={handleSend}>
