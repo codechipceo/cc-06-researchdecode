@@ -7,7 +7,7 @@ const CourseInstructor = ({ course }) => {
       <Typography variant="h6" gutterBottom>
         Instructor
       </Typography>
-      <Avatar alt={course.instructor} src={course.instructorImage} sx={{ width: 100, height: 100, mb: 2 }} />
+      <Avatar alt={course.instructor.name} src={course.instructorImage} sx={{ width: 100, height: 100, mb: 2 }} />
       <Typography variant="h6">{course.instructor}</Typography>
       <Typography variant="body1">Full Stack Developer with 10 years of experience in web development.</Typography>
     </Box>

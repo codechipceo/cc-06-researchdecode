@@ -1,12 +1,19 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box, Button, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import LanguageIcon from '@mui/icons-material/Language';
 import PeopleIcon from '@mui/icons-material/People';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import StarIcon from '@mui/icons-material/Star';
 
-const CourseSidebar = ({ course }) => {
+const CourseSidebar = ({ course, isEnrolled = true}) => {
+  const navigate = useNavigate();
+
+  const handleBuyCourse = () => {
+    navigate(`/payment/${course._id}`);
+  };
+
   return (
     <Card>
       <CardContent>
@@ -53,9 +60,26 @@ const CourseSidebar = ({ course }) => {
             <Typography variant="body1">Rating: {course.rating}</Typography>
           </Grid>
         </Grid>
-        <Button variant="contained" color="primary" fullWidth>
-          Enroll Now
-        </Button>
+        {isEnrolled ? (
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            component={Link}
+            to={`/course/${course._id}/lectures/1`}
+          >
+            Start Lecture
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleBuyCourse}
+          >
+            Buy Course
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

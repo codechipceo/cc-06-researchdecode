@@ -1,9 +1,9 @@
-
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
+import PDFviewer from "./Components/PDFviewer/PDFviewer";
 import { selectStudentToken } from "./Features/Slices/studentSlice";
 import { useCourse } from "./Hooks/use-course";
 import CourseDetail from "./Pages/CourseDetail/CourseDetail";
@@ -11,10 +11,11 @@ import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
 import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
+import LecturePage from "./Pages/LecturePage/LecturePage"; // Import LecturePage
+import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
+import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
-import PDFviewer  from "./Components/PDFviewer/PDFviewer";
-import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 
 export default function App() {
   const {
@@ -80,6 +81,10 @@ export default function App() {
             }
           />
           <Route
+            path="/course/:courseId/lectures/:lectureId"
+            element={<GuardComponents component={LecturePage} />}
+          />
+          <Route
             path='/experts'
             element={<GuardComponents component={Experts} />}
           />
@@ -90,6 +95,10 @@ export default function App() {
           <Route
             path='/inbox/:userId'
             element={<GuardComponents component={Inbox} />}
+          />
+          <Route
+            path='/payment/:courseId'
+            element={<GuardComponents component={PaymentPage} />}
           />
         </Routes>
       </BrowserRouter>
