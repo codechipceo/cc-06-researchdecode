@@ -16,6 +16,7 @@ import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
 export default function App() {
   const {
@@ -23,7 +24,6 @@ export default function App() {
     isCourseLoading: isLoading,
     isCourseError: isError,
   } = useCourse();
-
 
   return (
     <>
@@ -60,7 +60,10 @@ export default function App() {
             path='/searchPaper'
             element={<GuardComponents component={SearchPapers} />}
           />
-          <Route path="/pending-request/:pendingRequestId" element={<GuardComponents component={PendingRequestDetail} />} />
+          <Route
+            path='/pending-request/:pendingRequestId'
+            element={<GuardComponents component={PendingRequestDetail} />}
+          />
 
           {/*
           ##############################
@@ -81,7 +84,7 @@ export default function App() {
             }
           />
           <Route
-            path="/course/:courseId/lectures/:lectureId"
+            path='/course/:courseId/lectures/:lectureId'
             element={<GuardComponents component={LecturePage} />}
           />
           <Route
@@ -114,7 +117,9 @@ function GuardComponents({ component: Component, ...rest }) {
 
   return (
     <DefaultLayout>
-      <Component {...rest} token={token} />
+      <ScrollTop>
+        <Component {...rest} token={token} />
+      </ScrollTop>
     </DefaultLayout>
   );
 }

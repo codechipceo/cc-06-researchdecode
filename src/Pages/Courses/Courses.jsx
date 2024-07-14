@@ -13,19 +13,19 @@ const CoursePage = () => {
   const breadcrumbPath = [{ label: "Home", path: "/" }];
   return (
     <div>
-      <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth="lg" sx={{ marginTop: "40px" }}>
-        <Box sx={{ flexGrow: 1, margin: "20px" }}>
+      <HeaderTwo title='COURSES' breadcrumbPath={breadcrumbPath} />
+      <Container sx={{ marginTop: "40px" }}>
+        <Box>
           <StatusHandler
             isLoading={isLoading}
             isError={isError}
-            errorMessage="Error loading courses"
+            errorMessage='Error loading courses'
             isEmpty={courses.length === 0}
           />
           {!isLoading && !isError && courses.length > 0 && (
-            <Grid container spacing={4}>
+            <Grid container spacing={3}>
               {courses.map((course) => (
-                <Grid item xs={12} sm={6} md={4} key={course._id} display={"flex"}>
+                <Grid item xs={12} md={3} key={course._id}>
                   <CourseCard course={course} />
                 </Grid>
               ))}
