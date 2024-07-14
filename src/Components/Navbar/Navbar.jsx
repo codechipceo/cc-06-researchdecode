@@ -40,7 +40,7 @@ const pages = [
     navPath: "/courses",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Inbox"];
+const settings = ["Profile", "Account", "Dashboard", "Inbox","Requests"];
 
 function ResponsiveAppBar() {
   const token = useSelector(selectStudentToken);
@@ -214,7 +214,7 @@ function ResponsiveAppBar() {
                 <hr />
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
+                    <Link  style={{ textDecoration: "none" }}  to={`/${setting.toLowerCase()}`}>{setting}</Link>
                   </MenuItem>
                 ))}
                 <MenuItem onClick={handleLogout}>
