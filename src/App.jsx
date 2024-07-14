@@ -16,6 +16,7 @@ import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import Request from "./Pages/Requests/Request";
 
 export default function App() {
   const {
@@ -49,7 +50,7 @@ export default function App() {
           />
           <Route
             path='/signup'
-            element={<GuardComponents component={SignUp} />}
+            element={ <SignUp />}
           />
 
           {/*
@@ -99,6 +100,10 @@ export default function App() {
           <Route
             path='/payment/:courseId'
             element={<GuardComponents component={PaymentPage} />}
+          />
+          <Route
+            path='/requests'
+            element={<GuardComponents component={Request} />}
           />
         </Routes>
       </BrowserRouter>

@@ -5,8 +5,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import Grid from "@mui/material/Grid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPaperRequest } from "../Features/Slices/requestResearchPaper";
+import { selectStudentInfo } from "../Features/Slices/studentSlice";
 
 const PaperCard = ({
   title,
@@ -18,21 +19,22 @@ const PaperCard = ({
   paperDetail,
 }) => {
   const dispatch = useDispatch();
+  const loggedinUser = useSelector(selectStudentInfo);
 
   const requestPayload = {
     DOI_number: doi,
-    requestBy: "6683d6b2a0a0590aeda8e44a",
+    requestBy: loggedinUser._id,
     paperDetail,
   };
   return (
     <Card>
       <CardContent>
-        <Typography gutterBottom variant='h6' component='div'>
+        <Typography gutterBottom variant="h6" component="div">
           {title}
         </Typography>
-        <Grid container spacing={1} alignItems='center'>
+        <Grid container spacing={1} alignItems="center">
           <Grid item xs={12} sm={6}>
-            <Typography variant='body1' color='text.secondary'>
+            <Typography variant="body1" color="text.secondary">
               Authors:{" "}
               {author
                 .map((author, index) => `${author.given} ${author.family}`)
@@ -40,26 +42,26 @@ const PaperCard = ({
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant='body1' color='text.secondary'>
+            <Typography variant="body1" color="text.secondary">
               DOI: {doi}
             </Typography>
-            <Typography variant='body1' color='text.secondary'>
+            <Typography variant="body1" color="text.secondary">
               Language: {language}
             </Typography>
           </Grid>
         </Grid>
-        <Typography variant='body1' color='text.secondary' sx={{ mt: 1 }}>
+        <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
           Abstract: {abstract}
         </Typography>
-        <Typography variant='caption' color='text.secondary' sx={{ mt: 1 }}>
+        <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
           Published Date: {publishedDate}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
-          size='small'
-          variant='contained'
-          color='primary'
+          size="small"
+          variant="contained"
+          color="primary"
           onClick={() => {
             dispatch(createPaperRequest(requestPayload));
           }}
