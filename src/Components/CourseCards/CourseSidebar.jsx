@@ -7,7 +7,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StarIcon from "@mui/icons-material/Star";
 
-const CourseSidebar = ({ course, isEnrolled = true }) => {
+const CourseSidebar = ({ course, isEnrolled = true , firstVideo}) => {
   const navigate = useNavigate();
 
   const handleBuyCourse = () => {
@@ -74,7 +74,7 @@ const CourseSidebar = ({ course, isEnrolled = true }) => {
             color='primary'
             fullWidth
             component={Link}
-            to={`/course/${course._id}/lectures/1`}
+            to={`/course/${course._id}/lectures/${firstVideo}`}
           >
             Start Lecture
           </Button>

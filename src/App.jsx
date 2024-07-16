@@ -20,12 +20,6 @@ import ScrollTop from "./Components/ScrollTop/ScrollTop";
 import Request from "./Pages/Requests/Request";
 
 export default function App() {
-  const {
-    courseData: courses,
-    isCourseLoading: isLoading,
-    isCourseError: isError,
-  } = useCourse();
-
   return (
     <>
       <BrowserRouter>
@@ -48,10 +42,7 @@ export default function App() {
             path='/signin'
             element={<GuardComponents component={SignIn} />}
           />
-          <Route
-            path='/signup'
-            element={ <SignUp />}
-          />
+          <Route path='/signup' element={<SignUp />} />
 
           {/*
           ##############################
@@ -76,13 +67,7 @@ export default function App() {
           />
           <Route
             path='/course/:courseId'
-            element={
-              <GuardComponents
-                component={(props) => (
-                  <CourseDetail {...props} courses={courses} />
-                )}
-              />
-            }
+            element={<GuardComponents component={CourseDetail} />}
           />
           <Route
             path='/course/:courseId/lectures/:lectureId'

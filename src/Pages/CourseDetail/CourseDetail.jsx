@@ -8,20 +8,35 @@ import CourseInstructor from "../../Components/CourseCards/CourseInstructor";
 import CourseReviews from "../../Components/CourseCards/CourseReviews";
 import CourseSidebar from "../../Components/CourseCards/CourseSidebar";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCourseById,
+  selectCourseById,
+} from "../../Features/Slices/courseSlice";
+import {
+  getVideosByCourseId,
+  selectVideosByCourseId,
+} from "../../Features/Slices/videoSlice";
 const Banner = styled("img")({
   width: "100%",
   height: "auto",
   marginBottom: "20px",
 });
 
-const CourseDetail = ({ courses }) => {
+const CourseDetail = () => {
   const { courseId } = useParams();
+  const dispatch = useDispatch();
+  const courseDetail = useSelector(selectCourseById);
+  const videoByCourseId = useSelector(selectVideosByCourseId);
 
-  const course = courses.find((course) => course._id === courseId);
-  console.log(course);
+  useEffect(() => {
+    const payload = { courseId: courseId };
+    dispatch(getCourseById(payload));
+    dispatch(getVideosByCourseId(payload));
+  }, []);
 
-  if (!course) {
+  if (!courseId) {
     return <Typography variant='h5'>Course not found</Typography>;
   }
 
@@ -33,22 +48,19 @@ const CourseDetail = ({ courses }) => {
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
 
-  const {
-    courseName,
-    courseDescription,
-    courseExtras,
-    price,
-    courseThumbnail,
-    courseBanner,
-  } = course;
+  const { courseName, courseBanner, instructor } = courseDetail ?? {};
+
+  console.log(courseDetail);
+  if (!courseDetail?.courseName) return <>Loading</>;
+
   return (
     <div>
       <HeaderTwo title='COURSE' breadcrumbPath={breadcrumbPath} />
-        <Banner src={courseBanner} alt={course.courseName} />
+      <Banner src={courseBanner} alt={courseName} />
       <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
-        {/* <Banner src={course.courseBanner} alt={course.courseName} /> */}
+        {/* <Banner src={courseBanner} alt={courseName} /> */}
         <Typography variant='h4' gutterBottom>
-          {course.instructor.name}
+          {instructor?.name}
         </Typography>
         <Typography variant='h4' gutterBottom>
           {courseName}
@@ -63,15 +75,16 @@ const CourseDetail = ({ courses }) => {
               <Tab label='Overview' />
               <Tab label='Curriculum' />
               <Tab label='Instructor' />
-              <Tab label='Reviews' />
+              {/* <Tab label='Reviews' /> */}
             </Tabs>
-            {tabValue === 0 && <CourseOverview course={course} />}
-            {tabValue === 1 && <CourseCurriculum course={course} />}
-            {tabValue === 2 && <CourseInstructor course={course} />}
-            {tabValue === 3 && <CourseReviews />}
+
+            {tabValue === 0 && <CourseOverview course={courseDetail} />}
+            {tabValue === 1 && <CourseCurriculum course={videoByCourseId} />}
+            {tabValue === 2 && <CourseInstructor course={courseDetail} />}
+            {/* {tabValue === 3 && <CourseReviews />} */}
           </Grid>
           <Grid item xs={12} md={4}>
-            <CourseSidebar course={course} />
+            <CourseSidebar course={courseDetail} firstVideo={videoByCourseId[0]?._id} />
           </Grid>
         </Grid>
       </Container>

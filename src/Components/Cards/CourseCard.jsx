@@ -22,24 +22,17 @@ export const CourseCard = ({ course }) => {
   const { courseName, courseThumbnail, lessons, instructor, price, _id } =
     course ?? {};
   return (
-    <Box
-      style={{
-        transition: "transform 0.3s ease",
-        // maxWidth: '345px',
-      }}
-      onClick={() => navigate(`/course/${_id}`)}
-    >
+    <Box onClick={() => navigate(`/course/${_id}`)}>
       <Card
         sx={{
-          // maxWidth: 345,
-          position: "relative",
+          maxWidth: 345,
         }}
       >
         <CardMedia
           component='img'
           alt={courseName}
           height='250'
-          style={{objectFit:"fill"}}
+          style={{ objectFit: "fill" }}
           image={courseThumbnail}
         />
         {/* <div style={{ position: "absolute", top: "10px", right: "10px" }}>

@@ -19,6 +19,18 @@ export const getAllVideos = createAsyncThunk(
   }
 );
 
+export const getVideosByCourseId = createAsyncThunk(
+  "video/courseId",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, count } = await apiFeature.getById("byCourseId", payload);
+      return { data, count };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // GET BY ID
 export const getVideoById = createAsyncThunk(
   "video/getById",
@@ -37,6 +49,7 @@ const initialState = {
   totalCount: 0,
   videos: [],
   videoById: {},
+  videoByCourseId: [],
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -48,6 +61,10 @@ export const videoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getVideosByCourseId.fulfilled, (state, { payload }) => {
+        state.videoByCourseId = payload.data;
+        state.totalCount = payload.count;
+      })
 
       .addCase(getAllVideos.pending, (state) => {
         state.isLoading = true;
@@ -81,12 +98,10 @@ export const videoSlice = createSlice({
   },
 }).reducer;
 
-
 export const selectVideos = (state) => state.video.videos;
 export const selectVideoById = (state) => state.video.videoById;
 export const videoTotalCount = (state) => state.video.totalCount;
 export const selectVideoLoadingStatus = (state) => state.video.isLoading;
+export const selectVideosByCourseId = (state) => state.video.videoByCourseId;
 export const selectVideoErrorStatus = (state) => state.video.isError;
 export const selectVideoErrorMessage = (state) => state.video.errorMessage;
-
-

@@ -9,27 +9,19 @@ export const OurCourses = () => {
     isCourseError: isError,
   } = useCourse();
   return (
-    <Container maxWidth={"auto"}>
+    <Container>
       <Typography variant='h6' mt={5}>
         Need help with education?{" "}
       </Typography>
       <Typography variant='h4' fontWeight={"bold"}>
         We offer the best courses
       </Typography>
-      <Grid2
-        container
-        columns={{ xs: 1, sm: 1, md: 4, lg: 4 }}
-              columnSpacing={4}
-              rowSpacing={4}
-      >
-       <Grid container direction="row" spacing={2} style={{ flexWrap: 'nowrap', overflowX: 'auto' }}>
-      {courses.map((course) => (
-        <Grid item key={course._id} style={{ flex: '0 0 auto' }}>
-          <CourseCard course={course} />
-        </Grid>
-      ))}
-    </Grid>
-       
+      <Grid2 container my={5}>
+        {courses.map((course) => (
+          <Grid item key={course._id} xs={12} md={3} mx={"auto"} style={{cursor:'pointer'}}>
+            <CourseCard course={course} />
+          </Grid>
+        ))}
       </Grid2>
     </Container>
   );
