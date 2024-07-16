@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 const RequestLink = ({ request }) => {
   const navigate = useNavigate();
-  console.log(request);
   const handleSend = () => {
     navigate(`/pending-request/${request._id}`);
   };

@@ -23,7 +23,6 @@ export const PendingRequestDetail = ({ pendingRequestObj }) => {
     getRequestDetailsFn(pendingRequestId);
   }, []);
 
-  console.log(requestDetail);
 
   const { DOI_number, requestStatus  , } = requestDetail ?? {}
   return (

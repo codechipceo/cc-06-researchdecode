@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 
 const CourseInstructor = ({ course }) => {
-  console.log("Instructor", course);
   const { name, qualification, experience } = course?.instructor;
   const teacherInfo = { name, qualification, experience };
   return (

@@ -5,7 +5,6 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const RequestDetail = ({ requestDetail }) => {
   const dispatch = useDispatch();
-  console.log(requestDetail);
   if (!requestDetail) return null;
 
   const {
@@ -20,22 +19,18 @@ const RequestDetail = ({ requestDetail }) => {
 
   // Define button handlers (these should be implemented based on your requirements)
   const handleApprove = () => {
-    console.log('Approve action');
     // dispatch(approveRequest(_id)); // Example action
   };
 
   const handleReject = () => {
-    console.log('Reject action');
     // dispatch(rejectRequest(_id)); // Example action
   };
 
   const handleOpen = () => {
-    console.log('Open action');
     // dispatch(openRequest(_id)); // Example action
   };
 
   const handleUpload = () => {
-    console.log('Upload action');
     // dispatch(uploadRequest(_id)); // Example action
   };
 

@@ -50,7 +50,6 @@ const CourseDetail = () => {
 
   const { courseName, courseBanner, instructor } = courseDetail ?? {};
 
-  console.log(courseDetail);
   if (!courseDetail?.courseName) return <>Loading</>;
 
   return (

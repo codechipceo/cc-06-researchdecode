@@ -35,7 +35,6 @@ const Chat = ({ users, request }) => {
   const [attachment, setAttachment] = useState(null);
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState("");
-  console.log(file);
   useEffect(() => {
     const payload = {
       senderId: loggedinUser._id,

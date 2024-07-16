@@ -12,8 +12,7 @@ export const studentLogin = createAsyncThunk(
     try {
       const { data, msg } = await apiFeature.create("signIn", payload);
       localStorage.setItem("studentToken", data.token);
-      console.log(data)
-      localStorage.setItem("studentInfo",JSON.stringify( data.user));
+      localStorage.setItem("studentInfo", JSON.stringify(data.user));
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;
@@ -52,7 +51,7 @@ export const getAllStudents = createAsyncThunk(
 );
 // Initial state for student login slice
 const initialState = {
-  studentInfo:JSON.parse( localStorage.getItem("studentInfo")),
+  studentInfo: JSON.parse(localStorage.getItem("studentInfo")),
   studentData: [],
   isLoading: false,
   isError: false,
@@ -127,5 +126,5 @@ export const selectStudentSignUpErrorMsg = (state) =>
 export const selectStudentIsSignUpError = (state) =>
   state.student.isSignUpError;
 
-export const { logout} = studentSlice.actions
+export const { logout } = studentSlice.actions;
 export default studentSlice.reducer;

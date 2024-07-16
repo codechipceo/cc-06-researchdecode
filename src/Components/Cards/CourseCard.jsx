@@ -12,7 +12,6 @@ import StarIcon from "@mui/icons-material/Star";
 import { useNavigate } from "react-router-dom";
 
 export const CourseCard = ({ course }) => {
-  console.log("Each Course", course);
   const navigate = useNavigate();
 
   if (!course) {

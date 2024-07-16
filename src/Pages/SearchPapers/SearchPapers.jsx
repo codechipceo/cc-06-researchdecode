@@ -28,7 +28,6 @@ export const SearchPapers = () => {
 
   const handleSendPaper = (userId) => {
     // Implement the logic to send the paper
-    console.log(`Send paper to user with ID: ${userId}`);
     // navigate(`/inbox/${userId}`); // Uncomment this if you have the navigation logic in place
   };
 

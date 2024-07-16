@@ -22,7 +22,6 @@ import {
 //       .then((res) => {
 //         const data = res.data;
 //         const status = res.status;
-//         console.log(data);
 //         return { data, status };
 //       });
 //   };
@@ -52,7 +51,6 @@ export const useResearchPaper = () => {
       const data = res.data;
       setResearchPaper(data.message);
       const status = res.status;
-      console.log(data);
       return { data, status };
     });
 
