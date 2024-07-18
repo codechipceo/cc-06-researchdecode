@@ -6,8 +6,6 @@ import {
   List,
   TextField,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import PaperCard from "../../Components/card";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
@@ -46,7 +44,7 @@ export const SearchPapers = () => {
 
   const handleSendPaper = (userId) => {
     // Implement the logic to send the paper
-    // navigate(`/inbox/${userId}`); // Uncomment this if you have the navigation logic in place
+    // navigate(/inbox/${userId}); // Uncomment this if you have the navigation logic in place
   };
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -99,7 +97,7 @@ export const SearchPapers = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={(e) => handleSearch(e, doiNumber)}
+            onClick={handleSearch}
             sx={{
               borderRadius: 2,
               fontWeight: "bold",
