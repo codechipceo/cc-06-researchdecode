@@ -1,11 +1,10 @@
-import { Container, Paper } from "@mui/material";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
+import { Container } from "@mui/material";
 import { useEffect } from "react";
-import { usePendingRequests } from "../../Hooks/use-researchPaper";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getRequestById, selectRequestDetail } from "../../Features/Slices/requestResearchPaper";
+import { useParams } from "react-router-dom";
+import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import RequestDetail from "../../Components/RequestDetail";
+import { getRequestById, selectRequestDetail } from "../../Features/Slices/requestResearchPaper";
 
 export const PendingRequestDetail = ({ pendingRequestObj }) => {
   const dispatch = useDispatch()

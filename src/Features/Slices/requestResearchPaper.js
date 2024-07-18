@@ -19,13 +19,19 @@ export const createPaperRequest = createAsyncThunk(
   }
 );
 
+//to upload paper for pending requests
 export const sendPaper = createAsyncThunk(
   "requestPaper/sendPaper",
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create(
         "uploadRequestPaper",
-        payload
+        payload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return { data, msg };
     } catch (error) {
@@ -35,6 +41,8 @@ export const sendPaper = createAsyncThunk(
   }
 );
 
+
+// get requests as per status type
 export const getPendingRequests = createAsyncThunk(
   "requestPaper/pending",
   async (payload, { rejectWithValue }) => {
