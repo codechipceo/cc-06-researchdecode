@@ -8,30 +8,6 @@ import {
   selectPendingRequests,
   selectRequestDetail,
 } from "../Features/Slices/requestResearchPaper";
-// export const useResearchPaper = () => {
-//   const [doiNumber, setDoiNumber] = useState("");
-
-//   const doiApiPath =
-//     "https://api.crossref.org/works/10.1179/1942787514y.0000000039";
-
-//   const handleSearch = async (e, doiNumber) => {
-//     e.preventDefault();
-
-//     const { data, status } = await axios
-//       .get(`${doiApiPath}`)
-//       .then((res) => {
-//         const data = res.data;
-//         const status = res.status;
-//         return { data, status };
-//       });
-//   };
-
-//   return {
-//     doiNumber,
-//     setDoiNumber,
-//     handleSearch,
-//   };
-// };
 
 export const useResearchPaper = () => {
   const [doiNumber, setDoiNumber] = useState("");
@@ -39,8 +15,7 @@ export const useResearchPaper = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const doiApiPath =
-    "https://api.crossref.org/works/10.1179/1942787514y.0000000039";
+  const doiApiPath = `https://api.crossref.org/works/${doiNumber}`;
 
   const handleSearch = async (e, doiNumber) => {
     e.preventDefault();
@@ -83,3 +58,4 @@ export const usePendingRequests = () => {
 
   };
 };
+
