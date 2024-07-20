@@ -29,44 +29,56 @@ const PaperCard = ({
   return (
     <Card>
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography variant='h5'>Title</Typography>
+        <Typography gutterBottom variant='h6' component='div'>
           {title}
         </Typography>
-        <Grid container spacing={1} alignItems="center">
+        <Grid container spacing={1} alignItems='center'>
           <Grid item xs={12} sm={6}>
-            <Typography variant="body1" color="text.secondary">
-              Authors:{" "}
+            <Typography variant='body1'>Authors</Typography>
+            <Typography variant='body1' color='text.secondary'>
               {author
                 .map((author, index) => `${author.given} ${author.family}`)
                 .join(", ")}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant="body1" color="text.secondary">
-              DOI: {doi}
+            <Typography variant='body1'>DOI:</Typography>
+
+            <Typography variant='body1' color='text.secondary'>
+              {doi}
             </Typography>
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant='body1' color='text.secondary'>
               Language: {language}
             </Typography>
           </Grid>
         </Grid>
-        <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-          Abstract: {abstract}
+        <Typography variant='body1' fontWeight={600}>Abstract</Typography>
+        <Typography
+          variant='body1'
+          color='text.secondary'
+          sx={{ mt: 1 }}
+          maxHeight={"300px"}
+          overflow={"scroll"}
+        >
+          {/* Abstract: {abstract} */}
+          <div dangerouslySetInnerHTML={{ __html: abstract }} />
         </Typography>
-        <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+        <Typography variant='caption' color='text.secondary' sx={{ mt: 1 }}>
           Published Date: {publishedDate}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
-          size="small"
-          variant="contained"
-          color="primary"
+          size='small'
+          style={{marginLeft:'auto'}}
+          variant='contained'
+          color='primary'
           onClick={() => {
             dispatch(createPaperRequest(requestPayload));
           }}
         >
-          Make a Request
+          Request Paper
         </Button>
       </CardActions>
     </Card>

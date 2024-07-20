@@ -41,7 +41,6 @@ export const sendPaper = createAsyncThunk(
   }
 );
 
-
 // get requests as per status type
 export const getPendingRequests = createAsyncThunk(
   "requestPaper/pending",
@@ -85,6 +84,18 @@ export const approvePaper = createAsyncThunk(
   }
 );
 
+export const rejectPaperRequest = createAsyncThunk(
+  "requestPaper/reject",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create("rejectRequest", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   pendingRequests: [],
   uploadPaper: "",
@@ -109,7 +120,7 @@ const paperRequestSlice = createSlice({
       .addCase(approvePaper.fulfilled, (state, { payload }) => {
         state.isRequestApproved = payload.data;
       })
-      .addCase(approvePaper.pending, (state, { payload }) => {
+      .addCase(approvePaper.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(sendPaper.fulfilled, (state, { payload }) => {
@@ -143,6 +154,9 @@ const paperRequestSlice = createSlice({
       .addCase(getPendingRequests.rejected, (state, { payload }) => {
         state.isError = true;
         state.errorMessage = payload;
+      })
+      .addCase(rejectPaperRequest.fulfilled, (state, { payload }) => {
+        state.requestDetail = payload.data;
       });
   },
 });

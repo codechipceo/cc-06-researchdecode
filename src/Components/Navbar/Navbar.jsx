@@ -208,7 +208,7 @@ function ResponsiveAppBar() {
               >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign='center'>
-                    {studentInfo?.firstName + studentInfo?.lastName}
+                    {studentInfo?.firstName + studentInfo?.lastName} {studentInfo.points}
                   </Typography>
                 </MenuItem>
                 <hr />

@@ -16,41 +16,36 @@ import { MainModal } from "./MainModal/MainModal";
 import PDFviewer from "./PDFviewer/PDFviewer";
 import {
   approvePaper,
+  rejectPaperRequest,
   sendPaper,
 } from "../Features/Slices/requestResearchPaper";
 
 const RequestDetail = ({ requestDetail }) => {
   const dispatch = useDispatch();
-  console.log(requestDetail)
   const loggedinUser = useSelector(selectStudentInfo);
   const [file, setFile] = useState("");
   const [uploadFile, setUploadFile] = useState(null);
   const [open, setOpen] = useState(false);
+  const formData = new FormData();
+
   if (!requestDetail) return null;
 
   const { _id, requestBy, paperDetail, requestStatus, DOI_number } =
     requestDetail;
 
-  console.log(requestBy, loggedinUser._id)
 
   const { title, DOI, publisher, author } = paperDetail || {};
 
-  // Define button handlers (these should be implemented based on your requirements)
+
+  // Handler Functions
   const handleApprove = () => {
     dispatch(approvePaper({ requestId: _id }));
-    // dispatch(approveRequest(_id)); // Example action
   };
 
   const handleReject = () => {
-    // dispatch(rejectRequest(_id)); // Example action
+    dispatch(rejectPaperRequest({ requestId: _id }));
   };
 
-  const handleOpen = () => {
-    setFile();
-    // dispatch(openRequest(_id)); // Example action
-  };
-
-  const formData = new FormData();
   const handleUpload = () => {
     formData.append("file", uploadFile);
     formData.append("requestId", _id);
@@ -68,7 +63,7 @@ const RequestDetail = ({ requestDetail }) => {
           </Grid>
           <Grid item>
             <Typography variant='body1' color='text.secondary'>
-              {`${requestBy.firstName} ${requestBy.lastName}`}
+              {`${requestBy?.firstName} ${requestBy?.lastName}`}
             </Typography>
           </Grid>
         </Grid>

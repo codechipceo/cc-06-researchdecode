@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import PDFviewer from "./Components/PDFviewer/PDFviewer";
+import ScrollTop from "./Components/ScrollTop/ScrollTop";
 import { selectStudentToken } from "./Features/Slices/studentSlice";
-import { useCourse } from "./Hooks/use-course";
 import CourseDetail from "./Pages/CourseDetail/CourseDetail";
 import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
@@ -13,11 +13,13 @@ import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
 import LecturePage from "./Pages/LecturePage/LecturePage"; // Import LecturePage
 import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
+import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
-import ScrollTop from "./Components/ScrollTop/ScrollTop";
-import Request from "./Pages/Requests/Request";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -95,6 +97,7 @@ export default function App() {
           />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 }
