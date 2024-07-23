@@ -1,26 +1,26 @@
-import { Grid, Box, Container } from "@mui/material";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-import { useTeacher } from "../../Hooks/use-teacher";
+import { Box, Container, Grid } from "@mui/material";
 import { TeacherCard } from "../../Components/Cards/TeacherCard";
+import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import StatusHandler from "../../Components/statusHandler";
+import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
 
-const  Experts=()=> {
+const Experts = () => {
   const {
-    teacherData: teachers,
-    isTeacherLoading: isLoading,
-    isTeacherError: isError,
-  } = useTeacher();
+    consultancyCardData: teachers,
+    isLoading,
+    isError,
+  } = useConsultancyCard();
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
   return (
     <div>
-      <HeaderTwo title="EXPERTS" breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth="lg" sx={{ marginTop: "40px" }}>
+      <HeaderTwo title='EXPERTS' breadcrumbPath={breadcrumbPath} />
+      <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
         <Box sx={{ flexGrow: 1, margin: "20px" }}>
           <StatusHandler
             isLoading={isLoading}
             isError={isError}
-            errorMessage="Error loading Experts"
+            errorMessage='Error loading Experts'
             isEmpty={teachers.length === 0}
           />
           {!isLoading && !isError && teachers.length > 0 && (
@@ -36,5 +36,5 @@ const  Experts=()=> {
       </Container>
     </div>
   );
-}
-export default Experts
+};
+export default Experts;

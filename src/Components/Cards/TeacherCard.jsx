@@ -2,6 +2,7 @@ import StarIcon from "@mui/icons-material/Star";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -12,20 +13,17 @@ import { useNavigate } from "react-router-dom";
 
 export const TeacherCard = ({ data }) => {
   const navigate = useNavigate();
-  const { _id, profileImage, experience, name, qualification } = data;
+  const { _id, profileImage, experience, name, qualification, pricing } =
+    data?.teacherId;
 
+  console.log(data)
   return (
     <Card
       sx={{
         maxWidth: 350,
         minWidth: 300,
         boxShadow: 3,
-        transition: "transform 0.3s ease",
-        "&:hover": {
-          transform: "scale(1.05)",
-        },
       }}
-      onClick={() => navigate(`/teacher/${_id}`)}
     >
       <CardMedia
         component='img'
@@ -55,13 +53,26 @@ export const TeacherCard = ({ data }) => {
               alignItems='center'
             >
               <StarIcon sx={{ color: "#FFD700", mr: 0.5 }} />
-              {experience} years experience
+              {experience??""} years experience
             </Typography>
           </Box>
         </Box>
         <Typography variant='body2' color='text.secondary' mb={1}>
-          Qualification: {qualification}
+          Qualification: {qualification??""}
         </Typography>
+        <Typography variant='body2' color='text.secondary' mb={1}>
+          Price: {pricing?.single}
+        </Typography>
+
+        <Box display={"flex"} justifyContent={"space-between"}>
+          <Button
+            variant='contained'
+            onClick={() => navigate(`/supervisor/${data._id}`)}
+          >
+            Hire Me
+          </Button>
+          <Button onClick={() => navigate(`/inbox/${_id}`)}>Chat</Button>
+        </Box>
       </CardContent>
     </Card>
   );

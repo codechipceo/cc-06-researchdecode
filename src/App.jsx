@@ -17,6 +17,7 @@ import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
+import { SuperVisorDetail } from "./Pages/Experts/SuperVisorDetail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,8 +38,7 @@ export default function App() {
           <Route path='/' element={<GuardComponents component={Home} />} />
 
           {/*
-          ##############################
-          SIGN UP / SIGN IN
+          ##################### SIGNUP / SIGNIN #######################
           */}
           <Route
             path='/signin'
@@ -47,8 +47,7 @@ export default function App() {
           <Route path='/signup' element={<SignUp />} />
 
           {/*
-          ##############################
-          PAPER REQUEST
+          ##################### PAPER REQUESTS #######################
           */}
           <Route
             path='/searchPaper'
@@ -58,10 +57,13 @@ export default function App() {
             path='/pending-request/:pendingRequestId'
             element={<GuardComponents component={PendingRequestDetail} />}
           />
+          <Route
+            path='/requests'
+            element={<GuardComponents component={Request} />}
+          />
 
           {/*
-          ##############################
-          COURSE
+          ##################### COURSE #######################
           */}
           <Route
             path='/courses'
@@ -75,25 +77,32 @@ export default function App() {
             path='/course/:courseId/lectures/:lectureId'
             element={<GuardComponents component={LecturePage} />}
           />
+          {/*
+          ##################### TEACHER #######################
+          */}
           <Route
             path='/experts'
             element={<GuardComponents component={Experts} />}
           />
           <Route
+            path='/supervisor/:supervisorId'
+            element={<GuardComponents component={SuperVisorDetail} />}
+          />
+
+          {/*
+          ##################### INBOX #######################
+          */}
+          <Route
             path='/inbox'
             element={<GuardComponents component={Inbox} />}
           />
           <Route
-            path='/inbox/:userId'
+            path='/inbox/:supervisorId'
             element={<GuardComponents component={Inbox} />}
           />
           <Route
             path='/payment/:courseId'
             element={<GuardComponents component={PaymentPage} />}
-          />
-          <Route
-            path='/requests'
-            element={<GuardComponents component={Request} />}
           />
         </Routes>
       </BrowserRouter>

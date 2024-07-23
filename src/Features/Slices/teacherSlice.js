@@ -3,7 +3,7 @@ import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
-const apiFeature = new ApiFeatures("admin", "teacher", axiosInstance);
+const apiFeature = new ApiFeatures("user", "teacher", axiosInstance);
 
 // GET ALL TEACHER
 export const getAllTeachers = createAsyncThunk(

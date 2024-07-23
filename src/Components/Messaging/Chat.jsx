@@ -1,69 +1,30 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
-  TextField,
   Button,
-  Paper,
   List,
   ListItem,
   ListItemText,
+  Paper,
+  TextField,
   Typography,
-  IconButton,
-  InputAdornment,
 } from "@mui/material";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import SendIcon from "@mui/icons-material/Send";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  approvePaper,
-  sendPaper,
-} from "../../Features/Slices/requestResearchPaper";
+import { selectChats } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
-import { getConvo, selectChats } from "../../Features/Slices/chatSlice";
-import PdfViewer from "../PDFviewer/PDFviewer";
-import { MainModal } from "../MainModal/MainModal";
 
-const Chat = ({ users, request }) => {
+const Chat = ({ id }) => {
   const dispatch = useDispatch();
-  const { userId } = useParams();
   const loggedinUser = useSelector(selectStudentInfo);
 
   const chats = useSelector(selectChats);
 
   const [message, setMessage] = useState("");
-  const [attachment, setAttachment] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [file, setFile] = useState("");
-  useEffect(() => {
-    const payload = {
-      senderId: loggedinUser._id,
-      recepientId: userId,
-    };
-    dispatch(getConvo(payload));
-  }, [userId, dispatch]);
+  useEffect(() => {}, []);
 
   const handleSendMessage = () => {
-    const newMessage = {
-      fulfilledBy: loggedinUser._id,
-      requestId: "6686ef4db3f7b2f17f2e74f9" || request._id,
-      requestBy: userId,
-    };
-    dispatch(sendPaper(newMessage));
     setMessage("");
-    setAttachment(null);
-  };
-
-  const handleFileChange = (event) => {
-    setAttachment(event.target.files[0]);
-  };
-
-  const handleApprove = () => {
-    const payload = {
-      fulfilledBy: loggedinUser._id,
-      requestId: "",
-    };
-    dispatch(approvePaper(payload));
   };
 
   const getUserName = (arr, id) => {
@@ -81,9 +42,11 @@ const Chat = ({ users, request }) => {
       }}
       elevation={0}
     >
-      <Typography variant='h5' component='div' sx={{ marginBottom: "20px" }}>
-        Chat with{getUserName(users, userId)}
-      </Typography>
+      <Typography
+        variant='h5'
+        component='div'
+        sx={{ marginBottom: "20px" }}
+      ></Typography>
       <List sx={{ flex: 1, overflow: "auto", marginBottom: "20px" }}>
         {chats &&
           [...chats].reverse().map((msg) => {
@@ -111,27 +74,12 @@ const Chat = ({ users, request }) => {
                       maxWidth: "75%",
                     }}
                   ></ListItemText>
-                  {loggedinUser._id !== msg.sender && (
-                    <Box>
-                      <Button
-                        onClick={() => {
-                          setFile(msg.content);
-                          setOpen(true);
-                        }}
-                      >
-                        View File
-                      </Button>
-                      <Button onClick={() => handleApprove()}>Approve </Button>
-                    </Box>
-                  )}
                 </ListItem>
               </Box>
             );
           })}
       </List>
-      <MainModal open={open} setOpen={setOpen}>
-        {file && <PdfViewer file={file} />}
-      </MainModal>
+
       <Box
         sx={{
           display: "flex",
@@ -151,24 +99,6 @@ const Chat = ({ users, request }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           sx={{ flex: 1 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position='end'>
-                <input
-                  accept='*'
-                  style={{ display: "none" }}
-                  id='attachment-input'
-                  type='file'
-                  onChange={handleFileChange}
-                />
-                <label htmlFor='attachment-input'>
-                  <IconButton component='span'>
-                    <AttachFileIcon />
-                  </IconButton>
-                </label>
-              </InputAdornment>
-            ),
-          }}
         />
         <Button
           variant='contained'
