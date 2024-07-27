@@ -27,6 +27,7 @@ export const SearchPapers = () => {
     researchPaper,
     isLoading,
     isError,
+    setResearchPaper,
     handleSearch,
   } = useResearchPaper();
   const { pendingRequests } = usePendingRequests();
@@ -77,8 +78,8 @@ export const SearchPapers = () => {
 
   return (
     <div>
-      <HeaderTwo title="RESEARCH PAPER" breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth="md" sx={{ marginTop: "40px" }}>
+      <HeaderTwo title='RESEARCH PAPER' breadcrumbPath={breadcrumbPath} />
+      <Container maxWidth='md' sx={{ marginTop: "40px" }}>
         <Box
           sx={{
             display: "flex",
@@ -88,15 +89,15 @@ export const SearchPapers = () => {
           }}
         >
           <TextField
-            label="DOI Number"
-            variant="outlined"
+            label='DOI Number'
+            variant='outlined'
             value={doiNumber}
             onChange={(e) => setDoiNumber(e.target.value)}
             fullWidth
           />
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             onClick={handleSearch}
             sx={{
               borderRadius: 2,
@@ -106,7 +107,7 @@ export const SearchPapers = () => {
           >
             Search
           </Button>
-           <Button
+          <Button
             variant='contained'
             color='secondary'
             onClick={handleOpenModal}
@@ -131,12 +132,14 @@ export const SearchPapers = () => {
         <StatusHandler
           isLoading={isLoading}
           isError={isError}
-          errorMessage="Error fetching research paper"
+          errorMessage='Error fetching research paper'
         />
 
         {!isLoading && !isError && researchPaper && (
           <PaperCard
+            setDoiNumber={setDoiNumber}
             title={researchPaper.title}
+            setPaper={setResearchPaper}
             author={researchPaper.author}
             publishedDate={researchPaper.publishedDate}
             doi={researchPaper.DOI}
@@ -148,8 +151,8 @@ export const SearchPapers = () => {
 
         <Container>
           <Typography
-            variant="h5"
-            component="div"
+            variant='h5'
+            component='div'
             sx={{ marginTop: "30px", marginBottom: "20px" }}
           >
             Pending Requests

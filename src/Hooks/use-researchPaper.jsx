@@ -17,12 +17,12 @@ export const useResearchPaper = () => {
 
   const doiApiPath = `https://api.crossref.org/works/${doiNumber}`;
 
-  const handleSearch = async (e, doiNumber) => {
+  const handleSearch = async (e) => {
+    if (!doiNumber?.trim()) return;
     e.preventDefault();
     setIsLoading(true);
     setIsError(false);
-
-    const { data, status } = await axios.get(`${doiApiPath}`).then((res) => {
+    await axios.get(`${doiApiPath}`).then((res) => {
       const data = res.data;
       setResearchPaper(data.message);
       const status = res.status;
@@ -37,7 +37,7 @@ export const useResearchPaper = () => {
     setDoiNumber,
     researchPaper,
     isLoading,
-    isError,
+    isError,setResearchPaper,
     handleSearch,
   };
 };
@@ -46,16 +46,11 @@ export const usePendingRequests = () => {
   const dispatch = useDispatch();
   const pendingRequests = useSelector(selectPendingRequests);
 
-
-
   useEffect(() => {
     dispatch(getPendingRequests());
   }, [dispatch]);
 
   return {
     pendingRequests,
-
-
   };
 };
-

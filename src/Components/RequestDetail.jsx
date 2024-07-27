@@ -19,9 +19,11 @@ import {
   rejectPaperRequest,
   sendPaper,
 } from "../Features/Slices/requestResearchPaper";
+import { useNavigate } from "react-router-dom";
 
 const RequestDetail = ({ requestDetail }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
   const [file, setFile] = useState("");
   const [uploadFile, setUploadFile] = useState(null);
@@ -30,12 +32,10 @@ const RequestDetail = ({ requestDetail }) => {
 
   if (!requestDetail) return null;
 
-  const { _id, requestBy, paperDetail, requestStatus, DOI_number } =
+  const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl } =
     requestDetail;
 
-
   const { title, DOI, publisher, author } = paperDetail || {};
-
 
   // Handler Functions
   const handleApprove = () => {
@@ -51,6 +51,31 @@ const RequestDetail = ({ requestDetail }) => {
     formData.append("requestId", _id);
     dispatch(sendPaper(formData));
   };
+
+  const handleDownload = async () => {
+    if (fileUrl) {
+      try {
+        const response = await fetch(fileUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "paper.pdf"; // Specify the filename here
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Download failed", error);
+      }
+    }
+  };
+
+  const disableButtons = () => {
+    return fileUrl === "" || requestStatus === "approved";
+  };
+
+  console.log(disableButtons())
 
   return (
     <Card sx={{ margin: 2 }}>
@@ -106,6 +131,7 @@ const RequestDetail = ({ requestDetail }) => {
               size='small'
               variant='contained'
               color='primary'
+              disabled={fileUrl === ""}
               onClick={() => {
                 setFile(requestDetail?.fileUrl);
                 setOpen(true);
@@ -116,14 +142,27 @@ const RequestDetail = ({ requestDetail }) => {
             <Button
               size='small'
               variant='contained'
+              disabled={disableButtons()}
               color='primary'
               onClick={handleApprove}
             >
               Approve
             </Button>
+            {requestStatus === "approved" && (
+              <Button
+                size='small'
+                variant='contained'
+                disabled={fileUrl === ""}
+                color='primary'
+                onClick={handleDownload}
+              >
+                Download
+              </Button>
+            )}
             <Button
               size='small'
               variant='contained'
+              disabled={disableButtons()}
               color='primary'
               onClick={handleReject}
             >
@@ -140,6 +179,7 @@ const RequestDetail = ({ requestDetail }) => {
               size='small'
               variant='contained'
               color='primary'
+              disabled={uploadFile === null}
               onClick={() => handleUpload()}
             >
               Upload

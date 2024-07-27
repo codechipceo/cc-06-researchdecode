@@ -1,10 +1,13 @@
 import { Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { SwiperSlider } from "../../Components/Swiper/SwiperSlider";
 import { TeacherCard } from "../../Components/Cards/TeacherCard";
-import { useTeacher } from "../../Hooks/use-teacher";
+import { SwiperSlider } from "../../Components/Swiper/SwiperSlider";
+import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
 export const OurExperts = () => {
-  const { teacherData } = useTeacher();
+    const {
+      consultancyCardData: teacherData,
+     
+    } = useConsultancyCard();
   return (
     <>
       <Grid2 my={10}>
@@ -14,7 +17,7 @@ export const OurExperts = () => {
         <Typography variant='h3' align='center' color={"dark"}>
           Hire Experts For Consultancy
         </Typography>
-        { teacherData && 
+        { teacherData &&
 
         <SwiperSlider slidesArr={teacherData} Card={TeacherCard} />
         }

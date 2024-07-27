@@ -21,6 +21,7 @@ import { SuperVisorDetail } from "./Pages/Experts/SuperVisorDetail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WebRTC from "./Pages/WebRTC/WebRTC";
 
 export default function App() {
   return (
@@ -104,6 +105,8 @@ export default function App() {
             path='/payment/:courseId'
             element={<GuardComponents component={PaymentPage} />}
           />
+
+          <Route path="/call"  element ={<WebRTC />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

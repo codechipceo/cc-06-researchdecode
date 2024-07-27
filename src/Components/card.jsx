@@ -17,6 +17,8 @@ const PaperCard = ({
   language,
   abstract,
   paperDetail,
+  setPaper,
+  setDoiNumber,
 }) => {
   const dispatch = useDispatch();
   const loggedinUser = useSelector(selectStudentInfo);
@@ -53,7 +55,9 @@ const PaperCard = ({
             </Typography>
           </Grid>
         </Grid>
-        <Typography variant='body1' fontWeight={600}>Abstract</Typography>
+        <Typography variant='body1' fontWeight={600}>
+          Abstract
+        </Typography>
         <Typography
           variant='body1'
           color='text.secondary'
@@ -71,11 +75,17 @@ const PaperCard = ({
       <CardActions>
         <Button
           size='small'
-          style={{marginLeft:'auto'}}
+          style={{ marginLeft: "auto" }}
           variant='contained'
           color='primary'
           onClick={() => {
-            dispatch(createPaperRequest(requestPayload));
+            dispatch(createPaperRequest(requestPayload))
+              .unwrap()
+              .then((res) => {
+                console.log(res);
+                setPaper(null);
+                setDoiNumber("");
+              });
           }}
         >
           Request Paper

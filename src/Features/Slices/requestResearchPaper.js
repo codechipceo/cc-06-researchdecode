@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
+import { toast } from "react-toastify";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "paperRequest", axiosInstance);
@@ -13,7 +14,8 @@ export const createPaperRequest = createAsyncThunk(
       const { data, msg } = await apiFeature.create("createRequest", payload);
       return { data, msg };
     } catch (error) {
-      const errMessage = error.response.data.msg;
+      console.log(error);
+      const errMessage = error.response.data.message;
       return rejectWithValue(errMessage);
     }
   }
@@ -125,6 +127,8 @@ const paperRequestSlice = createSlice({
       })
       .addCase(sendPaper.fulfilled, (state, { payload }) => {
         state.uploadPaper = payload.data;
+        state.requestDetail.requestStatus = payload.data.requestStatus;
+        toast.success("Paper Uploaded Successfully");
       })
       // create paper request
       .addCase(createPaperRequest.pending, (state) => {
@@ -136,11 +140,13 @@ const paperRequestSlice = createSlice({
         state.isLoading = false;
         state.newRequest = action.payload.data;
         state.pendingRequests.push(action.payload.data);
+        toast.success("Request Created Successfully");
       })
       .addCase(createPaperRequest.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
+        toast.error(action.payload);
       })
 
       // get all pending requests
@@ -156,7 +162,12 @@ const paperRequestSlice = createSlice({
         state.errorMessage = payload;
       })
       .addCase(rejectPaperRequest.fulfilled, (state, { payload }) => {
-        state.requestDetail = payload.data;
+        state.pendingRequests = state.pendingRequests.map((item) => {
+          if (item._id === payload.data._id) {
+            return payload.data;
+          }
+          return item;
+        });
       });
   },
 });
