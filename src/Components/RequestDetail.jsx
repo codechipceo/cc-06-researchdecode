@@ -32,14 +32,21 @@ const RequestDetail = ({ requestDetail }) => {
 
   if (!requestDetail) return null;
 
-  const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl } =
-    requestDetail;
-
+  const {
+    _id,
+    requestBy,
+    paperDetail,
+    requestStatus,
+    DOI_number,
+    fileUrl,
+    fulfilledBy,
+  } = requestDetail;
+console.log(requestDetail)
   const { title, DOI, publisher, author } = paperDetail || {};
 
   // Handler Functions
   const handleApprove = () => {
-    dispatch(approvePaper({ requestId: _id }));
+    dispatch(approvePaper({ requestId: _id, fulfilledBy }));
   };
 
   const handleReject = () => {
@@ -75,7 +82,6 @@ const RequestDetail = ({ requestDetail }) => {
     return fileUrl === "" || requestStatus === "approved";
   };
 
-  console.log(disableButtons())
 
   return (
     <Card sx={{ margin: 2 }}>
