@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import PDFviewer from "./Components/PDFviewer/PDFviewer";
@@ -21,94 +21,76 @@ import { SuperVisorDetail } from "./Pages/Experts/SuperVisorDetail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import WebRTC from "./Pages/WebRTC/WebRTC";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <GuardComponents component={Home} />,
+  },
+  {
+    path: "/testpdf",
+    element: <PDFviewer />,
+  },
+  {
+    path: "/signin",
+    element: <GuardComponents component={SignIn} />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/searchPaper",
+    element: <GuardComponents component={SearchPapers} />,
+  },
+  {
+    path: "/pending-request/:pendingRequestId",
+    element: <GuardComponents component={PendingRequestDetail} />,
+  },
+  {
+    path: "/requests",
+    element: <GuardComponents component={Request} />,
+  },
+  {
+    path: "/courses",
+    element: <GuardComponents component={Courses} />,
+  },
+  {
+    path: "/course/:courseId",
+    element: <GuardComponents component={CourseDetail} />,
+  },
+  {
+    path: "/course/:courseId/lectures/:lectureId",
+    element: <GuardComponents component={LecturePage} />,
+  },
+  {
+    path: "/experts",
+    element: <GuardComponents component={Experts} />,
+  },
+  {
+    path: "/supervisor/:supervisorId",
+    element: <GuardComponents component={SuperVisorDetail} />,
+  },
+  {
+    path: "/inbox",
+    element: <GuardComponents component={Inbox} />,
+  },
+  {
+    path: "/inbox/:supervisorId",
+    element: <GuardComponents component={Inbox} />,
+  },
+  {
+    path: "/payment/:courseId",
+    element: <GuardComponents component={PaymentPage} />,
+  },
+]);
 
 export default function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path='/testpdf'
-            element={
-              <PDFviewer
-              // file={"https://morth.nic.in/sites/default/files/dd12-13_0.pdf"}
-              />
-            }
-          />
-          <Route path='/' element={<GuardComponents component={Home} />} />
-
-          {/*
-          ##################### SIGNUP / SIGNIN #######################
-          */}
-          <Route
-            path='/signin'
-            element={<GuardComponents component={SignIn} />}
-          />
-          <Route path='/signup' element={<SignUp />} />
-
-          {/*
-          ##################### PAPER REQUESTS #######################
-          */}
-          <Route
-            path='/searchPaper'
-            element={<GuardComponents component={SearchPapers} />}
-          />
-          <Route
-            path='/pending-request/:pendingRequestId'
-            element={<GuardComponents component={PendingRequestDetail} />}
-          />
-          <Route
-            path='/requests'
-            element={<GuardComponents component={Request} />}
-          />
-
-          {/*
-          ##################### COURSE #######################
-          */}
-          <Route
-            path='/courses'
-            element={<GuardComponents component={Courses} />}
-          />
-          <Route
-            path='/course/:courseId'
-            element={<GuardComponents component={CourseDetail} />}
-          />
-          <Route
-            path='/course/:courseId/lectures/:lectureId'
-            element={<GuardComponents component={LecturePage} />}
-          />
-          {/*
-          ##################### TEACHER #######################
-          */}
-          <Route
-            path='/experts'
-            element={<GuardComponents component={Experts} />}
-          />
-          <Route
-            path='/supervisor/:supervisorId'
-            element={<GuardComponents component={SuperVisorDetail} />}
-          />
-
-          {/*
-          ##################### INBOX #######################
-          */}
-          <Route
-            path='/inbox'
-            element={<GuardComponents component={Inbox} />}
-          />
-          <Route
-            path='/inbox/:supervisorId'
-            element={<GuardComponents component={Inbox} />}
-          />
-          <Route
-            path='/payment/:courseId'
-            element={<GuardComponents component={PaymentPage} />}
-          />
-
-          <Route path="/call"  element ={<WebRTC />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
       <ToastContainer />
     </>
   );
