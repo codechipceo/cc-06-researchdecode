@@ -4,6 +4,11 @@ import { ApiFeatures } from "../../Api/ApiRepo";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "course", axiosInstance);
+const enrollCourseApi = new ApiFeatures(
+  "user",
+  "courseEnrollment",
+  axiosInstance
+);
 
 // GET ALL Courses
 export const getAllCourses = createAsyncThunk(
@@ -15,6 +20,34 @@ export const getAllCourses = createAsyncThunk(
     } catch (error) {
       const errMessage = error.response.data.msg;
       return rejectWithValue(errMessage);
+    }
+  }
+);
+
+export const buyCourse = createAsyncThunk(
+  "course/buy",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await enrollCourseApi.create("enroll", payload);
+      return { data, msg };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const verifyEnrollPayment = createAsyncThunk(
+  "course/verifyEnroll",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await enrollCourseApi.create(
+        "verifyEnroll",
+        payload
+      );
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error);
     }
   }
 );
@@ -81,12 +114,9 @@ export const courseSlice = createSlice({
   },
 }).reducer;
 
-
 export const selectCourses = (state) => state.course.courses;
 export const selectCourseById = (state) => state.course.courseById;
 export const courseTotalCount = (state) => state.course.totalCount;
 export const selectCourseLoadingStatus = (state) => state.course.isLoading;
 export const selectCourseErrorStatus = (state) => state.course.isError;
 export const selectCourseErrorMessage = (state) => state.course.errorMessage;
-
-

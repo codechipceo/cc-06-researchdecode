@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Typography, Grid, Tabs, Tab } from "@mui/material";
 import { styled } from "@mui/system";
@@ -14,10 +14,7 @@ import {
   getCourseById,
   selectCourseById,
 } from "../../Features/Slices/courseSlice";
-import {
-  getVideosByCourseId,
-  selectVideosByCourseId,
-} from "../../Features/Slices/videoSlice";
+
 const Banner = styled("img")({
   width: "100%",
   height: "auto",
@@ -28,19 +25,19 @@ const CourseDetail = () => {
   const { courseId } = useParams();
   const dispatch = useDispatch();
   const courseDetail = useSelector(selectCourseById);
-  const videoByCourseId = useSelector(selectVideosByCourseId);
+
 
   useEffect(() => {
     const payload = { courseId: courseId };
     dispatch(getCourseById(payload));
-    dispatch(getVideosByCourseId(payload));
+
   }, []);
+  const [tabValue, setTabValue] = useState(0);
 
   if (!courseId) {
     return <Typography variant='h5'>Course not found</Typography>;
   }
 
-  const [tabValue, setTabValue] = React.useState(0);
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -48,7 +45,7 @@ const CourseDetail = () => {
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
 
-  const { courseName, courseBanner, instructor } = courseDetail ?? {};
+  const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
   if (!courseDetail?.courseName) return <>Loading</>;
 
@@ -78,12 +75,12 @@ const CourseDetail = () => {
             </Tabs>
 
             {tabValue === 0 && <CourseOverview course={courseDetail} />}
-            {tabValue === 1 && <CourseCurriculum course={videoByCourseId} />}
+            {tabValue === 1 && <CourseCurriculum course={videos} />}
             {tabValue === 2 && <CourseInstructor course={courseDetail} />}
             {/* {tabValue === 3 && <CourseReviews />} */}
           </Grid>
           <Grid item xs={12} md={4}>
-            <CourseSidebar course={courseDetail} firstVideo={videoByCourseId[0]?._id} />
+            <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
           </Grid>
         </Grid>
       </Container>

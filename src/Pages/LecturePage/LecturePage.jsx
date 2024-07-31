@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -47,66 +47,75 @@ const LecturePage = () => {
   const { courseId } = useParams();
   const dispatch = useDispatch();
   const videoData = useSelector(selectVideosByCourseId);
-  useEffect(() => {
-    const payload = { courseId: courseId };
-    dispatch(getVideosByCourseId(payload));
-  }, []);
+  const [currentLecture, setCurrentLecture] = useState();
 
-  const [currentLecture, setCurrentLecture] = useState(videoData[0]);
+  const payload = { courseId: courseId };
+  useEffect(() => {
+    dispatch(getVideosByCourseId(payload));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (videoData.length > 0) {
+      setCurrentLecture(videoData[0]);
+    }
+  }, [videoData]);
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
-
+  if (videoData.length === 0 || !currentLecture) return "Loading";
   return (
     <div>
       <HeaderTwo title='Lecture Videos' breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={8}>
-            <VideoContainer>
-              <VideoPlayer
-                width={"100%"}
-                height={"100%"}
-             
-                url={currentLecture?.videoUrl}
-                controls={true}
-              />
-            </VideoContainer>
-            <Box mt={2}>
-              <Typography variant='h5' sx={{ fontWeight: "bold" }}>
-                {currentLecture?.videoTitle}
-              </Typography>
-            </Box>
+      {videoData.length > 0 ? (
+        <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={8}>
+              <VideoContainer>
+                <VideoPlayer
+                  width={"100%"}
+                  height={"100%"}
+                  url={currentLecture?.videoUrl}
+                  controls={true}
+                />
+              </VideoContainer>
+              <Box mt={2}>
+                <Typography variant='h5' sx={{ fontWeight: "bold" }}>
+                  {currentLecture?.videoTitle}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <SidebarContainer>
+                <Typography variant='h6' gutterBottom>
+                  Lecture Playlist
+                </Typography>
+                <Divider sx={{ mb: 2 }} />
+                <List>
+                  {videoData &&
+                    videoData.map((lecture) => (
+                      <ListItem
+                        key={lecture.id}
+                        onClick={() => setCurrentLecture(lecture)}
+                        sx={{
+                          backgroundColor:
+                            lecture._id === currentLecture._id && "#f0f0f0",
+                          "&:hover": {
+                            backgroundColor: "#f0f0f0",
+                          },
+                          borderRadius: "4px",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        <ListItemText primary={lecture.videoTitle} />
+                      </ListItem>
+                    ))}
+                </List>
+              </SidebarContainer>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <SidebarContainer>
-              <Typography variant='h6' gutterBottom>
-                Lecture Playlist
-              </Typography>
-              <Divider sx={{ mb: 2 }} />
-              <List>
-                {videoData &&
-                  videoData.map((lecture) => (
-                    <ListItem
-                      key={lecture.id}
-                      onClick={() => setCurrentLecture(lecture)}
-                      sx={{
-                        backgroundColor:
-                          lecture._id === currentLecture._id && "#f0f0f0",
-                        "&:hover": {
-                          backgroundColor: "#f0f0f0",
-                        },
-                        borderRadius: "4px",
-                        marginBottom: "4px",
-                      }}
-                    >
-                      <ListItemText primary={lecture.videoTitle} />
-                    </ListItem>
-                  ))}
-              </List>
-            </SidebarContainer>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

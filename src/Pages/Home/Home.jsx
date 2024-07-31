@@ -11,8 +11,8 @@ export const Home = () => {
       <OurExperts />
       <AboutOne />
       <OurCourses />
-      <UpcomingEvents/>
-
+      <UpcomingEvents />
+      
     </div>
   );
 };

@@ -1,27 +1,74 @@
-import React from "react";
-import { Card, CardContent, Typography, Grid, Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import LanguageIcon from "@mui/icons-material/Language";
-import PeopleIcon from "@mui/icons-material/People";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import PeopleIcon from "@mui/icons-material/People";
 import StarIcon from "@mui/icons-material/Star";
+import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import useRazorpay from "react-razorpay";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  buyCourse,
+  verifyEnrollPayment,
+} from "../../Features/Slices/courseSlice";
 
-const CourseSidebar = ({ course, isEnrolled = true , firstVideo}) => {
+const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   const navigate = useNavigate();
+  const [Razorpay, isLoaded] = useRazorpay();
+  const dispatch = useDispatch();
 
-  const handleBuyCourse = () => {
-    navigate(`/payment/${course._id}`);
+  const { price, courseLanguage, videos, isStudentEnrolled, _id } = course;
+  const handleBuyCourse = async () => {
+    const payload = {
+      amount: price,
+      courseId: _id,
+      enrolledAt: new Date(),
+    };
+    const res = await dispatch(buyCourse(payload)).unwrap();
+    console.log(res);
+    const enrollmentId = res?.data?.courseEnrollment._id;
+    const order_id = res?.data?.order?.id;
+    const paymentId = res?.data.paymentId;
+    console.log(order_id, enrollmentId);
+    const initPayload = {
+      order_id,
+      amount: price,
+      enrollmentId,
+      paymentId,
+    };
+    initPay(initPayload);
   };
 
-  const {
-    courseName,
-    courseDescription,
-    courseExtras,
-    price,
-    courseThumbnail,
-    courseLanguage,
-  } = course;
+  const initPay = (paymentObj) => {
+    const { order_id, amount, enrollmentId, paymentId } = paymentObj;
+    const options = {
+      key: "rzp_test_jLhZZYBPKlMBn9",
+      amount: amount,
+      currency: "INR",
+      name: "ResearchPro",
+      description: "",
+      image: "https://example.com/your_logo",
+      order_id: order_id,
+      handler: async (res) => {
+        const payload = { ...res, enrollmentId, paymentId };
+        const verifyResponse = await dispatch(
+          verifyEnrollPayment(payload)
+        ).unwrap();
+        console.log(verifyResponse);
+      },
+
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const rzpay = new Razorpay(options);
+    rzpay.open();
+  };
+
   return (
     <Card>
       <CardContent>
@@ -33,7 +80,7 @@ const CourseSidebar = ({ course, isEnrolled = true , firstVideo}) => {
             <MonetizationOnIcon />
           </Grid>
           <Grid item>
-            <Typography variant='body1'>Price: ${price}</Typography>
+            <Typography variant='body1'>Price: {price} rupees</Typography>
           </Grid>
         </Grid>
         <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
@@ -57,7 +104,7 @@ const CourseSidebar = ({ course, isEnrolled = true , firstVideo}) => {
             <MenuBookIcon />
           </Grid>
           <Grid item>
-            <Typography variant='body1'>Lessons: </Typography>
+            <Typography variant='body1'>Lessons: {videos?.length}</Typography>
           </Grid>
         </Grid>
         <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
@@ -68,7 +115,7 @@ const CourseSidebar = ({ course, isEnrolled = true , firstVideo}) => {
             <Typography variant='body1'>Rating: </Typography>
           </Grid>
         </Grid>
-        {isEnrolled ? (
+        {isStudentEnrolled === true ? (
           <Button
             variant='contained'
             color='primary'

@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import PDFviewer from "./Components/PDFviewer/PDFviewer";
@@ -9,6 +8,7 @@ import { selectStudentToken } from "./Features/Slices/studentSlice";
 import CourseDetail from "./Pages/CourseDetail/CourseDetail";
 import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
+import { SuperVisorDetail } from "./Pages/Experts/SuperVisorDetail";
 import { Home } from "./Pages/Home/Home";
 import Inbox from "./Pages/Inbox/Inbox";
 import LecturePage from "./Pages/LecturePage/LecturePage"; // Import LecturePage
@@ -17,7 +17,6 @@ import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
-import { SuperVisorDetail } from "./Pages/Experts/SuperVisorDetail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -50,7 +49,7 @@ const router = createBrowserRouter([
     element: <GuardComponents component={PendingRequestDetail} />,
   },
   {
-    path: "/requests",
+    path: "/my-requests",
     element: <GuardComponents component={Request} />,
   },
   {

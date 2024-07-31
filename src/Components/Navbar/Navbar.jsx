@@ -40,7 +40,13 @@ const pages = [
     navPath: "/courses",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Inbox","Requests"];
+const settings = [
+  { name: "Paper Requests", path: "my-requests" },
+  { name: "Booked Consultancy", path: "my-consultancy" },
+  { name: "Courses", path: "my-courses" },
+  { name: "Collaborate", path: "collaborate" },
+  { name: "Payment History", path: "payment-history" },
+];
 
 function ResponsiveAppBar() {
   const token = useSelector(selectStudentToken);
@@ -208,13 +214,19 @@ function ResponsiveAppBar() {
               >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign='center'>
-                    {studentInfo?.firstName + studentInfo?.lastName} {studentInfo.points}
+                    {studentInfo?.firstName + studentInfo?.lastName}{" "}
+                    {studentInfo.points}
                   </Typography>
                 </MenuItem>
                 <hr />
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Link  style={{ textDecoration: "none" }}  to={`/${setting.toLowerCase()}`}>{setting}</Link>
+                  <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      to={`/${setting.path.toLowerCase()}`}
+                    >
+                      {setting.name}
+                    </Link>
                   </MenuItem>
                 ))}
                 <MenuItem onClick={handleLogout}>

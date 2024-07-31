@@ -11,7 +11,15 @@ import {
   getConsultancyCardById,
   selectConsultancyCardById,
 } from "../../Features/Slices/consultancyCardSlice";
-import { createConsultancy, selectConsultancyPaymentVerified, verifyConultancyPayment } from "../../Features/Slices/consultancySlice";
+import {
+  createConsultancy,
+  selectConsultancyPaymentVerified,
+  verifyConultancyPayment,
+} from "../../Features/Slices/consultancySlice";
+import {
+  selectStudentData,
+  selectStudentInfo,
+} from "../../Features/Slices/studentSlice";
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
@@ -24,22 +32,29 @@ export const SuperVisorDetail = () => {
   const isPaymentVerified = useSelector(selectConsultancyPaymentVerified);
   const [tabValue, setTabValue] = useState(0);
   const { supervisorId } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const loggedinUser = useSelector(selectStudentInfo);
 
   const [Razorpay, isLoaded] = useRazorpay();
 
+  const { name, experience, qualification, _id } =
+    consultancyCardDetail?.teacherId ?? {};
+  const { single, project } = consultancyCardDetail?.pricing ?? {};
+
   const initPay = (paymentObj) => {
-    const { order_id, amount } = paymentObj;
+    const { order_id, amount, consultancyId } = paymentObj;
     const options = {
       key: "rzp_test_jLhZZYBPKlMBn9",
-      amount: amount,
+      amount: amount ?? single,
       currency: "INR",
       name: "ResearchPro",
       description: "",
       image: "https://example.com/your_logo",
       order_id: order_id,
       handler: (res) => {
-        dispatch(verifyConultancyPayment(res)).then(() => {
+        console.log(res)
+        const verificationPayload = { ...res, consultancyId: consultancyId };
+        dispatch(verifyConultancyPayment(verificationPayload)).then(() => {
           if (isPaymentVerified) {
             navigate("/");
           }
@@ -64,21 +79,25 @@ export const SuperVisorDetail = () => {
 
   const handleConsultancy = async () => {
     const payload = {
-      studentId: "",
-      teacherId: "",
-      cardId: "",
-      amount: 500,
+      studentId: loggedinUser._id,
+      teacherId: _id,
+      cardId: supervisorId,
+      amount: amount ?? Number(single),
+      type: tabValue === 0 ? "single" : "project",
     };
     const res = await dispatch(createConsultancy(payload)).unwrap();
-    const order_id = res?.data?.id;
+    const order_id = res?.data?.order?.id;
+    const newConsultancyId = res?.data?.consultancy?._id;
+
     if (order_id) {
       const payloadObj = {
+        consultancyId: newConsultancyId,
         order_id,
         amount: payload.amount,
       };
       initPay(payloadObj);
     } else {
-      throw new Error("Order id not found")
+      throw new Error("Order id not found");
     }
   };
 
@@ -86,9 +105,8 @@ export const SuperVisorDetail = () => {
     dispatch(getConsultancyCardById({ consultancyCardId: supervisorId }));
   }, []);
 
-  const { name, experience, qualification } =
-    consultancyCardDetail?.teacherId ?? {};
-  const { single, project } = consultancyCardDetail?.pricing ?? {};
+  const [amount, setAmount] = useState(single);
+  console.log(amount);
 
   return (
     <div>
@@ -111,11 +129,14 @@ export const SuperVisorDetail = () => {
           <Grid2 item xs={12} md={4}>
             <Tabs
               value={tabValue}
-              onChange={(e, newValue) => setTabValue(newValue)}
+              onChange={(e, newValue) => {
+                setTabValue(newValue);
+                setAmount(Number(e.target.id));
+              }}
               aria-label='course details tabs'
             >
-              <Tab label='Single' id='single' />
-              <Tab label='Project' id='project' />
+              <Tab label='Single' id={single} />
+              <Tab label='Project' id={project} />
               {/* <Tab label='Reviews' /> */}
             </Tabs>
             <Typography>{tabValue === 0 && single}</Typography>
