@@ -10,10 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 import {
   getVideosByCourseId,

@@ -25,11 +25,9 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
       enrolledAt: new Date(),
     };
     const res = await dispatch(buyCourse(payload)).unwrap();
-    console.log(res);
     const enrollmentId = res?.data?.courseEnrollment._id;
     const order_id = res?.data?.order?.id;
     const paymentId = res?.data.paymentId;
-    console.log(order_id, enrollmentId);
     const initPayload = {
       order_id,
       amount: price,
@@ -54,7 +52,6 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
         const verifyResponse = await dispatch(
           verifyEnrollPayment(payload)
         ).unwrap();
-        console.log(verifyResponse);
       },
 
       notes: {

@@ -14,7 +14,6 @@ export const createPaperRequest = createAsyncThunk(
       const { data, msg } = await apiFeature.create("createRequest", payload);
       return { data, msg };
     } catch (error) {
-      console.log(error);
       const errMessage = error.response.data.message;
       return rejectWithValue(errMessage);
     }

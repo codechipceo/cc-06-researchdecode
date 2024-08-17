@@ -13,32 +13,33 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChats } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { useSockets } from "../../Hooks/useSockets";
 
 const Chat = ({ id }) => {
+  const { socket} = useSockets();
   const dispatch = useDispatch();
   const loggedinUser = useSelector(selectStudentInfo);
 
   const chats = useSelector(selectChats);
 
   const [message, setMessage] = useState("");
-  useEffect(() => {}, []);
+  useEffect(() => {
+
+    socket.emit("joinRoom" , {supervisorId : id})
+
+  }, []);
 
   const handleSendMessage = () => {
-    setMessage("");
   };
 
-  const getUserName = (arr, id) => {
-    const user = arr.find((user) => user._id === id);
-    const userName = user ? user.firstName + user.lastName : "Anonymous";
-    return userName;
-  };
   return (
     <Paper
       sx={{
-        padding: "20px",
+        padding: "",
         display: "flex",
         flexDirection: "column",
         height: "100vh",
+        width:"100%"
       }}
       elevation={0}
     >
@@ -86,11 +87,11 @@ const Chat = ({ id }) => {
           alignItems: "center",
           position: "sticky",
           bottom: 0,
-          backgroundColor: "#f1f0f0",
+          // backgroundColor: "#f1f0f0",
           padding: "10px",
           borderRadius: "10px",
           gap: "10px",
-          boxShadow: "0 -2px 5px rgba(0,0,0,0.2)", // Optional shadow for better visibility
+          // boxShadow: "0 -2px 5px rgba(0,0,0,0.2)", // Optional shadow for better visibility
         }}
       >
         <TextField

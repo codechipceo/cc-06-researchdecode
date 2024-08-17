@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import VideoCall from "./Pages/WebRTC/WebRTC";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
     path: "/payment/:courseId",
     element: <GuardComponents component={PaymentPage} />,
   },
+  {
+    path: "/videocall",
+    element:<VideoCall />
+  }
 ]);
 
 export default function App() {

@@ -16,7 +16,6 @@ export const TeacherCard = ({ data }) => {
   const { _id, profileImage, experience, name, qualification, pricing } =
     data?.teacherId;
 
-  console.log(data)
   return (
     <Card
       sx={{

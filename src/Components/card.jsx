@@ -82,7 +82,6 @@ const PaperCard = ({
             dispatch(createPaperRequest(requestPayload))
               .unwrap()
               .then((res) => {
-                console.log(res);
                 setPaper(null);
                 setDoiNumber("");
               });

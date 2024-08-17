@@ -52,21 +52,12 @@ export const SuperVisorDetail = () => {
       image: "https://example.com/your_logo",
       order_id: order_id,
       handler: (res) => {
-        console.log(res)
         const verificationPayload = { ...res, consultancyId: consultancyId };
         dispatch(verifyConultancyPayment(verificationPayload)).then(() => {
           if (isPaymentVerified) {
             navigate("/");
           }
         });
-      },
-      prefill: {
-        name: "Piyush Garg",
-        email: "youremail@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
       },
       theme: {
         color: "#3399cc",
@@ -106,7 +97,6 @@ export const SuperVisorDetail = () => {
   }, []);
 
   const [amount, setAmount] = useState(single);
-  console.log(amount);
 
   return (
     <div>

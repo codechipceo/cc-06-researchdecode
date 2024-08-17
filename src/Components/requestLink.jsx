@@ -10,7 +10,6 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 
 const RequestLink = ({ request }) => {
-  console.log(request);
   const { _id, requestBy, requestStatus, createdAt, paperDetail, DOI_number } =
     request;
   const { DOI, title } = paperDetail;

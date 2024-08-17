@@ -31,7 +31,6 @@ export const buyCourse = createAsyncThunk(
       const { data, msg } = await enrollCourseApi.create("enroll", payload);
       return { data, msg };
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error);
     }
   }

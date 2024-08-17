@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "module": "browser.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,8 +19,11 @@
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "express": "^4.19.2",
     "pdfjs-dist": "^3.4.120",
+    "peerjs": "^1.5.4",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-pdf": "^9.1.0",
     "react-player": "^2.16.0",
@@ -30,7 +34,8 @@
     "react-toastify": "^10.0.5",
     "sass": "^1.77.4",
     "socket.io-client": "^4.7.5",
-    "swiper": "^11.1.4"
+    "swiper": "^11.1.4",
+    "website": "file:"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

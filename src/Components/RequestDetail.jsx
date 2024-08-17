@@ -41,7 +41,6 @@ const RequestDetail = ({ requestDetail }) => {
     fileUrl,
     fulfilledBy,
   } = requestDetail;
-console.log(requestDetail)
   const { title, DOI, publisher, author } = paperDetail || {};
 
   // Handler Functions

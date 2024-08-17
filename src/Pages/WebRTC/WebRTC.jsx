@@ -1,112 +1,111 @@
-// import { useRef, useEffect, useState } from "react";
-// import io from "socket.io-client";
+import  { useEffect, useRef, useState } from "react";
+import Peer from "peerjs";
+import { io } from "socket.io-client";
 
-// const socket = io("http://localhost:5001"); // Updated port
+const socket = io("http://localhost:5001");
 
-// function WebRTC() {
-//   const [room, setRoom] = useState("");
-//   const localVideoRef = useRef(null);
-//   const remoteVideoRef = useRef(null);
-//   const peerConnection = useRef(null);
+function Videocall() {
+  const [myId, setMyId] = useState("");
+  const [callId, setCallId] = useState(""); // State for storing the ID to call
+  const [currentCall, setCurrentCall] = useState(null); // State to manage the current call
+  const myVideo = useRef();
+  const userVideo = useRef();
+  const peerInstance = useRef();
 
-//   useEffect(() => {
-//     socket.on("user-joined", (userId) => {
-//       console.log("User joined:", userId);
-//       callUser(userId);
-//     });
+  useEffect(() => {
+    // Create Peer instance
+    const peer = new Peer();
+    peerInstance.current = peer;
 
-//     socket.on("offer", async (data) => {
-//       if (data.offer) {
-//         await peerConnection.current.setRemoteDescription(
-//           new RTCSessionDescription(data.offer)
-//         );
-//         const answer = await peerConnection.current.createAnswer();
-//         await peerConnection.current.setLocalDescription(answer);
-//         socket.emit("answer", { room: data.room, answer });
-//       }
-//     });
+    // Get user's video and audio stream
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        // Display my video stream
+        myVideo.current.srcObject = stream;
 
-//     socket.on("answer", async (data) => {
-//       await peerConnection.current.setRemoteDescription(
-//         new RTCSessionDescription(data.answer)
-//       );
-//     });
+        // Answer incoming call
+        peer.on("call", (call) => {
+          call.answer(stream); // Answer the call with your own video/audio stream
+          setCurrentCall(call); // Save the call to the state
+          call.on("stream", (userVideoStream) => {
+            userVideo.current.srcObject = userVideoStream; // Show the remote video stream
+          });
+        });
 
-//     socket.on("candidate", async (data) => {
-//       await peerConnection.current.addIceCandidate(
-//         new RTCIceCandidate(data.candidate)
-//       );
-//     });
+        // Emit 'join-room' with roomId and myId
+        socket.emit("join-room", "my-room-id", peer.id);
+      });
 
-//     return () => {
-//       socket.off("user-joined");
-//       socket.off("offer");
-//       socket.off("answer");
-//       socket.off("candidate");
-//     };
-//   }, []);
+    // Set my PeerJS ID
+    peer.on("open", (id) => {
+      setMyId(id);
+    });
 
-//   const startStream = async () => {
-//     const stream = await navigator.mediaDevices.getUserMedia({
-//       video: true,
-//       audio: true,
-//     });
-//     localVideoRef.current.srcObject = stream;
-//     if (!peerConnection.current) {
-//       peerConnection.current = new RTCPeerConnection();
-//       stream
-//         .getTracks()
-//         .forEach((track) => peerConnection.current.addTrack(track, stream));
+    // Handle new user connection
+    socket.on("connection", (userId) => {
+      console.log("User connected:", userId);
+    });
 
-//       peerConnection.current.ontrack = (event) => {
-//         remoteVideoRef.current.srcObject = event.streams[0];
-//       };
+    // Handle user disconnection
+    socket.on("user-disconnected", (userId) => {
+      console.log("User disconnected:", userId);
+    });
+  }, []);
 
-//       peerConnection.current.onicecandidate = (event) => {
-//         if (event.candidate) {
-//           socket.emit("candidate", { room, candidate: event.candidate });
-//         }
-//       };
-//     }
-//   };
+  // Function to call another user by ID
+  const callUser = (userId) => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        const call = peerInstance.current.call(userId, stream);
+        setCurrentCall(call); // Save the call to the state
+        call.on("stream", (userVideoStream) => {
+          userVideo.current.srcObject = userVideoStream; // Show the remote video stream
+        });
+      });
+  };
 
-//   const joinRoom = () => {
-//     socket.emit("join", room);
-//   };
+  // Function to end the current call
+  const endCall = () => {
+    if (currentCall) {
+      currentCall.close(); // Close the call
+      setCurrentCall(null); // Reset the current call state
+      userVideo.current.srcObject = null; // Clear the remote video stream
+    }
+  };
 
-//   const callUser = async (userId) => {
-//     const offer = await peerConnection.current.createOffer();
-//     await peerConnection.current.setLocalDescription(offer);
-//     socket.emit("offer", { room, offer });
-//   };
+  return (
+    <div>
+      <h1>My ID: {myId}</h1>
+      <input
+        type='text'
+        value={callId}
+        onChange={(e) => setCallId(e.target.value)}
+        placeholder='Enter Peer ID to call'
+      />
+      <button onClick={() => callUser(callId)}>Call</button>
+      <button onClick={endCall} disabled={!currentCall}>
+        End Call
+      </button>{" "}
+      {/* End Call button */}
+      <div style={{ display: "flex", marginTop: "20px" }}>
+        <video
+          ref={myVideo}
+          autoPlay
+          playsInline
+          muted
+          style={{ width: "300px", marginRight: "20px" }}
+        />
+        <video
+          ref={userVideo}
+          autoPlay
+          playsInline
+          style={{ width: "300px" }}
+        />
+      </div>
+    </div>
+  );
+}
 
-//   return (
-//     <div>
-//       <input
-//         type='text'
-//         value={room}
-//         onChange={(e) => setRoom(e.target.value)}
-//         placeholder='Room'
-//       />
-//       <button onClick={joinRoom}>Join Room</button>
-//       <button onClick={startStream}>Start Stream</button>
-//       <div>
-//         <video
-//           ref={localVideoRef}
-//           autoPlay
-//           playsInline
-//           muted
-//           style={{ width: "300px", height: "200px" }}
-//         ></video>
-//         <video
-//           ref={remoteVideoRef}
-//           autoPlay
-//           playsInline
-//           style={{ width: "300px", height: "200px" }}
-//         ></video>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default WebRTC;
+export default Videocall;
