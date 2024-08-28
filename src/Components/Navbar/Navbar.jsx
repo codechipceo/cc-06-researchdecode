@@ -27,25 +27,25 @@ const pages = [
     navLink: "Courses",
     navPath: "/courses",
   },
-  {
-    navLink: "Lab Requests",
-    navPath: "/lab-request",
-  },
+  // {
+  //   navLink: "Lab Requests",
+  //   navPath: "/lab-request",
+  // },
   {
     navLink: "Find Papers",
     navPath: "/searchPaper",
   },
-  {
-    navLink: "Request Data",
-    navPath: "/courses",
-  },
+  // {
+  //   navLink: "Request Data",
+  //   navPath: "/courses",
+  // },
 ];
 const settings = [
   { name: "Paper Requests", path: "my-requests" },
-  { name: "Booked Consultancy", path: "my-consultancy" },
-  { name: "Courses", path: "my-courses" },
-  { name: "Collaborate", path: "collaborate" },
-  { name: "Payment History", path: "payment-history" },
+  // { name: "Booked Consultancy", path: "my-consultancy" },
+  // { name: "Courses", path: "my-courses" },
+  // { name: "Collaborate", path: "collaborate" },
+  // { name: "Payment History", path: "payment-history" },
 ];
 
 function ResponsiveAppBar() {

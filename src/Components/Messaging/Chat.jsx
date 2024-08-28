@@ -11,25 +11,79 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectChats } from "../../Features/Slices/chatSlice";
+import { getConvo, selectChats } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import { useSockets } from "../../Hooks/useSockets";
+import Peer from "peerjs";
+import { useRef } from "react";
+import { useNavigate}  from 'react-router-dom'
 
 const Chat = ({ id }) => {
-  const { socket} = useSockets();
+  const { socket } = useSockets();
   const dispatch = useDispatch();
   const loggedinUser = useSelector(selectStudentInfo);
-
   const chats = useSelector(selectChats);
-
   const [message, setMessage] = useState("");
+  const [liveChats, setLiveChats] = useState([]);
+  const navigate  = useNavigate()
+  const roomId = `${loggedinUser._id}-${id}`;
+
+  // peer js states
+  const [myId, setMyId] = useState("");
+  const [callId, setCallId] = useState(""); // State for storing the ID to call
+  const [currentCall, setCurrentCall] = useState(null); // State to manage the current call
+
+  const myVideo = useRef();
+  const userVideo = useRef();
+  const peerInstance = useRef();
+
+  // ####################################
+  //          PEER JS
+  // ####################################
+  const callModal = () => {
+}
+
+
+  // ####################################
+  //          USE EFFECT HOOKS
+  // ####################################
   useEffect(() => {
+    socket.emit("joinRoom", roomId);
+    return () => {
+      socket.emit("leaveroom", roomId);
+      socket.disconnect();
+    };
+  }, []);
 
-    socket.emit("joinRoom" , {supervisorId : id})
+  useEffect(() => {
+    const modifiedChats = [...chats];
 
+    setLiveChats(modifiedChats?.reverse());
+  }, [chats]);
+
+  useEffect(() => {
+    socket.on("message", (params) => {
+      const newMessages = [...liveChats, params];
+      setLiveChats(newMessages);
+    });
+  }, [liveChats, socket]);
+
+  useEffect(() => {
+    dispatch(getConvo({ senderId: loggedinUser._id, recepientId: id }));
   }, []);
 
   const handleSendMessage = () => {
+    if (message.trim() === "") return;
+    const payload = {
+      roomId: roomId,
+      content: message,
+      sender: loggedinUser._id,
+      senderModel: "Student",
+      recipient: id,
+      recipientModel: "Profile",
+    };
+    socket.emit("chat", payload);
+    setMessage("");
   };
 
   return (
@@ -39,7 +93,7 @@ const Chat = ({ id }) => {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
-        width:"100%"
+        width: "100%",
       }}
       elevation={0}
     >
@@ -50,7 +104,7 @@ const Chat = ({ id }) => {
       ></Typography>
       <List sx={{ flex: 1, overflow: "auto", marginBottom: "20px" }}>
         {chats &&
-          [...chats].reverse().map((msg) => {
+          [...liveChats].map((msg) => {
             return (
               <Box key={msg._id}>
                 <ListItem
@@ -80,6 +134,27 @@ const Chat = ({ id }) => {
             );
           })}
       </List>
+      <div>
+        <div style={{ display: "flex", marginTop: "20px" }}>
+          {currentCall && (
+            <>
+              <video
+                ref={myVideo}
+                autoPlay
+                playsInline
+                muted
+                style={{ width: "300px", marginRight: "20px" }}
+              />
+              <video
+                ref={userVideo}
+                autoPlay
+                playsInline
+                style={{ width: "300px" }}
+              />
+            </>
+          )}
+        </div>
+      </div>
 
       <Box
         sx={{
@@ -101,12 +176,15 @@ const Chat = ({ id }) => {
           onChange={(e) => setMessage(e.target.value)}
           sx={{ flex: 1 }}
         />
+        <Button onClick={()=> navigate(`/videocall/${id}`)}>Call</Button>
         <Button
           variant='contained'
           color='primary'
           onClick={handleSendMessage}
           endIcon={<SendIcon />}
-          sx={{ width: "100px" }}
+          sx={{
+            width: "100px",
+          }}
         >
           Send
         </Button>

@@ -73,10 +73,10 @@ const router = createBrowserRouter([
     path: "/supervisor/:supervisorId",
     element: <GuardComponents component={SuperVisorDetail} />,
   },
-  {
-    path: "/inbox",
-    element: <GuardComponents component={Inbox} />,
-  },
+  // {
+  //   path: "/inbox",
+  //   element: <GuardComponents component={Inbox} />,
+  // },
   {
     path: "/inbox/:supervisorId",
     element: <GuardComponents component={Inbox} />,
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
     element: <GuardComponents component={PaymentPage} />,
   },
   {
-    path: "/videocall",
+    path: "/videocall/:peerId",
     element:<VideoCall />
   }
 ]);
