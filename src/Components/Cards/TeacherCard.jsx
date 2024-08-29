@@ -52,12 +52,12 @@ export const TeacherCard = ({ data }) => {
               alignItems='center'
             >
               <StarIcon sx={{ color: "#FFD700", mr: 0.5 }} />
-              {experience??""} years experience
+              {experience ?? ""} years experience
             </Typography>
           </Box>
         </Box>
         <Typography variant='body2' color='text.secondary' mb={1}>
-          Qualification: {qualification??""}
+          Qualification: {qualification ?? ""}
         </Typography>
         <Typography variant='body2' color='text.secondary' mb={1}>
           Price: {pricing?.single}
