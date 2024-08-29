@@ -23,16 +23,7 @@ function Videocall() {
     if (!peerInstance.current) {
       setCallId(peerId);
       const peer = new Peer(loggedinUser._id, {
-        config: {
-          iceServers: [
-            { url: "stun:stun.l.google.com:19302" }, // Public STUN server
-            {
-              url: "turn:13.235.36.252:3478",
-              username: "user",
-              credential: "H4iauI7gCpy39KxS9JoyeCzQzrnL4JGd",
-            },
-          ],
-        },
+        host: "0.peerjs.com",
       });
       peerInstance.current = peer;
 
@@ -53,7 +44,7 @@ function Videocall() {
         });
 
       peer.on("open", (id) => {
-        console.log(id)
+        console.log(id);
         setMyId(id);
       });
     }
@@ -126,7 +117,7 @@ function Videocall() {
             <video ref={userVideo} autoPlay playsInline />
             {currentCall && (
               <Typography mt={4} variant='h3'>
-               Supervisor
+                Supervisor
               </Typography>
             )}
           </div>
