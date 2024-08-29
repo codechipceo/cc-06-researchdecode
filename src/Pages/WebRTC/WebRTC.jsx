@@ -42,6 +42,7 @@ function Videocall() {
         });
 
       peer.on("open", (id) => {
+        console.log(id)
         setMyId(id);
       });
     }
