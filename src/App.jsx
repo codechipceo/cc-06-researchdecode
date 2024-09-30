@@ -58,6 +58,14 @@ const router = createBrowserRouter([
     element: <GuardComponents component={Courses} />,
   },
   {
+    path: "/my-courses",
+    element: (
+      <GuardComponents
+        component={(props) => <Courses userCoursesOnly={true} {...props} />}
+      />
+    ),
+  },
+  {
     path: "/course/:courseId",
     element: <GuardComponents component={CourseDetail} />,
   },
@@ -87,8 +95,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/videocall/:peerId",
-    element:<VideoCall />
-  }
+    element: <VideoCall />,
+  },
 ]);
 
 export default function App() {

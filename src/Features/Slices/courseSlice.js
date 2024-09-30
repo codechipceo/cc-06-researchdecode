@@ -24,6 +24,19 @@ export const getAllCourses = createAsyncThunk(
   }
 );
 
+// Get courses that user has paid for
+export const getUserCourses = createAsyncThunk(
+  "course/getUserCourses",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.getAll("getUserCourses", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const buyCourse = createAsyncThunk(
   "course/buy",
   async (payload, { rejectWithValue }) => {
@@ -68,6 +81,7 @@ export const getCourseById = createAsyncThunk(
 const initialState = {
   totalCount: 0,
   courses: [],
+  getUserCourses: [],
   courseById: {},
   isLoading: false,
   isError: false,
@@ -109,12 +123,27 @@ export const courseSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
+      })
+
+      // get user specific courses
+      .addCase(getUserCourses.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserCourses.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userCourses = action.payload.data;
+      })
+      .addCase(getUserCourses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = action.payload;
       });
   },
 }).reducer;
 
 export const selectCourses = (state) => state.course.courses;
 export const selectCourseById = (state) => state.course.courseById;
+export const selectUserCourses = (state) => state.course.userCourses;
 export const courseTotalCount = (state) => state.course.totalCount;
 export const selectCourseLoadingStatus = (state) => state.course.isLoading;
 export const selectCourseErrorStatus = (state) => state.course.isError;

@@ -21,6 +21,8 @@ import {
   getAllCourses,
   getCourseById,
   selectCourseById,
+  getUserCourses,
+  selectUserCourses,
   selectCourseErrorMessage,
   selectCourseErrorStatus,
   selectCourseLoadingStatus,
@@ -54,6 +56,7 @@ const reduxStore = {
     selectTeachers,
 
     selectCourseById,
+    selectUserCourses,
     selectCourseErrorMessage,
     selectCourseErrorStatus,
     selectCourseLoadingStatus,
@@ -66,8 +69,6 @@ const reduxStore = {
     selectVideoLoadingStatus,
     selectVideos,
     videoTotalCount,
-
-
   },
   sliceMethods: {
     studentLogin,
@@ -77,7 +78,7 @@ const reduxStore = {
     getCourseById,
     getAllVideos,
     getVideoById,
-  
+    getUserCourses,
   },
 };
 

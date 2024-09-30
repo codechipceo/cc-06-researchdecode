@@ -42,8 +42,8 @@ const pages = [
 ];
 const settings = [
   { name: "Paper Requests", path: "my-requests" },
+  { name: "Courses", path: "my-courses" },
   // { name: "Booked Consultancy", path: "my-consultancy" },
-  // { name: "Courses", path: "my-courses" },
   // { name: "Collaborate", path: "collaborate" },
   // { name: "Payment History", path: "payment-history" },
 ];
