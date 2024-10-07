@@ -2,20 +2,22 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxStore } from "../Features/indexStates";
 
-export const useCourse = () => {
+export const useCourse = (userId = null) => {
   // ###########################################
   //                 STATES
   // ###########################################
   const dispatch = useDispatch();
-  const { getAllCourses } = reduxStore.sliceMethods;
+  const { getAllCourses, getUserCourses } = reduxStore.sliceMethods;
   const {
     selectCourses,
     selectCourseById,
     courseTotalCount,
     selectCourseLoadingStatus,
     selectCourseErrorStatus,
+    selectUserCourses,
   } = reduxStore.states;
   const courseData = useSelector(selectCourses);
+  const userCourses = useSelector(selectUserCourses);
   const courseById = useSelector(selectCourseById);
   const courseCount = useSelector(courseTotalCount);
   const isCourseLoading = useSelector(selectCourseLoadingStatus);
@@ -27,13 +29,21 @@ export const useCourse = () => {
 
   useEffect(() => {
     dispatch(getAllCourses());
-  }, [dispatch, getAllCourses ]);
+  }, [dispatch, getAllCourses]);
+
+  // Fetch user courses on component mount or when userId changes
+  useEffect(() => {
+    if (userId) {
+      dispatch(getUserCourses({ userId }));
+    }
+  }, [dispatch, getUserCourses, userId]);
 
   // ###########################################
   //                 EXPORT OBJECT
   // ###########################################
 
   return {
+    userCourses,
     courseData,
     courseById,
     courseCount,
