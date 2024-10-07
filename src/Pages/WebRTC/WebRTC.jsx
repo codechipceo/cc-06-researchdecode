@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { Button, Container, Typography } from "@mui/material";
 import Peer from "peerjs";
-import { io } from "socket.io-client";
-import ResponsiveAppBar from "../../Components/Navbar/Navbar";
-import { Container, Grid, Button, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import ResponsiveAppBar from "../../Components/Navbar/Navbar";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 
-const socket = io("http://localhost:5001");
 
 function Videocall() {
   const { peerId } = useParams();

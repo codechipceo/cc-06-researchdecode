@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useMemo } from "react";
 import { io } from "socket.io-client";
-
-const defaultUrl = "http://localhost:5001";
+const activeEnv = import.meta.env.VITE_NODE_ENV;
+const defaultUrl =
+  activeEnv === "test"
+    ? "https://api.researchdecode.com/"
+    : "http://localhost:5000";
 const defaultOptions = {
   reconnectionAttempts: 5,
   transports: ["websocket"],
