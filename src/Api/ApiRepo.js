@@ -6,9 +6,12 @@ export class ApiFeatures {
     this.path = `/${this.role}/${this.module}/`;
   }
 
-  async create(url, payload, headers = {}) {
-    const { data, msg } = await this.api
-      .post(this.path + url, payload, headers)
+  async create(url, payload, headers = {}, method = "post") {
+    const { data, msg } = await this.api[method](
+      this.path + url,
+      payload,
+      headers
+    )
       .then((res) => res.data)
       .catch((err) => {
         throw err;
@@ -16,9 +19,8 @@ export class ApiFeatures {
     return { data, msg };
   }
 
-  async delete(url, payload) {
-    const { data, msg } = await this.api
-      .post(this.path + url, payload)
+  async delete(url, payload, method = "post") {
+    const { data, msg } = await this.api[method](this.path + url, payload)
       .then((res) => res.data)
       .catch((err) => {
         throw err;
@@ -26,9 +28,8 @@ export class ApiFeatures {
     return { data, msg };
   }
 
-  async update(url, payload) {
-    const { data, msg } = await this.api
-      .post(this.path + url, payload)
+  async update(url, payload, method = "post") {
+    const { data, msg } = await this.api[method](this.path + url, payload)
       .then((res) => res.data)
       .catch((err) => {
         throw err;
@@ -36,9 +37,8 @@ export class ApiFeatures {
     return { data, msg };
   }
 
-  async getById(url, payload) {
-    const { data, msg } = await this.api
-      .post(this.path + url, payload)
+  async getById(url, payload, method = "post") {
+    const { data, msg } = await this.api[method](this.path + url, payload)
       .then((res) => res.data)
       .catch((err) => {
         throw err;
@@ -46,9 +46,11 @@ export class ApiFeatures {
     return { data, msg };
   }
 
-  async getAll(url, payload) {
-    const { data, msg, count } = await this.api
-      .post(this.path + url, payload)
+  async getAll(url, payload, method = "post") {
+    const { data, msg, count } = await this.api[method](
+      this.path + url,
+      payload
+    )
       .then((res) => res.data)
       .catch((err) => {
         throw err;
@@ -56,9 +58,11 @@ export class ApiFeatures {
     return { data, msg, count };
   }
 
-  async getAllById(url, payload) {
-    const { data, msg, count } = await this.api
-      .post(this.path + url, payload)
+  async getAllById(url, payload, method = "post") {
+    const { data, msg, count } = await this.api[method](
+      this.path + url,
+      payload
+    )
       .then((res) => res.data)
       .catch((err) => {
         throw err;
