@@ -16,7 +16,7 @@ import PaymentPage from "./Pages/Payment/PaymentPage"; // Import PaymentPage
 import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
-import { SignIn, SignUp } from "./Pages/indexPages";
+import { SignIn, SignUp, LabsPage } from "./Pages/indexPages";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -87,8 +87,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/videocall/:peerId",
-    element:<VideoCall />
-  }
+    element: <VideoCall />,
+  },
+  {
+    path: "/labs",
+    element: <GuardComponents component={LabsPage} />,
+  },
 ]);
 
 export default function App() {
