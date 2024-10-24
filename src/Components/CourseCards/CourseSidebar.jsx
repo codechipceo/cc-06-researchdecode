@@ -104,7 +104,7 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
             <Typography variant='body1'>Lessons: {videos?.length}</Typography>
           </Grid>
         </Grid>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
+        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }} >
           <Grid item>
             <StarIcon />
           </Grid>
