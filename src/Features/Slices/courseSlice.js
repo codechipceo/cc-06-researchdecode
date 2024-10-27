@@ -15,6 +15,7 @@ export const getAllCourses = createAsyncThunk(
   "course/getall",
   async (payload, { rejectWithValue }) => {
     try {
+     
       const { data, msg, count } = await apiFeature.getAll("getAll", payload);
       return { data, msg, count };
     } catch (error) {

@@ -1,25 +1,63 @@
-$dark-gray: #484848;
-$light-teal: #49BBBD;
-$dark-green: #2B2F2E;
-$charcoal-black: #101828;
-$medium-gray: #646464;
-$semi-transparent-black: #1D2939B2;
-$light-gray: #ACA5A5;
-$dark-brown: #453E3E;
-$black: #000000;
-$lavender-gray: #696984;
-$navy-blue: #252641;
-$dim-gray: #313131;
-$light-purple: #A8A8B6;
-$teal: #2BA7A9;
-$slate-gray: #333333;
-$lightest-gray: #EAECF0;
-$grayish-blue: #98A2B3;
-$bright-teal: #54BFC1;
-$deep-charcoal: #101828;
-$semi-transparent-black-80: #00000080;
-$semi-dark-gray:  #555555;
-$blue:  #2580D5;
-$dark-blue: #0061E0;
-$bright-green: #00E040;
-$red-pink: #BD4962;
+// primary represents theme shades palette
+$primary: #49BBBD;
+$primary70: #2BA7A9;
+$primary30:#54BFC1;
+
+//  neutral shades palette
+$neutral10: #EAECF0; // lightest-gray
+$neutral20: #ACA5A5; // light-gray
+$neutral30: #98A2B3; // grayish-blue
+$neutral40: #696984; // lavender-gray
+$neutral50: #646464; // medium-gray
+$neutral60: #555555; // semi-dark-gray
+$neutral70: #484848; // dark-gray
+$neutral80: #333333; // slate-gray
+$neutral90: #313131; // dim-gray
+
+// for accent colors palette
+$accent0 :#2580D5;
+$accent1:#0061E0;
+$accent2: #00E040;
+$accent3:#BD4962;
+
+//  dark shades palette
+$dark10: #A8A8B6; // light-purple
+$dark20: #453E3E; // dark-brown
+$dark30: #2B2F2E; // dark-green
+$dark40: #252641; // navy-blue
+$dark50: #333333; // slate-gray
+$dark60: #313131; // dim-gray
+$dark70: #101828; // charcoal-black
+$dark80: #101828; // deep-charcoal
+$dark90: #000000; // black
+$dark100: #00000080; // semi-transparent-black-80
+$dark110: #1D2939B2; // semi-transparent-black
+
+
+
+
+// // $dark-gray: #484848;
+// // $light-teal: #49BBBD;
+// $dark-green: #2B2F2E;
+// $charcoal-black: #101828;
+// // $medium-gray: #646464;
+// $semi-transparent-black: #1D2939B2;
+// // $light-gray: #ACA5A5;
+// $dark-brown: #453E3E;
+// $black: #000000;
+// // $lavender-gray: #696984;
+// $navy-blue: #252641;
+// // $dim-gray: #313131;
+// $light-purple: #A8A8B6;
+// // $teal: #2BA7A9;
+// // $slate-gray: #333333;
+// // $lightest-gray: #EAECF0;
+// // $grayish-blue: #98A2B3;
+// // $bright-teal: #54BFC1;
+// $deep-charcoal: #101828;
+// $semi-transparent-black-80: #00000080;
+// $semi-dark-gray:  #555555;
+// $blue:  #2580D5;
+// $dark-blue: #0061E0;
+// $bright-green: #00E040;
+// $red-pink: #BD4962;
