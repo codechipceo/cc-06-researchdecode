@@ -1,0 +1,338 @@
+@import '../base/typography.scss';
+
+
+.font-xs {
+  font-size: $font-xs;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-sm {
+  font-size: $font-sm;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.font-md {
+  font-size: $font-md;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-lg {
+  font-size: $font-lg;
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-xl {
+  font-size: $font-xl;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-2xl {
+  font-size: $font-2xl;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-3xl {
+  font-size: $font-3xl;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+.font-4xl {
+  font-size: $font-4xl;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+
+// @mixin font($size, $weight: null) {
+//   font-size: $size;
+
+  
+//   @if $weight {
+//     font-weight: $weight;
+//   }
+// }
+
+
+// .font-xs {
+//   @include font($font-xs);
+// }
+
+// .font-xs-regular {
+//   @include font($font-xs, $font-weight-regular);
+// }
+
+// .font-xs-bold {
+//   @include font($font-xs, $font-weight-bold);
+// }
+
+// .font-xs-semibold {
+//   @include font($font-xs, $font-weight-semibold);
+// }
+
+// .font-xs-medium {
+//   @include font($font-xs, $font-weight-medium);
+// }
+
+// .font-sm {
+//   @include font($font-sm);
+// }
+
+// .font-sm-regular {
+//   @include font($font-sm, $font-weight-regular);
+// }
+
+// .font-sm-bold {
+//   @include font($font-sm, $font-weight-bold);
+// }
+
+// .font-sm-semibold {
+//   @include font($font-sm, $font-weight-semibold);
+// }
+
+// .font-sm-medium {
+//   @include font($font-sm, $font-weight-medium);
+// }
+
+// .font-md {
+//   @include font($font-md);
+// }
+
+// .font-md-regular {
+//   @include font($font-md, $font-weight-regular);
+// }
+
+// .font-md-bold {
+//   @include font($font-md, $font-weight-bold);
+// }
+
+// .font-md-semibold {
+//   @include font($font-md, $font-weight-semibold);
+// }
+
+// .font-md-medium {
+//   @include font($font-md, $font-weight-medium);
+// }
+
+// .font-lg {
+//   @include font($font-lg);
+// }
+
+// .font-lg-regular {
+//   @include font($font-lg, $font-weight-regular);
+// }
+
+// .font-lg-bold {
+//   @include font($font-lg, $font-weight-bold);
+// }
+
+// .font-lg-semibold {
+//   @include font($font-lg, $font-weight-semibold);
+// }
+
+// .font-lg-medium {
+//   @include font($font-lg, $font-weight-medium);
+// }
+
+// .font-xl {
+//   @include font($font-xl);
+// }
+
+// .font-xl-regular {
+//   @include font($font-xl, $font-weight-regular);
+// }
+
+// .font-xl-bold {
+//   @include font($font-xl, $font-weight-bold);
+// }
+
+// .font-xl-semibold {
+//   @include font($font-xl, $font-weight-semibold);
+// }
+
+// .font-xl-medium {
+//   @include font($font-xl, $font-weight-medium);
+// }
+
+// .font-2xl {
+//   @include font($font-2xl);
+// }
+
+// .font-2xl-regular {
+//   @include font($font-2xl, $font-weight-regular);
+// }
+
+// .font-2xl-bold {
+//   @include font($font-2xl, $font-weight-bold);
+// }
+
+// .font-2xl-semibold {
+//   @include font($font-2xl, $font-weight-semibold);
+// }
+
+// .font-2xl-medium {
+//   @include font($font-2xl, $font-weight-medium);
+// }
+
+// .font-3xl {
+//   @include font($font-3xl);
+// }
+
+// .font-3xl-regular {
+//   @include font($font-3xl, $font-weight-regular);
+// }
+
+// .font-3xl-bold {
+//   @include font($font-3xl, $font-weight-bold);
+// }
+
+// .font-3xl-semibold {
+//   @include font($font-3xl, $font-weight-semibold);
+// }
+
+// .font-3xl-medium {
+//   @include font($font-3xl, $font-weight-medium);
+// }
+
+// .font-4xl {
+//   @include font($font-4xl);
+// }
+
+// .font-4xl-regular {
+//   @include font($font-4xl, $font-weight-regular);
+// }
+
+// .font-4xl-bold {
+//   @include font($font-4xl, $font-weight-bold);
+// }
+
+// .font-4xl-semibold {
+//   @include font($font-4xl, $font-weight-semibold);
+// }
+
+// .font-4xl-medium {
+//   @include font($font-4xl, $font-weight-medium);
+// }
