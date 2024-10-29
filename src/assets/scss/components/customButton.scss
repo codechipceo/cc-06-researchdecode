@@ -39,7 +39,7 @@
   color: $text-color ;
   font-family: $font-family-primary ;
   padding: 12px 25px ;
-
+  transition: background-color 300ms ease, box-shadow 300ms ease;
   @if $font-size {
     font-size: $font-size ;
   }

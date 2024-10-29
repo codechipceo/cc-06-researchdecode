@@ -2,8 +2,6 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ResponsiveAppBar from "../Navbar/Navbar";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../../assets/scss/components/CustomButton";
-import Icon from "../../assets/Icons/Icon.svg";
 export const HeaderOne = () => {
   return (
     <div
@@ -49,25 +47,14 @@ const LeftComponent = () => {
         For PHD students to help each other out
       </Typography>
 
-      <CustomButton
-        onClick={() => navigate("/signup")}
-        variant="primary"
-        fontWeight={"bold"}
-      >
-        Get Started
-      </CustomButton>
-      {/* 
-      <CustomButton variant="secondary" fontWeight="semibold">
-        Get free trail
-      </CustomButton> */}
-      {/* <Button
+      <Button
         onClick={() => navigate("/signup")}
         color="primary"
         variant="contained"
       >
         {" "}
         Join Today
-      </Button> */}
+      </Button>
     </Box>
   );
 };
