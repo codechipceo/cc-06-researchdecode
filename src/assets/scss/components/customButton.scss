@@ -1,36 +1,3 @@
-// @import "../base//colors.scss";
-// @import "../base//typography.scss";
-// .primary-button {
-//   background-color: $primary !important;
-//   font-family: $font-family-primary !important; // Corrected to `font-family`
-//   color: #FFFFFF !important;
-//   // font-weight: $font-weight-semibold !important;
-//   height: 55px;
-//   padding: 12px 25px !important;
-//   font-size: 18px !important;
-//   &:hover{
-//     background-color: darken($primary, 10%) !important;
-//     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-//   }
-// }
-// .font-weight-medium {
-//   font-weight: $font-weight-medium !important;
-// }
-// .font-weight-semibold{
-//   font-weight: $font-weight-semibold !important;
-// }
-// .font-weight-bold{
-//   font-weight: $font-weight-bold !important;
-// }
-// .secondary-button {
-//   background-color: green !important;
-//   color: $primary!important ;
-//   font-weight: bold !important;
-//   &:hover {
-//     background-color: darken($neutral10, 10%);
-//   }
-// }
-
 @import "../base/colors.scss";
 @import "../base/typography.scss";
 
