@@ -1,17 +1,160 @@
-@import "../base//colors.scss"; 
+// @import "../base//colors.scss"; 
+// @import "../base//typography.scss";
+// .primary-button {
+//   background-color: $primary !important;
+//   font-family: $font-family-primary !important; // Corrected to `font-family`
+//   color: #FFFFFF !important;
+//   // font-weight: $font-weight-semibold !important;
+//   height: 55px;
+//   padding: 12px 25px !important; 
+//   font-size: 18px !important; 
+//   &:hover{
+//     background-color: darken($primary, 10%) !important;
+//     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+//   }
+// }
+// .font-weight-medium {
+//   font-weight: $font-weight-medium !important;
+// }
+// .font-weight-semibold{
+//   font-weight: $font-weight-semibold !important;
+// }
+// .font-weight-bold{
+//   font-weight: $font-weight-bold !important;
+// }
+// .secondary-button {
+//   background-color: green !important;
+//   color: $primary!important ;
+//   font-weight: bold !important;
+//   &:hover {
+//     background-color: darken($neutral10, 10%); 
+//   }
+// }
 
-.primary-button {
-  background-color: yellow; 
-  color: white; 
+@import "../base/colors.scss";
+@import "../base/typography.scss";
+
+@mixin button-style($bg-color, $text-color, $font-size: null) {
+  background-color: $bg-color !important ;
+  color: $text-color !important;
+  font-family: $font-family-primary !important;
+  padding: 12px 25px !important;
+
+
+  @if $font-size {
+    font-size: $font-size !important;
+  }
+
+  else {
+    font-size: 18px !important; 
+  }
+
   &:hover {
-    background-color: darken($primary, 10%); 
+    background-color: darken($bg-color, 10%) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }
 
+.primary-button {
+  @include button-style($primary, $neutral5);
+}
+
 .secondary-button {
-  background-color: green; 
-  color: $primary; 
-  &:hover {
-    background-color: darken($neutral10, 10%); 
-  }
+  @include button-style($neutral15, $primary40);
+}
+
+.preview-button {
+  @include button-style($accent4, $neutral5,);
+}
+
+.font-weight-medium {
+  font-weight: $font-weight-medium !important;
+}
+.font-weight-semibold{
+  font-weight: $font-weight-semibold !important;
+}
+.font-weight-bold{
+  font-weight: $font-weight-bold !important;
+}
+
+// class for every button size
+.btn-size-1 {
+  width: 84px;
+  height: 32px;
+}
+
+.btn-size-2 {
+  width: 103px;
+  height: 45px;
+}
+
+.btn-size-3 {
+  width: 129px;
+  height: 36.28px;
+}
+
+.btn-size-4 {
+  width: 151px;
+  height: 45px;
+}
+
+.btn-size-5 {
+  width: 167px;
+  height: 45px;
+}
+
+.btn-size-6 {
+  width: 195px;
+  height: 45px;
+}
+
+.btn-size-7 {
+  width: 213px;
+  height: 60px;
+}
+
+.btn-size-8 {
+  width: 227px;
+  height: 56px;
+}
+
+.btn-size-9 {
+  width: 232px;
+  height: 45px;
+}
+
+.btn-size-10 {
+  width: 128.68px;
+  height: 60px;
+}
+
+.btn-size-11 {
+  width: 157px;
+  height: 60px;
+}
+
+.btn-size-12 {
+  width: 165px;
+  height: 60px;
+}
+
+.btn-size-13 {
+  width: 183.16px;
+  height: 60px;
+}
+
+.btn-size-14 {
+  width: 194px;
+  height: 60px;
+}
+
+.btn-size-15 {
+  width: 392px;
+  height: 48px;
+}
+
+.btn-size-16 {
+  width: 443px;
+  height: 60px;
+  font-size: 16px;
 }

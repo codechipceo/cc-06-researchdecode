@@ -4,11 +4,15 @@ import App from "./App";
 import { store } from "./Store/store";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./Utils/theme";
+import { CustomProvider } from "rsuite";
+import "rsuite/dist/rsuite-no-reset.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </Provider>
+  <CustomProvider theme="theme">
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </CustomProvider>
 );
