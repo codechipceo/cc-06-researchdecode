@@ -1,7 +1,7 @@
+import classNames from "classnames";
 import React from "react";
 import { Button } from "rsuite";
 import "./customButton.scss";
-import classNames from "classnames";
 
 const CustomButton = ({
   children,
@@ -21,7 +21,7 @@ const CustomButton = ({
   });
 
   return (
-    <Button onClick={onClick} className={buttonClassnames}>
+    <Button as={Button} appearance="primary" onClick={onClick} className={`${buttonClassnames}`}>
       {children}{" "}
       {Icon && (
         <img

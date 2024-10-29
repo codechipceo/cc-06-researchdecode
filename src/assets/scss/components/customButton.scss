@@ -1,4 +1,4 @@
-// @import "../base//colors.scss"; 
+// @import "../base//colors.scss";
 // @import "../base//typography.scss";
 // .primary-button {
 //   background-color: $primary !important;
@@ -6,8 +6,8 @@
 //   color: #FFFFFF !important;
 //   // font-weight: $font-weight-semibold !important;
 //   height: 55px;
-//   padding: 12px 25px !important; 
-//   font-size: 18px !important; 
+//   padding: 12px 25px !important;
+//   font-size: 18px !important;
 //   &:hover{
 //     background-color: darken($primary, 10%) !important;
 //     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -27,7 +27,7 @@
 //   color: $primary!important ;
 //   font-weight: bold !important;
 //   &:hover {
-//     background-color: darken($neutral10, 10%); 
+//     background-color: darken($neutral10, 10%);
 //   }
 // }
 
@@ -35,10 +35,10 @@
 @import "../base/typography.scss";
 
 @mixin button-style($bg-color, $text-color, $font-size: null) {
-  background-color: $bg-color !important ;
-  color: $text-color !important;
-  font-family: $font-family-primary !important;
-  padding: 12px 25px !important;
+  background-color: $bg-color  ;
+  color: $text-color ;
+  font-family: $font-family-primary ;
+  padding: 12px 25px ;
 
 
   @if $font-size {
@@ -46,11 +46,11 @@
   }
 
   else {
-    font-size: 18px !important; 
+    font-size: 18px !important;
   }
 
   &:hover {
-    background-color: darken($bg-color, 10%) !important;
+    background-color: darken($bg-color, 10%) ;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }
