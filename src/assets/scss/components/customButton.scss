@@ -40,13 +40,12 @@
   font-family: $font-family-primary ;
   padding: 12px 25px ;
 
-
   @if $font-size {
-    font-size: $font-size !important;
+    font-size: $font-size ;
   }
 
   else {
-    font-size: 18px !important;
+    font-size: 18px ;
   }
 
   &:hover {
@@ -68,16 +67,16 @@
 }
 
 .font-weight-medium {
-  font-weight: $font-weight-medium !important;
+  font-weight: $font-weight-medium;
 }
 .font-weight-semibold{
-  font-weight: $font-weight-semibold !important;
+  font-weight: $font-weight-semibold;
 }
 .font-weight-bold{
-  font-weight: $font-weight-bold !important;
+  font-weight: $font-weight-bold;
 }
 
-// class for every button size
+
 .btn-size-1 {
   width: 84px;
   height: 32px;
