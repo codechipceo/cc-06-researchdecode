@@ -12,7 +12,7 @@ export const Home = () => {
       <AboutOne />
       <OurCourses />
       <UpcomingEvents />
-      
+
     </div>
   );
 };

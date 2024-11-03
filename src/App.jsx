@@ -1,3 +1,4 @@
+import "rsuite/dist/rsuite.min.css";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import "./App.css";
