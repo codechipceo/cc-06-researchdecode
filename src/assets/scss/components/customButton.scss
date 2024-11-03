@@ -1,3 +1,21 @@
+
+@import "../base//colors.scss"; 
+
+.primary-button {
+  background-color: yellow; 
+  color: white; 
+  &:hover {
+    background-color: darken($primary, 10%); 
+  }
+}
+
+.secondary-button {
+  background-color: green; 
+  color: $primary; 
+  &:hover {
+    background-color: darken($neutral10, 10%); 
+  }
+
 @import "../base/colors.scss";
 @import "../base/typography.scss";
 
