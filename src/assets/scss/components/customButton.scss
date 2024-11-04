@@ -1,0 +1,144 @@
+
+@import "../base//colors.scss"; 
+
+.primary-button {
+  background-color: yellow; 
+  color: white; 
+  &:hover {
+    background-color: darken($primary, 10%); 
+  }
+}
+
+.secondary-button {
+  background-color: green; 
+  color: $primary; 
+  &:hover {
+    background-color: darken($neutral10, 10%); 
+  }
+
+@import "../base/colors.scss";
+@import "../base/typography.scss";
+
+@mixin button-style($bg-color, $text-color, $font-size: null) {
+  background-color: $bg-color  ;
+  color: $text-color ;
+  font-family: $font-family-primary ;
+  padding: 12px 25px ;
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+  @if $font-size {
+    font-size: $font-size ;
+  }
+
+  else {
+    font-size: 18px ;
+  }
+
+  &:hover {
+    background-color: darken($bg-color, 10%) ;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.primary-button {
+  @include button-style($primary, $neutral5);
+}
+
+.secondary-button {
+  @include button-style($neutral15, $primary40);
+}
+
+.preview-button {
+  @include button-style($accent4, $neutral5,);
+}
+
+.font-weight-medium {
+  font-weight: $font-weight-medium;
+}
+.font-weight-semibold{
+  font-weight: $font-weight-semibold;
+}
+.font-weight-bold{
+  font-weight: $font-weight-bold;
+}
+
+
+.btn-size-1 {
+  width: 84px;
+  height: 32px;
+}
+
+.btn-size-2 {
+  width: 103px;
+  height: 45px;
+}
+
+.btn-size-3 {
+  width: 129px;
+  height: 36.28px;
+}
+
+.btn-size-4 {
+  width: 151px;
+  height: 45px;
+}
+
+.btn-size-5 {
+  width: 167px;
+  height: 45px;
+}
+
+.btn-size-6 {
+  width: 195px;
+  height: 45px;
+}
+
+.btn-size-7 {
+  width: 213px;
+  height: 60px;
+}
+
+.btn-size-8 {
+  width: 227px;
+  height: 56px;
+}
+
+.btn-size-9 {
+  width: 232px;
+  height: 45px;
+}
+
+.btn-size-10 {
+  width: 128.68px;
+  height: 60px;
+}
+
+.btn-size-11 {
+  width: 157px;
+  height: 60px;
+}
+
+.btn-size-12 {
+  width: 165px;
+  height: 60px;
+}
+
+.btn-size-13 {
+  width: 183.16px;
+  height: 60px;
+}
+
+.btn-size-14 {
+  width: 194px;
+  height: 60px;
+}
+
+.btn-size-15 {
+  width: 392px;
+  height: 48px;
+}
+
+.btn-size-16 {
+  width: 443px;
+  height: 60px;
+  font-size: 16px;
+}

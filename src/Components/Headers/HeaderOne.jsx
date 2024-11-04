@@ -2,7 +2,6 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ResponsiveAppBar from "../Navbar/Navbar";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 export const HeaderOne = () => {
   return (
     <div
@@ -41,16 +40,17 @@ const LeftComponent = () => {
   const navigate = useNavigate();
   return (
     <Box>
-      <Typography variant='h4' align='left'>
+      <Typography variant="h4" align="left">
         From Students, For Students
       </Typography>
-      <Typography variant='h2' align='left' fontWeight={"bold"} my={5}>
+      <Typography variant="h2" align="left" fontWeight={"medium"} my={5}>
         For PHD students to help each other out
       </Typography>
+
       <Button
         onClick={() => navigate("/signup")}
-        color='primary'
-        variant='contained'
+        color="primary"
+        variant="contained"
       >
         {" "}
         Join Today
@@ -63,8 +63,8 @@ const RightComponent = () => {
   return (
     <Box sx={{ overflow: "hidden", position: "relative", height: "100vh" }}>
       <img
-        src='/images/banner/bannerProfile-01.png'
-        alt=''
+        src="/images/banner/bannerProfile-01.png"
+        alt=""
         style={{ width: "100%", height: "auto" }}
       />
     </Box>
