@@ -1,0 +1,68 @@
+.course-curriculum-container {
+    margin-bottom: 24px;
+  
+    h4 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .course-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+  
+    .section-title {
+      font-weight: bold;
+    }
+  
+    .section-info {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+  }
+  
+  .lesson-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+  
+    .icon {
+      margin-right: 8px;
+      color: gray;
+    }
+  
+    .lesson-title {
+      flex: 1;
+      color: #000;
+      font-size: 0.9rem;
+  
+      &.completed {
+        color: #49bbbd;
+      }
+    }
+  
+    .preview-button {
+      margin-right: 15px;
+    }
+  
+    .lesson-time {
+      margin-right: 10px;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+  
+    .completed-icon,
+    .locked-icon {
+      font-size: 1rem;
+      color: green; /* Adjust color as needed for completed or locked state */
+    }
+  
+    .locked-icon {
+      color: gray;
+    }
+  }
+  

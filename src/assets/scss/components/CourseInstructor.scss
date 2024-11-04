@@ -1,0 +1,100 @@
+.expert-card {
+  max-width: 42rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  &__left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @media (min-width: 768px) {
+      width: 33.333%;
+    }
+  }
+
+  &__avatar {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1rem;
+  }
+
+  &__name {
+    color: #49BBBD;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  &__contact {
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+
+      &-label {
+        color: #2C5F2D;
+      }
+
+      &-value {
+        color: #6b7280;
+      }
+    }
+  }
+
+  &__stats {
+    width: 100%;
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      &-label {
+        color: #6b7280;
+      }
+
+      &-value {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+  }
+
+  &__stars {
+    color: #fbbf24;
+  }
+
+  &__right-column {
+    @media (min-width: 768px) {
+      width: 86.666%;
+    }
+  }
+
+  &__description {
+    color: #4b5563;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+}

@@ -1,89 +1,90 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Typography, Grid, Tabs, Tab } from "@mui/material";
-import { styled } from "@mui/system";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { Container, Row, Col, Nav, Panel, Placeholder } from "rsuite";
 import CourseOverview from "../../Components/CourseCards/CourseOverview";
 import CourseCurriculum from "../../Components/CourseCards/CourseCurriculum";
 import CourseInstructor from "../../Components/CourseCards/CourseInstructor";
-import CourseReviews from "../../Components/CourseCards/CourseReviews";
 import CourseSidebar from "../../Components/CourseCards/CourseSidebar";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCourseById,
-  selectCourseById,
-} from "../../Features/Slices/courseSlice";
+import { getCourseById, selectCourseById } from "../../Features/Slices/courseSlice";
+import '../../assets/scss/components/CourseDetail.scss'; // Import the CSS file
+import { FaAngleRight } from "react-icons/fa";
 
-const Banner = styled("img")({
-  width: "100%",
-  height: "auto",
-  marginBottom: "20px",
-});
+
 
 const CourseDetail = () => {
   const { courseId } = useParams();
   const dispatch = useDispatch();
   const courseDetail = useSelector(selectCourseById);
 
-
   useEffect(() => {
-    const payload = { courseId: courseId };
-    dispatch(getCourseById(payload));
+    if (courseId) {
+      dispatch(getCourseById({ courseId }));
+    }
+  }, [dispatch, courseId]);
 
-  }, []);
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useState("overview");
 
   if (!courseId) {
-    return <Typography variant='h5'>Course not found</Typography>;
+    return <Placeholder.Paragraph rows={1} />;
   }
 
-
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
+  const handleTabChange = (eventKey) => {
+    setTabValue(eventKey);
   };
-
-  const breadcrumbPath = [{ label: "Home", path: "/" }];
 
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
-  if (!courseDetail?.courseName) return <>Loading</>;
+  if (!courseDetail?.courseName) return <>Loading...</>;
 
+  console.log(courseDetail);
+  
   return (
     <div>
-      <HeaderTwo title='COURSE' breadcrumbPath={breadcrumbPath} />
-      <Banner src={courseBanner} alt={courseName} />
-      <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
-        {/* <Banner src={courseBanner} alt={courseName} /> */}
-        <Typography variant='h4' gutterBottom>
-          {instructor?.name}
-        </Typography>
-        <Typography variant='h4' gutterBottom>
-          {courseName}
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={8}>
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              aria-label='course details tabs'
-            >
-              <Tab label='Overview' />
-              <Tab label='Curriculum' />
-              <Tab label='Instructor' />
-              {/* <Tab label='Reviews' /> */}
-            </Tabs>
+      {/* Banner section */}
+      <div className="BannerWrapper">
+        <img src={courseBanner} alt={courseName} className="Banner"/>
+        {/* Sidebar for large screens only */}
+        <div  className="firstbar">
+          <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
+        </div>
+      </div>
+      <nav className="breadcrumb">
+      <Link to="/">Homepage</Link>
+    <FaAngleRight/>
+      <Link to="/courses" className="current">Course List</Link>
+    </nav>
+      <Container className="container">
+        <Row>
+          {/* Main Content */}
+          <Col xs={24} md={16} style={{ position: 'relative', zIndex: 0 }}>
+        
+            <Nav appearance="tabs" activeKey={tabValue} onSelect={handleTabChange}>
+  <Nav.Item eventKey="overview" className="nav-item-style">
+    Overview
+  </Nav.Item>
+  <Nav.Item eventKey="curriculum" className="nav-item-style">
+    Curriculum
+  </Nav.Item>
+  <Nav.Item eventKey="instructor" className="nav-item-style">
+    Instructor
+  </Nav.Item>
+</Nav>
 
-            {tabValue === 0 && <CourseOverview course={courseDetail} />}
-            {tabValue === 1 && <CourseCurriculum course={videos} />}
-            {tabValue === 2 && <CourseInstructor course={courseDetail} />}
-            {/* {tabValue === 3 && <CourseReviews />} */}
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
-          </Grid>
-        </Grid>
+
+            <Panel bordered>
+              {tabValue === "overview" && <CourseOverview course={courseDetail} />}
+              {tabValue === "curriculum" && <CourseCurriculum course={videos} />}
+              {tabValue === "instructor" && <CourseInstructor course={courseDetail} />}
+            </Panel>
+          </Col>
+        </Row>
       </Container>
+
+      {/* Sidebar for small screens only */}
+      <div className="sidebar-small" style={{ marginTop: '20px', width: '100%' }}>
+        <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
+      </div>
     </div>
   );
 };
