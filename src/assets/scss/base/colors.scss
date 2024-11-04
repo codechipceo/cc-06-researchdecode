@@ -1,11 +1,13 @@
 // primary represents theme shades palette
 $primary: #49BBBD;
 $primary70: #2BA7A9;
-$primary30:#54BFC1;
+$primary30: #54BFC1;
+$primary40: #49BABC;
 
 //  neutral shades palette
-
-$neutral10: #EAECF0; // lightest-gray
+$neutral5: #FFFFFF;
+$neutral10: #EAECF0;
+$neutral15: #EAFFF9; // lightest-gray
 $neutral20: #ACA5A5; // light-gray
 $neutral30: #98A2B3; // grayish-blue
 $neutral40: #696984; // lavender-gray
@@ -17,9 +19,10 @@ $neutral90: #313131; // dim-gray
 
 // for accent colors palette
 $accent0 :#2580D5;
-$accent1:#0061E0;
+$accent1: #0061E0;
 $accent2: #00E040;
-$accent3:#BD4962;
+$accent3: #BD4962;
+$accent4: #2580D5;
 
 //  dark shades palette
 $dark10: #A8A8B6; // light-purple
