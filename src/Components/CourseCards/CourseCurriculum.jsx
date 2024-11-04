@@ -4,8 +4,7 @@ import { FaFolderOpen } from 'react-icons/fa';
 import '../../assets/scss/components/CourseCurriculum.scss';
 
 const CourseCurriculum = ({ course }) => {
-  console.log(course);
-  
+
   return (
     <div className="course-curriculum-container">
       <h4>Curriculum</h4>

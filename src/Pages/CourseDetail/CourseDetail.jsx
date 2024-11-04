@@ -37,7 +37,6 @@ const CourseDetail = () => {
 
   if (!courseDetail?.courseName) return <>Loading...</>;
 
-  console.log(courseDetail);
   
   return (
     <div>
