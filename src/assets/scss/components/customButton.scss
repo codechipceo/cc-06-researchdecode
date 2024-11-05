@@ -1,40 +1,23 @@
-
-@import "../base//colors.scss"; 
-
-.primary-button {
-  background-color: yellow; 
-  color: white; 
-  &:hover {
-    background-color: darken($primary, 10%); 
-  }
-}
-
-.secondary-button {
-  background-color: green; 
-  color: $primary; 
-  &:hover {
-    background-color: darken($neutral10, 10%); 
-  }
-
 @import "../base/colors.scss";
 @import "../base/typography.scss";
 
 @mixin button-style($bg-color, $text-color, $font-size: null) {
-  background-color: $bg-color  ;
+  background-color: $bg-color ;
   color: $text-color ;
   font-family: $font-family-primary ;
-  padding: 12px 25px ;
+  padding: 12px 25px;
   transition: background-color 300ms ease, box-shadow 300ms ease;
+
   @if $font-size {
     font-size: $font-size ;
   }
 
   else {
-    font-size: 18px ;
+    font-size: 18px;
   }
 
   &:hover {
-    background-color: darken($bg-color, 10%) ;
+    background-color: darken($bg-color, 10%);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }
@@ -48,16 +31,18 @@
 }
 
 .preview-button {
-  @include button-style($accent4, $neutral5,);
+  @include button-style($accent4, $neutral5, );
 }
 
 .font-weight-medium {
   font-weight: $font-weight-medium;
 }
-.font-weight-semibold{
+
+.font-weight-semibold {
   font-weight: $font-weight-semibold;
 }
-.font-weight-bold{
+
+.font-weight-bold {
   font-weight: $font-weight-bold;
 }
 
