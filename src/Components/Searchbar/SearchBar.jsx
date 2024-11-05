@@ -16,21 +16,8 @@ const SearchBar = ({ onSearch, placeholder = "Enter Your DOI No" }) => {
     
     setIsLoading(true);
     try {
-      // await onSearch(searchTerm);
-      const response = await fetch(`https://api.crossref.org/works/${searchTerm}`);
-      console.log(response);
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log("Search results:", data);
-      // Handle the response data as needed
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  
-  finally {
+      await onSearch(searchTerm);
+    } finally {
       setIsLoading(false);
     }
   };
