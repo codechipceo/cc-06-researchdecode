@@ -79,7 +79,7 @@ export const SearchPapers = () => {
   return (
     <div>
       <HeaderTwo title='RESEARCH PAPER' breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth='md' sx={{ marginTop: "40px" }}>
+      <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
         <Box
           sx={{
             display: "flex",

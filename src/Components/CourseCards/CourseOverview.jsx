@@ -4,9 +4,7 @@ const CourseOverview = ({ course }) => {
   return (
     <Box sx={{ mb: 4 }}>
      
-      <Typography
-       
-      ><p  dangerouslySetInnerHTML={{ __html: course?.courseDescription }}></p></Typography>
+      <Typography ><p  dangerouslySetInnerHTML={{ __html: course?.courseDescription }}></p></Typography>
     </Box>
   );
 };
