@@ -1,0 +1,60 @@
+// SearchBar.scss
+.custom-search-bar {
+  max-width: 1000px;
+  width: 100%;
+  margin: 50px auto;
+
+  .rs-input-group {
+    width: 100%;
+    border: 2px solid rgb(226, 222, 218);
+
+    .rs-input {
+      font-weight: 500;
+      padding: 10px;
+      font-size: 20px;
+      color: #333;
+      transition: border-color 0.3s ease;
+
+
+      &::placeholder {
+        color: #ACA5A5;
+        font-style: italic;
+
+      }
+
+      &:disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+      }
+    }
+
+    .rs-input-group-btn {
+
+      &.search-button {
+        &:hover:not(:disabled) {
+          background-color: #009c95;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        span {
+          margin-left: 6px;
+        }
+
+        .rs-loader {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.rs-input-group:focus-within,
+.rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus,
+.rs-input-group:not(.rs-input-group-disabled):hover {
+  border-color: #ACA5A5;
+  ;
+}
