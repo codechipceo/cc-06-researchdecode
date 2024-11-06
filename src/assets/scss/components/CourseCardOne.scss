@@ -1,0 +1,140 @@
+@import "../base/colors.scss";
+
+.course-card-one {
+  width: 280px;
+  border-radius: 20px !important;
+  display: flex;
+  overflow: hidden;
+  background: $neutral5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  .rs-panel-body,
+  .rs-panel-header {
+    padding: 12px !important;
+  }
+
+  .course-card-one__image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+  }
+
+  .course-card-one__content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .course-card-one__header {
+      margin-bottom: 12px;
+
+      .course-card-one__category-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .course-card-one__category-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          background: $neutral0;
+          border-radius: 8px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+            color: $neutral40;
+          }
+        }
+
+        .course-card-one__category-text {
+          // font-family: 'Poppins', sans-serif;
+          color: $neutral40;
+        }
+      }
+
+      .course-card-one__duration-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        svg {
+          width: 14px;
+          height: 14px;
+          color: $neutral40;
+        }
+
+        .course-card-one__duration-text {
+          // font-family: 'Poppins', sans-serif;
+          color: $neutral40;
+        }
+      }
+    }
+
+    .course-card-one__title {
+      // font-family: 'Poppins', sans-serif;
+      color: $dark40;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .course-card-one__description {
+      // font-family: 'Inter', sans-serif;
+      color: $neutral40;
+      margin-bottom: 22px;
+      // line-height: 1.6;
+    }
+
+    .course-card-one__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .course-card-one__instructor-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .course-card-one__instructor-image {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .course-card-one__instructor-name {
+          // font-family: 'Poppins', sans-serif;
+          color: $dark90;
+        }
+      }
+
+      .course-card-one__price-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .course-card-one__original-price {
+            color:$primary30;
+            text-decoration: line-through;
+            font-weight: 300;
+            font-style: italic;
+            // font-family: 'Poppins', sans-serif;
+        }
+
+        .course-card-one__discounted-price {
+          color: $primary;
+          // font-family: 'Poppins', sans-serif;
+        }
+      }
+    }
+  }
+}
