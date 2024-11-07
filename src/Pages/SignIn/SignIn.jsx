@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/use-auth";
 import { Input, InputGroup, Button, Container, Grid, Row, Col } from "rsuite";
-import { AiOutlineMail, AiOutlineLock, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import '../../assets/scss/components/signin.scss';
 
 export const SignIn = () => {
@@ -15,10 +15,13 @@ export const SignIn = () => {
   const handlePasswordToggle = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-
+  const loginObj = {
+    email,
+    password,
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    handleLogin(loginObj);
   };
 
   return (
@@ -46,7 +49,7 @@ export const SignIn = () => {
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <InputGroup inside className="input-field">
           <InputGroup.Addon>
-            <AiOutlineMail />
+            <AiOutlineMail className="icon"/>
           </InputGroup.Addon>
           <Input
             placeholder="Enter Your Mail id"
@@ -58,7 +61,7 @@ export const SignIn = () => {
 
         <InputGroup inside className="input-field">
           <InputGroup.Addon>
-            <AiOutlineLock />
+            <AiOutlineLock className="icon"/>
           </InputGroup.Addon>
           <Input
             placeholder="Password"
@@ -67,13 +70,18 @@ export const SignIn = () => {
             onChange={(value) => setPassword(value)}
           />
           <InputGroup.Button onClick={handlePasswordToggle}>
-            <AiOutlineEye />
+            {showPassword ? (
+              <AiOutlineEye className="icon"/>
+            
+            ) : (
+              <AiOutlineEyeInvisible className="icon"/>
+            )}
           </InputGroup.Button>
         </InputGroup>
 
         <Button
           type="submit"
-          appearance="primary"
+          // appearance="primary"
           className="submit-button"
           loading={isLoading}
           block

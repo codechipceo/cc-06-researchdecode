@@ -1,12 +1,13 @@
-body {
-  background: #49BBBD05;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 10fr;
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(73, 187, 189, 0.02); // #49BBBD05 converted to rgba
 }
 
 .signin-container {
   display: grid;
-  margin-top: 8vh; // Added space from top
+  margin-top: 8vh;
   align-items: center;
   padding: 2rem;
   width: 100%;
@@ -64,6 +65,7 @@ body {
     width: 100%;
     border-radius: 4px;
     padding: 0.5rem;
+    font-weight: 600;
   }
 
   .rs-input-group-addon {
@@ -100,4 +102,10 @@ body {
       text-decoration: underline;
     }
   }
+}
+
+.icon {
+  font-size: larger;
+  font-weight: bold;
+  color: #666;
 }
