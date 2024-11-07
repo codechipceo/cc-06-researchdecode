@@ -1,138 +1,92 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/use-auth";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant='body2'
-      color='text.secondary'
-      align='center'
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color='inherit' href='https://mui.com/'>
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { Input, InputGroup, Button, Container, Grid, Row, Col } from "rsuite";
+import { AiOutlineMail, AiOutlineLock, AiOutlineEye } from "react-icons/ai";
+import '../../assets/scss/components/signin.scss';
 
 export const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {
-    isLoading,
-    errorMessage,
+  const [showPassword, setShowPassword] = useState(false);
+  const { isLoading, errorMessage, isError, handleLogin } = useAuth();
 
-    isError,
-    handleLogin,
-  } = useAuth();
-
-  const loginObj = {
-    email,
-    password,
+  const handlePasswordToggle = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(loginObj);
+    handleLogin({ email, password });
   };
+
   return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Sign in
-        </Typography>
-        <Box component='form' noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
-            autoFocus
-            error={isError} // Show error state based on isError
-            helperText={errorMessage}
+    <Container className="signin-container">
+      <div className="svg-container">
+        <svg
+          className="signin-icon"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20.4281 2.94975C22.3807 0.997126 25.5466 0.997126 27.4992 2.94975L44.9775 20.4281C46.9302 22.3807 46.9302 25.5466 44.9775 27.4992L27.4992 44.9775C25.5466 46.9302 22.3807 46.9302 20.4281 44.9775L2.94975 27.4992C0.997126 25.5466 0.997126 22.3807 2.94975 20.4281L20.4281 2.94975Z"
+            stroke="#49BBBD"
+            strokeWidth="2"
+          />
+        </svg>
+        <h1 className="signin-title">RESEARCH DECODE</h1>
+      </div>
+
+      <h2 className="signin-subtitle">Sign In</h2>
+
+      <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+        <InputGroup inside className="input-field">
+          <InputGroup.Addon>
+            <AiOutlineMail />
+          </InputGroup.Addon>
+          <Input
+            placeholder="Enter Your Mail id"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(value) => setEmail(value)}
+            errorMessage={isError ? errorMessage : ""}
           />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='password'
-            autoComplete='current-password'
-            error={isError} // Show error state based on isError
-            helperText={errorMessage}
+        </InputGroup>
+
+        <InputGroup inside className="input-field">
+          <InputGroup.Addon>
+            <AiOutlineLock />
+          </InputGroup.Addon>
+          <Input
+            placeholder="Password"
+            type={showPassword ? "text" : "password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(value) => setPassword(value)}
           />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='primary' />}
-            label='Remember me'
-          />
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            onClick={(e) => handleSubmit(e)}
-            sx={{ mt: 3, mb: 2 }}
-            disabled={isLoading} // Disable button while loading
-          >
-            {isLoading ? "Signing In..." : "Sign In"}
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to='#' style={{ textDecoration: "none" }}>
-                <Typography variant='body2' color='primary'>
-                  Forgot Password
-                </Typography>
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to='/signup' style={{ textDecoration: "none" }}>
-                <Typography variant='body2' color='primary'>
-                  Do not have an account? Sign up
-                </Typography>
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
+          <InputGroup.Button onClick={handlePasswordToggle}>
+            <AiOutlineEye />
+          </InputGroup.Button>
+        </InputGroup>
+
+        <Button
+          type="submit"
+          appearance="primary"
+          className="submit-button"
+          loading={isLoading}
+          block
+        >
+          {isLoading ? "Signing In..." : "Sign In"}
+        </Button>
+
+        <Row className="forgot-password">
+          <Col xs={24}>
+            <Link to="#">Forgot Password?</Link>
+          </Col>
+        </Row>
+      </form>
     </Container>
   );
 };

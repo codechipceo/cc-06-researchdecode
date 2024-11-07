@@ -1,0 +1,103 @@
+body {
+  background: #49BBBD05;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 10fr;
+}
+
+.signin-container {
+  display: grid;
+  margin-top: 8vh; // Added space from top
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1.5rem;
+  background: white;
+  box-shadow: 0px 0px 4px 0px #00000040;
+  border-radius: 8px;
+}
+
+.svg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.signin-icon {
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+  margin-left: -12px;
+}
+
+.signin-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  background: linear-gradient(90deg, #333, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  margin-left: 8%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.signin-subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  justify-self: start;
+  color: #555;
+}
+
+.input-field {
+  margin-bottom: 1rem;
+
+  .rs-input {
+    width: 100%;
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+
+  .rs-input-group-addon {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.submit-button {
+  background-color: #49bbbd;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  width: 100%;
+
+  &:hover {
+    background-color: #3a9e9f;
+  }
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+
+  a {
+    color: #FD001F;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
