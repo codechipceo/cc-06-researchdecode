@@ -13,7 +13,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const ResearchPaperCard = ({
-  requestDetail, // Added fileUrl prop
+  requestDetail, 
+  isOpen,
+  onClose,
+  formFields,
+  handleFormChange,
+  handleFormSubmit,
   approveicon: ApproveIcon,
   crossicon: CrossIcon,
   viewicon: ViewIcon,

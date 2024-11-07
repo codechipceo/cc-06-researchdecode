@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourseById, selectCourseById } from "../../Features/Slices/courseSlice";
 import '../../assets/scss/components/CourseDetail.scss'; // Import the CSS file
 import { FaAngleRight } from "react-icons/fa";
-
+import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
 
 
 const CourseDetail = () => {
@@ -33,6 +33,7 @@ const CourseDetail = () => {
     setTabValue(eventKey);
   };
 
+  const breadcrumbPath = [{ label: "Home", path: "/" }];
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
   if (!courseDetail?.courseName) return <>Loading...</>;
@@ -41,6 +42,7 @@ const CourseDetail = () => {
   return (
     <div>
       {/* Banner section */}
+      <HeaderTwo title='COURSE' breadcrumbPath={breadcrumbPath} />
       <div className="BannerWrapper">
         <img src={courseBanner} alt={courseName} className="Banner"/>
         {/* Sidebar for large screens only */}
