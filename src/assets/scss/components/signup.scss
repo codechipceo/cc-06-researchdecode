@@ -1,0 +1,156 @@
+// General container for the sign-up page
+body{
+    background: #49BBBD05;
+}
+.sign-up-container {
+    margin-top: 5%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+    // height: 100vh; // Ensure the container takes full viewport height
+  }
+  
+  // Logo and title section
+  .logo-container {
+    display: flex;
+    align-items: center; // Align the SVG and title on the same line
+    justify-content: center; // Center the logo and title horizontally
+    margin-bottom: 20px;
+    position: relative; // Needed for proper positioning of the SVG
+  
+    .title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      background: linear-gradient(90deg, #333, #333);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-left: 8%;
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      transform: translateX(-50%); // Adjust to center the title
+  
+      // To make the SVG overflow on top of the title
+    }
+  
+    .svg-icon {
+      width: 40px; // Set the size of your SVG
+      height: 40px;
+      position: absolute;
+      top: -15px; // Move the SVG slightly above the title
+      left: 50%; // Center horizontally relative to the title
+      transform: translateX(-50%); // Center the SVG perfectly
+      z-index: 1; // Ensure the SVG is below the title
+    }
+  }
+  
+  // Sign-up form container
+  .sign-up-form {
+    background: white;
+    width: 546px; // Set width to 546px
+    padding: 40px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 546px; // Ensure maximum width is 546px
+  
+    .input-field {
+      margin-bottom: 15px;
+    }
+  
+    .icon {
+      color: #49bbbd;
+    }
+  
+    .input-field input, .input-field .rs-picker {
+      border-radius: 6px;
+      border: 1px solid #e1e1e1;
+      padding: 12px;
+      font-size: 1rem;
+      width: 100%;
+    }
+  
+    .input-field input:focus, .input-field .rs-picker:focus {
+      border-color: #49bbbd;
+    }
+  
+    .submit-button {
+      background-color: #49bbbd;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 1.1rem;
+      color: white;
+      &:hover {
+        background-color: #3da89b;
+      }
+      &:disabled {
+        background-color: #b0e0e6;
+      }
+    }
+  
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+  
+      .rs-picker {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #e1e1e1;
+        &:focus {
+          border-color: #49bbbd;
+        }
+      }
+    }
+  
+    // Redirect text for Sign In link
+    .redirect-to-signin {
+      text-align: center;
+      font-size: 0.9rem;
+  
+      a {
+        color: #49bbbd;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  
+  // Responsive design for small screens
+  @media (max-width: 768px) {
+    .sign-up-form {
+      padding: 30px;
+      width: 90%; // Ensure form takes up 90% of screen width on smaller screens
+    }
+  
+    .logo-container {
+      margin-bottom: 30px;
+    }
+  }
+  
+  // Make the First Name and Last Name appear on the same line
+  .name-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; // Optional, adjust spacing between fields
+    margin-bottom: 15px;
+    width: 100%; // Ensure the fields take up the full width of the form
+  
+    .input-field {
+      flex: 1; // Allow each input to take up equal space
+    }
+  
+    .input-field input {
+      width: 100%;
+    }
+  }
+  
