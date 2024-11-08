@@ -78,7 +78,11 @@ export const SignIn = () => {
             )}
           </InputGroup.Button>
         </InputGroup>
-
+        <Row className="forgot-password">
+          <Col xs={24}>
+            <Link to="#">Forgot Password?</Link>
+          </Col>
+        </Row>
         <Button
           type="submit"
           // appearance="primary"
@@ -89,11 +93,7 @@ export const SignIn = () => {
           {isLoading ? "Signing In..." : "Sign In"}
         </Button>
 
-        <Row className="forgot-password">
-          <Col xs={24}>
-            <Link to="#">Forgot Password?</Link>
-          </Col>
-        </Row>
+       
       </form>
     </Container>
   );
