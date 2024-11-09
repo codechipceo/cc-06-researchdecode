@@ -5,7 +5,7 @@ const activeEnv = import.meta.env.VITE_NODE_ENV;
 const defaultUrl =
   activeEnv === "test"
     ? "https://api.researchdecode.com/"
-    : "http://localhost:5000";
+    : "http://localhost:5001";
 const defaultOptions = {
   reconnectionAttempts: 5,
   transports: ["websocket"],

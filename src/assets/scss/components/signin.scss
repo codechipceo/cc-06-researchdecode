@@ -1,4 +1,6 @@
-html, body {
+@import "../base/colors.scss";
+html,
+body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -90,18 +92,25 @@ html, body {
 }
 
 .forgot-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-align: right;
   margin-top: 0.75rem;
   font-size: 0.875rem;
 
-  a {
-    color: #FD001F;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
+    &.primary {
+      color: $primary;
     }
-  }
+
+    &.danger {
+      color: #fd001f;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 }
 
 .icon {
