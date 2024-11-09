@@ -1,0 +1,69 @@
+@import "../../assets/scss/base/colors.scss";
+
+.research-collaboration {
+  width: 100%;
+  max-width: 1374.9px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .search-panel {
+    background: $neutral5;
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .collab {
+      text-align: center;
+      margin-bottom: 14px;
+      color: $dark30;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+      margin-bottom: 16px;
+
+    }
+  }
+
+  .loved-text {
+    color: $dark30;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+// Responsive styles
+@media (max-width: 1024px) {
+  .search-panel {
+    padding: 20px;
+
+    .collab {
+      font-size: 1.75rem; // Adjust font size for tablets
+    }
+
+    .search-container {
+      max-width: 100%;
+      flex-direction: column;
+
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  // padding: 10px;
+
+  .search-panel {
+    padding: 16px;
+
+    .collab {
+      font-size: 1.5rem; // Smaller font size for mobile screens
+    }
+
+    .loved-text {
+      font-size: 0.9rem; // Slightly smaller font for mobile screens
+    }
+  }
+}
