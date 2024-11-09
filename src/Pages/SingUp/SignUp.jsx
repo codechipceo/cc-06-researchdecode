@@ -1,35 +1,14 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { InputGroup, Input, Button, Container, Divider, Row, Col, SelectPicker, Grid } from "rsuite";
+import { AiOutlineMail, AiOutlineLock, AiOutlineUser, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import useAuth from "../../Hooks/use-auth";
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='text.secondary' align='center'>
-      {"Copyright © "}
-      <Link color='inherit' to='https://mui.com/'>
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const theme = createTheme();
+import '../../assets/scss/components/signup.scss';
 
 export const SignUp = () => {
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -47,8 +26,7 @@ export const SignUp = () => {
 
   const { isLoading, errorMessage, isError, handleSignUp } = useAuth();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name, value) => {
     setFormData({
       ...formData,
       [name]: value,
@@ -64,6 +42,7 @@ export const SignUp = () => {
       setPhoneNumberError(!phoneValid);
     }
   };
+
   const signUpObj = {
     email: formData.email,
     password: formData.password,
@@ -80,241 +59,201 @@ export const SignUp = () => {
       postalCode: formData.postalCode,
     },
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     handleSignUp(signUpObj);
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Sign up
-        </Typography>
-        <Box component='form' noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete='given-name'
-                name='firstName'
-                required
-                fullWidth
-                id='firstName'
-                label='First Name'
-                autoFocus
-                error={isError}
-                helperText={errorMessage}
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='family-name'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='email'
-                label='Email Address'
-                name='email'
-                type='email'
-                autoComplete='email'
-                error={emailError}
-                helperText={emailError ? "Invalid email format" : ""}
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='new-password'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                select
-                required
-                fullWidth
-                id='gender'
-                label='Gender'
-                name='gender'
-                SelectProps={{ native: true }}
-                error={isError}
-                helperText={errorMessage}
-                value={formData.gender}
-                onChange={handleChange}
-              >
-                <option value='male'>Male</option>
-                <option value='female'>Female</option>
-                <option value='other'>Other</option>
-              </TextField>
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                select
-                required
-                fullWidth
-                id='countryCode'
-                label='Country Code'
-                name='countryCode'
-                SelectProps={{ native: true }}
-                error={isError}
-                helperText={errorMessage}
+    <Container className="sign-up-container">
+      <form className="sign-up-form" onSubmit={handleSubmit}>
+        <div className="logo-container">
+          <svg width="48" height="48" className="icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.4281 2.94975C22.3807 0.997126 25.5466 0.997126 27.4992 2.94975L44.9775 20.4281C46.9302 22.3807 46.9302 25.5466 44.9775 27.4992L27.4992 44.9775C25.5466 46.9302 22.3807 46.9302 20.4281 44.9775L2.94975 27.4992C0.997126 25.5466 0.997126 22.3807 2.94975 20.4281L20.4281 2.94975Z" stroke="#49BBBD" strokeWidth="2"/>
+          </svg>
+          <h5 className="title">RESEARCH DECODE</h5>
+        </div>
+
+        <Grid fluid>
+          {/* First Name and Last Name on the same line */}
+          <Row className="name-fields">
+            <Col xs={12}>
+              <InputGroup inside className="input-field">
+                <InputGroup.Addon>
+                  <AiOutlineUser className="icon" />
+                </InputGroup.Addon>
+                <Input
+                  placeholder="First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={(value) => handleChange("firstName", value)}
+                />
+              </InputGroup>
+            </Col>
+            <Col xs={12}>
+              <InputGroup inside className="input-field">
+                <InputGroup.Addon>
+                  <AiOutlineUser className="icon" />
+                </InputGroup.Addon>
+                <Input
+                  placeholder="Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={(value) => handleChange("lastName", value)}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+
+          {/* Email Field */}
+          <Row>
+            <Col xs={24}>
+              <InputGroup inside className="input-field">
+                <InputGroup.Addon>
+                  <AiOutlineMail className="icon" />
+                </InputGroup.Addon>
+                <Input
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(value) => handleChange("email", value)}
+                  error={emailError}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+
+          {/* Password Field */}
+          <Row>
+            <Col xs={24}>
+              <InputGroup inside className="input-field">
+                <InputGroup.Addon>
+                  <AiOutlineLock className="icon" />
+                </InputGroup.Addon>
+                <Input
+                  placeholder="Password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={(value) => handleChange("password", value)}
+                  error={isError}
+                />
+                <InputGroup.Button onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </InputGroup.Button>
+              </InputGroup>
+            </Col>
+          </Row>
+
+          {/* Country Code and Phone Number */}
+          <Row className="phone-fields">
+            <Col xs={6}>
+            <InputGroup className="input-field">
+              <SelectPicker
+                placeholder="+91"
+                name="countryCode"
+                className="country-code"
+                data={[
+                  { label: "+91", value: "+91" },
+                  { label: "+1", value: "+1" },
+                  { label: "+44", value: "+44" },
+                ]}
+                style={{ width: "100%" }}
                 value={formData.countryCode}
-                onChange={handleChange}
+                onChange={(value) => handleChange("countryCode", value)}
+                error={isError}
+              />
+              </InputGroup>
+            </Col>
+            <Col xs={18}>
+              <InputGroup inside className="input-field">
+                <Input
+                  placeholder="Phone Number"
+                  name="phoneNumber"
+                  className="phone-number"
+                  type="tel"
+                  value={formData.phoneNumber}
+                  onChange={(value) => handleChange("phoneNumber", value)}
+                  error={phoneNumberError}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+
+          <InputGroup inside className="input-field">
+          <Input
+            placeholder="Street"
+            name="street"
+            value={formData.street}
+            onChange={(value) => handleChange("street", value)}
+            error={isError}
+          />
+        </InputGroup>
+
+        <InputGroup inside className="input-field">
+          <Input
+            placeholder="City"
+            name="city"
+            value={formData.city}
+            onChange={(value) => handleChange("city", value)}
+            error={isError}
+          />
+        </InputGroup>
+
+        <InputGroup inside className="input-field">
+          <Input
+            placeholder="State/Province"
+            name="state"
+            value={formData.state}
+            onChange={(value) => handleChange("state", value)}
+            error={isError}
+          />
+        </InputGroup>
+
+        <InputGroup inside className="input-field">
+          <Input
+            placeholder="Postal Code"
+            name="postalCode"
+            value={formData.postalCode}
+            onChange={(value) => handleChange("postalCode", value)}
+            error={isError}
+          />
+        </InputGroup>
+
+        <InputGroup inside className="input-field">
+          <Input
+            placeholder="Country"
+            name="country"
+            value={formData.country}
+            onChange={(value) => handleChange("country", value)}
+            error={isError}
+          />
+        </InputGroup>
+          <Row>
+            <Col xs={24}>
+              <Button
+                type="submit"
+                className="submit-button"
+                block
+                loading={isLoading}
+                disabled={isLoading}
               >
-                <option value='+91'>+91</option>
-                <option value='+1'>+1</option>
-                <option value='+44'>+44</option>
-                {/* Add more country codes as needed */}
-              </TextField>
-            </Grid>
-            <Grid item xs={8}>
-              <TextField
-                required
-                fullWidth
-                id='phoneNumber'
-                label='Phone Number'
-                name='phoneNumber'
-                type='tel'
-                autoComplete='tel'
-                inputProps={{ pattern: "[0-9]*" }}
-                error={phoneNumberError}
-                helperText={
-                  phoneNumberError ? "Phone number must be numeric" : ""
-                }
-                value={formData.phoneNumber}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='street'
-                label='Street'
-                name='street'
-                autoComplete='address-line1'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.street}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='city'
-                label='City'
-                name='city'
-                autoComplete='address-level2'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.city}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='state'
-                label='State/Province'
-                name='state'
-                autoComplete='address-level1'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.state}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='postalCode'
-                label='Postal Code'
-                name='postalCode'
-                autoComplete='postal-code'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.postalCode}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id='country'
-                label='Country'
-                name='country'
-                autoComplete='country'
-                error={isError}
-                helperText={errorMessage}
-                value={formData.country}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            sx={{ mt: 3, mb: 2 }}
-            disabled={isLoading}
-            onClick={(e) => handleSubmit(e)}
-          >
-            {isLoading ? "Signing up..." : "Sign Up"}
-          </Button>
-          <Grid container justifyContent='flex-end'>
-            <Grid item>
-              <Link to='/signin' style={{ textDecoration: "none" }}>
-                <Typography variant='body2' color='primary'>
-                  Already have an account? Sign in
-                </Typography>
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
+                Sign Up
+              </Button>
+            </Col>
+          </Row>
+        </Grid>
+
+        <Divider />
+
+        <Row className="redirect-to-signin">
+          <Col xs={24}>
+            Already have an account? <Link to="/signin">Sign In</Link>
+          </Col>
+        </Row>
+      </form>
     </Container>
   );
 };
