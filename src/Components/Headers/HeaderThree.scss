@@ -1,0 +1,78 @@
+@import "../../assets/scss/base/colors.scss";
+
+.header-three {
+  .banner {
+    // background-image: url('../images/banner/bgrp.png');
+    background-size: cover;
+    background-position: center;
+    padding: 60px;
+    padding-bottom: 50px;
+    width: 100%;
+    color: $neutral5; // Heading font color for title
+
+
+    @media (max-width: 1024px) {
+      padding: 40px;
+      padding-bottom: 30px;
+
+      .title {
+        font-size: 70px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding: 15px;
+      padding-bottom: 15px;
+
+      .title {
+        font-size: 45px;
+      }
+    }
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: $neutral20; // Breadcrumbs background color
+
+
+    .breadcrumb-button {
+      background: none;
+      border: none;
+      color: $neutral60;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 5px;
+      font-weight: 400;
+      margin-left: 50px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 0.9rem;
+        margin-left: 30px !important;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+        margin-left: 0px !important;
+      }
+    }
+
+    .breadcrumb-separator {
+      color: $neutral60;
+      margin: 0 5px;
+    }
+
+    .breadcrumb-current {
+      // font-weight: bold;
+      font-size: 16px;
+      font-weight: 400;
+      color: $neutral60;
+    }
+  }
+}
