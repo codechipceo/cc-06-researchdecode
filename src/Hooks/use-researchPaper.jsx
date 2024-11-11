@@ -19,7 +19,9 @@ export const useResearchPaper = () => {
 
   const handleSearch = async (e) => {
     if (!doiNumber?.trim()) return;
-    e.preventDefault();
+    console.log(doiNumber);
+    
+    // e.preventDefault();
     setIsLoading(true);
     setIsError(false);
     await axios.get(`${doiApiPath}`).then((res) => {
