@@ -20,17 +20,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import { useNavigate } from "react-router-dom";
-import { FaCloudDownloadAlt, FaCloudUploadAlt } from "react-icons/fa";
-import { SiTicktick } from "react-icons/si";
-import { RxCrossCircled } from "react-icons/rx";
-
 
 const ResearchPaperCard = ({
   requestDetail,
   approveicon: ApproveIcon,
-  crossicon: CrossIcon,
+  rejecticon: RejectIcon,
   downloadicon: DownloadIcon,
+  uploadicon: UploadIcon,
   sendicon: SendIcon,
+  viewicon: ViewIcon
 }) => {
   const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy } = requestDetail;
   const [isExpanded, setIsExpanded] = useState(false);
@@ -45,9 +43,6 @@ const ResearchPaperCard = ({
   const loggedinUser = useSelector(selectStudentInfo);
 
   const handlePanelClick = (e) => {
-  
-    if (e.target.closest(".icons")) return;
-  
     if (fileUrl) {
       setOpen(true);
     } else {
@@ -55,7 +50,6 @@ const ResearchPaperCard = ({
       setTimeout(() => setShowAlert(false), 3000);
     }
   };
-  
 
   const handleUpload = () => {
     if (uploadFile) {
@@ -85,7 +79,7 @@ const ResearchPaperCard = ({
   const handleReject = () => {  
     dispatch(rejectPaperRequest({ requestId: _id }));
   };
-  
+
   const handleDownload = async () => {
     if (fileUrl) {
       try {
@@ -118,84 +112,85 @@ const ResearchPaperCard = ({
           Unable to open this document
         </Message>
       )}
-      
-      <Panel className="panel-border" onClick={handlePanelClick} style={{ cursor: "pointer" }}>
-        <Typography size="lg" variant="bold">
-          {containerTitle && containerTitle[0]}
-        </Typography>
-        <Typography size="sm">{title && title[0]}</Typography>
-        <Divider />
 
-        <FlexboxGrid className="details" align="middle">
-          <FlexboxGrid.Item className="author-info">
-            <Avatar circle icon={<PersonIcon />} size="md" />
-            <Typography className="name" size="sm">
-              By {requestBy?.firstName} {requestBy?.lastName}
-            </Typography>
-          </FlexboxGrid.Item>
+      <Panel className="panel-border" style={{ cursor: "pointer" }}>
+        <div onClick={handleSend}>
+          <Typography size="lg" variant="bold">
+            {containerTitle && containerTitle[0]}
+          </Typography>
+          <Typography size="sm">{title && title[0]}</Typography>
+          <Divider />
 
-          <p className="publisher">Publisher: {publisher}</p>
+          <FlexboxGrid className="details" align="middle">
+            <FlexboxGrid.Item className="author-info">
+              <Avatar circle icon={<PersonIcon />} size="md" />
+              <Typography className="name" size="sm">
+                By {requestBy?.firstName} {requestBy?.lastName}
+              </Typography>
+            </FlexboxGrid.Item>
 
-          <FlexboxGrid.Item className="publisher_name">
-            <Typography size="xm">
-              {author && author.length > 0 && (
-                <div className="author-container">
-                  <div className="author-names">
-                    <p>
-                      {author[0].given} {author[0].family}
-                    </p>
-                    {isExpanded &&
-                      author.slice(1).map((name, index) => (
-                        <p key={index + 1}>
-                          {name.given} {name.family}
-                        </p>
-                      ))}
+            <p className="publisher">Publisher: {publisher}</p>
+
+            <FlexboxGrid.Item className="publisher_name">
+              <Typography size="xm">
+                {author && author.length > 0 && (
+                  <div className="author-container">
+                    <div className="author-names">
+                      <p>
+                        {author[0].given} {author[0].family}
+                      </p>
+                      {isExpanded &&
+                        author.slice(1).map((name, index) => (
+                          <p key={index + 1}>
+                            {name.given} {name.family}
+                          </p>
+                        ))}
+                    </div>
+                    {author.length > 1 && (
+                      <Button
+                        appearance="link"
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevents expanding when card is clicked
+                          toggleExpand();
+                        }}
+                        className="toggle-button"
+                      >
+                        {isExpanded ? "Show Less" : "Show All"}
+                      </Button>
+                    )}
                   </div>
-                  {author.length > 1 && (
-                    <Button
-                      appearance="link"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevents expanding when card is clicked
-                        toggleExpand();
-                      }}
-                      className="toggle-button"
-                    >
-                      {isExpanded ? "Show Less" : "Show All"}
-                    </Button>
-                  )}
-                </div>
-              )}
-            </Typography>
-          </FlexboxGrid.Item>
+                )}
+              </Typography>
+            </FlexboxGrid.Item>
 
-          <FlexboxGrid.Item className="doi">
-            <Typography size="xm" weight="bold">
-              DOI Number: {DOI_number}
-            </Typography>
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
+            <FlexboxGrid.Item className="doi">
+              <Typography size="xm" weight="bold">
+                DOI Number: {DOI_number}
+              </Typography>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
+        </div>
 
         <FlexboxGrid className="icons">
-          {SendIcon && <SendIcon className="sendbutton" onClick={handleSend} />}
-          {loggedinUser._id !== requestBy._id && SiTicktick && (
-            <SiTicktick className="firsticon" onClick={handleApprove} />
-          )}
-          {loggedinUser._id !== requestBy._id && RxCrossCircled && (
-            <RxCrossCircled className="crossicon" onClick={handleReject} />
-          )}
           {loggedinUser._id !== requestBy._id && (
             <>
-              {/* Hidden file input element */}
               <input
                 type="file"
                 ref={fileInputRef}
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
-              <FaCloudUploadAlt onClick={handleUpload} style={{ cursor: "pointer" }} />
+              {UploadIcon && <UploadIcon onClick={handleUpload} style={{ cursor: "pointer" }} />}
             </>
           )}
-          {fileUrl && <FaCloudDownloadAlt onClick={handleDownload} />}
+          {fileUrl && loggedinUser._id === requestBy._id && (
+            <>
+              {ApproveIcon && <ApproveIcon className="firsticon" onClick={handleApprove} />}
+              {RejectIcon && <RejectIcon className="crossicon" onClick={handleReject} />}
+              {ViewIcon && <ViewIcon onClick={handlePanelClick} />}
+              {DownloadIcon && <DownloadIcon onClick={handleDownload}/>}
+            </>
+          )}
         </FlexboxGrid>
       </Panel>
 
