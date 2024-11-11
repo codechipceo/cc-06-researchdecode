@@ -7,7 +7,7 @@ import "./ResearchPaper.scss";
 import PaperCard from "../../Components/card";
 import { List } from '@mui/material';
 import RequestLink from "../../Components/requestLink";
-
+import ResearchPaperCard from '../../Components/ReacherchPaperCard/ReacherchPaperCard'
 import {
   usePendingRequests,
   useResearchPaper,
@@ -58,14 +58,15 @@ const ResearchPaper = () => {
           />
         )}
 
-                  <List>
+            <List>
             {pendingRequests &&
               pendingRequests.map((request) => (
-                <RequestLink
-                  key={request._id}
-                  request={request}
-                  onSend={handleSendPaper}
-                />
+                // <RequestLink
+                //   key={request._id}
+                //   request={request}
+                //   onSend={handleSendPaper}
+                // />
+                 <ResearchPaperCard requestDetail={request} />
               ))}
           </List>
         
