@@ -84,7 +84,7 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
           <CustomButton
 appearance="bold"
             fullWidth
-            // className="buy-button"
+            className="buy-button"
             onClick={handleBuyCourse}
           >
             Buy Course

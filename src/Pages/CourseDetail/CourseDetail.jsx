@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourseById, selectCourseById } from "../../Features/Slices/courseSlice";
 import '../../assets/scss/components/CourseDetail.scss'; // Import the CSS file
 import { FaAngleRight } from "react-icons/fa";
-
+import {HeaderThree} from '../../Components/Headers/HeaderThree'
 
 
 const CourseDetail = () => {
@@ -36,14 +36,14 @@ const CourseDetail = () => {
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
   if (!courseDetail?.courseName) return <>Loading...</>;
-
+  const breadcrumbPath = [{ label: "Home", path: "/" },{label:"Course List", path:"/courses"}]
   
   return (
     <div>
-      {/* Banner section */}
-      <div className="BannerWrapper">
+  <HeaderThree title={CourseDetail} breadcrumbPath={breadcrumbPath} backgroundImage={'../../../public/images/banner/bgrp.png'}/>
+      {/* <div className="BannerWrapper">
         <img src={courseBanner} alt={courseName} className="Banner"/>
-        {/* Sidebar for large screens only */}
+     
         <div  className="firstbar">
           <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
         </div>
@@ -52,7 +52,7 @@ const CourseDetail = () => {
       <Link to="/">Homepage</Link>
     <FaAngleRight/>
       <Link to="/courses" className="current">Course List</Link>
-    </nav>
+    </nav> */}
       <Container className="container">
         <Row>
           {/* Main Content */}
