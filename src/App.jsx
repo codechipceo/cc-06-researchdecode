@@ -18,7 +18,7 @@ import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
-
+import ResearchPaper from "./Pages/ResearchPapers/ResearchPaper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -89,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "/videocall/:peerId",
     element:<VideoCall />
+  },
+    {
+    path: "test",
+    element:<ResearchPaper />
   }
 ]);
 

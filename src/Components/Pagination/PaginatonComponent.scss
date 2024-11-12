@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 @import '../../assets/scss/base/colors.scss';
 
+=======
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
 .pagination-container {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     background: $veylightgray;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 4px 0px $dark100;
+=======
+    background: #F7F9FF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px 0px #00000033;
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
     width: fit-content;
     margin: 0 auto;
   
@@ -17,14 +27,21 @@
       margin: 0 5px;
       border-radius: 100%;
       transition: background-color 0.3s ease, color 0.3s ease;
+<<<<<<< HEAD
       color: $dark70;
       border: 1px solid $White;
       background-color: $White;
+=======
+      color: #333;
+      border: 1px solid #fafafa;
+      background-color: #fff;
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
       min-width: 40px;
       height: 40px;
       // display: flex;
       justify-content: center;
       align-items: center;
+<<<<<<< HEAD
       
       &:hover {
         background-color: $neutral10;
@@ -47,10 +64,35 @@
         &:hover {
           background-color: $neutral10;
           color: $dark70;
+=======
+      // flex-direction: column;
+  
+      &:hover {
+        background-color: #cbcbcb;
+        color: #000000;
+      }
+  
+      &.rs-pagination-btn-active {
+        background-color: #23CF9B;
+        color: #FFFFFF;
+        border-color: #23CF9B;
+      }
+        // Styles for previos button
+      &[aria-label="Previous"] {
+        background-color: transparent;
+        border: none;
+        color: #666;
+        font-size: 1.2rem;
+        
+        &:hover {
+          background-color: #cbcbcb;
+          color: #333;
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
         }
       }
   
       // Styles for next button
+<<<<<<< HEAD
 
       &[aria-label="Next"] {
         background-color: transparent;
@@ -61,14 +103,33 @@
         &:hover {
           background-color: $neutral10;
           color: $dark70;
+=======
+      &[aria-label="Next"] {
+        background-color: transparent;
+        border: none;
+        color: #666;
+        font-size: 1.2rem;
+        
+        &:hover {
+          background-color: #cbcbcb;
+          color: #333;
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
         }
       }
     }
   
     .rs-pagination-ellipsis {
       font-size: 1.2rem;
+<<<<<<< HEAD
       color: $White;
       margin: 0 8px;
     }
   }
   
+=======
+      color: #FFFFFF;
+      margin: 0 8px;
+    }
+  }
+  
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b

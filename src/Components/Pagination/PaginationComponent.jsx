@@ -8,6 +8,10 @@ function PaginationComponent({ total, limit, activePage, setActivePage,maxButton
       <Pagination
         prev
         next
+<<<<<<< HEAD
+=======
+   
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
         total={total}         
         limit={limit}         
         maxButtons={maxButton}        
@@ -18,4 +22,8 @@ function PaginationComponent({ total, limit, activePage, setActivePage,maxButton
   );
 }
 
+<<<<<<< HEAD
 export default PaginationComponent;
+=======
+export default PaginationComponent;
+>>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
