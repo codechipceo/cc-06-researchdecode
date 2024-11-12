@@ -42,10 +42,10 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
-  {
-    path: "/searchPaper",
-    element: <GuardComponents component={SearchPapers} />,
-  },
+  // {
+  //   path: "/searchPaper",
+  //   element: <GuardComponents component={SearchPapers} />,
+  // },
   {
     path: "/pending-request/:pendingRequestId",
     element: <GuardComponents component={PendingRequestDetail} />,
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
     element:<VideoCall />
   },
     {
-    path: "test",
+    path: "searchPaper",
     element:<ResearchPaper />
   }
 ]);

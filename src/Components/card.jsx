@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { createPaperRequest } from "../Features/Slices/requestResearchPaper";
 import { selectStudentInfo } from "../Features/Slices/studentSlice";
-
+import CustomButton from "../assets/scss/components/CustomButton";
 const PaperCard = ({
   title,
   author,
@@ -73,11 +73,11 @@ const PaperCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          size='small'
-          style={{ marginLeft: "auto" }}
-          variant='contained'
-          color='primary'
+        <CustomButton
+          variant='primary'
+          fontWeight={"semibold"}
+          className={"left"}
+          // style={{ marginLeft: "auto" }}
           onClick={() => {
             dispatch(createPaperRequest(requestPayload))
               .unwrap()
@@ -88,7 +88,7 @@ const PaperCard = ({
           }}
         >
           Request Paper
-        </Button>
+        </CustomButton>
       </CardActions>
     </Card>
   );

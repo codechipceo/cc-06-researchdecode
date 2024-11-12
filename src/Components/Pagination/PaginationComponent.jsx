@@ -2,7 +2,9 @@ import React from 'react';
 import { Pagination } from 'rsuite';
 import './PaginatonComponent.scss';
 
-function PaginationComponent({ total, limit, activePage, setActivePage,maxButton }) {
+function PaginationComponent({ total, limit, activePage, setActivePage,maxButtons }) {
+  // console.log(maxButtons);
+  
   return (
     <div className="pagination-container">
       <Pagination
@@ -14,7 +16,7 @@ function PaginationComponent({ total, limit, activePage, setActivePage,maxButton
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
         total={total}         
         limit={limit}         
-        maxButtons={maxButton}        
+        maxButtons={maxButtons}        
         activePage={activePage}
         onChangePage={setActivePage}
       />
