@@ -47,8 +47,9 @@ export const getPendingRequests = createAsyncThunk(
   "requestPaper/pending",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("pendingRequests", payload);
-      return { data, msg };
+      const { data, msg,count } = await apiFeature.getAll("pendingRequests", payload);   
+
+      return { data, msg,count };
     } catch (error) {
       const errMessage = error.response.data.msg;
       return rejectWithValue(errMessage);
@@ -101,6 +102,7 @@ const initialState = {
   pendingRequests: [],
   uploadPaper: "",
   newRequest: "",
+  pendingRequestCount: 0,
   isRequestApproved: "",
   isRequestCreated: false,
   requestDetail: "",
@@ -151,6 +153,7 @@ const paperRequestSlice = createSlice({
       // get all pending requests
       .addCase(getPendingRequests.fulfilled, (state, { payload }) => {
         state.pendingRequests = payload.data;
+        state.pendingRequestCount = payload.count;
         state.isLoading = false;
       })
       .addCase(getPendingRequests.pending, (state) => {
@@ -174,6 +177,8 @@ const paperRequestSlice = createSlice({
 // Selectors
 export const selectPendingRequests = (state) =>
   state.paperRequest.pendingRequests;
+export const selectPendingRequestCount = (state) => state.paperRequest.pendingRequestCount;
+
 export const selectNewRequest = (state) => state.paperRequest.newRequest;
 export const selectIsRequestCreated = (state) =>
   state.paperRequest.isRequestCreated;

@@ -6,13 +6,12 @@ import SearchBar from '../../Components/Searchbar/SearchBar';
 import "./ResearchPaper.scss";
 import PaperCard from "../../Components/card";
 import { List } from '@mui/material';
-import RequestLink from "../../Components/requestLink";
-
+import PaginationComponent from '../../Components/Pagination/PaginationComponent'
+import ResearchPaperCard from '../../Components/ReacherchPaperCard/ReacherchPaperCard'
 import {
   usePendingRequests,
   useResearchPaper,
 } from "../../Hooks/use-researchPaper";
-import { useEffect } from 'react';
 
 const ResearchPaper = () => {
     const {
@@ -25,7 +24,9 @@ const ResearchPaper = () => {
     handleSearch,
   } = useResearchPaper();
 
-  const { pendingRequests } = usePendingRequests();
+   const {pendingRequestCount, pendingRequests, activePage, setActivePage, limit } = usePendingRequests();
+   console.log(pendingRequestCount);
+   
     const handleSendPaper = (userId) => {
     // Implement the logic to send the paper
     // navigate(/inbox/${userId}); // Uncomment this if you have the navigation logic in place
@@ -58,16 +59,25 @@ const ResearchPaper = () => {
           />
         )}
 
-                  <List>
+            <List>
             {pendingRequests &&
               pendingRequests.map((request) => (
-                <RequestLink
-                  key={request._id}
-                  request={request}
-                  onSend={handleSendPaper}
-                />
+                // <RequestLink
+                //   key={request._id}
+                //   request={request}
+                //   onSend={handleSendPaper}
+                // />
+                 <ResearchPaperCard requestDetail={request} />
               ))}
           </List>
+
+           <PaginationComponent
+          limit={limit}
+          total={pendingRequestCount} // Ensure `total` is part of the pendingRequests data
+          activePage={activePage}
+          setActivePage={setActivePage}
+          maxButtons={4}
+        />
         
       </div>
     </>
