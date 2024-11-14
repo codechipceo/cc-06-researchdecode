@@ -1,23 +1,26 @@
-import LanguageIcon from "@mui/icons-material/Language";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import PeopleIcon from "@mui/icons-material/People";
-import StarIcon from "@mui/icons-material/Star";
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import React from "react";
+import { IoIosTime } from "react-icons/io";
+import { FaLanguage } from "react-icons/fa";
+import { Panel } from "rsuite"; // Changed to rsuite
 import useRazorpay from "react-razorpay";
+import Typography from "../../assets/scss/components/Typography";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   buyCourse,
   verifyEnrollPayment,
 } from "../../Features/Slices/courseSlice";
+import '../../assets/scss/components/CourseSidebar.scss';
+import CustomButton from "../../assets/scss/components/CustomButton";
+
 
 const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   const navigate = useNavigate();
   const [Razorpay, isLoaded] = useRazorpay();
   const dispatch = useDispatch();
 
-  const { price, courseLanguage, videos, isStudentEnrolled, _id } = course;
+  const { price, courseLanguage, videos, isStudentEnrolled, _id, courseBanner,courseName } = course;
+
   const handleBuyCourse = async () => {
     const payload = {
       amount: price,
@@ -53,7 +56,6 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
           verifyEnrollPayment(payload)
         ).unwrap();
       },
-
       notes: {
         address: "Razorpay Corporate Office",
       },
@@ -67,73 +69,57 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant='h6' gutterBottom>
-          Course Details
-        </Typography>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
-          <Grid item>
-            <MonetizationOnIcon />
-          </Grid>
-          <Grid item>
-            <Typography variant='body1'>Price: {price} rupees</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
-          <Grid item>
-            <LanguageIcon />
-          </Grid>
-          <Grid item>
-            <Typography variant='body1'>Language: {courseLanguage}</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
-          <Grid item>
-            <PeopleIcon />
-          </Grid>
-          <Grid item>
-            <Typography variant='body1'>Enrolled:</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }}>
-          <Grid item>
-            <MenuBookIcon />
-          </Grid>
-          <Grid item>
-            <Typography variant='body1'>Lessons: {videos?.length}</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} alignItems='center' sx={{ mb: 2 }} >
-          <Grid item>
-            <StarIcon />
-          </Grid>
-          <Grid item>
-            <Typography variant='body1'>Rating: </Typography>
-          </Grid>
-        </Grid>
-        {isStudentEnrolled === true ? (
-          <Button
-            variant='contained'
-            color='primary'
+    <Panel className="course-sidebar" shaded>
+      {courseBanner && (
+        <img src={courseBanner} alt="Course Banner" className="course-banner" />
+      )}
+      <div className="course-content">
+        <div className="course-info">
+          <Typography size="xl" className="price-text">
+            Price: ₹{price}
+          </Typography>
+        </div>
+
+        {!isStudentEnrolled ? (
+          <CustomButton
+appearance="bold"
+            fullWidth
+            className="buy-button"
+            onClick={handleBuyCourse}
+          >
+            Buy Course
+          </CustomButton>
+        ) : (
+          <CustomButton
+            appearance="bold" // Using rsuite button appearance
+            className="buy-button"
             fullWidth
             component={Link}
             to={`/course/${course._id}/lectures/${firstVideo}`}
           >
             Start Lecture
-          </Button>
-        ) : (
-          <Button
-            variant='contained'
-            color='primary'
-            fullWidth
-            onClick={handleBuyCourse}
-          >
-            Buy Course
-          </Button>
+          </CustomButton>
         )}
-      </CardContent>
-    </Card>
+
+        <hr />
+
+        <Typography size="lg" variant="bold">
+         {courseName}
+        </Typography>
+
+        <div className="course-includes">
+          <div className="feature-item">
+            <FaLanguage className="icon-style" />
+            <Typography className="include-text"> This course is in {courseLanguage} language</Typography>
+          </div>
+
+          <div className="feature-item">
+            <IoIosTime className="icon-style" />
+            <Typography className="include-text"> This Course includes {videos.length} videos</Typography>
+          </div>
+        </div>
+      </div>
+    </Panel>
   );
 };
 

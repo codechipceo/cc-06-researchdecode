@@ -1,0 +1,102 @@
+@import '../base/colors.scss';
+
+$small-screen: 768px;
+
+.sidebar-small {
+  display: none; // Hidden by default
+
+  @media (max-width: $small-screen) {
+    display: block; // Show on small screens
+  }
+}
+
+@media (min-width: 769px) { // Hide on large screens
+  .sidebar-small {
+    display: none;
+  }
+}
+
+.firstbar {
+  position: absolute; // Corrected syntax
+  top: 80%; // Adjust this value to control how much it overlaps the banner
+  right: 7%; // Adjust horizontal position as needed
+  width: 25%; // Width of the sidebar on larger screens
+  z-index: 1; // Corrected syntax
+
+  @media (max-width: $small-screen) {
+    display: none; // Hide the first sidebar on small screens
+  }
+}
+
+.container {
+
+  @media (min-width: $small-screen) {
+    margin-left: 10%;
+    margin-right: 10%;
+    // Adjust left margin on larger screens
+  }
+}
+
+.Banner {
+  width: 100%;
+  height: 417px;
+  @media (max-width: $small-screen) {
+    height: 417px; // Set height on small screens
+    // object-fit: cover; // Optional: cover the area without distortion
+  }
+}
+
+.BannerWrapper {
+  position: relative;
+  margin-bottom: 20px; 
+}
+.nav-item-style {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+
+  &.rs-nav-item-active {  
+    color: $primary; 
+  }
+}
+
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+ 
+  padding: 8px 16px;
+  background-color: $neutral5;
+}
+
+.breadcrumb a {
+  color: $dark10;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.breadcrumb a:hover {
+  color: $dark60;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  color: $dark10;
+}
+
+.current {
+  color: $dark10 !important;
+  cursor: default;
+}
+.breadcrumb {
+margin-bottom: 10px;
+  @media (min-width: $small-screen) {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+    // Adjust left margin on larger screens
+  }
+}
