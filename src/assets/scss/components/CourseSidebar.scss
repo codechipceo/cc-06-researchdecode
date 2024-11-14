@@ -1,0 +1,94 @@
+@import '../base/colors.scss';
+
+.course-sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: $neutral5;
+
+    .course-banner {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+
+    .course-info {
+        display: flex;
+        gap: 0.1rem;
+        margin-bottom: 1rem;
+
+        .original-price {
+            margin-top: 7px;  
+            margin-left: 20%;
+        }
+
+        .discounted-price {
+            margin-top: 7px; 
+            margin-left: 5%;
+        }
+    }
+
+    .price-text {
+        font-weight: 600;
+    }
+
+    .buy-button,
+    .start-button {
+        margin: 10px;
+        padding: 0.5rem;
+        width: 90%;
+    }
+
+    .buy-button {
+        margin: 0.4rem;
+        background-color: $primary;  
+        color: $neutral5;
+        font-size: medium;
+    }
+
+    .buy-button:hover {
+        background-color: $primary40;
+    }
+
+    .course-includes {
+        padding-top: 1.5rem;
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+
+            svg {
+                flex-shrink: 0;
+            }
+
+            p {
+                margin: 0;
+                font-size: 0.875rem;
+                color: $dark10;
+            }
+        }
+    }
+
+    .icon-style {
+        width: 23px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        color: $primary;
+    }
+
+    .include-text {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        letter-spacing: 0.02em;
+        text-align: left;
+        color: $dark100;
+    }
+}
