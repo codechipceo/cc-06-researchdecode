@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from 'rsuite';
 import "./Labs.scss"
-import Labsimg from './2dd71d5ea1975b594bbce4a62c879754.png'
+import Labsimg from './images/2dd71d5ea1975b594bbce4a62c879754.png'
+import { useNavigate } from 'react-router-dom';
 const Labs = () => {
+  const navigate = useNavigate()
   return (
  <div className="hero-section">
       <div className="hero-content">
@@ -15,7 +17,7 @@ const Labs = () => {
           Serving Millions of physicians and biomedical scientists<br />
           in Industry and academia.
         </p>
-        <Button appearance="ghost" className="request-button">
+        <Button onClick={()=>{navigate("/labs")}} appearance="ghost" className="request-button">
           Request a Service
         </Button>
       </div>

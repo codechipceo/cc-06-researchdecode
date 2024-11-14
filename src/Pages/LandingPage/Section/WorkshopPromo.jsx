@@ -1,8 +1,15 @@
 import React from 'react';
 import { Panel, Button, Container, Row, Col } from 'rsuite';
 import './WorkshopPromo.scss';
-import img from './image.png';
+import CustomButton from '../../../assets/scss/components/CustomButton';
+import img from './images/image.png';
+import img2 from './images/image2.png';
+import { useNavigate } from 'react-router-dom';
+import RightArrowIcon from '../../../assets/Icons/RightArrowIcon.svg'
+
 const WorkshopPromo = () => {
+
+  const navigate = useNavigate()
   return (
     <Container className="workshop-promo">
       <div className='workshop-container'>
@@ -22,10 +29,10 @@ const WorkshopPromo = () => {
             <li>TAs and presenters can be moved to the front of the class.</li>
             <li>Teachers can easily see all students and class data at one time.</li>
           </ul>
-          <Button appearance="primary" className="know-more-btn">
+          <CustomButton onClick={()=>{navigate('/consultancy')}} Icon={RightArrowIcon} variant="primary" fontWeight={"semibold"} className="btn-size-7">
             Know More
-            <span className="arrow">→</span>
-          </Button>
+            {/* <span className="arrow">→</span> */}
+          </CustomButton>
         </Col>
       </Row>
       <Row >
@@ -37,15 +44,15 @@ const WorkshopPromo = () => {
             <li>TAs and presenters can be moved to the front of the class.</li>
             <li>Teachers can easily see all students and class data at one time.</li>
           </ul>
-          <Button appearance="primary" className="know-more-btn">
+          <CustomButton onClick={()=>{navigate('/consultancy')}} Icon={RightArrowIcon} variant="primary" fontWeight={"semibold"} className="btn-size-7">
             Know More
-            <span className="arrow">→</span>
-          </Button>
+            {/* <span className="arrow">→</span> */}
+          </CustomButton>
         </Col>
         <Col xs={24} md={12} className="image-section">
           <div className="participants-grid">
             <div className="participant main">
-              <img src={img} alt="Main participant" className="avatar" />
+              <img src={img2} alt="Main participant" className="avatar" />
               </div>
           </div>
         </Col>

@@ -10,7 +10,10 @@ import magicleap from '../../../assets/Icons/magicleap.svg';
 import publicicon from '../../../assets/Icons/publicicon.svg';
 import career from '../../../assets/Icons/career.svg';
 import creative from '../../../assets/Icons/creative.svg';
+import { useNavigate } from "react-router-dom";
+
 const Hero = () => {
+  const navigate = useNavigate();
   return (
       <div className="landing-page">
       <div className="content">
@@ -23,8 +26,8 @@ const Hero = () => {
           
           {/* Buttons */}
           <div className="button-group">
-            <CustomButton variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Get Started</CustomButton>
-            <CustomButton variant={"secondary"} fontWeight={"semibold"} className="free-trial btn-size-11">Get free trial</CustomButton>
+            <CustomButton onClick={() => navigate(`/signin`)}  variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Get Started</CustomButton>
+            {/* <CustomButton variant={"secondary"} fontWeight={"semibold"} className="free-trial btn-size-11">Get free trial</CustomButton> */}
           </div>
 
           {/* Features */}

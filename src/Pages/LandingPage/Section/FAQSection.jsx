@@ -3,6 +3,7 @@ import React from 'react';
 import { Grid, Row, Col } from 'rsuite';
 import FaqCardComponent from '../../../Components/FAQCardComponent/FaqCardComponent'
 import './FAQSection.scss';
+import Typography from '../../../assets/scss/components/Typography';
 
 const FAQSection = () => {
   const faqs = [
@@ -35,11 +36,11 @@ const FAQSection = () => {
   return (
     <div className="faq-section">
       <div className="faq-header">
-        <h2>Frequently Asked Questions</h2>
-        <p>
+        <Typography  variant={"semibold"} size={"3xl"}>Frequently Asked Questions</Typography>
+        <Typography variant={"regular"} size={"sm"}>
           Install our top-rated dropshipping app to your e-commerce site and get access to
           US Suppliers, AliExpress vendors, and the best.
-        </p>
+        </Typography>
       </div>
       
       <Grid fluid>
