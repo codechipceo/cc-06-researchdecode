@@ -40,7 +40,7 @@ const ResearchPaper = () => {
     <div className="research-collaboration">
       <Panel className="search-panel">
        <Typography className="collab" size={"3xl"} variant={"semibold"}>Find Your Next Research Collaboration</Typography>
-        <SearchBar doiNumber={doiNumber} setDoiNumber={setDoiNumber} className="input" onSearch={handleSearch} placeholder='Enter Your DOI No' />
+        <SearchBar value={doiNumber} setValue={setDoiNumber} className="input" onSearch={handleSearch} placeholder='Enter Your DOI No' />
         <Typography size={"md"} variant={"semibold"} className="loved-text">Loved by over 600 academics</Typography>
       </Panel>
 

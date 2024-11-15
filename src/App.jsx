@@ -24,7 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import VideoCall from "./Pages/WebRTC/WebRTC";
-
+import LandingPage from "./Pages/LandingPage/LandingPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -89,10 +89,6 @@ const router = createBrowserRouter([
   {
     path: "/videocall/:peerId",
     element:<VideoCall />
-  },
-    {
-    path: "searchPaper",
-    element:<ResearchPaper />
   }
 ]);
 

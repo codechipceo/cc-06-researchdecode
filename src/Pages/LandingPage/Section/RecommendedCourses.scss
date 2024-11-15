@@ -1,0 +1,100 @@
+.recommended-courses {
+  padding: 24px;
+  background: #ffffff;
+  margin: 20px 0;
+  border-radius: 8px; // Optional: adds rounded corners for a smoother look
+
+  .recommended-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .see-all {
+      color: var(--rs-primary-500);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      &:hover {
+        color: var(--rs-primary-600);
+      }
+
+      i {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .courses-container {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--rs-gray-100);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--rs-gray-300);
+      border-radius: 3px;
+
+      &:hover {
+        background: var(--rs-gray-400);
+      }
+    }
+
+    // Hide scrollbar in Firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--rs-gray-300) var(--rs-gray-100);
+
+    // Box shadow for course cards
+    .course-card {
+      transition: box-shadow 0.3s ease;
+      border-radius: 8px; // Optional: adds rounded corners to course cards
+
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .recommended-courses {
+    padding: 16px;
+
+    .recommended-header {
+      margin-bottom: 16px;
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+
+    .courses-container {
+      display: block; // Stack the course cards vertically
+      gap: 20px;
+      padding-bottom: 0; // Optional: adjust padding for a more compact layout
+
+      .course-card {
+        width: 100%; // Make the course card take full width on smaller screens
+      }
+    }
+  }
+}

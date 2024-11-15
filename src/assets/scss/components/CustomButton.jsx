@@ -25,7 +25,7 @@ const CustomButton = ({
   });
 
   return (
-    <Button as={Button} appearance="primary"  disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
+    <Button as={Button} appearance="default" disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
       {/* {children}{" "}
       {Icon && (
         <img

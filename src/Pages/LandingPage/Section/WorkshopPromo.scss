@@ -1,0 +1,165 @@
+.workshop-promo {
+  // padding: 2rem;
+  // max-width: 1200px;
+  margin: 0 auto;
+
+  .workshop-container {
+    // background: #f4f4f4;
+    padding: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-section {
+    padding: 2rem;
+    // background: #f8f9fa;
+    position: relative;
+
+    .participants-grid {
+      position: relative;
+      padding: 1rem;
+    }
+
+    .participant {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+
+      &.main {
+        margin-bottom: 1rem;
+
+        .avatar {
+          width: 100%;
+          height: auto;
+          border-radius: 12px;
+        }
+
+        .action-buttons {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          display: flex;
+          gap: 0.5rem;
+
+          .present-btn {
+            background: #4285f4;
+            color: white;
+          }
+
+          .call-btn {
+            background: #dc3545;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .secondary-participants {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      .participant {
+        position: relative;
+
+        .avatar {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+
+        .hand-icon {
+          position: absolute;
+          bottom: 0.5rem;
+          right: 0.5rem;
+          background: #ffd700;
+          padding: 0.25rem;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .content-section {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+
+      li {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        position: relative;
+
+        &:before {
+          content: "•";
+          color: #4285f4;
+          position: absolute;
+          left: 0;
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+      }
+    }
+
+    // .know-more-btn {
+    //   align-self: flex-start;
+    //   background: #4ecdc4;
+    //   color: white;
+    //   padding: 0.75rem 1.5rem;
+    //   border-radius: 8px;
+    //   display: flex;
+    //   align-items: center;
+    //   gap: 0.5rem;
+
+    //   .arrow {
+    //     font-size: 1.25rem;
+    //   }
+
+    //   &:hover {
+    //     background: #45b7af;
+    //   }
+    // }
+  }
+}
+
+@media (max-width: 768px) {
+  .workshop-promo {
+    padding: 1rem;
+
+    .content-section {
+      padding: 2rem 1rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    .image-section {
+      padding: 1rem;
+    }
+  }
+}
