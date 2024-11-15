@@ -10,8 +10,7 @@ import {
   buyCourse,
   verifyEnrollPayment,
 } from "../../Features/Slices/courseSlice";
-import '../../assets/scss/components/CourseSidebar.scss';
-import CustomButton from "../../assets/scss/components/CustomButton";
+import CustomButton from "../../Components/CustomButton/CustomButton";
 
 
 const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {

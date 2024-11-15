@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Button, Container, Row, Col } from 'rsuite';
 import './WorkshopPromo.scss';
-import CustomButton from '../../../assets/scss/components/CustomButton';
+import CustomButton from '../../../Components/CustomButton/CustomButton';
 import img from './images/image.png';
 import img2 from './images/image2.png';
 import { useNavigate } from 'react-router-dom';

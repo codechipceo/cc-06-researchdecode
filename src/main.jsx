@@ -1,4 +1,5 @@
 import "rsuite/dist/rsuite.min.css";
+import './assets/scss/_root.scss'
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";

@@ -2,7 +2,7 @@ import React from 'react'
 import "./Hero.scss";
 import a from '../../../assets/Images/a3.png'
 import Typography from '../../../assets/scss/components/Typography';
-import CustomButton from '../../../assets/scss/components/CustomButton';
+import CustomButton from '../../../Components/CustomButton/CustomButton';
 import dulingo from '../../../assets/Icons/duolingo.svg';
 import codecov from '../../../assets/Icons/codecov.svg';
 import usertesting from '../../../assets/Icons/usertesting.svg';
@@ -23,7 +23,7 @@ const Hero = () => {
             Up Your <span className="highlight">Skills</span> <br /> To <span className="highlight">Advance</span> Your <span className="highlight">Career</span> & Research Path
           </Typography>
           <Typography size={"sm"} variant={"regular"} className="primary-text">Lorem Ipsum is simply simply dummy text of the printing and typesetting industry.</Typography>
-          
+
           {/* Buttons */}
           <div className="button-group">
             <CustomButton onClick={() => navigate(`/signin`)}  variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Get Started</CustomButton>
@@ -46,11 +46,11 @@ const Hero = () => {
               <img src={creative} alt="" />
               <span>  Creative Thinking</span>
             </span>
-           
-          
+
+
           </div>
 
-          
+
 
           {/* Collaboration Info */}
           <div className="collaboration">
@@ -64,7 +64,7 @@ const Hero = () => {
               <img src={codecov} alt="" />
               <img src={usertesting} alt="" />
               <img src={magicleap} alt="" />
-          
+
             </div>
           </div>
         </div>

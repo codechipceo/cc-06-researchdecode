@@ -1,9 +1,8 @@
 // SearchBar.jsx
 import React, { useState } from 'react';
-import { InputGroup, Input, Button, Loader } from 'rsuite';
-import SearchIcon from '@rsuite/icons/Search';
-import '../../assets/scss/components/SearchBar.scss'
-import CustomButton from '../../assets/scss/components/CustomButton';
+import { Input, InputGroup } from 'rsuite';
+import '../../assets/scss/components/SearchBar.scss';
+import CustomButton from '../../Components/CustomButton/CustomButton';
 
 
 const SearchBar = ({setValue,value, onSearch, placeholder = "Enter Your DOI No" }) => {
@@ -29,13 +28,13 @@ const SearchBar = ({setValue,value, onSearch, placeholder = "Enter Your DOI No" 
   };
   const handleonChange = (e)=>{
     setValue(e)
-    
+
   }
 
   return (
     <div className="custom-search-bar">
       <InputGroup>
-        <Input 
+        <Input
           value={value}
           // onChange={setSearchTerm}
           onChange={handleonChange}
