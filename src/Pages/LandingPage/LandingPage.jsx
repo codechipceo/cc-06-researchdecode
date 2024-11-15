@@ -1,26 +1,26 @@
-import React from 'react';
-import Hero from './Section/Hero';
-import SearchResearch from "./Section/SearchResearch";
+import ResponsiveAppBar from '../../Components/Navbar/Navbar';
 import "./LandingPage.scss";
-import RecommendedCourses from './Section/RecommendedCourses';
-import WorkshopPromo from './Section/WorkshopPromo';
 import ConsultingServices from './Section/ConsultingServices';
-import Collaboration from './Section/Collaboration';
-import Labs from './Section/Labs';
+import FAQSection from './Section/FAQSection';
 import Footer from './Section/Footer';
-import FAQSection  from './Section/FAQSection';
+import Hero from './Section/Hero';
+import Labs from './Section/Labs';
+import RecommendedCourses from './Section/RecommendedCourses';
+import SearchResearch from "./Section/SearchResearch";
+import WorkshopPromo from './Section/WorkshopPromo';
 const LandingPage = () => {
   return (
     <>
-    <Hero/>
-    <SearchResearch/>
-    <RecommendedCourses/>
-    <WorkshopPromo/>
-    <ConsultingServices/>
-    {/* <Collaboration/> */}
-    <Labs/>
-    <FAQSection />
-    <Footer/>
+      <ResponsiveAppBar />
+      <Hero />
+      <SearchResearch />
+      <RecommendedCourses />
+      <WorkshopPromo />
+      <ConsultingServices />
+      {/* <Collaboration/> */}
+      <Labs />
+      <FAQSection />
+      <Footer />
     </>
   );
 

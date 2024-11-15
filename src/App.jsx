@@ -28,7 +28,7 @@ import LandingPage from "./Pages/LandingPage/LandingPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GuardComponents component={Home} />,
+    element: <GuardComponents component={LandingPage} />,
   },
   {
     path: "/testpdf",
@@ -46,6 +46,10 @@ const router = createBrowserRouter([
   //   path: "/searchPaper",
   //   element: <GuardComponents component={SearchPapers} />,
   // },
+  {
+    path: "/searchPaper",
+    element: <GuardComponents component={ResearchPaper} />,
+  },
   {
     path: "/pending-request/:pendingRequestId",
     element: <GuardComponents component={PendingRequestDetail} />,
@@ -88,8 +92,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/videocall/:peerId",
-    element:<VideoCall />
-  }
+    element: <VideoCall />,
+  },
 ]);
 
 export default function App() {

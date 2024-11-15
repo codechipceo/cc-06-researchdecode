@@ -81,6 +81,9 @@ function ResponsiveAppBar() {
     navigate("/");
   };
   return (
+
+      <div style={{position:'sticky' , top:0, backgroundColor:'white', zIndex:5}}>
+
     <AppBar
       position=''
       sx={{ backgroundColor: "transparent", color: "black", boxShadow: "0" }}
@@ -242,6 +245,7 @@ function ResponsiveAppBar() {
         </Toolbar>
       </Container>
     </AppBar>
+</div>
   );
 }
 export default ResponsiveAppBar;
