@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { createPaperRequest } from "../Features/Slices/requestResearchPaper";
 import { selectStudentInfo } from "../Features/Slices/studentSlice";
-import CustomButton from "../assets/scss/components/CustomButton";
+import CustomButton from "./CustomButton/CustomButton";
 const PaperCard = ({
   title,
   author,

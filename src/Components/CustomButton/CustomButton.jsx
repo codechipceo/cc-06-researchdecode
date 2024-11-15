@@ -2,7 +2,6 @@
 import classNames from "classnames";
 import React from "react";
 import { Button } from "rsuite";
-import "./customButton.scss";
 import { Loader } from 'rsuite';
 
 const CustomButton = ({

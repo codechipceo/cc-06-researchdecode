@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import "./typographycomponents.scss";
 import React from "react";
 
 const Typography = ({ size, variant, children, className }) => {
