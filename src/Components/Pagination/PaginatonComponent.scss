@@ -8,7 +8,7 @@
     box-shadow: 0px 4px 4px 0px #00000033;
     width: fit-content;
     margin: 0 auto;
-  
+
     .rs-pagination-btn {
       font-size: 1rem;
       padding: 8px 12px;
@@ -24,12 +24,12 @@
       justify-content: center;
       align-items: center;
       // flex-direction: column;
-  
+
       &:hover {
         background-color: #cbcbcb;
         color: #000000;
       }
-  
+
       &.rs-pagination-btn-active {
         background-color: #23CF9B;
         color: #FFFFFF;
@@ -41,27 +41,27 @@
         border: none;
         color: #666;
         font-size: 1.2rem;
-        
+
         &:hover {
           background-color: #cbcbcb;
           color: #333;
         }
       }
-  
+
       // Styles for next button
       &[aria-label="Next"] {
         background-color: transparent;
         border: none;
         color: #666;
         font-size: 1.2rem;
-        
+
         &:hover {
           background-color: #cbcbcb;
           color: #333;
         }
       }
     }
-  
+
     .rs-pagination-ellipsis {
       font-size: 1.2rem;
       color: #FFFFFF;
