@@ -1,0 +1,50 @@
+// FAQSection.scss
+.faq-section {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 48px 16px;
+
+  .faq-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #666;
+      line-height: 1.6;
+    }
+  }
+
+  .faq-grid {
+    margin: -12px; // Negative margin to offset padding of grid items
+  }
+
+  .faq-item {
+    padding: 12px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 32px 16px;
+
+    .faq-header {
+      h2 {
+        font-size: 24px;
+      }
+    }
+  }
+}

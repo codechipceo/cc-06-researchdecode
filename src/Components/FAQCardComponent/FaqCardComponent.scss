@@ -1,11 +1,13 @@
-@import '../../assets/scss/base/colors.scss'; 
+@import '../../assets/scss/base/colors.scss';
 
 .faq-card {
-   
-    padding: 20px;
-    background-color: #FFFFFF; 
-    border-radius: 10px;
-    box-shadow: 0px 0px 15.2px 0px $primary30; 
 
-    
+    // padding: 15px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px $primary30;
+}
+
+.faq-card__header {
+    margin-bottom: 5px;
 }

@@ -36,23 +36,35 @@ const CourseDetail = () => {
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
   if (!courseDetail?.courseName) return <>Loading...</>;
+<<<<<<< HEAD
   const breadcrumbPath = [{ label: "Home", path: "/" },{label:"Course List", path:"/courses"}]
+=======
+  const breadcrumbPath = [{ label: "Home", path: "/" }]
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
   
   return (
+    <>  <HeaderThree title="Course Details" breadcrumbPath={breadcrumbPath} backgroundImage={'../../../images/banner/bgrp.png'}/>
     <div>
+<<<<<<< HEAD
   <HeaderThree title={CourseDetail} breadcrumbPath={breadcrumbPath} backgroundImage={'../../../public/images/banner/bgrp.png'}/>
       {/* <div className="BannerWrapper">
+=======
+      <div className="BannerWrapper">
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
         <img src={courseBanner} alt={courseName} className="Banner"/>
      
         <div  className="firstbar">
           <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
         </div>
       </div>
+<<<<<<< HEAD
       <nav className="breadcrumb">
       <Link to="/">Homepage</Link>
     <FaAngleRight/>
       <Link to="/courses" className="current">Course List</Link>
     </nav> */}
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       <Container className="container">
         <Row>
           {/* Main Content */}
@@ -85,6 +97,7 @@ const CourseDetail = () => {
         <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,32 +1,42 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 @import '../../assets/scss/base/colors.scss';
 
 =======
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
 .pagination-container {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     background: $veylightgray;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 4px 0px $dark100;
 =======
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
     background: #F7F9FF;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 4px 0px #00000033;
+<<<<<<< HEAD
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
     width: fit-content;
     margin: 0 auto;
-  
+
     .rs-pagination-btn {
       font-size: 1rem;
       padding: 8px 12px;
       margin: 0 5px;
       border-radius: 100%;
       transition: background-color 0.3s ease, color 0.3s ease;
+<<<<<<< HEAD
 <<<<<<< HEAD
       color: $dark70;
       border: 1px solid $White;
@@ -36,11 +46,17 @@
       border: 1px solid #fafafa;
       background-color: #fff;
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
+=======
+      color: #333;
+      border: 1px solid #fafafa;
+      background-color: #fff;
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       min-width: 40px;
       height: 40px;
       // display: flex;
       justify-content: center;
       align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
       
       &:hover {
@@ -65,13 +81,15 @@
           background-color: $neutral10;
           color: $dark70;
 =======
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       // flex-direction: column;
-  
+
       &:hover {
         background-color: #cbcbcb;
         color: #000000;
       }
-  
+
       &.rs-pagination-btn-active {
         background-color: #23CF9B;
         color: #FFFFFF;
@@ -83,10 +101,11 @@
         border: none;
         color: #666;
         font-size: 1.2rem;
-        
+
         &:hover {
           background-color: #cbcbcb;
           color: #333;
+<<<<<<< HEAD
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
         }
       }
@@ -104,22 +123,32 @@
           background-color: $neutral10;
           color: $dark70;
 =======
+=======
+        }
+      }
+
+      // Styles for next button
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       &[aria-label="Next"] {
         background-color: transparent;
         border: none;
         color: #666;
         font-size: 1.2rem;
-        
+
         &:hover {
           background-color: #cbcbcb;
           color: #333;
+<<<<<<< HEAD
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
         }
       }
     }
-  
+
     .rs-pagination-ellipsis {
       font-size: 1.2rem;
+<<<<<<< HEAD
 <<<<<<< HEAD
       color: $White;
       margin: 0 8px;
@@ -127,9 +156,15 @@
   }
   
 =======
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       color: #FFFFFF;
       margin: 0 8px;
     }
   }
+<<<<<<< HEAD
   
 >>>>>>> 694838a796075c0380f1ab5d994d674196e1271b
+=======
+  
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f

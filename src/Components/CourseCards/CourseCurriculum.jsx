@@ -7,7 +7,10 @@ const CourseCurriculum = ({ course }) => {
 
   return (
     <div className="course-curriculum-container">
+<<<<<<< HEAD
       <h4>Curriculum</h4>
+=======
+>>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       <PanelGroup accordion bordered>
         {course.map((lesson, index) => (
           <Panel

@@ -1,16 +1,18 @@
-@import "../../assets/scss/base/colors.scss";
+@import "../../../assets/scss/base/colors.scss";
 
 .research-collaboration {
   width: 100%;
-  background-color: white;
   max-width: 1374.9px;
   margin: 0 auto;
   padding: 20px;
+
 
   .search-panel {
     background: $neutral5;
     border-radius: 4px;
     padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
 
     .collab {
       text-align: center;
@@ -66,4 +68,8 @@
       font-size: 0.9rem; // Slightly smaller font for mobile screens
     }
   }
+}
+
+.normal {
+  text-align: center;
 }

@@ -13,15 +13,21 @@ const CourseCardOne = ({ course }) => {
 
   const {
     _id,
-    title,
-    description,
+    courseName,
+    courseDescription,
     category,
     duration,
     instructor: { name, avatar },
     originalPrice,
-    discountedPrice,
-    thumbnailUrl,
+    price,
+    courseThumbnail,
   } = course;
+  console.log(name);
+  
+  const maxDescriptionLength = 80;
+  const shortDescription = courseDescription.length > maxDescriptionLength 
+    ? courseDescription.slice(0, maxDescriptionLength) + "..." 
+    : courseDescription;
 
   return (
     <div>
@@ -31,7 +37,7 @@ const CourseCardOne = ({ course }) => {
         onClick={() => navigate(`/course/${_id}`)}
       >
         <div className="course-card-one__image">
-          <img src={thumbnailUrl} alt="Course Thumbnail" />
+          <img src={courseThumbnail} alt="Course Thumbnail" />
         </div>
 
         <div className="course-card-one__content">
@@ -70,7 +76,7 @@ const CourseCardOne = ({ course }) => {
             variant="semibold"
             className="course-card-one__title"
           >
-            {title}
+            {courseName}
           </Typography>
 
           <Typography
@@ -78,7 +84,7 @@ const CourseCardOne = ({ course }) => {
             variant="regular"
             className="course-card-one__description"
           >
-            {description}
+            {shortDescription}
           </Typography>
 
           <FlexboxGrid
@@ -103,14 +109,14 @@ const CourseCardOne = ({ course }) => {
 
             <FlexboxGrid.Item className="course-card-one__price-container">
               <Typography size="sm" className="course-card-one__original-price">
-                ₹{originalPrice}
+                {/* ₹{originalPrice} */}
               </Typography>
               <Typography
                 size="24px"
                 variant="bold"
                 className="course-card-one__discounted-price"
               >
-                ₹{discountedPrice}
+                ₹{price}
               </Typography>
             </FlexboxGrid.Item>
           </FlexboxGrid>

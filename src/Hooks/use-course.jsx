@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxStore } from "../Features/indexStates";
 
-export const useCourse = () => {
+export const useCourse = (limit = null) => {
   // ###########################################
   //                 STATES
   // ###########################################
@@ -26,7 +26,7 @@ export const useCourse = () => {
   // ###########################################
 
   useEffect(() => {
-    dispatch(getAllCourses());
+    dispatch(getAllCourses({limit}));
   }, [dispatch, getAllCourses ]);
 
   // ###########################################
