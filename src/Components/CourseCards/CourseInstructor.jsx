@@ -62,8 +62,5 @@ const ExpertCard = ({course}) => {
   );
 };
 
-<<<<<<< HEAD
+
 export default ExpertCard;
-=======
-export default ExpertCard;
->>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f

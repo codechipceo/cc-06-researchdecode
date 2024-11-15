@@ -4,13 +4,9 @@ import { FaFolderOpen } from 'react-icons/fa';
 import '../../assets/scss/components/CourseCurriculum.scss';
 
 const CourseCurriculum = ({ course }) => {
-
   return (
     <div className="course-curriculum-container">
-<<<<<<< HEAD
       <h4>Curriculum</h4>
-=======
->>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
       <PanelGroup accordion bordered>
         {course.map((lesson, index) => (
           <Panel
@@ -26,7 +22,6 @@ const CourseCurriculum = ({ course }) => {
               <span className="lesson-title">
                 {lesson.videoTitle}
               </span>
-     
             </div>
           </Panel>
         ))}

@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourseById, selectCourseById } from "../../Features/Slices/courseSlice";
 import '../../assets/scss/components/CourseDetail.scss'; // Import the CSS file
 import { FaAngleRight } from "react-icons/fa";
-import {HeaderThree} from '../../Components/Headers/HeaderThree'
-
+import { HeaderThree } from '../../Components/Headers/HeaderThree';
 
 const CourseDetail = () => {
   const { courseId } = useParams();
@@ -36,67 +35,53 @@ const CourseDetail = () => {
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
 
   if (!courseDetail?.courseName) return <>Loading...</>;
-<<<<<<< HEAD
-  const breadcrumbPath = [{ label: "Home", path: "/" },{label:"Course List", path:"/courses"}]
-=======
-  const breadcrumbPath = [{ label: "Home", path: "/" }]
->>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
-  
+
+  const breadcrumbPath = [
+    { label: "Home", path: "/" },
+    { label: "Course List", path: "/courses" }
+  ];
+
   return (
-    <>  <HeaderThree title="Course Details" breadcrumbPath={breadcrumbPath} backgroundImage={'../../../images/banner/bgrp.png'}/>
-    <div>
-<<<<<<< HEAD
-  <HeaderThree title={CourseDetail} breadcrumbPath={breadcrumbPath} backgroundImage={'../../../public/images/banner/bgrp.png'}/>
-      {/* <div className="BannerWrapper">
-=======
-      <div className="BannerWrapper">
->>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
-        <img src={courseBanner} alt={courseName} className="Banner"/>
-     
-        <div  className="firstbar">
+    <>
+      <HeaderThree title="Course Details" breadcrumbPath={breadcrumbPath} backgroundImage={'../../../images/banner/bgrp.png'} />
+      <div>
+        <div className="BannerWrapper">
+          <img src={courseBanner} alt={courseName} className="Banner" />
+          <div className="firstbar">
+            <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
+          </div>
+        </div>
+
+        <Container className="container">
+          <Row>
+            {/* Main Content */}
+            <Col xs={24} md={16} style={{ position: 'relative', zIndex: 0 }}>
+              <Nav appearance="tabs" activeKey={tabValue} onSelect={handleTabChange}>
+                <Nav.Item eventKey="overview" className="nav-item-style">
+                  Overview
+                </Nav.Item>
+                <Nav.Item eventKey="curriculum" className="nav-item-style">
+                  Curriculum
+                </Nav.Item>
+                <Nav.Item eventKey="instructor" className="nav-item-style">
+                  Instructor
+                </Nav.Item>
+              </Nav>
+
+              <Panel bordered>
+                {tabValue === "overview" && <CourseOverview course={courseDetail} />}
+                {tabValue === "curriculum" && <CourseCurriculum course={videos} />}
+                {tabValue === "instructor" && <CourseInstructor course={courseDetail} />}
+              </Panel>
+            </Col>
+          </Row>
+        </Container>
+
+        {/* Sidebar for small screens only */}
+        <div className="sidebar-small" style={{ marginTop: '20px', width: '100%' }}>
           <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
         </div>
       </div>
-<<<<<<< HEAD
-      <nav className="breadcrumb">
-      <Link to="/">Homepage</Link>
-    <FaAngleRight/>
-      <Link to="/courses" className="current">Course List</Link>
-    </nav> */}
-=======
->>>>>>> daffc8cb5e27f4917e80e5e7ebd2df581a91e72f
-      <Container className="container">
-        <Row>
-          {/* Main Content */}
-          <Col xs={24} md={16} style={{ position: 'relative', zIndex: 0 }}>
-        
-            <Nav appearance="tabs" activeKey={tabValue} onSelect={handleTabChange}>
-  <Nav.Item eventKey="overview" className="nav-item-style">
-    Overview
-  </Nav.Item>
-  <Nav.Item eventKey="curriculum" className="nav-item-style">
-    Curriculum
-  </Nav.Item>
-  <Nav.Item eventKey="instructor" className="nav-item-style">
-    Instructor
-  </Nav.Item>
-</Nav>
-
-
-            <Panel bordered>
-              {tabValue === "overview" && <CourseOverview course={courseDetail} />}
-              {tabValue === "curriculum" && <CourseCurriculum course={videos} />}
-              {tabValue === "instructor" && <CourseInstructor course={courseDetail} />}
-            </Panel>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* Sidebar for small screens only */}
-      <div className="sidebar-small" style={{ marginTop: '20px', width: '100%' }}>
-        <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
-      </div>
-    </div>
     </>
   );
 };
