@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Panel } from 'rsuite';
-import "./SearchResearch.scss";
 import Typography from "../../../assets/scss/components/Typography"; // Import your custom typography component
 import SearchBar from '../../../Components/Searchbar/SearchBar';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,7 @@ const SearchResearch = () => {
   const handleSearch = (searchItem)=>{
     navigate("/searchPaper")
     console.log(searchItem);
-    
+
   }
   return (
     <div className="research-collaboration">

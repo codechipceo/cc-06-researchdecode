@@ -1,5 +1,4 @@
 import React from 'react'
-import "./Hero.scss";
 import a from '../../../assets/Images/a3.png'
 import Typography from '../../../assets/scss/components/Typography';
 import CustomButton from '../../../Components/CustomButton/CustomButton';

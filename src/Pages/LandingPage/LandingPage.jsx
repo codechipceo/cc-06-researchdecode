@@ -1,5 +1,4 @@
 import ResponsiveAppBar from '../../Components/Navbar/Navbar';
-import "./LandingPage.scss";
 import ConsultingServices from './Section/ConsultingServices';
 import FAQSection from './Section/FAQSection';
 import Footer from './Section/Footer';

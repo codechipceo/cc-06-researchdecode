@@ -1,5 +1,4 @@
 import React from 'react'
-import "./RecommendedCourses.scss"
 import { Panel } from 'rsuite';
 import CourseCard from "../../../Components/CourseCard/CourseCardOne"
 import { useCourse } from "../../../Hooks/use-course";
@@ -11,7 +10,7 @@ const RecommendedCourses = () => {
     isCourseError: isError,
   } = useCourse(5);
 
-  
+
 
 
   return (
@@ -23,10 +22,10 @@ const RecommendedCourses = () => {
           <i className="rs-icon rs-icon-chevron-right"></i>
         </a>
       </div>
-      
+
       <div className="courses-container">
         {courses.map(course => (
-          <CourseCard 
+          <CourseCard
             key={course.id}
             course={course}
           />
@@ -36,4 +35,4 @@ const RecommendedCourses = () => {
   )
 }
 
-export default RecommendedCourses 
+export default RecommendedCourses

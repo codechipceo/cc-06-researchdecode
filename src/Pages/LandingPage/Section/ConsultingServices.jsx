@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'rsuite';
-import './consulting.scss';
 import CustomButton from '../../../Components/CustomButton/CustomButton';
 import RightArrowIcon from '../../../assets/Icons/RightArrowIcon.svg'
 import { useNavigate } from 'react-router-dom';
