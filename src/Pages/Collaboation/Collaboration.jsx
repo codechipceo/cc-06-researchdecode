@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { HeaderThree } from '../../Components/Headers/HeaderThree';
 
 const Collaboration = () => {
@@ -7,7 +7,7 @@ const Collaboration = () => {
         label: "Home",
         path: "/",
       },
-   
+
     ];
     return (
       <div>

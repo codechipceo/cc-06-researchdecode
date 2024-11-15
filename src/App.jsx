@@ -25,10 +25,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
+import Collaboration from "./Pages/Collaboation/Collaboration";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <GuardComponents component={LandingPage} />,
+  },
+  {
+    path: '/collaboration',
+    element: <Collaboration />
   },
   {
     path: "/testpdf",
