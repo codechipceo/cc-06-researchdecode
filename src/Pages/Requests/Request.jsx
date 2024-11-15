@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RequestDetail from "../../Components/RequestDetail";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
+
 import {
   getPendingRequests,
   selectPendingRequests,
@@ -34,7 +36,7 @@ const Request = () => {
 
   return (
     <div>
-      <HeaderTwo title='My Paper Request' breadcrumbPath={breadcrumbPath} />
+    <HeaderThree title='Research' breadcrumbPath={breadcrumbPath} backgroundImage ={"../../../public/images/banner/bgrp.png"} />
       <Container>
       <Typography mb={4}>Approved requests will disappear in next 48 hours</Typography>
         <FormControl variant='outlined' >

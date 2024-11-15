@@ -1,0 +1,82 @@
+@import '../base/colors.scss';
+
+.icons {
+  justify-content: flex-end;
+  gap: 10px;
+
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.sendbutton{
+  color: $primary;
+ 
+}
+.firsticon{
+ 
+  color: $primary;
+}
+.crossicon{
+  color: #BD494B;
+}
+
+
+.panel-border {
+  border: 1px solid #ddd;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.publisher {
+  margin-left: 5%;
+  color: $dark10;
+}
+
+.publisher_name {
+  margin-left: 2%;
+  color: $dark10;
+}
+
+.doi {
+  margin-left: auto; 
+  font-style: italic;
+  color: $dark10;
+}
+
+
+.publisher_name {
+  display: flex;
+  flex-direction: column;
+  color: $dark10;
+
+  .author-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toggle-button {
+    margin-left: auto;
+    color: $primary;
+  }
+}

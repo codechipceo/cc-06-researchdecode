@@ -1,5 +1,25 @@
 @import '../base/typography.scss';
 
+.font-2xs {
+  font-size: $font-2xs;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
 
 .font-xs {
   font-size: $font-xs;
@@ -65,6 +85,7 @@
 
 .font-lg {
   font-size: $font-lg;
+
   &--regular {
     font-weight: $font-weight-regular;
   }
@@ -148,6 +169,46 @@
 
 .font-4xl {
   font-size: $font-4xl;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.font-24px {
+  font-size: $font-24px;
+
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.font-5xl {
+  font-size: $font-5xl;
 
   &--regular {
     font-weight: $font-weight-regular;

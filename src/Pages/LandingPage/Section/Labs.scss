@@ -1,0 +1,71 @@
+// HeroSection.scss
+.hero-section {
+  background-color: #5DBEBD;
+  padding: 10px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 552px;
+  margin: 20px 100px;
+
+  .hero-content {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .hero-title {
+    color: white;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .hero-text {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+
+  .request-button {
+    background: white;
+    color: #5DBEBD;
+    padding: 10px 20px;
+    border: none;
+    font-weight: 500;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      max-width: 300px;
+      height: auto;
+    }
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 40px 20px;
+    flex-direction: column;
+    text-align: center;
+
+    .hero-content {
+      margin-bottom: 40px;
+    }
+
+    .hero-image {
+      justify-content: center;
+    }
+  }
+}

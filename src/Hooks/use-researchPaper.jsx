@@ -6,6 +6,7 @@ import {
   getPendingRequests,
   getRequestById,
   selectPendingRequests,
+  selectPendingRequestCount,
   selectRequestDetail,
 } from "../Features/Slices/requestResearchPaper";
 
@@ -19,7 +20,9 @@ export const useResearchPaper = () => {
 
   const handleSearch = async (e) => {
     if (!doiNumber?.trim()) return;
-    e.preventDefault();
+    // console.log(doiNumber);
+    
+    // e.preventDefault();
     setIsLoading(true);
     setIsError(false);
     await axios.get(`${doiApiPath}`).then((res) => {
@@ -45,12 +48,29 @@ export const useResearchPaper = () => {
 export const usePendingRequests = () => {
   const dispatch = useDispatch();
   const pendingRequests = useSelector(selectPendingRequests);
+  const pendingRequestCount = useSelector(selectPendingRequestCount); // Access the total count
+  console.log(pendingRequests);
+  // console.log(pendingRequestCount);
+  
+  // Pagination state
+  const [activePage, setActivePage] = useState(1);
+  
+  const limit = 4; // Number of items per page
+  const skip = (activePage - 1) * limit;
+
+  const fetchPendingRequests = () => {
+    dispatch(getPendingRequests({ limit, skip }));
+  };
 
   useEffect(() => {
-    dispatch(getPendingRequests());
-  }, [dispatch]);
+    fetchPendingRequests();
+  }, [dispatch, activePage]);
 
   return {
+    pendingRequestCount,
     pendingRequests,
+    activePage,
+    setActivePage,
+    limit,
   };
 };
