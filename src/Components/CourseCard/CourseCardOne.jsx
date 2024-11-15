@@ -3,7 +3,6 @@ import { Panel, FlexboxGrid } from "rsuite";
 import Typography from "../../assets/scss/components/Typography";
 import { BsClock } from "react-icons/bs";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
-import "../../assets/scss/components/CourseCardOne.scss";
 import { useNavigate } from "react-router-dom";
 
 const CourseCardOne = ({ course }) => {
@@ -23,10 +22,10 @@ const CourseCardOne = ({ course }) => {
     courseThumbnail,
   } = course;
   console.log(name);
-  
+
   const maxDescriptionLength = 80;
-  const shortDescription = courseDescription.length > maxDescriptionLength 
-    ? courseDescription.slice(0, maxDescriptionLength) + "..." 
+  const shortDescription = courseDescription.length > maxDescriptionLength
+    ? courseDescription.slice(0, maxDescriptionLength) + "..."
     : courseDescription;
 
   return (

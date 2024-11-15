@@ -7,7 +7,6 @@ import CourseInstructor from "../../Components/CourseCards/CourseInstructor";
 import CourseSidebar from "../../Components/CourseCards/CourseSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseById, selectCourseById } from "../../Features/Slices/courseSlice";
-import '../../assets/scss/components/CourseDetail.scss'; // Import the CSS file
 import { FaAngleRight } from "react-icons/fa";
 import {HeaderThree} from '../../Components/Headers/HeaderThree'
 
@@ -37,13 +36,13 @@ const CourseDetail = () => {
 
   if (!courseDetail?.courseName) return <>Loading...</>;
   const breadcrumbPath = [{ label: "Home", path: "/" }]
-  
+
   return (
     <>  <HeaderThree title="Course Details" breadcrumbPath={breadcrumbPath} backgroundImage={'../../../images/banner/bgrp.png'}/>
     <div>
       <div className="BannerWrapper">
         <img src={courseBanner} alt={courseName} className="Banner"/>
-     
+
         <div  className="firstbar">
           <CourseSidebar course={courseDetail} firstVideo={videos[0]?._id} />
         </div>
@@ -52,7 +51,7 @@ const CourseDetail = () => {
         <Row>
           {/* Main Content */}
           <Col xs={24} md={16} style={{ position: 'relative', zIndex: 0 }}>
-        
+
             <Nav appearance="tabs" activeKey={tabValue} onSelect={handleTabChange}>
   <Nav.Item eventKey="overview" className="nav-item-style">
     Overview

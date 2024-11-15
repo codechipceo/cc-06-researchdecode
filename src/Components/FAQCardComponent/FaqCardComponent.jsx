@@ -1,5 +1,5 @@
 import React from "react";
-import "./FaqCardComponent.scss";
+
 import Typography from "../../assets/scss/components/Typography";
 import { Panel } from 'rsuite';
 
