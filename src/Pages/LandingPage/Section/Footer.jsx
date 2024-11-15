@@ -1,5 +1,4 @@
 import React from 'react';
-import './Footer.scss';
 import Logo from '../../../assets/Icons/Logo.svg'
 const Footer = () => {
   return (
@@ -12,20 +11,20 @@ const Footer = () => {
           </div>
           <p>Top learning experiences that create<br />more talent in the world.</p>
         </div>
-        
+
         <div className="footer-links">
           <div className="link-column">
             <a href="#">Research</a>
             <a href="#">Careers</a>
             <a href="#">Consultancy</a>
           </div>
-          
+
           <div className="link-column">
             <a href="#">Labs</a>
             <a href="#">Webinar</a>
             <a href="#">Collaboration</a>
           </div>
-          
+
           <div className="link-column">
             <a href="#">Privacy</a>
             <a href="#">Contact Us</a>
@@ -33,7 +32,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="footer-bottom">
         <p>© 2022 Ed-Circle. All rights reserved.</p>
         <div className="social-links">

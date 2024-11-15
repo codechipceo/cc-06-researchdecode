@@ -1,8 +1,7 @@
 import React from "react";
 import ResponsiveAppBar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
-import Typography from "../../assets/scss/components/Typography"; // Import your custom typography component
-import "./HeaderThree.scss"; // Import SCSS for custom styles
+import Typography from "../../assets/scss/components/Typography"; 
 import defaultBgImage  from '../../assets/Images/bgrp.png'
 export const HeaderThree = ({ title, breadcrumbPath ,backgroundImage}) => {
 

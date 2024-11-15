@@ -8,7 +8,6 @@ import {
   Message,
 } from "rsuite";
 import Typography from "../../assets/scss/components/Typography";
-import "../../assets/scss/components/researchpapercard.scss";
 import PersonIcon from "@rsuite/icons/legacy/User";
 import { MainModal } from "../MainModal/MainModal";
 import PDFviewer from "../PDFviewer/PDFviewer";
@@ -76,7 +75,7 @@ const ResearchPaperCard = ({
     dispatch(approvePaper({ requestId: _id, fulfilledBy }));
   };
 
-  const handleReject = () => {  
+  const handleReject = () => {
     dispatch(rejectPaperRequest({ requestId: _id }));
   };
 
