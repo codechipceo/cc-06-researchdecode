@@ -17,8 +17,11 @@
   }
 
   &:hover {
-    background-color: darken($bg-color, 10%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: $text-color;
+    background-color: darken($bg-color, 8%);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
 }
 
@@ -27,7 +30,7 @@
 }
 
 .secondary-button {
-  @include button-style($neutral15, $primary40);
+  @include button-style(#dadada, $primary40);
 }
 
 .preview-button {
@@ -79,7 +82,7 @@
 
 .btn-size-7 {
   width: 213px;
-  height: 60px;
+  height: 55px;
 }
 
 .btn-size-8 {
@@ -127,4 +130,8 @@
   width: 443px;
   height: 60px;
   font-size: 16px;
+}
+
+.left {
+  margin-left: auto;
 }

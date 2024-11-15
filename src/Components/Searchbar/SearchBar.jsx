@@ -6,38 +6,39 @@ import '../../assets/scss/components/SearchBar.scss'
 import CustomButton from '../../assets/scss/components/CustomButton';
 
 
-const SearchBar = ({ onSearch, placeholder = "Enter Your DOI No" }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar = ({setValue,value, onSearch, placeholder = "Enter Your DOI No" }) => {
   const [isLoading, setIsLoading] = useState(false);
 
 
   const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
-    
+    if (!value.trim()) return;
+
     setIsLoading(true);
     try {
-      await onSearch(searchTerm);
+      await onSearch(value);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleClear = () => {
-    setSearchTerm('');
-  };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       handleSearch();
     }
   };
+  const handleonChange = (e)=>{
+    setValue(e)
+    
+  }
 
   return (
     <div className="custom-search-bar">
       <InputGroup>
         <Input 
-          value={searchTerm}
-          onChange={setSearchTerm}
+          value={value}
+          // onChange={setSearchTerm}
+          onChange={handleonChange}
           onKeyPress={handleKeyPress}
           placeholder={placeholder}
           disabled={isLoading}

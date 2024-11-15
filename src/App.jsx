@@ -18,18 +18,17 @@ import Request from "./Pages/Requests/Request";
 import { PendingRequestDetail } from "./Pages/SearchPapers/PendingRequestDetail";
 import { SearchPapers } from "./Pages/SearchPapers/SearchPapers";
 import { SignIn, SignUp } from "./Pages/indexPages";
-
+import ResearchPaper from "./Pages/ResearchPapers/ResearchPaper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import VideoCall from "./Pages/WebRTC/WebRTC";
-import Collaboration from "./Pages/Collaboation.jsx/Collaboration";
-
+import LandingPage from "./Pages/LandingPage/LandingPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GuardComponents component={Home} />,
+    element: <GuardComponents component={LandingPage} />,
   },
   {
     path: "/testpdf",
@@ -43,9 +42,13 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
+  // {
+  //   path: "/searchPaper",
+  //   element: <GuardComponents component={SearchPapers} />,
+  // },
   {
     path: "/searchPaper",
-    element: <GuardComponents component={SearchPapers} />,
+    element: <GuardComponents component={ResearchPaper} />,
   },
   {
     path: "/pending-request/:pendingRequestId",
@@ -89,12 +92,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/videocall/:peerId",
-    element:<VideoCall />
-  }
-,  {
-    path: "/collaboration",
-    element:<Collaboration />
-  }
+    element: <VideoCall />,
+  },
 ]);
 
 export default function App() {
