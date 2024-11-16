@@ -20,8 +20,16 @@ import {
 } from "../../Features/Slices/studentSlice";
 const pages = [
   {
+    navLink: "Find Papers",
+    navPath: "/searchPaper",
+  },
+  {
     navLink: "Hire Expert",
     navPath: "/experts",
+  },
+  {
+    navLink: "Collaboration",
+    navPath: "/collaboration",
   },
   {
     navLink: "Courses",
@@ -31,10 +39,7 @@ const pages = [
   //   navLink: "Lab Requests",
   //   navPath: "/lab-request",
   // },
-  {
-    navLink: "Find Papers",
-    navPath: "/searchPaper",
-  },
+
   // {
   //   navLink: "Request Data",
   //   navPath: "/courses",

@@ -6,6 +6,7 @@ import chatSlice from "./Slices/chatSlice";
 import { videoSlice } from "./Slices/videoSlice";
 import consultancySlice from "./Slices/consultancySlice";
 import consultancyCardSlice from "./Slices/consultancyCardSlice";
+import collaborationSlice from "./Slices/collaborationSlice";
 export {
   videoSlice,
   chatSlice,
@@ -15,4 +16,5 @@ export {
   consultancyCardSlice,
   paperRequestSlice,
   consultancySlice,
+  collaborationSlice
 };

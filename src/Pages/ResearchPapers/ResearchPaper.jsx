@@ -3,7 +3,6 @@ import { HeaderThree } from "../../Components/Headers/HeaderThree";
 import { Panel } from 'rsuite';
 import Typography from "../../assets/scss/components/Typography"; // Import your custom typography component
 import SearchBar from '../../Components/Searchbar/SearchBar';
-import "./ResearchPaper.scss";
 import PaperCard from "../../Components/card";
 import { List } from '@mui/material';
 import PaginationComponent from '../../Components/Pagination/PaginationComponent'
@@ -26,7 +25,7 @@ const ResearchPaper = () => {
 
    const {pendingRequestCount, pendingRequests, activePage, setActivePage, limit } = usePendingRequests();
    console.log(pendingRequestCount);
-   
+
     const handleSendPaper = (userId) => {
     // Implement the logic to send the paper
     // navigate(/inbox/${userId}); // Uncomment this if you have the navigation logic in place
@@ -78,7 +77,7 @@ const ResearchPaper = () => {
           setActivePage={setActivePage}
           maxButtons={4}
         />
-        
+
       </div>
     </>
   )
