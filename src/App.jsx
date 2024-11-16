@@ -21,7 +21,9 @@ import { SignIn, SignUp } from "./Pages/indexPages";
 import ResearchPaper from "./Pages/ResearchPapers/ResearchPaper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <GuardComponents component={LandingPage} />,
+    // element:<LandingPage/>,
   },
   {
     path: '/collaboration',
@@ -112,6 +115,26 @@ export default function App() {
 
 function GuardComponents({ component: Component, ...rest }) {
   const token = useSelector(selectStudentToken);
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token) {
+      try {
+        
+        const decodedToken = jwtDecode(token);
+
+        const currentTime = Date.now() / 1000;
+        if (decodedToken.exp < currentTime) {
+  
+          localStorage.removeItem('studentToken'); 
+          navigate("/signin"); 
+        }
+      } catch (error) {
+        console.error("Error decoding token", error);
+      }
+    }
+  }, [token, navigate]);
+
   if (!token) {
     return <SignIn />;
   }
@@ -124,6 +147,7 @@ function GuardComponents({ component: Component, ...rest }) {
     </DefaultLayout>
   );
 }
+
 GuardComponents.propTypes = {
   component: PropTypes.func,
 };

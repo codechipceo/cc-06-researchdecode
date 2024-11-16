@@ -6,7 +6,6 @@ import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const CourseCardOne = ({ course }) => {
-  console.log(course);
 
   const navigate = useNavigate();
 
@@ -21,7 +20,7 @@ const CourseCardOne = ({ course }) => {
     price,
     courseThumbnail,
   } = course;
-  console.log(name);
+
 
   const maxDescriptionLength = 80;
   const shortDescription = courseDescription.length > maxDescriptionLength
