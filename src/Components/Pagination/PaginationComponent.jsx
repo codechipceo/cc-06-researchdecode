@@ -9,7 +9,6 @@ function PaginationComponent({ total, limit, activePage, setActivePage,maxButton
       <Pagination
         prev
         next
-
         total={total}
         limit={limit}
         maxButtons={maxButtons}
