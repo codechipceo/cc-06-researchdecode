@@ -1,5 +1,7 @@
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import ResponsiveAppBar from '../../Components/Navbar/Navbar';
-import "./LandingPage.scss";
 import ConsultingServices from './Section/ConsultingServices';
 import FAQSection from './Section/FAQSection';
 import Footer from './Section/Footer';
@@ -8,42 +10,45 @@ import Labs from './Section/Labs';
 import RecommendedCourses from './Section/RecommendedCourses';
 import SearchResearch from "./Section/SearchResearch";
 import WorkshopPromo from './Section/WorkshopPromo';
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+
 const LandingPage = () => {
-  const location = useLocation();
+  const location = useLocation(); // Get the current location
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get("token");
-
-    if (token) {
-      console.log("Token from URL:", token);
-      const verifyUser = async () => {
-        try {
-          const response = await axios.post(
-            "http://localhost:5001/user/student/verify",
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          console.log("Response data:", response.data);
-        } catch (error) {
-          console.error("Error verifying token:", error);
+    const verifyUser = async () => {
+      try {
+        // Parse the URL to extract the token
+        const queryParams = new URLSearchParams(location.search);
+        const token = queryParams.get("token"); // Get the 'token' parameter
+        console.log(token);
+        
+        if (!token) {
+          console.error("Authorization token is missing.");
+          return;
         }
-      };
 
-      verifyUser();
-    }
-  }, [location]);
+        const response = await axios.post(
+          "http://localhost:5001/user/student/verify",
+          {},
+          {
+            headers: {
+              authToken: token, 
+            },
+          }
+        );
+
+        console.log("Verification Successful:", response.data);
+      } catch (error) {
+        console.error("Verification Failed:", error.response?.data || error.message);
+      }
+    };
+
+    verifyUser();
+  }, [location.search]); // Dependency ensures the effect runs when the URL changes
 
   return (
     <>
-      <ResponsiveAppBar />
+      {/* <ResponsiveAppBar />   */}
       <Hero />
       <SearchResearch />
       <RecommendedCourses />
@@ -55,7 +60,6 @@ const LandingPage = () => {
       <Footer />
     </>
   );
-
 };
 
 export default LandingPage;
