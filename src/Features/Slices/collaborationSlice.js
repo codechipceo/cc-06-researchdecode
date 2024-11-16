@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
-import { getAllCollaborations } from "../../../../backend/src/Modules/Collaboration/collaborationService";
 
 const apiFeature = new ApiFeatures("user", "collaboration", axiosInstance);
 
-const getAllCollaborations = createAsyncThunk(
+export const getAllCollaborations = createAsyncThunk(
   "collab/getall",
   async (payload, { rejectWithValue }) => {
     try {
@@ -43,3 +42,5 @@ const collaborationSlice = createSlice({
 });
 
 export default collaborationSlice;
+
+export const collabState = state => state.collaboration

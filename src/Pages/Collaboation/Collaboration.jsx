@@ -1,96 +1,126 @@
-import { useState } from 'react';
-import { HeaderThree } from '../../Components/Headers/HeaderThree';
-import SearchBar from '../../Components/Searchbar/SearchBar';
-import Typography from '../../assets/scss/components/Typography';
-import { CollaborationCard } from './components/CollaborationCard';
-import PaginationComponent from '../../Components/Pagination/PaginationComponent';
+import { useState } from "react";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import SearchBar from "../../Components/Searchbar/SearchBar";
+import Typography from "../../assets/scss/components/Typography";
+import { CollaborationCard } from "./components/CollaborationCard";
+import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import { useCollaboration } from "../../Hooks/use-collaboration";
 const breadcrumbPath = [
   {
     label: "Home",
     path: "/",
   },
-]
+];
 
 const dummyData = [
   {
-  title: "Sample Collaboration",
-  description:
-    "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration.",
-  collaborators: ["User 1", "User 2", "User 3"],
-  tags: ["AI", "Machine Learning", "Data Science"],
-  date: "2022-01-01",
+    title: "Sample Collaboration",
+    description:
+      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration.",
+    collaborators: ["User 1", "User 2", "User 3"],
+    tags: ["AI", "Machine Learning", "Data Science"],
+    date: "2022-01-01",
     status: "Active",
-  username:'mansab'
-},
+    username: "mansab",
+  },
   {
-  title: "Sample Collaboration",
-  description:
-    "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
-  collaborators: ["User 1", "User 2", "User 3"],
-  tags: ["AI", "Machine Learning", "Data Science"],
-  date: "2022-01-01",
+    title: "Sample Collaboration",
+    description:
+      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
+    collaborators: ["User 1", "User 2", "User 3"],
+    tags: ["AI", "Machine Learning", "Data Science"],
+    date: "2022-01-01",
     status: "Active",
-  username:'ubaid'
-},
+    username: "ubaid",
+  },
   {
-  title: "Sample Collaboration",
-  description:
-    "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
-  collaborators: ["User 1", "User 2", "User 3"],
-  tags: ["AI", "Machine Learning", "Data Science"],
-  date: "2022-01-01",
+    title: "Sample Collaboration",
+    description:
+      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
+    collaborators: ["User 1", "User 2", "User 3"],
+    tags: ["AI", "Machine Learning", "Data Science"],
+    date: "2022-01-01",
     status: "Active",
-  username:'ubaid'
-},
-
-]
+    username: "ubaid",
+  },
+];
 
 const Collaboration = () => {
-  // states
-  const [search, setSearch] = useState('')
-  const  [activePage, setActivePage] = useState(1)
+  /*
+  ----------------------------------------------------------------
+                         STATES
+  ----------------------------------------------------------------
+  */
+  const limit = 9;
+  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activePage, setActivePage] = useState(1);
 
+  const { data } = useCollaboration(
+    limit,
+    (activePage - 1) * limit,
+    searchQuery
+  );
 
-  // handler functions
-  const handleSearch = (value) => {
-    console.log("searching for: ", value);
+  const { allCollaborations, count, loading } = data;
 
-    setSearch("dne");
-  }
-    return (
-      <div>
-        <HeaderThree breadcrumbPath={breadcrumbPath} title={"Collaboration"} />
-        <div className='default__layout_container'>
-          <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
-            Find Your Next Research Collaboration
-          </Typography>
+  /*
+  ----------------------------------------------------------------
+                          SEARCHING
+  ----------------------------------------------------------------
+  */
+  const handleSearch = () => {
+    setSearchQuery(search.trim());
+  };
 
-          <SearchBar
-            value={search}
-            setValue={setSearch}
-            onSearch={handleSearch}
-            placeholder='Search Collaboration'
-          />
+  const handleInputChange = (value) => {
+    setSearch(value);
+    if (value.trim() === "") {
+      setSearchQuery("");
+    }
+  };
 
-          <div className='flex collaboration__cards_wrapper flex-wrap'>
-            {dummyData.map((d) => {
-              return (
-                <CollaborationCard
-                  title={d.title}
-                  key={d.title}
-                  description={d.description}
-                  username={d.username}
-                  userImage={""}
-                />
-              );
-            })}
-          </div>
+  return (
+    <div>
+      <HeaderThree breadcrumbPath={breadcrumbPath} title={"Collaboration"} />
+      <div className='default__layout_container'>
+        <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
+          Find Your Next Research Collaboration
+        </Typography>
 
-          <PaginationComponent total={dummyData.length} limit={1} activePage={activePage} setActivePage={setActivePage}/>
+        <SearchBar
+          value={search}
+          handleChange={handleInputChange}
+          handleSearch={handleSearch}
+          placeholder='Search Collaboration'
+        />
 
+        <div className='flex collaboration__cards_wrapper flex-wrap'>
+          {allCollaborations.length && !loading
+            ? allCollaborations?.map((d) => {
+                const { _id, title, description } = d;
+                return (
+                  <CollaborationCard
+                    title={title}
+                    key={_id}
+                    description={description}
+                    username={d.username}
+                    userImage={""}
+                  />
+                );
+              })
+            : "Trying to fetch data..."}
         </div>
-      </div>
-    );
-}
 
-export default Collaboration
+        <PaginationComponent
+          total={count}
+          limit={limit}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Collaboration;
