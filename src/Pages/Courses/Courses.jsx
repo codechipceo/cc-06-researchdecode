@@ -11,39 +11,23 @@ const CoursePage = () => {
   const limit = 9;
   const [searchInput, setSearchInput] = useState(""); // State for search input
   const [searchTerm, setSearchTerm] = useState(""); // State for search term triggered by the button
-  const [filteredCourses, setFilteredCourses] = useState([]); // State for filtered courses
   const [activePage, setActivePage] = useState(1);
-  const { courseData: courses = [], courseCount, isCourseLoading, isCourseError } = useCourse(
+  const { courseData, courseCount, isCourseLoading, isCourseError } = useCourse(
     limit,
     (activePage - 1) * limit,
-    searchTerm 
+    searchTerm
   );
 
-  const handleSearch = () => {
-    if (searchInput.trim() === "") {
-      
-      setSearchTerm("");
-    } else {
-      
-      setSearchTerm(searchInput);
-    }
+  const handleSearch = (val) => {
+    setSearchTerm(val);
   };
-  
 
-  useEffect(() => {
-    
-    if (searchTerm.trim() === "") {
-      setFilteredCourses(courses);
-    } else {
-      const filtered = courses.filter((course) =>
-        course.courseName.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredCourses(filtered);
-    }
-  }, [courses, searchTerm]);
 
   const handleInputChange = (value) => {
-    setSearchInput(value); 
+    setSearchInput(value);
+    if (value.trim() === "") {
+      setSearchTerm("");
+    }
   };
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];
@@ -52,9 +36,9 @@ const CoursePage = () => {
     <div>
       <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
       <SearchBar
-        value={searchInput} 
-        handleChange={handleInputChange} 
-        handleSearch={handleSearch} 
+        value={searchInput}
+        handleChange={handleInputChange}
+        handleSearch={handleSearch}
         placeholder="Search Collaboration"
       />
       <Container sx={{ marginTop: "40px" }}>
@@ -66,14 +50,14 @@ const CoursePage = () => {
           />
           {!isCourseLoading && !isCourseError && (
             <Grid container spacing={3}>
-              {filteredCourses.length > 0 ? (
-                filteredCourses.map((course) => (
+              {courseData.length > 0 ? (
+                courseData.map((course) => (
                   <Grid item xs={12} md={3} key={course._id}>
                     <CourseCard course={course} />
                   </Grid>
                 ))
               ) : (
-                <p>No courses found</p> 
+                <p>No courses found</p>
               )}
             </Grid>
           )}
