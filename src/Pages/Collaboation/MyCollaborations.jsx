@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
 import SearchBar from "../../Components/Searchbar/SearchBar";
+import { collabState, getStudentCollaborations } from "../../Features/Slices/collaborationSlice";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import Typography from "../../assets/scss/components/Typography";
 import { CollaborationCard } from "./components/CollaborationCard";
-import PaginationComponent from "../../Components/Pagination/PaginationComponent";
-import { useCollaboration } from "../../Hooks/use-collaboration";
+
 const breadcrumbPath = [
   {
     label: "Home",
@@ -12,24 +14,23 @@ const breadcrumbPath = [
   },
 ];
 
-const Collaboration = () => {
+const MyCollaborations = () => {
   /*
   ----------------------------------------------------------------
                          STATES
   ----------------------------------------------------------------
   */
-  const limit = 9;
+
   const [search, setSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activePage, setActivePage] = useState(1);
 
-  const { data } = useCollaboration(
-    limit,
-    (activePage - 1) * limit,
-    searchQuery
-  );
+  const studentId = useSelector(selectStudentInfo);
+  const dispatch = useDispatch();
+  const collabStore = useSelector(collabState);
 
-  const { allCollaborations, count, loading } = data;
+  const {myCollaborations , loading} = collabStore;
+
+
 
   /*
   ----------------------------------------------------------------
@@ -47,12 +48,24 @@ const Collaboration = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(
+      getStudentCollaborations({
+
+        studentId: studentId._id,
+      })
+    );
+  }, []);
+
   return (
     <div>
-      <HeaderThree breadcrumbPath={breadcrumbPath} title={"Collaboration"} />
+      <HeaderThree
+        breadcrumbPath={breadcrumbPath}
+        title={"My Collaborations"}
+      />
       <div className='default__layout_container'>
         <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
-          Find Your Next Research Collaboration
+          Search Your Collaborations
         </Typography>
 
         <SearchBar
@@ -63,31 +76,28 @@ const Collaboration = () => {
         />
 
         <div className='flex collaboration__cards_wrapper flex-wrap'>
-          {allCollaborations.length && !loading
-            ? allCollaborations?.map((d) => {
-                const { _id, title, description } = d;
-                return (
-                  <CollaborationCard
-                    title={title}
-                    key={_id}
-                    description={description}
-                    username={d.username}
-                    userImage={""}
-                  />
-                );
-              })
+          {myCollaborations.length && !loading
+            ? myCollaborations
+                .map((d) => {
+                  const { _id, title, description } = d;
+                  return (
+                    <CollaborationCard
+                      title={title}
+                      key={_id}
+                      description={description}
+                      username={d.username}
+                      userImage={""}
+                      userId={studentId?._id}
+                    />
+                  );
+                })
             : "Trying to fetch data..."}
         </div>
 
-        <PaginationComponent
-          total={count}
-          limit={limit}
-          activePage={activePage}
-          setActivePage={setActivePage}
-        />
+
       </div>
     </div>
   );
 };
 
-export default Collaboration;
+export default MyCollaborations;

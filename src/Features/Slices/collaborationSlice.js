@@ -16,10 +16,23 @@ export const getAllCollaborations = createAsyncThunk(
   }
 );
 
+export const getStudentCollaborations = createAsyncThunk(
+  "collab:myCollabs",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg, count } = await apiFeature.getAll("student", payload);
+      return { data, msg, count };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const collaborationSlice = createSlice({
   name: "collab",
   initialState: {
     allCollaborations: [],
+    myCollaborations: [] ,
     error: null,
     loading: false,
     count: 0,
@@ -38,9 +51,22 @@ const collaborationSlice = createSlice({
       .addCase(getAllCollaborations.rejected, (state) => {
         state.loading = false;
       });
+
+    addCase(getStudentCollaborations.pending, (state) => {
+      state.loading = true;
+
+    }).addCase(getStudentCollaborations.fulfilled, (state, { payload }) => {
+      state.myCollaborations = payload.data;
+      state.error = null;
+      state.loading = false;
+      state.count = payload.count;
+    }).addCase(getStudentCollaborations.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    })
   },
 });
 
 export default collaborationSlice;
 
-export const collabState = state => state.collaboration
+export const collabState = (state) => state.collaboration;

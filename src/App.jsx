@@ -5,7 +5,7 @@ import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import PDFviewer from "./Components/PDFviewer/PDFviewer";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
-import { selectStudentToken } from "./Features/Slices/studentSlice";
+import { selectStudentInfo, selectStudentToken } from "./Features/Slices/studentSlice";
 import CourseDetail from "./Pages/CourseDetail/CourseDetail";
 import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
@@ -26,14 +26,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import Collaboration from "./Pages/Collaboation/Collaboration";
+import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <GuardComponents component={LandingPage} />,
+    element: <PropProvider component={LandingPage} />,
   },
   {
-    path: '/collaboration',
-    element: <Collaboration />
+    path: "/collaboration",
+    element: <Collaboration />,
+  },
+  {
+    path: "/my-collaborations",
+    element: <MyCollaborations />,
   },
   {
     path: "/testpdf",
@@ -53,7 +58,7 @@ const router = createBrowserRouter([
   // },
   {
     path: "/searchPaper",
-    element: <GuardComponents component={ResearchPaper} />,
+    element: <PropProvider component={ResearchPaper} />,
   },
   {
     path: "/pending-request/:pendingRequestId",
@@ -112,6 +117,7 @@ export default function App() {
 
 function GuardComponents({ component: Component, ...rest }) {
   const token = useSelector(selectStudentToken);
+  const studentInfo = useSelector(selectStudentInfo);
   if (!token) {
     return <SignIn />;
   }
@@ -119,10 +125,22 @@ function GuardComponents({ component: Component, ...rest }) {
   return (
     <DefaultLayout>
       <ScrollTop>
-        <Component {...rest} token={token} />
+        <Component {...rest} token={token} studentInfo={studentInfo} />
       </ScrollTop>
     </DefaultLayout>
   );
+}
+
+function PropProvider({ component: Component, ...rest }) {
+  const studentInfo = useSelector(selectStudentInfo);
+
+
+ return (  <DefaultLayout>
+     <ScrollTop>
+       <Component {...rest}  studentInfo={studentInfo} />
+     </ScrollTop>
+   </DefaultLayout>)
+
 }
 GuardComponents.propTypes = {
   component: PropTypes.func,

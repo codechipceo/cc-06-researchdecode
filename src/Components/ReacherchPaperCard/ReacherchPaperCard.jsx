@@ -30,6 +30,8 @@ const ResearchPaperCard = ({
   viewicon: ViewIcon
 }) => {
   const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy } = requestDetail;
+
+  console.log(requestDetail)
   const [isExpanded, setIsExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -171,7 +173,7 @@ const ResearchPaperCard = ({
         </div>
 
         <FlexboxGrid className="icons">
-          {loggedinUser._id !== requestBy._id && (
+          {loggedinUser?._id !== requestBy?._id && (
             <>
               <input
                 type="file"
@@ -182,7 +184,7 @@ const ResearchPaperCard = ({
               {UploadIcon && <UploadIcon onClick={handleUpload} style={{ cursor: "pointer" }} />}
             </>
           )}
-          {fileUrl && loggedinUser._id === requestBy._id && (
+          {fileUrl && loggedinUser?._id === requestBy?._id && (
             <>
               {ApproveIcon && <ApproveIcon className="firsticon" onClick={handleApprove} />}
               {RejectIcon && <RejectIcon className="crossicon" onClick={handleReject} />}
