@@ -79,7 +79,7 @@ const ResearchPaper = ({ studentInfo }) => {
             abstract={researchPaper.abstract}
             paperDetail={researchPaper}
             isLoggedin={isUserLoggedin}
-            // userInfo ={studentInfo}
+            userInfo ={studentInfo}
           />
         )}
 
