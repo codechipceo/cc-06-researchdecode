@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxStore } from "../Features/indexStates";
 
-export const useCourse = (limit = null) => {
+export const useCourse = (limit , skip  ,search) => {
   // ###########################################
   //                 STATES
   // ###########################################
+  
+  console.log(search)
+  const throttleTimeout = useRef(null);
   const dispatch = useDispatch();
   const { getAllCourses } = reduxStore.sliceMethods;
   const {
@@ -15,6 +18,7 @@ export const useCourse = (limit = null) => {
     selectCourseLoadingStatus,
     selectCourseErrorStatus,
   } = reduxStore.states;
+  
   const courseData = useSelector(selectCourses);
   const courseById = useSelector(selectCourseById);
   const courseCount = useSelector(courseTotalCount);
@@ -24,15 +28,30 @@ export const useCourse = (limit = null) => {
   // ###########################################
   //                 GET ALL COURSES
   // ###########################################
-
   useEffect(() => {
-    dispatch(getAllCourses({limit}));
-  }, [dispatch, getAllCourses ]);
+    
+      // Clear any existing timeout to throttle requests
+      if (throttleTimeout.current) {
+        clearTimeout(throttleTimeout.current);
+      }
+    
+      // Set a new timeout to dispatch the action
+      throttleTimeout.current = setTimeout(() => {
+        dispatch(getAllCourses({ limit, skip, search }));
+      }, 300); // Adjust delay as needed (300ms is a common throttle time)
+    
+      // Cleanup timeout on unmount or when dependencies change
+      return () => {
+        if (throttleTimeout.current) {
+          clearTimeout(throttleTimeout.current);
+        }
+      };
+    }, [limit, skip, search, dispatch]);
+  
 
   // ###########################################
   //                 EXPORT OBJECT
   // ###########################################
-
   return {
     courseData,
     courseById,
@@ -41,3 +60,4 @@ export const useCourse = (limit = null) => {
     isCourseError,
   };
 };
+
