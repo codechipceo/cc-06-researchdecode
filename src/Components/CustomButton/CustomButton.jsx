@@ -1,4 +1,3 @@
-
 import classNames from "classnames";
 import React from "react";
 import { Button } from "rsuite";
@@ -26,7 +25,7 @@ const CustomButton = ({
 
 
   return (
-    <Button as={Button} {...props}   disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
+    <Button as={Button} {...props} disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
       {/* {children}{" "}
       {Icon && (
         <img
@@ -38,7 +37,7 @@ const CustomButton = ({
           }}
         />
       )} */}
-        {isLoading ? (
+      {isLoading ? (
         <Loader size="sm" />
       ) : (
         <>

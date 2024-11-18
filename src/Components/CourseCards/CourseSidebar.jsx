@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoIosTime } from "react-icons/io";
 import { FaLanguage } from "react-icons/fa";
 import { Panel } from "rsuite"; // Changed to rsuite
@@ -18,7 +18,8 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   const [Razorpay, isLoaded] = useRazorpay();
   const dispatch = useDispatch();
 
-  const { price, courseLanguage, videos, isStudentEnrolled, _id, courseBanner,courseName } = course;
+
+  const { price, courseLanguage, videos, isStudentEnrolled, _id, courseBanner, courseName } = course;
 
   const handleBuyCourse = async () => {
     const payload = {
@@ -67,10 +68,14 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
     rzpay.open();
   };
 
+  const handleNavigation = () => {
+    navigate(`/course/${course._id}/lectures/${firstVideo}`);
+  };
+
   return (
     <Panel className="course-sidebar" shaded>
       {courseBanner && (
-        <img src={courseBanner} alt="Course Banner" className="course-banner" />
+        <img src={course.courseThumbnail} alt="Course Banner" className="course-banner" />
       )}
       <div className="course-content">
         <div className="course-info">
@@ -81,7 +86,7 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
 
         {!isStudentEnrolled ? (
           <CustomButton
-appearance="bold"
+            appearance="bold"
             fullWidth
             className="buy-button"
             onClick={handleBuyCourse}
@@ -90,11 +95,12 @@ appearance="bold"
           </CustomButton>
         ) : (
           <CustomButton
-            appearance="bold" // Using rsuite button appearance
+            appearance="bold"
             className="buy-button"
             fullWidth
             component={Link}
-            to={`/course/${course._id}/lectures/${firstVideo}`}
+            onClick={handleNavigation}
+          // to={`/course/${course._id}/lectures/${firstVideo}`}
           >
             Start Lecture
           </CustomButton>
@@ -103,7 +109,7 @@ appearance="bold"
         <hr />
 
         <Typography size="lg" variant="bold">
-         {courseName}
+          {courseName}
         </Typography>
 
         <div className="course-includes">
