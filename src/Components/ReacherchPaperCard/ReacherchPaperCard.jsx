@@ -31,9 +31,6 @@ const ResearchPaperCard = ({
 }) => {
   const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy} = requestDetail;
 
-  console.log(requestDetail)
-  console.log("Here is request detail");
-
   const [isExpanded, setIsExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);

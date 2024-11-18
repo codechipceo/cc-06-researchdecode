@@ -33,7 +33,6 @@ const CourseDetail = () => {
     if (courseId) {
       dispatch(getCourseById({ courseId }));
     }
-    console.log(courseDetail);
   }, [dispatch, courseId]);
 
   if (!courseDetail?.courseName) return <>Loading...</>;

@@ -2,7 +2,6 @@ import { Viewer, Worker } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
-import { useEffect } from "react";
 
 const PDFviewer = ({ file }) => {
 
@@ -16,10 +15,6 @@ const PDFviewer = ({ file }) => {
     SwitchTheme: () => <></>,
     Print: () => <></>,
   });
-
-  useEffect(() => {
-    console.log(file);
-  }, [])
   
 
   return (
