@@ -43,7 +43,7 @@ const CourseDetail = () => {
     <>  <HeaderThree title="Course Details" breadcrumbPath={breadcrumbPath} backgroundImage={'../../../images/banner/bgrp.png'} />
       <div>
         <div className="BannerWrapper">
-          <img src={courseDetail.courseThumbnail
+          <img src={courseDetail.courseBanner
           } alt={courseName} className="Banner" />
 
           <div className="firstbar">
