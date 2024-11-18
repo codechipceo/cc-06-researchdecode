@@ -1,8 +1,8 @@
-
 import classNames from "classnames";
 import React from "react";
 import { Button } from "rsuite";
-import { Loader } from 'rsuite';
+import { Loader } from "rsuite";
+import { useNavigate } from "react-router-dom";
 
 const CustomButton = ({
   children,
@@ -13,8 +13,20 @@ const CustomButton = ({
   onClick,
   disabled,
   isLoading,
+  to,
   ...props
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    if (to) {
+      event.preventDefault(); 
+      navigate(to);
+    } else if (onClick) {
+      onClick(event);
+    }
+  };
+
   const buttonClassnames = classNames(className, {
     "primary-button": variant === "primary",
     "font-weight-medium": fontWeight === "medium",
@@ -24,21 +36,15 @@ const CustomButton = ({
     "preview-button": variant === "preview",
   });
 
-
   return (
-    <Button as={Button} {...props}   disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
-      {/* {children}{" "}
-      {Icon && (
-        <img
-          src={Icon}
-          alt="icon"
-          style={{
-            marginLeft: "8px",
-            width: "14px",
-          }}
-        />
-      )} */}
-        {isLoading ? (
+    <Button
+      as={Button}
+      {...props}
+      disabled={disabled || isLoading}
+      onClick={handleClick}
+      className={`${buttonClassnames}`}
+    >
+      {isLoading ? (
         <Loader size="sm" />
       ) : (
         <>
@@ -57,7 +63,6 @@ const CustomButton = ({
       )}
     </Button>
   );
-
 };
 
 export default CustomButton;

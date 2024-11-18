@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoIosTime } from "react-icons/io";
 import { FaLanguage } from "react-icons/fa";
 import { Panel } from "rsuite"; // Changed to rsuite
@@ -17,6 +17,7 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   const navigate = useNavigate();
   const [Razorpay, isLoaded] = useRazorpay();
   const dispatch = useDispatch();
+  
 
   const { price, courseLanguage, videos, isStudentEnrolled, _id, courseBanner,courseName } = course;
 
@@ -70,7 +71,7 @@ const CourseSidebar = ({ course, isEnrolled = true, firstVideo }) => {
   return (
     <Panel className="course-sidebar" shaded>
       {courseBanner && (
-        <img src={courseBanner} alt="Course Banner" className="course-banner" />
+        <img src={course.courseThumbnail} alt="Course Banner" className="course-banner" />
       )}
       <div className="course-content">
         <div className="course-info">
@@ -90,7 +91,7 @@ appearance="bold"
           </CustomButton>
         ) : (
           <CustomButton
-            appearance="bold" // Using rsuite button appearance
+            appearance="bold"
             className="buy-button"
             fullWidth
             component={Link}
