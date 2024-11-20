@@ -1,0 +1,14 @@
+import React from "react";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import ChatContainer from "./ChatContainer";
+const InnboxOne = () => {
+  const breadcrumbPath = [{ label: "Home", path: "/" }];
+  return (
+    <>
+      <HeaderThree title="Inbox" breadcrumbPath={breadcrumbPath} />
+      <ChatContainer />
+    </>
+  );
+};
+
+export default InnboxOne;
