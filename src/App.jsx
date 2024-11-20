@@ -107,7 +107,7 @@ const router = createBrowserRouter([
   {
     path: "/videocall/:peerId",
     element: <VideoCall />,
-  },
+  }
 ]);
 
 export default function App() {
