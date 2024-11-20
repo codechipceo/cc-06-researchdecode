@@ -27,6 +27,7 @@ import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import Collaboration from "./Pages/Collaboation/Collaboration";
 import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -103,7 +104,7 @@ const router = createBrowserRouter([
   {
     path: "/videocall/:peerId",
     element: <VideoCall />,
-  },
+  }
 ]);
 
 export default function App() {
