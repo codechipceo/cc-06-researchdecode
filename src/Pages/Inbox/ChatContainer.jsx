@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChatList from "./ChatList";
 import ChatArea from "./ChatArea";
-import "./Chat.scss";
 
 const users = [
   {

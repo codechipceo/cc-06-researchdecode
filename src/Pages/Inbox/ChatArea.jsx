@@ -9,7 +9,7 @@ import {
 } from "react-icons/bi";
 import Message from "./Message";
 import { Log } from "@rsuite/icons";
-// import EmojiPicker from "emoji-picker-react";
+import EmojiPicker from "emoji-picker-react";
 
 const ChatArea = ({
   user,
@@ -20,30 +20,30 @@ const ChatArea = ({
 }) => {
   // console.log(messages);
 
-  // const [isRecording, setIsRecording] = useState(false);
-  // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   // Function to handle sending voice messages
-  // const handleSendVoiceMessage = () => {
-  //   console.log("Voice message sent");
-  //   setIsRecording(false);
-  //   // Add voice message sending logic here
-  // };
+  const handleSendVoiceMessage = () => {
+    console.log("Voice message sent");
+    setIsRecording(false);
+    // Add voice message sending logic here
+  };
 
   // Function to handle sending photos
-  // const handleSendPhoto = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     console.log("Photo sent:", file);
-  //     // Add photo sending logic here
-  //   }
-  // };
+  const handleSendPhoto = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      console.log("Photo sent:", file);
+      // Add photo sending logic here
+    }
+  };
 
   // // Function to handle emoji selection
-  // const onEmojiClick = (event, emojiObject) => {
-  //   onMessageChange(message + emojiObject.emoji); // Append emoji to the message
-  //   setShowEmojiPicker(false); // Close emoji picker
-  // };
+  const onEmojiClick = (event, emojiObject) => {
+    onMessageChange(message + emojiObject.emoji); // Append emoji to the message
+    setShowEmojiPicker(false); // Close emoji picker
+  };
 
   const handleVideoCall = () => {
     console.log("Video call started");
@@ -83,27 +83,27 @@ const ChatArea = ({
       <div className="message-input">
         <div className="input-actions">
           {/* Emoji Picker */}
-          {/* <IconButton
+          <IconButton
             icon={<BiSmile size={20} />}
             onClick={() => setShowEmojiPicker(!showEmojiPicker)}
           />
-          {showEmojiPicker && <EmojiPicker onEmojiClick={onEmojiClick} />} */}
+          {showEmojiPicker && <EmojiPicker onEmojiClick={onEmojiClick} />}
 
           {/* Photo Input */}
-          {/* <IconButton
+          <IconButton
             icon={<BiImage size={20} />}
             onClick={() => document.getElementById("photoInput").click()}
-          /> */}
-          {/* <input
+          />
+          <input
             type="file"
             id="photoInput"
             style={{ display: "none" }}
             accept="image/*"
             onChange={handleSendPhoto}
-          /> */}
+          />
 
           {/* Voice Message */}
-          {/* <IconButton
+          <IconButton
             icon={<BiMicrophone size={20} />}
             onClick={() => {
               if (!isRecording) {
@@ -114,7 +114,7 @@ const ChatArea = ({
                 handleSendVoiceMessage();
               }
             }}
-          /> */}
+          />
         </div>
 
         {/* Message Input */}
