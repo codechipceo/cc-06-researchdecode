@@ -5,7 +5,10 @@ import "./App.css";
 import { DefaultLayout } from "./Components/DefaultLayout/DefaultLayout";
 import PDFviewer from "./Components/PDFviewer/PDFviewer";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
-import { selectStudentInfo, selectStudentToken } from "./Features/Slices/studentSlice";
+import {
+  selectStudentInfo,
+  selectStudentToken,
+} from "./Features/Slices/studentSlice";
 import CourseDetail from "./Pages/CourseDetail/CourseDetail";
 import Courses from "./Pages/Courses/Courses";
 import Experts from "./Pages/Experts/Experts";
@@ -27,6 +30,7 @@ import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import Collaboration from "./Pages/Collaboation/Collaboration";
 import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -88,10 +92,10 @@ const router = createBrowserRouter([
     path: "/supervisor/:supervisorId",
     element: <GuardComponents component={SuperVisorDetail} />,
   },
-  // {
-  //   path: "/inbox",
-  //   element: <GuardComponents component={Inbox} />,
-  // },
+  {
+    path: "/inbox",
+    element: <Inbox />,
+  },
   {
     path: "/inbox/:supervisorId",
     element: <GuardComponents component={Inbox} />,
@@ -134,13 +138,13 @@ function GuardComponents({ component: Component, ...rest }) {
 function PropProvider({ component: Component, ...rest }) {
   const studentInfo = useSelector(selectStudentInfo);
 
-
- return (  <DefaultLayout>
-     <ScrollTop>
-       <Component {...rest}  studentInfo={studentInfo} />
-     </ScrollTop>
-   </DefaultLayout>)
-
+  return (
+    <DefaultLayout>
+      <ScrollTop>
+        <Component {...rest} studentInfo={studentInfo} />
+      </ScrollTop>
+    </DefaultLayout>
+  );
 }
 GuardComponents.propTypes = {
   component: PropTypes.func,
