@@ -4,10 +4,10 @@ import { AiOutlineMessage } from "react-icons/ai";
 import CustomButton from '../CustomButton/CustomButton';
 
 const Consultancy_card = ({ image, title, description, name, qualification }) => {
-    // const title1 = "Full stack developer";
-    // const description1 = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, tempore!";
-    // const name1 = "Amit pattanaik";
-    // const qualification1 = "Btech";
+    title = "Full stack developer";
+    const description1 = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, tempore!";
+    const name1 = "Amit pattanaik";
+    const qualification1 = "Btech";
     return (
         <div className='card'>
             <div className='card-left'>
