@@ -27,6 +27,40 @@ export const getStudentCollaborations = createAsyncThunk(
     }
   }
 );
+export const createCollaboration = createAsyncThunk(
+  "collab:create",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg, count } = await apiFeature.create("create", payload);
+      return { data, msg, count };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateCollaboration = createAsyncThunk(
+  "collab:update",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg, count } = await apiFeature.create("update", payload);
+      return { data, msg, count };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const deleteCollaboration = createAsyncThunk(
+  "collab:delete",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg, count } = await apiFeature.create("delete", payload);
+      return { data, msg, count };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 
 const collaborationSlice = createSlice({
   name: "collab",

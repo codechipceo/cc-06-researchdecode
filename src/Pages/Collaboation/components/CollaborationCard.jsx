@@ -1,20 +1,22 @@
 import Typography from "../../../assets/scss/components/Typography";
 import CustomButton from "../../../Components/CustomButton/CustomButton";
-import SendMessage  from "../../../assets/Icons/send_message_arrow.svg?react";
+import SendMessage from "../../../assets/Icons/send_message_arrow.svg?react";
 import { selectStudentInfo } from "../../../Features/Slices/studentSlice";
 import { useSelector } from "react-redux";
 
 export const CollaborationCard = ({
   title,
   description,
+  cardId,
   userImage,
   username,
   userId,
   handleBtnClick,
+  handleEdit,
+  handleDelete
 }) => {
-
-  const studentInfo = useSelector(selectStudentInfo)
-  const isOwner = userId === studentInfo._id
+  const studentInfo = useSelector(selectStudentInfo);
+  const isOwner = userId === studentInfo._id;
   return (
     <div className='collaboration__card__container'>
       <div className='collaboration__card__container--inner-wrapper'>
@@ -42,22 +44,30 @@ export const CollaborationCard = ({
         </div>
 
         {isOwner ? (
-<div className='flex flex-between'>
-          <CustomButton variant={"primary"}>Edit</CustomButton>
-          <CustomButton color={"red"} appearance={"primary"}>
-            Delete
+          <div className='flex flex-between'>
+            <CustomButton variant={"primary"} onClick={() => {
+              handleEdit({
+              cardId, title, description
+            }) }}>
+              Edit
+            </CustomButton>
+            <CustomButton
+              color={"red"}
+              appearance={"primary"}
+              onClick={() => handleDelete(cardId)}
+            >
+              Delete
+            </CustomButton>
+          </div>
+        ) : (
+          <CustomButton
+            variant={"primary"}
+            onClick={handleBtnClick}
+            className={"collaboration__card_action_btn"}
+          >
+            Send Message <SendMessage />
           </CustomButton>
-        </div>
-        ) : <CustomButton
-          variant={"primary"}
-          onClick={handleBtnClick}
-          className={"collaboration__card_action_btn"}
-        >
-          Send Message <SendMessage />
-        </CustomButton>}
-
-
-
+        )}
       </div>
     </div>
   );
