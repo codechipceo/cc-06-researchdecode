@@ -11,7 +11,8 @@ export const CollaborationCard = ({
   userImage,
   username,
   userId,
-  handleBtnClick,
+  handleMessage,
+  cardInfo,
   handleEdit,
   handleDelete
 }) => {
@@ -45,10 +46,16 @@ export const CollaborationCard = ({
 
         {isOwner ? (
           <div className='flex flex-between'>
-            <CustomButton variant={"primary"} onClick={() => {
-              handleEdit({
-              cardId, title, description
-            }) }}>
+            <CustomButton
+              variant={"primary"}
+              onClick={() => {
+                handleEdit({
+                  cardId,
+                  title,
+                  description,
+                });
+              }}
+            >
               Edit
             </CustomButton>
             <CustomButton
@@ -62,7 +69,7 @@ export const CollaborationCard = ({
         ) : (
           <CustomButton
             variant={"primary"}
-            onClick={handleBtnClick}
+            onClick={() => handleMessage({ ...cardInfo, userId })}
             className={"collaboration__card_action_btn"}
           >
             Send Message <SendMessage />
