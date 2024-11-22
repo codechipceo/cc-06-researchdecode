@@ -5,7 +5,9 @@ import SearchBar from "../../Components/Searchbar/SearchBar";
 import {
   collabState,
   createCollaboration,
+  deleteCollaboration,
   getStudentCollaborations,
+  updateCollaboration,
 } from "../../Features/Slices/collaborationSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import Typography from "../../assets/scss/components/Typography";
@@ -33,8 +35,11 @@ const MyCollaborations = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { isOpen, show, hide } = useModal();
 
-  const  [title, setTitle] = useState("")
-  const  [description, setDescription] = useState("")
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [isEdit, setEdit] = useState(false);
+  const [cardId, setCardId] = useState("");
+  const  [refresh , setRefresh] = useState(false)
 
   const studentId = useSelector(selectStudentInfo);
   const dispatch = useDispatch();
@@ -63,24 +68,50 @@ const MyCollaborations = () => {
                           HANDLER FUNCTIONS
   ----------------------------------------------------------------
   */
+  const handleReset = () => {
+    hide();
+    setSearch("");
+    setSearchQuery("");
+    setTitle("");
+    setDescription("");
+    setEdit(false);
+    setCardId("");
+  };
+  const handleEdit = (data) => {
+    setEdit(true);
+    const { title, description, cardId } = data;
+    setTitle(title);
+    setDescription(description);
+    setCardId(cardId);
+    console.log(data);
+    show();
+  };
 
+  const handleDelete = (paperId) => {
+    dispatch(deleteCollaboration({ paperId })).then(() => {
 
+      setRefresh(true);
+    })
+    // dispatch delete fn
+  };
 
-  const  handleSubmit = () => {
+  const handleSubmit = () => {
+    if (isEdit) {
+      dispatch(updateCollaboration({ title, description, paperId: cardId }));
+      setRefresh(!refresh)
+    } else {
+      dispatch(createCollaboration({ title, description }));
+    }
 
-    dispatch(createCollaboration({
-      title,description
-    }))
-
-    hide()
-  }
+    hide();
+  };
   useEffect(() => {
     dispatch(
       getStudentCollaborations({
         studentId: studentId._id,
       })
     );
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -112,10 +143,13 @@ const MyCollaborations = () => {
                     <CollaborationCard
                       title={title}
                       key={_id}
+                      cardId={_id}
                       description={description}
                       username={d.username}
                       userImage={""}
                       userId={studentId?._id}
+                      handleEdit={handleEdit}
+                      handleDelete={handleDelete}
                     />
                   );
                 })
@@ -124,9 +158,13 @@ const MyCollaborations = () => {
         </div>
       </div>
 
-      <CustomModal open={isOpen} handleClose={hide}>
+      <CustomModal open={isOpen} handleClose={handleReset}>
         <CustomModal.Header>
-          <h3>Add New Collaboration Request</h3>
+          <h3>
+            {isEdit
+              ? `Update Collaboration Request`
+              : `Add New Collaboration Request`}
+          </h3>
         </CustomModal.Header>
         <CustomModal.Body>
           <div>
@@ -137,6 +175,7 @@ const MyCollaborations = () => {
                   <Form.Control
                     name='title'
                     onChange={setTitle}
+                    value={title}
                     size='md'
                   />
                   <Form.HelpText tooltip>Required</Form.HelpText>
@@ -146,6 +185,7 @@ const MyCollaborations = () => {
                 <Form.ControlLabel>Description</Form.ControlLabel>
                 <Input
                   as='textarea'
+                  value={description}
                   onChange={setDescription}
                   name='description'
                 />
@@ -157,6 +197,7 @@ const MyCollaborations = () => {
         <CustomModal.FooterLeft>
           <CustomButton
             onClick={() => {
+              handleReset();
               hide();
             }}
           >
