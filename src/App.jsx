@@ -30,6 +30,7 @@ import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import Collaboration from "./Pages/Collaboation/Collaboration";
 import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
+import Supervisorform from "./Pages/Supervisorform/Supervisorform";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
   {
     path: "/videocall/:peerId",
     element: <VideoCall />,
+  },
+  {
+    path: "/supervisorform",
+    element: <Supervisorform />,
   }
 ]);
 
