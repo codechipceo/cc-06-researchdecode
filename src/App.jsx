@@ -109,7 +109,7 @@ const router = createBrowserRouter([
     element: <VideoCall />,
   },
   {
-    path: "/test",
+    path: "/course-lecture/:courseId",
     element: <CourseLecture />,
   },
 ]);
