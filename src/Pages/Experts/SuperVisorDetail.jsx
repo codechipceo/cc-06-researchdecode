@@ -115,7 +115,7 @@ export const SuperVisorDetail = () => {
       <HeaderThree
         title="Supervisor Detail"
         breadcrumbPath={breadcrumbPath}
-        backgroundImage={bgImage}
+        // backgroundImage={bgImage}
       />
       <Container>
         <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
