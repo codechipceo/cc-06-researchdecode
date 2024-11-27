@@ -8,7 +8,8 @@
     padding: 60px;
     padding-bottom: 50px;
     width: 100%;
-    color: $neutral5; // Heading font color for title
+    color: $neutral5;
+    min-height: 220px; // Heading font color for title
 
 
     @media (max-width: 1024px) {
