@@ -13,7 +13,7 @@ const Experts = () => {
   const [activePage, setActivePage] = useState(1);
 
   const {
-    consultancyCardData: teachers,
+    consultancyCardData: consultancyCards,
     consultancyCount,
     isLoading,
     isError,
@@ -61,11 +61,14 @@ const Experts = () => {
           </h3>
           <div className="cards-list">
             {!isLoading && !isError ? (
-              teachers.length > 0 ? (
-                teachers.map((d) => {
-                  const { title, description, teacherId } = d;
+              consultancyCards.length > 0 ? (
+                consultancyCards.map((d) => {
+                  console.log(d)
+                  const { title, description, teacherId, _id } = d;
                   return (
                     <Consultancy_card
+                      data ={d}
+                      key={teacherId}
                       image={image}
                       title={title}
                       description={description}
