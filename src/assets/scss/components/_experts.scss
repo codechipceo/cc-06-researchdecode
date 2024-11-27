@@ -1,0 +1,11 @@
+.cards-list{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    row-gap: 40px;
+}
+@media (max-width:800px) {
+    .cards-list{
+        display: flex;
+        flex-direction: column;
+    }
+}

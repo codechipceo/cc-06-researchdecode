@@ -22,6 +22,23 @@ export const getConvo = createAsyncThunk(
   }
 );
 
+export const createCollabConvo = createAsyncThunk(
+  "chats/collabConvo",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg} = await apiFeature.create(
+        "create",
+        payload
+      );
+      return { data, msg };
+    } catch (error) {
+      const errMessage = error.response.data.msg;
+      return rejectWithValue(errMessage);
+    }
+  }
+);
+
+
 const initialState = {
   totalCount: 0,
   userChats: [],
