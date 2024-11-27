@@ -6,6 +6,8 @@ import { useCourse } from "../../Hooks/use-course";
 import SearchBar from "../../Components/Searchbar/SearchBar";
 import { useState, useEffect } from "react";
 import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import RecommendedCourses from "../LandingPage/Section/RecommendedCourses";
+import AllCourses from "./AllCourses";
 
 const CoursePage = () => {
   const limit = 9;
@@ -34,43 +36,21 @@ const CoursePage = () => {
 
   return (
     <div>
-      <HeaderTwo title="COURSES" breadcrumbPath={breadcrumbPath} />
+      <HeaderTwo title="Course List" breadcrumbPath={breadcrumbPath} />
       <SearchBar
         value={searchInput}
         handleChange={handleInputChange}
         handleSearch={handleSearch}
-        placeholder="Search Collaboration"
+        placeholder="Search your favourite course"
       />
-      <Container sx={{ marginTop: "40px" }}>
-        <Box>
-          <StatusHandler
-            isLoading={isCourseLoading}
-            isError={isCourseError}
-            errorMessage="Error loading courses"
-          />
-          {!isCourseLoading && !isCourseError && (
-            <Grid container spacing={3}>
-              {courseData.length > 0 ? (
-                courseData.map((course) => (
-                  <Grid item xs={12} md={3} key={course._id}>
-                    <CourseCard course={course} />
-                  </Grid>
-                ))
-              ) : (
-                <p>No courses found</p>
-              )}
-            </Grid>
-          )}
-        </Box>
-      </Container>
-
+      <AllCourses />
       {/* Pagination Component */}
-      <PaginationComponent
+      {/* <PaginationComponent
         total={courseCount}
         limit={limit}
         activePage={activePage}
         setActivePage={setActivePage}
-      />
+      /> */}
     </div>
   );
 };

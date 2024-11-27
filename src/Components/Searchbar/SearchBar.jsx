@@ -17,7 +17,7 @@ const SearchBar = ({
 
 
   return (
-    <div className='custom-search-bar'>
+    <div className='custom-search-bar' style={{display: 'flex', gap: '10px', }}>
       <InputGroup>
         <Input
           value={value}
@@ -25,6 +25,7 @@ const SearchBar = ({
           placeholder={placeholder}
           disabled={isLoading}
         />
+        </InputGroup>
         <CustomButton
           variant='primary'
           fontWeight='medium'
@@ -35,7 +36,6 @@ const SearchBar = ({
         >
           Search
         </CustomButton>
-      </InputGroup>
     </div>
   );
 };

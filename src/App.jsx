@@ -30,7 +30,11 @@ import VideoCall from "./Pages/WebRTC/WebRTC";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import Collaboration from "./Pages/Collaboation/Collaboration";
 import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
+
 import CourseLecture from "./Pages/CourseLecture/CourseLecture";
+
+import Supervisorform from "./Pages/Supervisorform/Supervisorform";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -109,9 +113,15 @@ const router = createBrowserRouter([
     element: <VideoCall />,
   },
   {
+
     path: "/course-lecture/:courseId",
     element: <CourseLecture />,
   },
+    {
+    path: "/supervisorform",
+    element: <Supervisorform />,
+  }
+
 ]);
 
 export default function App() {
