@@ -53,10 +53,18 @@ const ChatArea = ({
       {/* Header Section */}
       <div className="chat-header">
         <div className="user-info">
-          <Avatar src={user.avatar} alt={user.name} circle size="md" />
+          <Avatar
+            src={
+              user.profileImage ||
+              "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+            }
+            alt={user.name}
+            circle
+            size="md"
+          />
           {user.online && <span className="online-indicator"></span>}
           <div>
-            <h2>{user.name}</h2>
+            <h2>{user.firstName || user.name}</h2>
             <p>{user.role}</p>
           </div>
         </div>

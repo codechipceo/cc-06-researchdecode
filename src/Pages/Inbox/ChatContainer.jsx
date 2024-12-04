@@ -1,76 +1,18 @@
-import React, { useState, useEffect } from "react";
-import ChatList from "./ChatList";
+import React, { useState, useEffect, useRef } from "react";
+import { useChat } from "../../Hooks/useChat"; // Assuming useChat is your custom hook
+import ChatList from "./ChatList"; // Assuming ChatList is your child component
 import ChatArea from "./ChatArea";
-
-const users = [
-  {
-    id: 1,
-    name: "ByeWind",
-    role: "Software Engineer",
-    avatar:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
-    online: true,
-  },
-  {
-    id: 2,
-    name: "Sarah Chen",
-    role: "UX/UI Designer",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
-  },
-  {
-    id: 3,
-    name: "Alex Morgan",
-    role: "Product Manager",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
-    online: true,
-  },
-  {
-    id: 4,
-    name: "Emma Wilson",
-    role: "Software Engineer",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
-  },
-  {
-    id: 5,
-    name: "James Lee",
-    role: "Developer",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
-    online: true,
-  },
-  {
-    id: 6,
-    name: "Alex Morgan",
-    role: "Product Manager",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
-    online: true,
-  },
-  {
-    id: 7,
-    name: "Emma Wilson",
-    role: "Software Engineer",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
-  },
-  {
-    id: 8,
-    name: "James Lee",
-    role: "Developer",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
-    online: true,
-  },
-];
-
 const ChatContainer = () => {
-  const [selectedUser, setSelectedUser] = useState(users[0]);
+  const { inbox, fetchInbox, fetchChatHistory, isLoading, isError } = useChat();
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedUser, setSelectedUser] = useState({});
+  const prevInboxRef = useRef(); // Ref to store the previous inbox value
+  const hasFetched = useRef(false); // Ref to track if data has been fetched
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     const chatArea = document.getElementById("chat-area");
@@ -79,10 +21,29 @@ const ChatContainer = () => {
     }
   }, [messages]);
 
+  // Run fetchInbox only once when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchInbox(); // Wait for the fetch to complete
+      // console.log(inbox);
+    };
+    fetchData();
+  }, []); // Only call once on mount (no dependency on fetchInbox)
+  // console.log(inbox);
+
+  // Log inbox only once after the first fetch
+  useEffect(() => {
+    if (!hasFetched.current && inbox && inbox.length > 0) {
+      // Log inbox once after the first fetch
+      hasFetched.current = true; // Set the flag to true so it doesn't log again
+    }
+  }, [inbox]); // Log when inbox is set for the first time
+
   const handleUserSelect = (user) => {
     setSelectedUser(user);
-    setMessages([]);
   };
+
+  // console.log(selectedUser);
 
   const handleSearch = (value) => {
     setSearchQuery(value);
@@ -99,28 +60,65 @@ const ChatContainer = () => {
     }
   };
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.role.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    if (inbox.data) {
+      // Filter the users based on the search query
+      const filtered = inbox.data.filter(
+        (user) =>
+          user.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.name?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setUser(filtered);
+
+      // Set the first user as the default selected user if available
+      if (filtered.length > 0) {
+        setSelectedUser(filtered[0]); // Select the first user by default
+      }
+    }
+  }, [inbox.data, searchQuery]);
+
+  useEffect(() => {
+    const fetchChatHistoryForUser = async () => {
+      if (selectedUser._id) {
+        console.log(selectedUser._id);
+
+        // Prepare the payload for the backend
+        const payload = {
+          recipientId: selectedUser._id, // Use the selected user's ID
+        };
+
+        // Fetch chat history for the selected user
+        const chatHistory = await fetchChatHistory(payload); // Pass the payload to the fetchChatHistory function
+        setChatHistory(chatHistory.payload.data);
+        // console.log(chatHistory.payload.data);
+        // Log the fetched chat history
+      }
+    };
+
+    fetchChatHistoryForUser();
+  }, [selectedUser]); // Run this effect when selectedUser changes
+  console.log(chatHistory);
 
   return (
     <div className="chat-container">
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>Error: {isError}</p>}
+      {/* Ensure inbox is an array before passing it to ChatList */}
       <ChatList
-        users={filteredUsers}
+        users={user} // Use filtered users instead of inbox.data
         selectedUser={selectedUser}
         onUserSelect={handleUserSelect}
         onSearch={handleSearch}
         searchQuery={searchQuery}
       />
+
       {selectedUser && (
         <ChatArea
           user={selectedUser}
           message={message}
           onMessageChange={setMessage}
           onSendMessage={handleSendMessage}
-          messages={messages}
+          messages={[...chatHistory, ...messages]}
         />
       )}
     </div>

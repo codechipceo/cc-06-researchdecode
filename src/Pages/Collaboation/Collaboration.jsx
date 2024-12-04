@@ -11,7 +11,7 @@ import useModal from "../../Hooks/useModal";
 import { Form } from "rsuite";
 import { Input } from "rsuite";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-import { createCollabConvo } from "../../Features/Slices/chatSlice";
+// import { createCollabConvo } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 const breadcrumbPath = [
   {
@@ -34,7 +34,7 @@ const Collaboration = () => {
   } = useModal();
   const [message, setMessage] = useState();
   const [selectedCard, setSelectedCard] = useState("");
-  const loggedinUser = useSelector(selectStudentInfo)
+  const loggedinUser = useSelector(selectStudentInfo);
 
   /*
   ----------------------------------------------------------------
@@ -95,13 +95,13 @@ const Collaboration = () => {
     };
 
     dispatch(createCollabConvo(payload));
-    reset()
+    reset();
   };
 
   return (
     <div>
       <HeaderThree breadcrumbPath={breadcrumbPath} title={"Collaboration"} />
-      <div className='default__layout_container'>
+      <div className="default__layout_container">
         <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
           Find Your Next Research Collaboration
         </Typography>
@@ -110,17 +110,16 @@ const Collaboration = () => {
           value={search}
           handleChange={handleInputChange}
           handleSearch={handleSearch}
-          placeholder='Search Collaboration'
+          placeholder="Search Collaboration"
         />
 
-        <div className='flex collaboration__cards_wrapper flex-wrap'>
+        <div className="flex collaboration__cards_wrapper flex-wrap">
           {allCollaborations.length && !loading
             ? allCollaborations?.map((d) => {
                 const { _id, title, description } = d;
                 return (
                   <CollaborationCard
-                    cardInfo ={d}
-
+                    cardInfo={d}
                     title={title}
                     key={_id}
                     description={description}
@@ -149,13 +148,13 @@ const Collaboration = () => {
           <CustomModal.Body>
             <div>
               <Form fluid>
-                <Form.Group controlId='textarea-6'>
+                <Form.Group controlId="textarea-6">
                   <Form.ControlLabel>Write Message</Form.ControlLabel>
                   <Input
-                    as='textarea'
+                    as="textarea"
                     value={message}
                     onChange={setMessage}
-                    name='message'
+                    name="message"
                   />
                 </Form.Group>
               </Form>

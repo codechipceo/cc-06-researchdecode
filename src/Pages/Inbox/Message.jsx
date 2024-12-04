@@ -3,7 +3,7 @@ import React from "react";
 import { Avatar } from "rsuite";
 
 const Message = ({ message, isOwn }) => {
-  console.log(message, isOwn);
+  console.log(message);
 
   return (
     <div className={`message ${isOwn ? "message-own" : "message-received"}`}>
