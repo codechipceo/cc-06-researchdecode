@@ -1,9 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useChat } from "../../Hooks/useChat"; // Assuming useChat is your custom hook
+import io from "socket.io-client";
 import ChatList from "./ChatList"; // Assuming ChatList is your child component
 import ChatArea from "./ChatArea";
+import { Log } from "@rsuite/icons";
+
+const socket = io("http://localhost:5000");
+
 const ChatContainer = () => {
-  const { inbox, fetchInbox, fetchChatHistory, isLoading, isError } = useChat();
+  const {
+    inbox,
+    fetchInbox,
+    fetchChatHistory,
+    sendMessageAction,
+    isLoading,
+    isError,
+  } = useChat();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState({});
   const prevInboxRef = useRef(); // Ref to store the previous inbox value
@@ -13,6 +25,13 @@ const ChatContainer = () => {
   const [messages, setMessages] = useState([]);
   const [chatHistory, setChatHistory] = useState([]);
   const [user, setUser] = useState([]);
+  const senderId = JSON.parse(localStorage.getItem("studentInfo"))?._id;
+  const senderModel = JSON.parse(localStorage.getItem("studentInfo"))?.userType;
+  // console.log(senderModel);
+
+  // Get sender ID from localStorage
+  const recipientId = selectedUser._id; // The selected user's ID
+  const roomId = [senderId, recipientId].sort().join("-"); // Unique room ID for the two users
 
   useEffect(() => {
     const chatArea = document.getElementById("chat-area");
@@ -43,20 +62,48 @@ const ChatContainer = () => {
     setSelectedUser(user);
   };
 
-  // console.log(selectedUser);
+  console.log(selectedUser);
 
   const handleSearch = (value) => {
     setSearchQuery(value);
   };
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { user: selectedUser.name, text: message },
-      ]);
+  useEffect(() => {
+    if (roomId) {
+      console.log("Joining Room: ", roomId);
+      socket.emit("joinRoom", roomId); // Join room
+    }
 
-      setMessage("");
+    const handleMessage = (message) => {
+      console.log("Received message: ", message);
+      setMessages((prevMessages) => [message, ...prevMessages]);
+      // Append new message to the end
+    };
+
+    socket.on("message", handleMessage);
+
+    return () => {
+      console.log("Cleaning up listeners for room: ", roomId);
+      socket.off("message", handleMessage);
+    };
+  }, [roomId]);
+
+  const handleSendMessage = async () => {
+    if (message && senderId && recipientId) {
+      // Check if not currently sending
+
+      const modelSender = senderModel == "USER" ? "Student" : "Profile";
+      const messageData = {
+        sender: senderId,
+        senderModel: modelSender,
+        recipient: recipientId,
+        recipientModel: selectedUser.userType == "USER" ? "Student" : "Profile",
+        content: message,
+      };
+
+      socket.emit("chat", messageData);
+      setMessage(""); // Clear input field
+      // Reset flag after sending
     }
   };
 
@@ -80,7 +127,7 @@ const ChatContainer = () => {
   useEffect(() => {
     const fetchChatHistoryForUser = async () => {
       if (selectedUser._id) {
-        console.log(selectedUser._id);
+        // console.log(selectedUser._id);
 
         // Prepare the payload for the backend
         const payload = {
@@ -97,7 +144,7 @@ const ChatContainer = () => {
 
     fetchChatHistoryForUser();
   }, [selectedUser]); // Run this effect when selectedUser changes
-  console.log(chatHistory);
+  // console.log(chatHistory);
 
   return (
     <div className="chat-container">
@@ -118,7 +165,7 @@ const ChatContainer = () => {
           message={message}
           onMessageChange={setMessage}
           onSendMessage={handleSendMessage}
-          messages={[...chatHistory, ...messages]}
+          messages={[...messages, ...chatHistory]}
         />
       )}
     </div>

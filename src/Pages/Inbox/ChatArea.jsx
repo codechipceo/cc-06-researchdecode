@@ -18,7 +18,7 @@ const ChatArea = ({
   onMessageChange,
   onSendMessage,
 }) => {
-  // console.log(messages);
+  // console.log(user._id);
 
   const [isRecording, setIsRecording] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -48,6 +48,9 @@ const ChatArea = ({
   const handleVideoCall = () => {
     console.log("Video call started");
   };
+
+  // console.log(user);
+
   return (
     <div className="chat-area">
       {/* Header Section */}
@@ -78,13 +81,16 @@ const ChatArea = ({
 
       {/* Messages Section */}
       <div className="messages-area">
-        {messages.map((msg, index) => (
-          <Message
-            key={index}
-            message={msg}
-            isOwn={msg.sender && msg.sender.id === "me"}
-          />
-        ))}
+        {messages
+          .slice()
+          .reverse()
+          .map((msg, index) => (
+            <Message
+              key={index}
+              message={msg}
+              notOwn={msg.sender != user._id}
+            />
+          ))}
       </div>
 
       {/* Input Section */}

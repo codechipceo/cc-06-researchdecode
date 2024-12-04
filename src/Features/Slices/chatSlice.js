@@ -88,7 +88,7 @@ export const sendMessage = createAsyncThunk(
 export const getChatHistory = createAsyncThunk(
   "chats/history",
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
+    // console.log(payload);
 
     try {
       const { data, msg } = await apiFeature.create("history", payload);
