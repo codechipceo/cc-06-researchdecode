@@ -1,7 +1,6 @@
 import React from "react";
 import { Input, InputGroup, Avatar } from "rsuite";
 import { BiSearch } from "react-icons/bi";
-
 const ChatList = ({
   users,
   selectedUser,
@@ -9,6 +8,8 @@ const ChatList = ({
   onSearch,
   searchQuery,
 }) => {
+  // console.log(users);
+
   return (
     <div className="chat-sidebar">
       <div className="sidebar-header">
@@ -32,18 +33,31 @@ const ChatList = ({
         ) : (
           users.map((user) => (
             <div
-              key={user.id}
+              key={user._id} // Use _id as the unique key for each user
               className={`chat-list-item ${
-                selectedUser.id === user.id ? "active" : ""
+                selectedUser._id === user._id ? "active" : ""
               }`}
               onClick={() => onUserSelect(user)}
             >
               <div className="avatar-container">
-                <Avatar src={user.avatar} alt={user.name} circle size="lg" />
+                <Avatar
+                  src={
+                    user.profileImage ||
+                    "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+                  } // Ensure fallback if no profileImage
+                  alt={user.firstName || user.name} // Display first name or name
+                  circle
+                  size="lg"
+                />
               </div>
               <div className="user-info">
-                <h3>{user.name}</h3>
-                <p>{user.role}</p>
+                <h3>
+                  {user.firstName
+                    ? `${user.firstName} ${user.lastName}`
+                    : user.name}
+                </h3>
+                <p>{user.userType || "TEACHER"}</p>{" "}
+                {/* Display user type or fallback */}
               </div>
             </div>
           ))

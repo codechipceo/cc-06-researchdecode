@@ -18,7 +18,7 @@ const ChatArea = ({
   onMessageChange,
   onSendMessage,
 }) => {
-  // console.log(messages);
+  // console.log(user._id);
 
   const [isRecording, setIsRecording] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -48,15 +48,26 @@ const ChatArea = ({
   const handleVideoCall = () => {
     console.log("Video call started");
   };
+
+  // console.log(user);
+
   return (
     <div className="chat-area">
       {/* Header Section */}
       <div className="chat-header">
         <div className="user-info">
-          <Avatar src={user.avatar} alt={user.name} circle size="md" />
+          <Avatar
+            src={
+              user.profileImage ||
+              "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+            }
+            alt={user.name}
+            circle
+            size="md"
+          />
           {user.online && <span className="online-indicator"></span>}
           <div>
-            <h2>{user.name}</h2>
+            <h2>{user.firstName || user.name}</h2>
             <p>{user.role}</p>
           </div>
         </div>
@@ -70,13 +81,16 @@ const ChatArea = ({
 
       {/* Messages Section */}
       <div className="messages-area">
-        {messages.map((msg, index) => (
-          <Message
-            key={index}
-            message={msg}
-            isOwn={msg.sender && msg.sender.id === "me"}
-          />
-        ))}
+        {messages
+          .slice()
+          .reverse()
+          .map((msg, index) => (
+            <Message
+              key={index}
+              message={msg}
+              notOwn={msg.sender != user._id}
+            />
+          ))}
       </div>
 
       {/* Input Section */}
