@@ -6,11 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Consultancy_card = ({ image, title, description, name, qualification, data }) => {
     const navigate = useNavigate()
-    const { _id}= data
-    title = "Full stack developer";
-    const description1 = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, tempore!";
-    const name1 = "Amit pattanaik";
-    const qualification1 = "Btech";
+    const { _id , teacherId } = data
+
     return (
         <div className='card'>
             <div className='card-left'>
@@ -26,7 +23,7 @@ const Consultancy_card = ({ image, title, description, name, qualification, data
                     <p>Qualification : {qualification}</p>
                     <div className='buttons'>
                         <CustomButton onClick={() =>navigate(`/supervisor/${_id}`)} variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Hire me <MdSend style={{ color: "white", marginLeft: "10px" }} /></CustomButton>
-                        <AiOutlineMessage size={50} color="aqua" style={{ cursor: "pointer" }} />
+                        <AiOutlineMessage size={50} onClick={() => navigate('/inbox/'+teacherId._id)} color="aqua" style={{ cursor: "pointer" }} />
                     </div>
                 </div>
             </div>

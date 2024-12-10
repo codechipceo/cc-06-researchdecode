@@ -32,7 +32,7 @@
   // Styling for sent messages
   &.message-own {
     justify-content: flex-end; // Push sent messages to the right
-    flex-direction: row-reverse; // Reverse layout: avatar on the right
+    flex-direction: reverse; // Reverse layout: avatar on the right
 
     .message-avatar {
       margin-left: 12px; // Adjust margin for reversed layout
@@ -52,7 +52,7 @@
 
   // Styling for received messages
   &.message-received {
-    justify-content: flex-end; // Align received messages to the left
+    justify-content: flex-start; // Align received messages to the left
 
     .message-avatar {
       margin-right: 12px; // Keep avatar on the left

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
 import ChatContainer from "./ChatContainer";
 const Inbox = () => {
@@ -6,7 +6,7 @@ const Inbox = () => {
   return (
     <>
       <HeaderThree title="Inbox" breadcrumbPath={breadcrumbPath} />
-      <ChatContainer />
+      <ChatContainer  />
     </>
   );
 };

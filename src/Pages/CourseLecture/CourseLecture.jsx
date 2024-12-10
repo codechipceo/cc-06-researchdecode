@@ -15,7 +15,6 @@ const CourseLecture = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
 
   const { courseId } = useParams();
-  console.log(courseId);
 
   const dispatch = useDispatch();
   const videos = useSelector(selectVideosByCourseId);
@@ -36,7 +35,6 @@ const CourseLecture = () => {
     setCurrentVideo(video);
   };
 
-  console.log(videos);
   const breadcrumbPath = [{ label: "Home", path: "/" }];
 
   return (

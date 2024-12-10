@@ -63,7 +63,6 @@ const Experts = () => {
             {!isLoading && !isError ? (
               consultancyCards.length > 0 ? (
                 consultancyCards.map((d) => {
-                  console.log(d)
                   const { title, description, teacherId, _id } = d;
                   return (
                     <Consultancy_card
