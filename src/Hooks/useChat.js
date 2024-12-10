@@ -8,6 +8,7 @@ import {
   sendMessage,
   getChatHistory,
 } from "../Features/Slices/chatSlice";
+import { useEffect, useState } from "react";
 
 export const useChat = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const useChat = () => {
   const isLoading = useSelector((state) => state.chats.isLoading);
   const isError = useSelector((state) => state.chats.isError);
   const errorMessage = useSelector((state) => state.chats.errorMessage);
+  const [chat, setChat] = useState([])
 
   const fetchInbox = (payload) => dispatch(getInbox(payload));
   const fetchAllChats = (payload) => dispatch(getAllChats(payload));
@@ -24,8 +26,33 @@ export const useChat = () => {
   const sendMessageAction = (payload) => dispatch(sendMessage(payload));
   const fetchChatHistory = (payload) => dispatch(getChatHistory(payload));
 
+
+  useEffect(() => {
+
+    setChat(() =>inbox?.map((e) => serialise(e)) )
+  }, [inbox])
+  const serialise = (inboxObj) => {
+    const { model, details } = inboxObj
+    const { firstName, lastName, role, name, _id} = details
+    if (model === "Student") {
+
+      return {
+        userId: _id,
+        name: firstName + " " + lastName,
+        role: role,
+        model: model
+      };
+    } else {
+      return {
+        userId: _id,
+        name: name, role: role, model: model
+      };
+    }
+
+  }
+
   return {
-    inbox,
+    inbox : chat,
     isLoading,
     isError,
     errorMessage,

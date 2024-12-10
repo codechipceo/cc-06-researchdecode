@@ -36,7 +36,7 @@ const CoursePage = () => {
 
   return (
     <div>
-      <HeaderTwo title="Course List" breadcrumbPath={breadcrumbPath} />
+      <HeaderTwo title="Course " breadcrumbPath={breadcrumbPath} />
       <SearchBar
         value={searchInput}
         handleChange={handleInputChange}
