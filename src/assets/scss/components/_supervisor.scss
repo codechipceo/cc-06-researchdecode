@@ -1,0 +1,77 @@
+.about {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://res.cloudinary.com/dsxrpa0ja/image/upload/v1732302925/202303_ThomasPrior_NewYork_IBMinnovationStudio_1247_cloz3g.jpg")
+      no-repeat center center;
+  background-size: cover;
+  height: auto;
+  width: 100%;
+  color: white;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 800px) {
+  .about {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+.about p {
+  font-size: 2vw;
+}
+
+.form-area {
+  width: 50%;
+  margin: auto;
+  padding: 50px 50px;
+}
+
+@media (max-width: 800px) {
+    .form-area{
+        width: 70%;
+    }
+}
+@media (max-width: 500px) {
+    .form-area{
+        width: 9%;
+    }
+}
+
+.about-inner {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.input-field {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.rs-picker-select {
+  width: 100% !important;
+}
+
+.submit-button-container {
+  text-align: center;
+}
+
+.submit-button1 {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-button1:hover {
+  background-color: #45a049;
+}

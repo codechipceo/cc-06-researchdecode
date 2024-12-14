@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar } from 'rsuite';
 import Typography from '../../assets/scss/components/Typography';
 import '../../assets/scss/components/CourseInstructor.scss';
-const ExpertCard = ({course}) => {
-  const {name,instructor,courseLanguage}=course;
-  const description="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.s"
+const ExpertCard = ({ course }) => {
+
+  const { name, instructor, courseLanguage } = course;
+  const description = `
+    Meet ${instructor.name}, one of our expert instructors! 
+    ${instructor.name} has been active since ${new Date(instructor.createdAt).toLocaleDateString()} 
+    and specializes in teaching courses in ${courseLanguage}. 
+    Their active status: ${instructor.isActive ? "Active" : "Inactive"}.
+  `;
   return (
     <div className="expert-card">
       <Typography size="xl" variant="bold" className="expert-card__title">
@@ -14,13 +20,13 @@ const ExpertCard = ({course}) => {
       <div className="expert-card__container">
         {/* Left Column - Photo, Contact, and Stats */}
         <div className="expert-card__left-column">
-          <Avatar 
-            circle 
-            size="lg" 
+          <Avatar
+            circle
+            size="lg"
             className="expert-card__avatar"
-        
+
           />
-          
+
           <Typography size="2xl" variant="bold" className="expert-card__name">
             {name}
           </Typography>
@@ -33,14 +39,14 @@ const ExpertCard = ({course}) => {
               </Typography>
               <span className="expert-card__contact-item-value">{instructor.email}</span>
             </Typography>
-            
+
           </div>
 
           {/* Stats */}
           <div className="expert-card__stats">
-          
 
-          
+
+
 
             <div className="expert-card__stats-item">
               <Typography size="sm" variant="regular" className="expert-card__stats-item-label">

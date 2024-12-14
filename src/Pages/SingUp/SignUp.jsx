@@ -19,7 +19,6 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import useAuth from "../../Hooks/use-auth";
-import "../../assets/scss/components/signup.scss";
 
 export const SignUp = () => {
   const [phoneNumberError, setPhoneNumberError] = useState(false);

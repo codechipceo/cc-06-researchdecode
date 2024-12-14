@@ -8,7 +8,6 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
-import "../../assets/scss/components/signin.scss";
 
 export const SignIn = () => {
   const navigate = useNavigate();

@@ -6,6 +6,10 @@ import chatSlice from "./Slices/chatSlice";
 import { videoSlice } from "./Slices/videoSlice";
 import consultancySlice from "./Slices/consultancySlice";
 import consultancyCardSlice from "./Slices/consultancyCardSlice";
+import collaborationSlice from "./Slices/collaborationSlice";
+import supervisorSlice from "./Slices/supervisorSlice";
+import { webinarSlice } from "./Slices/webinarSlice";
+
 export {
   videoSlice,
   chatSlice,
@@ -15,4 +19,7 @@ export {
   consultancyCardSlice,
   paperRequestSlice,
   consultancySlice,
+  collaborationSlice,
+  supervisorSlice,
+  webinarSlice
 };

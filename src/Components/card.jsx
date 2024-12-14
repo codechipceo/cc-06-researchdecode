@@ -1,14 +1,13 @@
-import React from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { createPaperRequest } from "../Features/Slices/requestResearchPaper";
 import { selectStudentInfo } from "../Features/Slices/studentSlice";
-import CustomButton from "../assets/scss/components/CustomButton";
+import CustomButton from "./CustomButton/CustomButton";
+import { useNavigate } from "react-router-dom";
 const PaperCard = ({
   title,
   author,
@@ -19,13 +18,15 @@ const PaperCard = ({
   paperDetail,
   setPaper,
   setDoiNumber,
+  isLoggedin,
+  userInfo,
 }) => {
   const dispatch = useDispatch();
-  const loggedinUser = useSelector(selectStudentInfo);
+  const navigate = useNavigate();
 
   const requestPayload = {
     DOI_number: doi,
-    requestBy: loggedinUser._id,
+    requestBy: userInfo?._id,
     paperDetail,
   };
   return (
@@ -79,12 +80,16 @@ const PaperCard = ({
           className={"left"}
           // style={{ marginLeft: "auto" }}
           onClick={() => {
-            dispatch(createPaperRequest(requestPayload))
-              .unwrap()
-              .then((res) => {
-                setPaper(null);
-                setDoiNumber("");
-              });
+            if (isLoggedin === false) {
+              navigate("/signup");
+            } else {
+              dispatch(createPaperRequest(requestPayload))
+                .unwrap()
+                .then((res) => {
+                  setPaper(null);
+                  setDoiNumber("");
+                });
+            }
           }}
         >
           Request Paper

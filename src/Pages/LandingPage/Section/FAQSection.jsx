@@ -2,7 +2,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'rsuite';
 import FaqCardComponent from '../../../Components/FAQCardComponent/FaqCardComponent'
-import './FAQSection.scss';
 import Typography from '../../../assets/scss/components/Typography';
 
 const FAQSection = () => {
@@ -42,7 +41,7 @@ const FAQSection = () => {
           US Suppliers, AliExpress vendors, and the best.
         </Typography>
       </div>
-      
+
       <Grid fluid>
         <Row className="faq-grid">
           {faqs.map((faq, index) => (

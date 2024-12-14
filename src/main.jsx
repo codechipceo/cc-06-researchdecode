@@ -6,7 +6,7 @@ import { store } from "./Store/store";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./Utils/theme";
 import { CustomProvider } from "rsuite";
-
+import './assets/scss/root.scss';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CustomProvider theme="theme">

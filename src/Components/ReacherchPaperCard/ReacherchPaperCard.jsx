@@ -8,7 +8,6 @@ import {
   Message,
 } from "rsuite";
 import Typography from "../../assets/scss/components/Typography";
-import "../../assets/scss/components/researchpapercard.scss";
 import PersonIcon from "@rsuite/icons/legacy/User";
 import { MainModal } from "../MainModal/MainModal";
 import PDFviewer from "../PDFviewer/PDFviewer";
@@ -30,7 +29,8 @@ const ResearchPaperCard = ({
   sendicon: SendIcon,
   viewicon: ViewIcon
 }) => {
-  const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy } = requestDetail;
+  const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy} = requestDetail;
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -41,7 +41,6 @@ const ResearchPaperCard = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
-
   const handlePanelClick = (e) => {
     if (fileUrl) {
       setOpen(true);
@@ -76,7 +75,7 @@ const ResearchPaperCard = ({
     dispatch(approvePaper({ requestId: _id, fulfilledBy }));
   };
 
-  const handleReject = () => {  
+  const handleReject = () => {
     dispatch(rejectPaperRequest({ requestId: _id }));
   };
 
@@ -100,7 +99,9 @@ const ResearchPaperCard = ({
   };
 
   const handleSend = () => {
-    navigate(`/pending-request/${_id}`);
+    if (location.pathname !== `/pending-request/${_id}`) {
+      navigate(`/pending-request/${_id}`);
+    }
   };
 
   const { title, author, ["container-title"]: containerTitle, publisher } = paperDetail;
@@ -119,8 +120,8 @@ const ResearchPaperCard = ({
             {containerTitle && containerTitle[0]}
           </Typography>
           <Typography size="sm">{title && title[0]}</Typography>
+          <Typography size="sm" variant="bold">Status:-{requestStatus}</Typography>
           <Divider />
-
           <FlexboxGrid className="details" align="middle">
             <FlexboxGrid.Item className="author-info">
               <Avatar circle icon={<PersonIcon />} size="md" />
@@ -172,7 +173,7 @@ const ResearchPaperCard = ({
         </div>
 
         <FlexboxGrid className="icons">
-          {loggedinUser._id !== requestBy._id && (
+          {loggedinUser?._id !== requestBy?._id && (
             <>
               <input
                 type="file"
@@ -183,12 +184,12 @@ const ResearchPaperCard = ({
               {UploadIcon && <UploadIcon onClick={handleUpload} style={{ cursor: "pointer" }} />}
             </>
           )}
-          {fileUrl && loggedinUser._id === requestBy._id && (
+          {fileUrl && loggedinUser?._id === requestBy?._id && (
             <>
               {ApproveIcon && <ApproveIcon className="firsticon" onClick={handleApprove} />}
               {RejectIcon && <RejectIcon className="crossicon" onClick={handleReject} />}
               {ViewIcon && <ViewIcon onClick={handlePanelClick} />}
-              {DownloadIcon && <DownloadIcon onClick={handleDownload}/>}
+              {DownloadIcon && <DownloadIcon onClick={handleDownload} />}
             </>
           )}
         </FlexboxGrid>

@@ -1,0 +1,51 @@
+@import "../root.scss";
+
+.recommended-courses {
+  padding: 16px;
+  
+  .recommended-header {
+    margin-bottom: 24px;
+    text-align: center;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+    
+      color: $dark90;
+    }
+  }
+  .webinar-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    text-align: center;       /* Horizontally centers the text */
+  }
+  
+  .courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px; // Spacing between cards
+    justify-content: space-between;
+
+    .courses-item {
+      flex: 1 1 calc(50% - 12px); // Two cards in a row
+      max-width: calc(50% - 12px); // Max width to maintain spacing
+      padding: 8px; // Optional padding for better spacing inside the item
+
+      @media (max-width: 768px) {
+        flex: 1 1 100%; // Single card in a row on smaller screens
+        max-width: 100%;
+      }
+
+      // Style for the image inside the courses-item
+      img {
+        width: 100%; // Ensure the image takes the full width of the container
+        height: auto; // Maintain the aspect ratio of the image
+        object-fit: cover; // Ensure the image covers the container while maintaining aspect ratio
+        // max-width: 681px; // Set max width to 681px
+        max-height: 266px; // Set max height to 266px
+        margin: 0 auto; // Center the image if it's smaller than the container
+      }
+    }
+  }
+}

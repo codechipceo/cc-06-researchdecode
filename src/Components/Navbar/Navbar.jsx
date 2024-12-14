@@ -20,8 +20,16 @@ import {
 } from "../../Features/Slices/studentSlice";
 const pages = [
   {
+    navLink: "Find Papers",
+    navPath: "/searchPaper",
+  },
+  {
     navLink: "Hire Expert",
     navPath: "/experts",
+  },
+  {
+    navLink: "Collaboration",
+    navPath: "/collaboration",
   },
   {
     navLink: "Courses",
@@ -31,10 +39,7 @@ const pages = [
   //   navLink: "Lab Requests",
   //   navPath: "/lab-request",
   // },
-  {
-    navLink: "Find Papers",
-    navPath: "/searchPaper",
-  },
+
   // {
   //   navLink: "Request Data",
   //   navPath: "/courses",
@@ -43,8 +48,8 @@ const pages = [
 const settings = [
   { name: "Paper Requests", path: "my-requests" },
   // { name: "Booked Consultancy", path: "my-consultancy" },
-  // { name: "Courses", path: "my-courses" },
-  // { name: "Collaborate", path: "collaborate" },
+  { name: "Courses", path: "my-courses" },
+  { name: "My Collabs", path: "my-collaborations" },
   // { name: "Payment History", path: "payment-history" },
 ];
 

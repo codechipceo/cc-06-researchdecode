@@ -38,6 +38,8 @@ import {
   videoTotalCount,
 } from "./Slices/videoSlice";
 
+import { resetState , submitSupervisorForm } from "./Slices/supervisorSlice";
+
 const reduxStore = {
   states: {
     StudentInfo: selectStudentInfo,
@@ -77,7 +79,8 @@ const reduxStore = {
     getCourseById,
     getAllVideos,
     getVideoById,
-  
+    resetState,
+    submitSupervisorForm
   },
 };
 

@@ -1,4 +1,4 @@
-@import '../base/colors.scss';
+
 
 .course-sidebar {
     display: flex;
@@ -20,12 +20,12 @@
         margin-bottom: 1rem;
 
         .original-price {
-            margin-top: 7px;  
+            margin-top: 7px;
             margin-left: 20%;
         }
 
         .discounted-price {
-            margin-top: 7px; 
+            margin-top: 7px;
             margin-left: 5%;
         }
     }
@@ -43,7 +43,7 @@
 
     .buy-button {
         margin: 0.4rem;
-        background-color: $primary;  
+        background-color: $primary;
         color: $neutral5;
         font-size: medium;
     }

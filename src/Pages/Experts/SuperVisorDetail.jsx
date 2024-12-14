@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-import { useCallback } from "react";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import bgImage from "../../assets/Images/bgrp2.png";
 import useRazorpay from "react-razorpay";
 
-import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
+import ExpertDetailCard from "../../Components/Cards/ExpertDetailCard";
+import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
+import { FaCalendarAlt } from "react-icons/fa";
+
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import {
   getConsultancyCardById,
@@ -23,7 +35,7 @@ import {
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
-  { label: "Supervisor", path: "/experts" },
+  { label: "Hire Expert", path: "/experts" },
 ];
 
 export const SuperVisorDetail = () => {
@@ -100,41 +112,108 @@ export const SuperVisorDetail = () => {
 
   return (
     <div>
-      <HeaderTwo title='Supervisor Detail' breadcrumbPath={breadcrumbPath} />
+      <HeaderThree
+        title="Supervisor Detail"
+        breadcrumbPath={breadcrumbPath}
+        // backgroundImage={bgImage}
+      />
       <Container>
-        <Grid2 container>
-          <Grid2 item xs={12} md={8}>
+        <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
+          <Grid2 item xs={4}>
             <Box>
-              <Typography variant='h3' fontWeight={500}>
-                {name}
-              </Typography>
-              <Typography variant='body1' fontWeight={500}>
-                {"Qualitification" || qualification}
-              </Typography>
-              <Typography variant='body1' fontWeight={500}>
-                {"Experience" || experience}
-              </Typography>
+              <ExpertDetailCard />
             </Box>
           </Grid2>
-          <Grid2 item xs={12} md={4}>
-            <Tabs
-              value={tabValue}
-              onChange={(e, newValue) => {
-                setTabValue(newValue);
-                setAmount(Number(e.target.id));
+          <Grid2 item xs={4}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                textAlign: "justify",
               }}
-              aria-label='course details tabs'
             >
-              <Tab label='Single' id={single} />
-              <Tab label='Project' id={project} />
-              {/* <Tab label='Reviews' /> */}
-            </Tabs>
-            <Typography>{tabValue === 0 && single}</Typography>
-            <Typography>{tabValue === 1 && project}</Typography>
+              <Box>
+                <h5>Heading of the teachers detail.</h5>
+              </Box>
+              <Box>
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. Lorem
+                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
+                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of
+                ethics, very popular during the Renaissance. The first line of
+                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
+                in section 1.10.32.
+              </Box>
+            </Box>
+          </Grid2>
+          <Grid2 item xs={4}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+            >
+              <Tabs
+                value={tabValue}
+                onChange={(e, newValue) => {
+                  setTabValue(newValue);
+                  setAmount(Number(e.target.id));
+                }}
+                aria-label="course details tabs"
+              >
+                <Tab label="Single" id={single} />
+                <Tab label="Project" id={project} />
+                {/* <Tab label="Reviews" /> */}
+              </Tabs>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "1rem",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  textAlign="center"
+                >
+                  <strong>Select Project Date:</strong>
+                </Typography>
 
-            <Button fullWidth variant='contained' onClick={handleConsultancy}>
-              Continue
-            </Button>
+                <CustomDatePicker
+                  placeholder="Pick a date"
+                  format="yyyy-MM-dd"
+                  onChange={(date) => console.log("Selected Date:", date)}
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "1rem",
+                }}
+              >
+                {/* ON Click alignment of amount needs to be fixed later no */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  textAlign="center"
+                >
+                  <strong>Project Cost:</strong>
+                </Typography>
+
+                <Typography>{tabValue === 0 && single}</Typography>
+                <Typography>{tabValue === 1 && project}</Typography>
+              </Box>
+
+              <Button fullWidth variant="contained" onClick={handleConsultancy}>
+                Continue
+              </Button>
+            </Box>
           </Grid2>
         </Grid2>
       </Container>

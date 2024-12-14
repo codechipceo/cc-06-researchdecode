@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'rsuite';
-import "./Labs.scss"
 import Labsimg from './images/2dd71d5ea1975b594bbce4a62c879754.png'
 import { useNavigate } from 'react-router-dom';
 const Labs = () => {

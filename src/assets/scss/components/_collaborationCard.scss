@@ -1,0 +1,27 @@
+.collaboration__card__container {
+    min-width: 300px;
+    max-width: 390px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 0px #00000040;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding:20px;
+    margin : 4px 8px;
+
+    &--inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+}
+
+.collaboration__cards_wrapper {
+    margin-bottom: 40px;
+}
+
+.collaboration__card_action_btn {
+    margin-top: 10px;
+    width: 100%;
+}

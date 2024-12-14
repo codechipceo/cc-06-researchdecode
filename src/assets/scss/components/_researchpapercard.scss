@@ -1,4 +1,4 @@
-@import '../base/colors.scss';
+
 
 .icons {
   justify-content: flex-end;
@@ -12,10 +12,10 @@
 
 .sendbutton{
   color: $primary;
- 
+
 }
 .firsticon{
- 
+
   color: $primary;
 }
 .crossicon{
@@ -57,7 +57,7 @@
 }
 
 .doi {
-  margin-left: auto; 
+  margin-left: auto;
   font-style: italic;
   color: $dark10;
 }

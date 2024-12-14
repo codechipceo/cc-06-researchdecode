@@ -40,28 +40,54 @@ $neutral0: #f7f7fa;
 $neutral15: #EAFFF9;
 $neutral20: #F5F5F5;
 
-// // $dark-gray: #484848;
-// // $light-teal: #49BBBD;
-// $dark-green: #2B2F2E;
-// $charcoal-black: #101828;
-// // $medium-gray: #646464;
-// $semi-transparent-black: #1D2939B2;
-// // $light-gray: #ACA5A5;
-// $dark-brown: #453E3E;
-// $black: #000000;
-// // $lavender-gray: #696984;
-// $navy-blue: #252641;
-// // $dim-gray: #313131;
-// $light-purple: #A8A8B6;
-// // $teal: #2BA7A9;
-// // $slate-gray: #333333;
-// // $lightest-gray: #EAECF0;
-// // $grayish-blue: #98A2B3;
-// // $bright-teal: #54BFC1;
-// $deep-charcoal: #101828;
-// $semi-transparent-black-80: #00000080;
-// $semi-dark-gray:  #555555;
-// $blue:  #2580D5;
-// $dark-blue: #0061E0;
-// $bright-green: #00E040;
-// $red-pink: #BD4962;
+
+
+// Define Color Palette Map
+$colors: (
+  primary: $primary,
+  primary70: $primary70,
+  primary30: $primary30,
+  primary40: $primary40,
+
+  neutral5: $neutral5,
+  neutral10: $neutral10,
+  neutral15: $neutral15,
+  neutral20: $neutral20,
+  neutral30: $neutral30,
+  neutral40: $neutral40,
+  neutral50: $neutral50,
+  neutral60: $neutral60,
+  neutral70: $neutral70,
+  neutral80: $neutral80,
+  neutral90: $neutral90,
+  neutral0: $neutral0,
+
+  accent0: $accent0,
+  accent1: $accent1,
+  accent2: $accent2,
+  accent3: $accent3,
+  accent4: $accent4,
+
+  dark10: $dark10,
+  dark20: $dark20,
+  dark30: $dark30,
+  dark40: $dark40,
+  dark50: $dark50,
+  dark60: $dark60,
+  dark70: $dark70,
+  dark80: $dark80,
+  dark90: $dark90,
+  dark100: $dark100,
+  dark110: $dark110
+);
+
+// Generate Text Color Classes Using Mixin
+@mixin generate-text-color-classes($colorMap) {
+  @each $name, $value in $colorMap {
+    .font-#{$name} {
+      color: $value;
+    }
+  }
+}
+
+@include generate-text-color-classes($colors);
