@@ -1,9 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
+import { toast } from "react-toastify";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "student", axiosInstance);
+const notify = (data) => {
+  // console.log(data);
+  toast.error(`${data}`, {
+    position: "top-right",
+  });
+};
 
 // Async thunk for student login
 export const studentLogin = createAsyncThunk(
@@ -11,9 +18,17 @@ export const studentLogin = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("signIn", payload);
-      localStorage.setItem("studentToken", data.token);
-      localStorage.setItem("studentInfo", JSON.stringify(data.user));
-      return { data, msg };
+      
+      if (Array.isArray(msg)) {
+        // console.log(msg);
+        msg.map((item)=>{
+          notify(item.msg)
+        })
+      } else {
+        localStorage.setItem("studentToken", data.token);
+        localStorage.setItem("studentInfo", JSON.stringify(data.user));
+        return { data, msg };
+      }
     } catch (error) {
       const errMessage = error.response.data.msg;
       return rejectWithValue(errMessage);
@@ -27,8 +42,18 @@ export const studentSignUp = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
-      localStorage.setItem("studentToken", data.token);
-      return { data, msg };
+
+      if (Array.isArray(msg)) {
+        console.log("error");
+        // console.log(msg);
+        // // notify();
+        msg.map((item) => {
+          notify(item.msg);
+        });
+      } else {
+        localStorage.setItem("studentToken", data.token);
+        return { data, msg };
+      }
     } catch (error) {
       const errMessage = error.response.data.msg;
       return rejectWithValue(errMessage);

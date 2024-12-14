@@ -1,19 +1,36 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosInstance } from '../../axios/axios';
-import { ApiFeatures } from '../../Api/ApiRepo';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { axiosInstance } from "../../axios/axios";
+import { ApiFeatures } from "../../Api/ApiRepo";
+import { toast } from "react-toastify";
 
 // Initialize the ApiFeatures for the supervisor module
-const apiFeature = new ApiFeatures('admin', 'teacheronboarding', axiosInstance);  // Updated module name
+const apiFeature = new ApiFeatures("admin", "teacheronboarding", axiosInstance); // Updated module name
+const notify = (data) => {
+  toast.error(`${data}`, {
+    position: "top-right",
+  });
+};
 
 // Async thunk for submitting supervisor form data
 export const submitSupervisorForm = createAsyncThunk(
-  'supervisor/submitRequest',
+  "supervisor/submitRequest",
   async (formData, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create('submitRequest', formData); // Use the `create` method from ApiFeatures
-      return { data, msg };
+      console.log("form submitted");
+
+      const { data, msg } = await apiFeature.create("submitRequest", formData); // Use the `create` method from ApiFeatures
+
+      console.log("response here");
+
+      if (Array.isArray(msg)) {
+        msg.map((item) => {
+          notify(item.msg);
+        });
+      } else {
+        return { data, msg };
+      }
     } catch (error) {
-      const errMessage = error.response.data.msg || 'Something went wrong';
+      const errMessage = error.response.data.msg || "Something went wrong";
       return rejectWithValue(errMessage);
     }
   }
@@ -21,7 +38,7 @@ export const submitSupervisorForm = createAsyncThunk(
 
 // Supervisor slice
 const supervisorSlice = createSlice({
-  name: 'supervisor',
+  name: "supervisor",
   initialState: {
     loading: false,
     success: false,

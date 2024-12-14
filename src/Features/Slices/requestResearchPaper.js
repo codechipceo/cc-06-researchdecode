@@ -5,6 +5,11 @@ import { toast } from "react-toastify";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "paperRequest", axiosInstance);
+const notify = (data) => {
+  toast.error(`${data}`, {
+    position: "top-right",
+  });
+};
 
 // Async thunk for creating a research paper
 export const createPaperRequest = createAsyncThunk(
@@ -12,7 +17,13 @@ export const createPaperRequest = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("createRequest", payload);
-      return { data, msg };
+      if (Array.isArray(msg)) {
+        msg.map((item) => {
+          notify(item.msg);
+        });
+      } else {
+        return { data, msg };
+      }
     } catch (error) {
       const errMessage = error.response.data.message;
       return rejectWithValue(errMessage);
@@ -47,9 +58,12 @@ export const getPendingRequests = createAsyncThunk(
   "requestPaper/pending",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg,count } = await apiFeature.getAll("pendingRequests", payload);   
+      const { data, msg, count } = await apiFeature.getAll(
+        "pendingRequests",
+        payload
+      );
 
-      return { data, msg,count };
+      return { data, msg, count };
     } catch (error) {
       const errMessage = error.response.data.msg;
       return rejectWithValue(errMessage);
@@ -177,7 +191,8 @@ const paperRequestSlice = createSlice({
 // Selectors
 export const selectPendingRequests = (state) =>
   state.paperRequest.pendingRequests;
-export const selectPendingRequestCount = (state) => state.paperRequest.pendingRequestCount;
+export const selectPendingRequestCount = (state) =>
+  state.paperRequest.pendingRequestCount;
 
 export const selectNewRequest = (state) => state.paperRequest.newRequest;
 export const selectIsRequestCreated = (state) =>

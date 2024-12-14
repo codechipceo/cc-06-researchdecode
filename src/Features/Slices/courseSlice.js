@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
+import { toast } from "react-toastify";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "course", axiosInstance);
@@ -9,13 +10,17 @@ const enrollCourseApi = new ApiFeatures(
   "courseEnrollment",
   axiosInstance
 );
+const notify = (data) => {
+  toast.error(`${data}`, {
+    position: "top-right",
+  });
+};
 
 // GET ALL Courses
 export const getAllCourses = createAsyncThunk(
   "course/getall",
   async (payload, { rejectWithValue }) => {
     try {
-     
       const { data, msg, count } = await apiFeature.getAll("getAll", payload);
       return { data, msg, count };
     } catch (error) {
@@ -30,7 +35,13 @@ export const buyCourse = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await enrollCourseApi.create("enroll", payload);
-      return { data, msg };
+      if (Array.isArray(msg)) {
+        msg.map((item) => {
+          notify(item.msg);
+        });
+      } else {
+        return { data, msg };
+      }
     } catch (error) {
       return rejectWithValue(error);
     }
