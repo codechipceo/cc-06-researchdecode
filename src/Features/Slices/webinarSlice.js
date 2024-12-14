@@ -182,9 +182,7 @@ export const webinarSlice = createSlice({
 // Selectors
 export const selectAllWebinars = (state) => state.webinar.webinars || [];
 export const selectWebinarById = (state) => state.webinar.webinarById || {};
-export const selectWebinarLoading = (state) =>
-  state.webinar?.isLoading || false;
+export const selectWebinarLoading = (state) => state.webinar?.isLoading || false;
 export const selectWebinarError = (state) => state.webinar?.isError || false;
-export const selectWebinarErrorMessage = (state) =>
-  state.webinar?.errorMessage || "";
+export const selectWebinarErrorMessage = (state) => state.webinar?.errorMessage || "";
 export const selectTotalCount = (state) => state.webinar?.totalCount || 0;
