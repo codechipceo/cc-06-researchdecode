@@ -28,7 +28,6 @@ const CourseDetail = () => {
   };
 
   const { courseName, courseBanner, instructor, videos } = courseDetail ?? {};
-console.log(courseDetail);
 
   useEffect(() => {
     if (courseId) {
