@@ -39,7 +39,7 @@ const MyCollaborations = () => {
   const [description, setDescription] = useState("");
   const [isEdit, setEdit] = useState(false);
   const [cardId, setCardId] = useState("");
-  const  [refresh , setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   const studentId = useSelector(selectStudentInfo);
   const dispatch = useDispatch();
@@ -96,13 +96,24 @@ const MyCollaborations = () => {
   };
 
   const handleSubmit = () => {
-    if (isEdit) {
-      dispatch(updateCollaboration({ title, description, paperId: cardId }));
-      setRefresh(!refresh)
-    } else {
-      dispatch(createCollaboration({ title, description }));
+    const student_info = localStorage.getItem("studentInfo");
+
+    let student_id = null;
+    if (student_info) {
+      const parsedStudentInfo = JSON.parse(student_info);
+      student_id = parsedStudentInfo._id;
     }
 
+    if (isEdit) {
+      dispatch(updateCollaboration({ title, description, paperId: cardId }));
+      setRefresh(!refresh);
+    } else {
+      if (student_id) {
+        dispatch(createCollaboration({ title, description, createdBy: student_id }));
+      } else {
+        console.error("Student ID not found. Cannot create collaboration.");
+      }
+    }
     hide();
   };
   useEffect(() => {
@@ -138,21 +149,21 @@ const MyCollaborations = () => {
           <div className='flex collaboration__cards_wrapper flex-wrap'>
             {myCollaborations.length && !loading
               ? myCollaborations.map((d) => {
-                  const { _id, title, description } = d;
-                  return (
-                    <CollaborationCard
-                      title={title}
-                      key={_id}
-                      cardId={_id}
-                      description={description}
-                      username={d.username}
-                      userImage={""}
-                      userId={studentId?._id}
-                      handleEdit={handleEdit}
-                      handleDelete={handleDelete}
-                    />
-                  );
-                })
+                const { _id, title, description } = d;
+                return (
+                  <CollaborationCard
+                    title={title}
+                    key={_id}
+                    cardId={_id}
+                    description={description}
+                    username={d.username}
+                    userImage={""}
+                    userId={studentId?._id}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                  />
+                );
+              })
               : "Looks like you have not created any collaborations yet. Click Add New to create a new collaboration."}
           </div>
         </div>
