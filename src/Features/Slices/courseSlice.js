@@ -68,6 +68,8 @@ export const getCourseById = createAsyncThunk(
   "course/getById",
   async (payload, { rejectWithValue }) => {
     try {
+      console.log(payload);
+      
       const { data, msg } = await apiFeature.getById("getById", payload);
       return { data, msg };
     } catch (error) {

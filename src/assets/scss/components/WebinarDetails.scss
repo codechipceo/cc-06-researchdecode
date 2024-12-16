@@ -1,0 +1,180 @@
+// Import fonts or global variables if necessary
+
+// Colors and Styles
+$primary-blue: #0078d7; // Adjust primary color based on image
+$dark-gray: #333333;
+$light-gray: #f5f5f5;
+$border-gray: #dddddd;
+$accent-color: #23cf9b;
+
+
+
+.webinar-banner {
+    width: 100%;
+    height: 505px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; // Adjust to contain if you want the whole image visible
+    display: flex; // Optional: for centering content inside the banner
+    justify-content: center;
+    align-items: center;padding: 20px;
+  }
+  
+.webinar-layout {
+  display: flex;
+//   justify-content: space-between;
+gap: 20px;
+  padding: 40px 20px;
+  background-color: $light-gray;
+
+  .webinar-details {
+    width: 70%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+  
+
+    .webinar-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: $dark-gray;
+      margin: 20px;
+    }
+
+    .webinar-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 0 20px;
+      margin-bottom: 20px;
+
+      p {
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        color: $dark-gray;
+
+        .icon {
+          margin-right: 8px;
+          font-size: 1.2rem;
+
+          &.icon-blue {
+            color: $primary-blue;
+          }
+
+          &.icon-green {
+            color: #28a745;
+          }
+
+          &.icon-red {
+            color: #dc3545;
+          }
+
+          &.icon-yellow {
+            color: #ffc107;
+          }
+
+          &.icon-purple {
+            color: #6f42c1;
+          }
+        }
+
+        strong {
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .webinar-description {
+      padding: 20px;
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: $dark-gray;
+        margin-bottom: 15px;
+      }
+
+      .description-content {
+        font-size: 1rem;
+        color: #555555;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .webinar-countdown {
+    width: 28%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+  
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .countdown-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      height: auto;
+  
+      .countdown-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        span {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: #444;
+        }
+  
+        p {
+          font-size: 0.9rem;
+          color: #777;
+          margin-top: 5px;
+        }
+      }
+    }
+  
+    .enroll-btn {
+      background-color: #23cf9b;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 15px;
+  
+      &:hover {
+        background-color: darken(#23cf9b, 10%);
+      }
+    }
+  }
+  
+}
+
+// Responsive Design
+@media screen and (max-width: 768px) {
+  .webinar-layout {
+    flex-direction: column;
+    gap: 20px;
+
+    .webinar-details,
+    .webinar-banner,
+    .webinar-countdown {
+      width: 100%;
+    }
+  }
+}
