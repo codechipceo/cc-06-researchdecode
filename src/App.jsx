@@ -35,6 +35,7 @@ import CourseLecture from "./Pages/CourseLecture/CourseLecture";
 import Supervisorform from "./Pages/Supervisorform/Supervisorform";
 import WebinarPage from "./Pages/Webinar/Webinar";
 import WebinarDetail from "./Pages/WebinarDetails/WebinarDetails";
+import Mycourse from "./Pages/Mycourse/Mycourse";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
   {
     path: "/webinar/:webinarId",
     element: <WebinarDetail/>,
+  },
+  {
+    path: "/my-courses",
+    element: <Mycourse/>,
   },
 ]);
 
