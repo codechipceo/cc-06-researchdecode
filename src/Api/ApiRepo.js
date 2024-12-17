@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export class ApiFeatures {
   constructor(role, module, apiInstance) {
     this.role = role;
@@ -37,6 +39,16 @@ export class ApiFeatures {
   }
 
   async getById(url, payload) {
+    const { data, msg } = await this.api
+      .post(this.path + url, payload)
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err;
+      });
+    return { data, msg };
+  }
+  
+  async getUserCourses(url, payload) {
     const { data, msg } = await this.api
       .post(this.path + url, payload)
       .then((res) => res.data)

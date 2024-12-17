@@ -48,7 +48,7 @@ const pages = [
 const settings = [
   { name: "Paper Requests", path: "my-requests" },
   // { name: "Booked Consultancy", path: "my-consultancy" },
-  { name: "Courses", path: "my-courses" },
+  { name: "My Courses", path: "my-courses" },
   { name: "My Collabs", path: "my-collaborations" },
   // { name: "Payment History", path: "payment-history" },
 ];
