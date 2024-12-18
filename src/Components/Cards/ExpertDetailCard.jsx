@@ -18,7 +18,7 @@ const ExpertDetailCard = ({
     <Card
       sx={{
         width: "100%",
-        boxShadow: 4,
+     
         borderRadius: 2,
         overflow: "hidden",
       }}

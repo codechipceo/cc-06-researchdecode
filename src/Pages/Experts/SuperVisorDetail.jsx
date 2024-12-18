@@ -8,7 +8,7 @@ import useRazorpay from "react-razorpay";
 import ExpertDetailCard from "../../Components/Cards/ExpertDetailCard";
 import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
 import { FaCalendarAlt } from "react-icons/fa";
-
+import WechatOutlineIcon from "@rsuite/icons/WechatOutline";
 import {
   Box,
   Button,
@@ -26,26 +26,36 @@ import {
 import {
   createConsultancy,
   selectConsultancyPaymentVerified,
+  verifyConsultancy,
   verifyConultancyPayment,
 } from "../../Features/Slices/consultancySlice";
 import {
   selectStudentData,
   selectStudentInfo,
 } from "../../Features/Slices/studentSlice";
+import CustomButton from "../../Components/CustomButton/CustomButton";
+import { IconButton } from "rsuite";
+import { useSockets } from "../../Hooks/useSockets";
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
   { label: "Hire Expert", path: "/experts" },
 ];
 
+const callMe = () => {
+  return "Mansab"
+}
 export const SuperVisorDetail = () => {
   const dispatch = useDispatch();
   const consultancyCardDetail = useSelector(selectConsultancyCardById);
   const isPaymentVerified = useSelector(selectConsultancyPaymentVerified);
   const [tabValue, setTabValue] = useState(0);
-  const { supervisorId } = useParams();
+  const { supervisorCardId } = useParams();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
+  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false)
+  const { socket } = useSockets()
+
 
   const [Razorpay, isLoaded] = useRazorpay();
 
@@ -59,7 +69,7 @@ export const SuperVisorDetail = () => {
       key: "rzp_test_jLhZZYBPKlMBn9",
       amount: amount ?? single,
       currency: "INR",
-      name: "ResearchPro",
+      name: "Researchdecode",
       description: "",
       image: "https://example.com/your_logo",
       order_id: order_id,
@@ -84,7 +94,7 @@ export const SuperVisorDetail = () => {
     const payload = {
       studentId: loggedinUser._id,
       teacherId: _id,
-      cardId: supervisorId,
+      cardId: supervisorCardId,
       amount: amount ?? Number(single),
       type: tabValue === 0 ? "single" : "project",
     };
@@ -105,15 +115,23 @@ export const SuperVisorDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getConsultancyCardById({ consultancyCardId: supervisorId }));
-  }, []);
+
+    if (_id) {
+
+      socket.emit("online", _id);
+    }
+    dispatch(getConsultancyCardById({ consultancyCardId: supervisorCardId }));
+    dispatch(verifyConsultancy({ consultancyCardId: supervisorCardId }))
+      .unwrap()
+      .then((res) => setIsConsultancyVerified(res?.data));
+  }, [supervisorCardId]);
 
   const [amount, setAmount] = useState(single);
 
   return (
     <div>
       <HeaderThree
-        title="Supervisor Detail"
+        title='Supervisor Detail'
         breadcrumbPath={breadcrumbPath}
         // backgroundImage={bgImage}
       />
@@ -163,10 +181,10 @@ export const SuperVisorDetail = () => {
                   setTabValue(newValue);
                   setAmount(Number(e.target.id));
                 }}
-                aria-label="course details tabs"
+                aria-label='course details tabs'
               >
-                <Tab label="Single" id={single} />
-                <Tab label="Project" id={project} />
+                <Tab label='Single' id={single} />
+                <Tab label='Project' id={project} />
                 {/* <Tab label="Reviews" /> */}
               </Tabs>
               <Box
@@ -177,16 +195,16 @@ export const SuperVisorDetail = () => {
                 }}
               >
                 <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  textAlign="center"
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
                 >
                   <strong>Select Project Date:</strong>
                 </Typography>
 
                 <CustomDatePicker
-                  placeholder="Pick a date"
-                  format="yyyy-MM-dd"
+                  placeholder='Pick a date'
+                  format='yyyy-MM-dd'
                   onChange={(date) => console.log("Selected Date:", date)}
                 />
               </Box>
@@ -199,9 +217,9 @@ export const SuperVisorDetail = () => {
               >
                 {/* ON Click alignment of amount needs to be fixed later no */}
                 <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  textAlign="center"
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
                 >
                   <strong>Project Cost:</strong>
                 </Typography>
@@ -210,9 +228,35 @@ export const SuperVisorDetail = () => {
                 <Typography>{tabValue === 1 && project}</Typography>
               </Box>
 
-              <Button fullWidth variant="contained" onClick={handleConsultancy}>
-                Continue
-              </Button>
+              <CustomButton
+                fullWidth
+                variant='primary'
+                disabled={isConsultancyVerified}
+                onClick={handleConsultancy}
+              >
+                {isConsultancyVerified ? "Currently Active" : "Buy"}
+              </CustomButton>
+              <div className='supervisor-chat-video-btn'>
+                <CustomButton
+                  variant={"primary"}
+                  onClick={() => {
+                    navigate(`/inbox/${_id}`);
+                  }}
+                >
+                  Chat{" "}
+                </CustomButton>
+                <CustomButton
+                  disabled={isConsultancyVerified === false}
+                  variant={"primary"}
+                  onClick={() =>
+                    navigate(
+                      `/consultancyCard/${supervisorCardId}/videocall/${_id}`
+                    )
+                  }
+                >
+                  Video Call
+                </CustomButton>
+              </div>
             </Box>
           </Grid2>
         </Grid2>
