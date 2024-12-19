@@ -54,10 +54,15 @@ export const usePeerJs = (myPeerId, remoteUserPeerId) => {
         const stream = await getUserMedia();
         myVideo.current.srcObject = stream;
         const call = peerInstance.current.call(remoteUserPeerId, stream);
-        call.on("stream", (userStream) => {
-          userVideo.current.srcObject = userStream;
-        });
-        setCurrentCall(call);
+        if (call) {
+          call.on("stream", (userStream) => {
+            userVideo.current.srcObject = userStream;
+          });
+
+          setCurrentCall(call);
+        } else {
+          throw new Error(call);
+        }
       } catch (error) {
         console.error("Error during call:", error);
       }
@@ -81,12 +86,6 @@ export const usePeerJs = (myPeerId, remoteUserPeerId) => {
         tracks.forEach((track) => track.stop());
         userVideo.current.srcObject = null;
       }
-
-      if (peerInstance.current) {
-        peerInstance.current.disconnect();
-        peerInstance.current.destroy();
-      }
-
     }
   };
 

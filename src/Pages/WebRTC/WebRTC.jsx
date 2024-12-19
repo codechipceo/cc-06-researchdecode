@@ -27,6 +27,8 @@ function Videocall() {
     remoteUserPeerId
   );
 
+  console.log(currentCall)
+
   const [isLoading, setIsLoading] = useState(false);
   const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
 
@@ -40,6 +42,7 @@ function Videocall() {
       });
   }, [consultancyCardId, dispatch]);
 
+  if (isLoading) return <Typography>Loading...</Typography>;
   return (
     <div>
       <ResponsiveAppBar />
