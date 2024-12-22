@@ -2,11 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
 const apiFeature = new ApiFeatures("admin", "webinar", axiosInstance);
-const enrollCourseApi = new ApiFeatures(
-  "user",
-  "courseEnrollment",
-  axiosInstance
-);
+
 export const createWebinar = createAsyncThunk(
   "webinar/create",
   async (payload, { rejectWithValue }) => {
@@ -23,6 +19,8 @@ export const getAllWebinar = createAsyncThunk(
   "webinar/getall",
   async (payload, { rejectWithValue }) => {
     try {
+      console.log(payload);
+      
       const { data, msg, count } = await apiFeature.create("getAll", payload);
           console.log(data);
       return { data, msg, count };
@@ -39,7 +37,6 @@ export const getByIdWebinar = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const requestData = { _id: payload.webinarId };
-      console.log(requestData);
 
       const { data, msg } = await apiFeature.create("getById", requestData);
       console.log(data);

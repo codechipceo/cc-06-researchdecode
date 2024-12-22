@@ -10,7 +10,7 @@ import RecommendedCourses from "../LandingPage/Section/RecommendedCourses";
 import AllWebinars from "./AllWebinars";
 import '../../assets/scss/components/webinar.scss'
 const WebinarPage = () => {
-  const limit = 9;
+  const limit = 8;
   const [searchInput, setSearchInput] = useState(""); // State for search input
   const [searchTerm, setSearchTerm] = useState(""); // State for search term triggered by the button
   const [activePage, setActivePage] = useState(1);
@@ -22,6 +22,7 @@ const WebinarPage = () => {
   const handleSearch = (val) => {
     setSearchTerm(val);
   };
+  
   const handleInputChange = (value) => {
     setSearchInput(value);
     if (value.trim() === "") {
@@ -32,7 +33,7 @@ const WebinarPage = () => {
   return (
     <div>
       <HeaderThree title="Webinars " breadcrumbPath={breadcrumbPath} />
-      <h1 className="webinar-title">Find your Webinar</h1>
+      {/* <h1 className="webinar-title">Find your Webinar</h1> */}
       <SearchBar
         value={searchInput}
         handleChange={handleInputChange}
@@ -41,12 +42,12 @@ const WebinarPage = () => {
       />
       <AllWebinars />
       {/* Pagination Component */}
-      {/* <PaginationComponent
-        total={courseCount}
+      <PaginationComponent
+        total={webinars.length}
         limit={limit}
         activePage={activePage}
         setActivePage={setActivePage}
-      /> */}
+      />
     </div>
   );
 };
