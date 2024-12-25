@@ -50,6 +50,7 @@ const settings = [
   // { name: "Booked Consultancy", path: "my-consultancy" },
   { name: "Courses", path: "my-courses" },
   { name: "My Collabs", path: "my-collaborations" },
+  { name: "My Webinars", path: "my-webinars" },
   // { name: "Payment History", path: "payment-history" },
 ];
 

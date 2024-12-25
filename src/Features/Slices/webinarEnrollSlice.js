@@ -19,13 +19,13 @@ export const createWebinarEnroll = createAsyncThunk(
 );
 
 
-export const getByIdWebinarEnroll = createAsyncThunk(
-  "webinarEnrollment/getById",
+export const getAllEnrolledWebinar = createAsyncThunk(
+  "webinarEnrollment/myEnrollments",
   async (payload, { rejectWithValue }) => {
     try {
-      const requestData = { _id: payload.webinarId };
 
-      const { data, msg } = await apiFeature.create("getById", requestData);
+
+      const { data, msg } = await apiFeature.create("myEnrollments");
       console.log(data);
 
       return { data, msg };
@@ -72,6 +72,7 @@ export const deleteWebinarEnrollment = createAsyncThunk(
 
 const initialState = {
   webinarById: {},
+  enrolledWebinars: [],
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -99,14 +100,14 @@ const initialState = {
           state.isError = true;
           state.errorMessage = action.payload;
         })
-        .addCase(getByIdWebinarEnroll.pending, (state) => {
+        .addCase(getAllEnrolledWebinar.pending, (state) => {
           state.isLoading = true;
         })
-        .addCase(getByIdWebinarEnroll.fulfilled, (state, action) => {
+        .addCase(getAllEnrolledWebinar.fulfilled, (state, action) => {
           state.isLoading = false;
-          state.webinarById = action.payload.data;
-        })
-        .addCase(getByIdWebinarEnroll.rejected, (state, action) => {
+          state.enrolledWebinars = action.payload.data;
+        })        
+        .addCase(getAllEnrolledWebinar.rejected, (state, action) => {
           state.isLoading = false;
           state.isError = true;
           state.errorMessage = action.payload;
@@ -139,9 +140,10 @@ const initialState = {
   
 
 
-  export const selectWebinarById = (state) => state.webinarEnroll.webinarById || {};
   export const selectWebinarLoading = (state) => state.webinarEnroll?.isLoading || false;
   export const selectWebinarError = (state) => state.webinarEnroll?.isError || false;
   export const selectWebinarErrorMessage = (state) => state.webinarEnroll?.errorMessage || "";
   export const selectIsEnrolled = (state) => state.webinarEnroll?.isEnrolled ?? null;
+  export const selectAllEnrolledWebinars = (state) => state.webinarEnroll.enrolledWebinars || [];
+
 
