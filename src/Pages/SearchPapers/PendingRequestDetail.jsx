@@ -11,7 +11,6 @@ export const PendingRequestDetail = ({ pendingRequestObj }) => {
   const breadcrumbPath = [{ label: "Home", path: "/" }];
 
   const requestDetail = useSelector(selectRequestDetail);
-console.log(requestDetail);
 
   const { pendingRequestId } = useParams();
 

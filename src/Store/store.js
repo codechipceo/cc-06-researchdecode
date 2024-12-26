@@ -8,7 +8,9 @@ import {
   chatSlice,
   consultancyCardSlice,
   consultancySlice,
-  collaborationSlice
+  collaborationSlice,
+  supervisorSlice,
+  webinarSlice
 } from "../Features/indexSlice";
 
 const reducers = combineReducers({
@@ -20,7 +22,9 @@ const reducers = combineReducers({
   chats: chatSlice,
   consultancyCard: consultancyCardSlice,
   consultancy: consultancySlice,
+  supervisor: supervisorSlice,
   collaboration: collaborationSlice.reducer,
+  webinar:webinarSlice
 });
 
 export const store = configureStore({

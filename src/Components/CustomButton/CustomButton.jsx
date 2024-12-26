@@ -1,4 +1,3 @@
-
 import classNames from "classnames";
 import React from "react";
 import { Button } from "rsuite";
@@ -13,6 +12,7 @@ const CustomButton = ({
   onClick,
   disabled,
   isLoading,
+  ...props
 }) => {
   const buttonClassnames = classNames(className, {
     "primary-button": variant === "primary",
@@ -23,8 +23,9 @@ const CustomButton = ({
     "preview-button": variant === "preview",
   });
 
+
   return (
-    <Button as={Button} appearance="default" disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
+    <Button as={Button} {...props} disabled={disabled || isLoading} onClick={onClick} className={`${buttonClassnames}`}>
       {/* {children}{" "}
       {Icon && (
         <img
@@ -36,7 +37,7 @@ const CustomButton = ({
           }}
         />
       )} */}
-        {isLoading ? (
+      {isLoading ? (
         <Loader size="sm" />
       ) : (
         <>

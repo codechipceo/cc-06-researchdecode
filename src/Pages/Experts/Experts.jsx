@@ -1,40 +1,99 @@
-import { Box, Container, Grid } from "@mui/material";
-import { TeacherCard } from "../../Components/Cards/TeacherCard";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-import StatusHandler from "../../Components/statusHandler";
+import { useState, useEffect } from "react";
 import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
+import Consultancy_card from "../../Components/Consultant_card/Consultancy_card";
+import SearchBar from "../../Components/Searchbar/SearchBar";
+import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import Typography from "../../assets/scss/components/Typography";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
 
 const Experts = () => {
+  const limit = 9;
+  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activePage, setActivePage] = useState(1);
+
   const {
-    consultancyCardData: teachers,
+    consultancyCardData: consultancyCards,
+    consultancyCount,
     isLoading,
     isError,
-  } = useConsultancyCard();
+  } = useConsultancyCard(limit, (activePage - 1) * limit, searchTerm);
 
+
+  const handleInputChange = (value) => {
+    setSearchInput(value);
+    if (value.trim() === "") {
+      setSearchTerm("");
+    }
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput.trim());
+    setActivePage(1);
+  };
+
+  const image = "https://res.cloudinary.com/dsxrpa0ja/image/upload/v1732090327/imgae_eizrwi.png";
+  const qualification = "Btech";
   const breadcrumbPath = [{ label: "Home", path: "/" }];
+
   return (
     <div>
-      <HeaderTwo title='EXPERTS' breadcrumbPath={breadcrumbPath} />
-      <Container maxWidth='lg' sx={{ marginTop: "40px" }}>
-        <Box sx={{ flexGrow: 1, margin: "20px" }}>
-          <StatusHandler
-            isLoading={isLoading}
-            isError={isError}
-            errorMessage='Error loading Experts'
-            isEmpty={teachers.length === 0}
-          />
-          {!isLoading && !isError && teachers.length > 0 && (
-            <Grid container spacing={4}>
-              {teachers.map((teacher) => (
-                <Grid item xs={12} sm={6} md={4} key={teacher._id}>
-                  <TeacherCard data={teacher} />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Box>
-      </Container>
+      <HeaderThree title="EXPERTS" breadcrumbPath={breadcrumbPath} />
+      <div className="default__layout_container">
+        <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
+          Find your next research collaboration
+        </Typography>
+
+        <SearchBar
+          value={searchInput}
+          handleChange={handleInputChange}
+          handleSearch={handleSearch}
+          placeholder="Enter Expert's Name"
+        />
+
+        <Typography size={"md"} variant={"bold"} className={"text-center"}>
+          Loved by over 600 academics
+        </Typography>
+
+        <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
+          <h3 style={{ paddingTop: "10px", paddingBottom: "30px", paddingLeft: "50px" }}>
+            Top Experts
+          </h3>
+          <div className="cards-list">
+            {!isLoading && !isError ? (
+              consultancyCards.length > 0 ? (
+                consultancyCards.map((d) => {
+                  const { title, description, teacherId, _id } = d;
+                  return (
+                    <Consultancy_card
+                      data ={d}
+                      key={teacherId}
+                      image={image}
+                      title={title}
+                      description={description}
+                      name={teacherId?.name || "Unknown"}
+                      qualification={qualification}
+                    />
+                  );
+                })
+              ) : (
+                <p>No experts found</p>
+              )
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
+        </div>
+
+        <PaginationComponent
+          total={consultancyCount}
+          limit={limit}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      </div>
     </div>
   );
 };
+
 export default Experts;

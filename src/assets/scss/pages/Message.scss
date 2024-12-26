@@ -1,0 +1,79 @@
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+
+  .message-avatar {
+    margin-right: 12px; // Default margin for received messages
+    flex-shrink: 0;
+  }
+
+  .message-content {
+    background-color: #f0f0f0; // Background for received messages
+    padding: 12px;
+    border-radius: 12px 12px 12px 0; // Rounded corners
+    max-width: 70%; // Limit bubble width
+    position: relative;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: #8e8e93;
+      margin-top: 4px;
+      display: block;
+    }
+  }
+
+  // Styling for sent messages
+  &.message-own {
+    justify-content: flex-end; // Push sent messages to the right
+    flex-direction: reverse; // Reverse layout: avatar on the right
+
+    .message-avatar {
+      margin-left: 12px; // Adjust margin for reversed layout
+      margin-right: 0;
+    }
+
+    .message-content {
+      background-color: #3498ff; // Blue background for sent messages
+      color: white; // White text
+      border-radius: 12px 12px 0 12px; // Adjusted corner radius
+
+      .message-time {
+        color: rgba(255, 255, 255, 0.8); // Lighter timestamp color
+      }
+    }
+  }
+
+  // Styling for received messages
+  &.message-received {
+    justify-content: flex-start; // Align received messages to the left
+
+    .message-avatar {
+      margin-right: 12px; // Keep avatar on the left
+    }
+
+    .message-content {
+      background-color: #f0f0f0; // Light gray background for received messages
+      color: black; // Black text
+      border-radius: 12px 12px 12px 0; // Adjusted corner radius
+    }
+  }
+
+  // Adjust spacing between consecutive messages
+  &+.message {
+    margin-top: 8px; // Reduce spacing for grouped messages
+  }
+}
+
+// Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 85%; // Allow wider bubbles on small screens
+  }
+}

@@ -5,24 +5,36 @@ import {
   selectConsultancyCardErrorStatus,
   selectConsultancyCardLoadingStatus,
   selectConsultancyCards,
+  consultancyCardTotalCount,
 } from "../Features/Slices/consultancyCardSlice";
 
-export const useConsultancyCard = (skip, limit) => {
+export const useConsultancyCard = (limit = 9, skip = 0, search = "") => {
   const dispatch = useDispatch();
+
   const consultancyCardData = useSelector(selectConsultancyCards) ?? [];
+  const consultancyCount = useSelector(consultancyCardTotalCount) ?? 0;
   const isLoading = useSelector(selectConsultancyCardLoadingStatus);
   const isError = useSelector(selectConsultancyCardErrorStatus);
 
   useEffect(() => {
     const payload = {
-      skip: skip ?? 0,
-      limit: limit ?? 0,
+      skip,
+      limit,
+      search: search.trim(),
     };
     dispatch(getAllConsultancyCard(payload));
-  }, [skip, limit, dispatch]);
+  }, [skip, limit, search, dispatch]);
+
+  const filteredData = search
+    ? consultancyCardData.filter((card) =>
+        card.teacherId?.name?.toLowerCase().includes(search.toLowerCase())
+      )
+    : consultancyCardData;
+
   return {
-    consultancyCardData,
-    isError,
+    consultancyCardData: filteredData,
+    consultancyCount: search ? filteredData.length : consultancyCount,
     isLoading,
+    isError,
   };
 };

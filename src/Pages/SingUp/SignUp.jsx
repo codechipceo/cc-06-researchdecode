@@ -11,6 +11,8 @@ import {
   SelectPicker,
   Grid,
 } from "rsuite";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   AiOutlineMail,
   AiOutlineLock,
@@ -275,6 +277,7 @@ export const SignUp = () => {
           </Col>
         </Row>
       </form>
+      <ToastContainer />
     </Container>
   );
 };

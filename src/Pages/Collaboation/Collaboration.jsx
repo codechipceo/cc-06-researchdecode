@@ -1,10 +1,19 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import CustomModal from "../../Components/Modal/Modal";
+import PaginationComponent from "../../Components/Pagination/PaginationComponent";
 import SearchBar from "../../Components/Searchbar/SearchBar";
+import { useCollaboration } from "../../Hooks/use-collaboration";
 import Typography from "../../assets/scss/components/Typography";
 import { CollaborationCard } from "./components/CollaborationCard";
-import PaginationComponent from "../../Components/Pagination/PaginationComponent";
-import { useCollaboration } from "../../Hooks/use-collaboration";
+import useModal from "../../Hooks/useModal";
+import { Form } from "rsuite";
+import { Input } from "rsuite";
+import CustomButton from "../../Components/CustomButton/CustomButton";
+// import { createCollabConvo } from "../../Features/Slices/chatSlice";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { sendMessage } from "../../Features/Slices/chatSlice";
 const breadcrumbPath = [
   {
     label: "Home",
@@ -12,43 +21,25 @@ const breadcrumbPath = [
   },
 ];
 
-const dummyData = [
-  {
-    title: "Sample Collaboration",
-    description:
-      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration.",
-    collaborators: ["User 1", "User 2", "User 3"],
-    tags: ["AI", "Machine Learning", "Data Science"],
-    date: "2022-01-01",
-    status: "Active",
-    username: "mansab",
-  },
-  {
-    title: "Sample Collaboration",
-    description:
-      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
-    collaborators: ["User 1", "User 2", "User 3"],
-    tags: ["AI", "Machine Learning", "Data Science"],
-    date: "2022-01-01",
-    status: "Active",
-    username: "ubaid",
-  },
-  {
-    title: "Sample Collaboration",
-    description:
-      "This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn and grow together.This is a sample collaboration. It's a great opportunity to learn ",
-    collaborators: ["User 1", "User 2", "User 3"],
-    tags: ["AI", "Machine Learning", "Data Science"],
-    date: "2022-01-01",
-    status: "Active",
-    username: "ubaid",
-  },
-];
-
 const Collaboration = () => {
   /*
   ----------------------------------------------------------------
-                         STATES
+                         MESSAGE STATES
+  ----------------------------------------------------------------
+  */
+  const dispatch = useDispatch();
+  const {
+    isOpen: isCollabMessageModalOpen,
+    show: showCollabMessageModal,
+    hide: hideCollabMessageModal,
+  } = useModal();
+  const [message, setMessage] = useState();
+  const [selectedCard, setSelectedCard] = useState("");
+  const loggedinUser = useSelector(selectStudentInfo);
+
+  /*
+  ----------------------------------------------------------------
+                         COLLAB PAGE STATES
   ----------------------------------------------------------------
   */
   const limit = 9;
@@ -79,11 +70,39 @@ const Collaboration = () => {
       setSearchQuery("");
     }
   };
+  /*
+  ----------------------------------------------------------------
+                          Handlers
+  ----------------------------------------------------------------
+  */
+
+  const reset = () => {
+    hideCollabMessageModal();
+    setMessage("");
+    setSelectedCard("");
+  };
+  const handleCollabRequest = (data) => {
+    setSelectedCard(data);
+    showCollabMessageModal();
+  };
+
+  const handleSubmitCollabRequest = () => {
+    const payload = {
+      content: message,
+      sender: loggedinUser._id,
+      senderModel: "Student",
+      recipient: selectedCard?.createdBy,
+      recipientModel: "Student",
+    };
+
+    dispatch(sendMessage(payload));
+    reset();
+  };
 
   return (
     <div>
       <HeaderThree breadcrumbPath={breadcrumbPath} title={"Collaboration"} />
-      <div className='default__layout_container'>
+      <div className="default__layout_container">
         <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
           Find Your Next Research Collaboration
         </Typography>
@@ -92,20 +111,22 @@ const Collaboration = () => {
           value={search}
           handleChange={handleInputChange}
           handleSearch={handleSearch}
-          placeholder='Search Collaboration'
+          placeholder="Search Collaboration"
         />
 
-        <div className='flex collaboration__cards_wrapper flex-wrap'>
+        <div className="flex collaboration__cards_wrapper flex-wrap">
           {allCollaborations.length && !loading
             ? allCollaborations?.map((d) => {
                 const { _id, title, description } = d;
                 return (
                   <CollaborationCard
+                    cardInfo={d}
                     title={title}
                     key={_id}
                     description={description}
-                    username={d.username}
+                    username={d?.username}
                     userImage={""}
+                    handleMessage={handleCollabRequest}
                   />
                 );
               })
@@ -118,6 +139,40 @@ const Collaboration = () => {
           activePage={activePage}
           setActivePage={setActivePage}
         />
+      </div>
+
+      <div>
+        <CustomModal open={isCollabMessageModalOpen} handleClose={reset}>
+          <CustomModal.Header>
+            <Typography size={"xl"}>Send Collaboration Request</Typography>
+          </CustomModal.Header>
+          <CustomModal.Body>
+            <div>
+              <Form fluid>
+                <Form.Group controlId="textarea-6">
+                  <Form.ControlLabel>Write Message</Form.ControlLabel>
+                  <Input
+                    as="textarea"
+                    value={message}
+                    onChange={setMessage}
+                    name="message"
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          </CustomModal.Body>
+          <CustomModal.FooterLeft>
+            <CustomButton onClick={reset}>Cancel</CustomButton>
+          </CustomModal.FooterLeft>
+          <CustomModal.FooterRight>
+            <CustomButton
+              variant={"primary"}
+              onClick={handleSubmitCollabRequest}
+            >
+              Submit
+            </CustomButton>
+          </CustomModal.FooterRight>
+        </CustomModal>
       </div>
     </div>
   );

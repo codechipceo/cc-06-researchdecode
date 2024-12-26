@@ -1,9 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../axios/axios";
 import { ApiFeatures } from "../../Api/ApiRepo";
+import { toast } from "react-toastify";
 
 // ApiFeature: role, moduleName to create backend Path
 const apiFeature = new ApiFeatures("user", "consultancy", axiosInstance);
+const notify = (data) => {
+  toast.error(`${data}`, {
+    position: "top-right",
+  });
+};
 
 //create consultancy
 
@@ -12,7 +18,13 @@ export const createConsultancy = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("create", payload);
-      return { data, msg };
+      if (Array.isArray(msg)) {
+        msg.map((item) => {
+          notify(item.msg);
+        });
+      } else {
+        return { data, msg };
+      }
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -24,6 +36,32 @@ export const verifyConultancyPayment = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data, msg } = await apiFeature.create("verifypayment", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const endConsultancy = createAsyncThunk(
+  "consultancy/end",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create("endConsultancy", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const verifyConsultancy = createAsyncThunk(
+  "consultancy/verify",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create(
+        "verifyConsultancy",
+        payload
+      );
       return { data, msg };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -88,6 +126,7 @@ export const selectConsultancyErrorStatus = (state) =>
   state.consultancy.isError;
 export const selectConsultancyErrorMessage = (state) =>
   state.consultancy.errorMessage;
-export const selectConsultancyPaymentVerified = state => state.consultancy.isConsultancyPaymentVerify
+export const selectConsultancyPaymentVerified = (state) =>
+  state.consultancy.isConsultancyPaymentVerify;
 
 export default consultancySlice.reducer;

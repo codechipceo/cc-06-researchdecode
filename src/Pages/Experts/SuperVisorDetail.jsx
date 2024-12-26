@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { HeaderTwo } from "../../Components/Headers/HeaderTwo";
-import { useCallback } from "react";
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
 import useRazorpay from "react-razorpay";
+import ExpertDetailCard from "../../Components/Cards/ExpertDetailCard";
+import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
 
-import { Box, Button, Container, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import {
   getConsultancyCardById,
@@ -14,16 +15,17 @@ import {
 import {
   createConsultancy,
   selectConsultancyPaymentVerified,
+  verifyConsultancy,
   verifyConultancyPayment,
 } from "../../Features/Slices/consultancySlice";
-import {
-  selectStudentData,
-  selectStudentInfo,
-} from "../../Features/Slices/studentSlice";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import CustomButton from "../../Components/CustomButton/CustomButton";
+
+import { useSockets } from "../../Hooks/useSockets";
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
-  { label: "Supervisor", path: "/experts" },
+  { label: "Hire Expert", path: "/experts" },
 ];
 
 export const SuperVisorDetail = () => {
@@ -31,14 +33,17 @@ export const SuperVisorDetail = () => {
   const consultancyCardDetail = useSelector(selectConsultancyCardById);
   const isPaymentVerified = useSelector(selectConsultancyPaymentVerified);
   const [tabValue, setTabValue] = useState(0);
-  const { supervisorId } = useParams();
+  const { supervisorCardId } = useParams();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
+  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
+  const { socket } = useSockets();
 
   const [Razorpay, isLoaded] = useRazorpay();
 
-  const { name, experience, qualification, _id } =
+  const { name, email, experience, qualification, _id } =
     consultancyCardDetail?.teacherId ?? {};
+  console.log(consultancyCardDetail);
   const { single, project } = consultancyCardDetail?.pricing ?? {};
 
   const initPay = (paymentObj) => {
@@ -47,7 +52,7 @@ export const SuperVisorDetail = () => {
       key: "rzp_test_jLhZZYBPKlMBn9",
       amount: amount ?? single,
       currency: "INR",
-      name: "ResearchPro",
+      name: "Researchdecode",
       description: "",
       image: "https://example.com/your_logo",
       order_id: order_id,
@@ -72,7 +77,7 @@ export const SuperVisorDetail = () => {
     const payload = {
       studentId: loggedinUser._id,
       teacherId: _id,
-      cardId: supervisorId,
+      cardId: supervisorCardId,
       amount: amount ?? Number(single),
       type: tabValue === 0 ? "single" : "project",
     };
@@ -93,48 +98,152 @@ export const SuperVisorDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getConsultancyCardById({ consultancyCardId: supervisorId }));
-  }, []);
+    if (_id) {
+      socket.emit("online", _id);
+    }
+    dispatch(getConsultancyCardById({ consultancyCardId: supervisorCardId }));
+    dispatch(verifyConsultancy({ consultancyCardId: supervisorCardId }))
+      .unwrap()
+      .then((res) => setIsConsultancyVerified(res?.data));
+  }, [supervisorCardId]);
 
   const [amount, setAmount] = useState(single);
 
   return (
     <div>
-      <HeaderTwo title='Supervisor Detail' breadcrumbPath={breadcrumbPath} />
+      <HeaderThree
+        title='Supervisor Detail'
+        breadcrumbPath={breadcrumbPath}
+        // backgroundImage={bgImage}
+      />
       <Container>
-        <Grid2 container>
-          <Grid2 item xs={12} md={8}>
+        <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
+          <Grid2 item xs={4}>
             <Box>
-              <Typography variant='h3' fontWeight={500}>
-                {name}
-              </Typography>
-              <Typography variant='body1' fontWeight={500}>
-                {"Qualitification" || qualification}
-              </Typography>
-              <Typography variant='body1' fontWeight={500}>
-                {"Experience" || experience}
-              </Typography>
+              <ExpertDetailCard
+                name={name}
+                email={email}
+                experience={experience}
+                qualification={qualification}
+              />
             </Box>
           </Grid2>
-          <Grid2 item xs={12} md={4}>
-            <Tabs
-              value={tabValue}
-              onChange={(e, newValue) => {
-                setTabValue(newValue);
-                setAmount(Number(e.target.id));
+          <Grid2 item xs={4}>
+            {/* <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                textAlign: "justify",
               }}
-              aria-label='course details tabs'
             >
-              <Tab label='Single' id={single} />
-              <Tab label='Project' id={project} />
-              {/* <Tab label='Reviews' /> */}
-            </Tabs>
-            <Typography>{tabValue === 0 && single}</Typography>
-            <Typography>{tabValue === 1 && project}</Typography>
+              <Box>
+                <h5>Heading of the teachers detail.</h5>
+              </Box>
+              <Box>
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. Lorem
+                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
+                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of
+                ethics, very popular during the Renaissance. The first line of
+                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
+                in section 1.10.32.
+              </Box>
+            </Box> */}
+          </Grid2>
+          <Grid2 item xs={4}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+            >
+              <Tabs
+                value={tabValue}
+                onChange={(e, newValue) => {
+                  setTabValue(newValue);
+                  setAmount(Number(e.target.id));
+                }}
+                aria-label='course details tabs'
+              >
+                <Tab label='Single' id={single} />
+                {/* <Tab label='Project' id={project} /> */}
+                {/* <Tab label="Reviews" /> */}
+              </Tabs>
+              {/* <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "1rem",
+                }}
+              >
+                <Typography
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
+                >
+                  <strong>Select Project Date:</strong>
+                </Typography>
 
-            <Button fullWidth variant='contained' onClick={handleConsultancy}>
-              Continue
-            </Button>
+                <CustomDatePicker
+                  placeholder='Pick a date'
+                  format='yyyy-MM-dd'
+                  onChange={(date) => console.log("Selected Date:", date)}
+                />
+              </Box> */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "1rem",
+                }}
+              >
+                {/* ON Click alignment of amount needs to be fixed later no */}
+                <Typography
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
+                >
+                  <strong>Project Cost:</strong>
+                </Typography>
+
+                <Typography>{tabValue === 0 && single}</Typography>
+                <Typography>{tabValue === 1 && project}</Typography>
+              </Box>
+
+              <CustomButton
+                fullWidth
+                variant='primary'
+                disabled={isConsultancyVerified}
+                onClick={handleConsultancy}
+              >
+                {isConsultancyVerified ? "Currently Active" : "Buy"}
+              </CustomButton>
+              <div className='supervisor-chat-video-btn'>
+                <CustomButton
+                  variant={"primary"}
+                  onClick={() => {
+                    navigate(`/inbox/${_id}`);
+                  }}
+                >
+                  Chat{" "}
+                </CustomButton>
+                <CustomButton
+                  disabled={isConsultancyVerified === false}
+                  variant={"primary"}
+                  onClick={() =>
+                    navigate(
+                      `/consultancyCard/${supervisorCardId}/videocall/${_id}`
+                    )
+                  }
+                >
+                  Video Call
+                </CustomButton>
+              </div>
+            </Box>
           </Grid2>
         </Grid2>
       </Container>
