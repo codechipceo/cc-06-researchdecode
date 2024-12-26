@@ -22,12 +22,12 @@ const WebinarPage = () => {
   const handleInputChange = (value) => {
     setSearchInput(value);
     if (value.trim() === "") {
-      setSearchTerm(""); // Clear search term when input is empty
+      setSearchTerm("");
     }
   };
 
   const handleSearchTrigger = () => {
-    setSearchTerm(searchInput.trim()); // Trigger search with input value
+    setSearchTerm(searchInput.trim()); 
   };
 
   const breadcrumbPath = [{ label: "Home", path: "/" }];

@@ -23,10 +23,7 @@ export const getAllEnrolledWebinar = createAsyncThunk(
   "webinarEnrollment/myEnrollments",
   async (payload, { rejectWithValue }) => {
     try {
-
-
-      const { data, msg } = await apiFeature.create("myEnrollments");
-      console.log(data);
+      const { data, msg } = await apiFeature.create("myEnrollments",payload);
 
       return { data, msg };
     } catch (error) {
@@ -41,10 +38,9 @@ export const isEnrolled=createAsyncThunk(
     "webinarEnrollment/isEnroll",
     async (payload, { rejectWithValue }) => {
       try {
-        // console.log(payload);
         
         const { data, msg } = await apiFeature.create("isEnroll", payload);
-        console.log(data);
+  
         
         return { data, msg };
       } catch (error) {
@@ -58,7 +54,7 @@ export const deleteWebinarEnrollment = createAsyncThunk(
   "webinarEnrollment/unenroll",
   async (payload, { rejectWithValue }) => {
     try {
-      console.log(payload);
+
       
       const { data, msg } = await apiFeature.create("unenroll", payload);
       return { data, msg };
