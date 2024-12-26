@@ -17,6 +17,7 @@ const AllWebinars = () => {
 
   const dispatch = useDispatch();
 
+  
  
   const skip = (activePage - 1) * limit;
 
