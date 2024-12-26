@@ -32,8 +32,9 @@ import Collaboration from "./Pages/Collaboation/Collaboration";
 import MyCollaborations from "./Pages/Collaboation/MyCollaborations";
 
 import CourseLecture from "./Pages/CourseLecture/CourseLecture";
-
 import Supervisorform from "./Pages/Supervisorform/Supervisorform";
+import WebinarPage from "./Pages/Webinar/Webinar";
+import WebinarDetail from "./Pages/WebinarDetails/WebinarDetails";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,14 @@ const router = createBrowserRouter([
   {
     path: "/supervisorform",
     element: <Supervisorform />,
+  },
+  {
+    path: "/webinar",
+    element: <WebinarPage />,
+  },
+  {
+    path: "/webinar/:webinarId",
+    element: <WebinarDetail/>,
   },
 ]);
 
