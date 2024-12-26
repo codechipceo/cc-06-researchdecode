@@ -2,22 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
-import bgImage from "../../assets/Images/bgrp2.png";
 import useRazorpay from "react-razorpay";
-
 import ExpertDetailCard from "../../Components/Cards/ExpertDetailCard";
 import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
-import { FaCalendarAlt } from "react-icons/fa";
-import WechatOutlineIcon from "@rsuite/icons/WechatOutline";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+
+import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import {
   getConsultancyCardById,
@@ -29,12 +18,9 @@ import {
   verifyConsultancy,
   verifyConultancyPayment,
 } from "../../Features/Slices/consultancySlice";
-import {
-  selectStudentData,
-  selectStudentInfo,
-} from "../../Features/Slices/studentSlice";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-import { IconButton } from "rsuite";
+
 import { useSockets } from "../../Hooks/useSockets";
 
 const breadcrumbPath = [
@@ -42,9 +28,6 @@ const breadcrumbPath = [
   { label: "Hire Expert", path: "/experts" },
 ];
 
-const callMe = () => {
-  return "Mansab"
-}
 export const SuperVisorDetail = () => {
   const dispatch = useDispatch();
   const consultancyCardDetail = useSelector(selectConsultancyCardById);
@@ -53,14 +36,14 @@ export const SuperVisorDetail = () => {
   const { supervisorCardId } = useParams();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
-  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false)
-  const { socket } = useSockets()
-
+  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
+  const { socket } = useSockets();
 
   const [Razorpay, isLoaded] = useRazorpay();
 
-  const { name, experience, qualification, _id } =
+  const { name, email, experience, qualification, _id } =
     consultancyCardDetail?.teacherId ?? {};
+  console.log(consultancyCardDetail);
   const { single, project } = consultancyCardDetail?.pricing ?? {};
 
   const initPay = (paymentObj) => {
@@ -115,9 +98,7 @@ export const SuperVisorDetail = () => {
   };
 
   useEffect(() => {
-
     if (_id) {
-
       socket.emit("online", _id);
     }
     dispatch(getConsultancyCardById({ consultancyCardId: supervisorCardId }));
@@ -139,11 +120,16 @@ export const SuperVisorDetail = () => {
         <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
           <Grid2 item xs={4}>
             <Box>
-              <ExpertDetailCard />
+              <ExpertDetailCard
+                name={name}
+                email={email}
+                experience={experience}
+                qualification={qualification}
+              />
             </Box>
           </Grid2>
           <Grid2 item xs={4}>
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -169,7 +155,7 @@ export const SuperVisorDetail = () => {
                 Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
                 in section 1.10.32.
               </Box>
-            </Box>
+            </Box> */}
           </Grid2>
           <Grid2 item xs={4}>
             <Box
@@ -184,10 +170,10 @@ export const SuperVisorDetail = () => {
                 aria-label='course details tabs'
               >
                 <Tab label='Single' id={single} />
-                <Tab label='Project' id={project} />
+                {/* <Tab label='Project' id={project} /> */}
                 {/* <Tab label="Reviews" /> */}
               </Tabs>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -207,7 +193,7 @@ export const SuperVisorDetail = () => {
                   format='yyyy-MM-dd'
                   onChange={(date) => console.log("Selected Date:", date)}
                 />
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   display: "flex",
