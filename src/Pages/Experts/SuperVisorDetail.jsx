@@ -2,22 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
-import bgImage from "../../assets/Images/bgrp2.png";
 import useRazorpay from "react-razorpay";
-
 import ExpertDetailCard from "../../Components/Cards/ExpertDetailCard";
 import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
-import { FaCalendarAlt } from "react-icons/fa";
 
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import {
   getConsultancyCardById,
@@ -26,12 +15,13 @@ import {
 import {
   createConsultancy,
   selectConsultancyPaymentVerified,
+  verifyConsultancy,
   verifyConultancyPayment,
 } from "../../Features/Slices/consultancySlice";
-import {
-  selectStudentData,
-  selectStudentInfo,
-} from "../../Features/Slices/studentSlice";
+import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import CustomButton from "../../Components/CustomButton/CustomButton";
+
+import { useSockets } from "../../Hooks/useSockets";
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
@@ -43,14 +33,17 @@ export const SuperVisorDetail = () => {
   const consultancyCardDetail = useSelector(selectConsultancyCardById);
   const isPaymentVerified = useSelector(selectConsultancyPaymentVerified);
   const [tabValue, setTabValue] = useState(0);
-  const { supervisorId } = useParams();
+  const { supervisorCardId } = useParams();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
+  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
+  const { socket } = useSockets();
 
   const [Razorpay, isLoaded] = useRazorpay();
 
-  const { name, experience, qualification, _id } =
+  const { name, email, experience, qualification, _id } =
     consultancyCardDetail?.teacherId ?? {};
+  console.log(consultancyCardDetail);
   const { single, project } = consultancyCardDetail?.pricing ?? {};
 
   const initPay = (paymentObj) => {
@@ -59,7 +52,7 @@ export const SuperVisorDetail = () => {
       key: "rzp_test_jLhZZYBPKlMBn9",
       amount: amount ?? single,
       currency: "INR",
-      name: "ResearchPro",
+      name: "Researchdecode",
       description: "",
       image: "https://example.com/your_logo",
       order_id: order_id,
@@ -84,7 +77,7 @@ export const SuperVisorDetail = () => {
     const payload = {
       studentId: loggedinUser._id,
       teacherId: _id,
-      cardId: supervisorId,
+      cardId: supervisorCardId,
       amount: amount ?? Number(single),
       type: tabValue === 0 ? "single" : "project",
     };
@@ -105,15 +98,21 @@ export const SuperVisorDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getConsultancyCardById({ consultancyCardId: supervisorId }));
-  }, []);
+    if (_id) {
+      socket.emit("online", _id);
+    }
+    dispatch(getConsultancyCardById({ consultancyCardId: supervisorCardId }));
+    dispatch(verifyConsultancy({ consultancyCardId: supervisorCardId }))
+      .unwrap()
+      .then((res) => setIsConsultancyVerified(res?.data));
+  }, [supervisorCardId]);
 
   const [amount, setAmount] = useState(single);
 
   return (
     <div>
       <HeaderThree
-        title="Supervisor Detail"
+        title='Supervisor Detail'
         breadcrumbPath={breadcrumbPath}
         // backgroundImage={bgImage}
       />
@@ -121,11 +120,16 @@ export const SuperVisorDetail = () => {
         <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
           <Grid2 item xs={4}>
             <Box>
-              <ExpertDetailCard />
+              <ExpertDetailCard
+                name={name}
+                email={email}
+                experience={experience}
+                qualification={qualification}
+              />
             </Box>
           </Grid2>
           <Grid2 item xs={4}>
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -151,7 +155,7 @@ export const SuperVisorDetail = () => {
                 Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
                 in section 1.10.32.
               </Box>
-            </Box>
+            </Box> */}
           </Grid2>
           <Grid2 item xs={4}>
             <Box
@@ -163,13 +167,13 @@ export const SuperVisorDetail = () => {
                   setTabValue(newValue);
                   setAmount(Number(e.target.id));
                 }}
-                aria-label="course details tabs"
+                aria-label='course details tabs'
               >
-                <Tab label="Single" id={single} />
-                <Tab label="Project" id={project} />
+                <Tab label='Single' id={single} />
+                {/* <Tab label='Project' id={project} /> */}
                 {/* <Tab label="Reviews" /> */}
               </Tabs>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -177,19 +181,19 @@ export const SuperVisorDetail = () => {
                 }}
               >
                 <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  textAlign="center"
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
                 >
                   <strong>Select Project Date:</strong>
                 </Typography>
 
                 <CustomDatePicker
-                  placeholder="Pick a date"
-                  format="yyyy-MM-dd"
+                  placeholder='Pick a date'
+                  format='yyyy-MM-dd'
                   onChange={(date) => console.log("Selected Date:", date)}
                 />
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   display: "flex",
@@ -199,9 +203,9 @@ export const SuperVisorDetail = () => {
               >
                 {/* ON Click alignment of amount needs to be fixed later no */}
                 <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  textAlign="center"
+                  variant='body2'
+                  color='text.secondary'
+                  textAlign='center'
                 >
                   <strong>Project Cost:</strong>
                 </Typography>
@@ -210,9 +214,35 @@ export const SuperVisorDetail = () => {
                 <Typography>{tabValue === 1 && project}</Typography>
               </Box>
 
-              <Button fullWidth variant="contained" onClick={handleConsultancy}>
-                Continue
-              </Button>
+              <CustomButton
+                fullWidth
+                variant='primary'
+                disabled={isConsultancyVerified}
+                onClick={handleConsultancy}
+              >
+                {isConsultancyVerified ? "Currently Active" : "Buy"}
+              </CustomButton>
+              <div className='supervisor-chat-video-btn'>
+                <CustomButton
+                  variant={"primary"}
+                  onClick={() => {
+                    navigate(`/inbox/${_id}`);
+                  }}
+                >
+                  Chat{" "}
+                </CustomButton>
+                <CustomButton
+                  disabled={isConsultancyVerified === false}
+                  variant={"primary"}
+                  onClick={() =>
+                    navigate(
+                      `/consultancyCard/${supervisorCardId}/videocall/${_id}`
+                    )
+                  }
+                >
+                  Video Call
+                </CustomButton>
+              </div>
             </Box>
           </Grid2>
         </Grid2>

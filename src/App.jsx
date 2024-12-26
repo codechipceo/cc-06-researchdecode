@@ -94,12 +94,16 @@ const router = createBrowserRouter([
     element: <GuardComponents component={Experts} />,
   },
   {
-    path: "/supervisor/:supervisorId",
+    path: "/supervisor",
+    element: <GuardComponents component={Experts} />,
+  },
+  {
+    path: "/supervisor/:supervisorCardId",
     element: <GuardComponents component={SuperVisorDetail} />,
   },
   {
     path: "/inbox",
-    element: <Inbox />,
+    element: <GuardComponents component={Inbox} />,
   },
   {
     path: "/inbox/:supervisorId",
@@ -110,15 +114,14 @@ const router = createBrowserRouter([
     element: <GuardComponents component={PaymentPage} />,
   },
   {
-    path: "/videocall/:peerId",
+    path: "/consultancyCard/:consultancyCardId/videocall/:peerId",
     element: <VideoCall />,
   },
   {
-
     path: "/course-lecture/:courseId",
     element: <CourseLecture />,
   },
-    {
+  {
     path: "/supervisorform",
     element: <Supervisorform />,
   },

@@ -76,7 +76,7 @@ export const sendMessage = createAsyncThunk(
   "chats/send",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data, msg } = await apiFeature.create("send", payload);
+      const { data, msg } = await apiFeature.create("create", payload);
       return { data, msg };
     } catch (error) {
       const errMessage = error.response.data.msg;

@@ -13,6 +13,7 @@ import { Input } from "rsuite";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 // import { createCollabConvo } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { sendMessage } from "../../Features/Slices/chatSlice";
 const breadcrumbPath = [
   {
     label: "Home",
@@ -94,7 +95,7 @@ const Collaboration = () => {
       recipientModel: "Student",
     };
 
-    dispatch(createCollabConvo(payload));
+    dispatch(sendMessage(payload));
     reset();
   };
 

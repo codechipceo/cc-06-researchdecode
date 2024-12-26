@@ -1,125 +1,119 @@
 import { Button, Container, Typography } from "@mui/material";
-import Peer from "peerjs";
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ResponsiveAppBar from "../../Components/Navbar/Navbar";
+import { verifyConsultancy } from "../../Features/Slices/consultancySlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { usePeerJs } from "../../Hooks/usePeerjs";
 
 
+const generatePeerId = (id, paramId) => {
+  const myPeerId = `${id}_${paramId}`;
+  const remoteUserPeerId = `${paramId}_${id}`;
+
+  return { myPeerId, remoteUserPeerId };
+};
 function Videocall() {
-  const { peerId } = useParams();
-  const [myId, setMyId] = useState("");
-  const [callId, setCallId] = useState(""); // State for storing the ID to call
-  const [currentCall, setCurrentCall] = useState(null); // State to manage the current call
-  const myVideo = useRef();
-  const userVideo = useRef();
-  const peerInstance = useRef();
+  const dispatch = useDispatch();
+  const { consultancyCardId, peerId } = useParams();
   const loggedinUser = useSelector(selectStudentInfo);
+  const { myPeerId, remoteUserPeerId } = generatePeerId(
+    loggedinUser._id,
+    peerId
+  );
+  const { currentCall, myVideo, userVideo, callUser, endCall } = usePeerJs(
+    myPeerId,
+    remoteUserPeerId
+  );
+
+  console.log(currentCall)
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
 
   useEffect(() => {
-    if (!peerInstance.current) {
-      setCallId(peerId);
-      const peer = new Peer(loggedinUser._id, {
-        host: "0.peerjs.com",
+    setIsLoading(true);
+    dispatch(verifyConsultancy({ consultancyCardId: consultancyCardId }))
+      .unwrap()
+      .then((res) => {
+        setIsConsultancyVerified(res?.data);
+        setIsLoading(false);
       });
-      peerInstance.current = peer;
+  }, [consultancyCardId, dispatch]);
 
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          myVideo.current.srcObject = stream;
-          peer.on("call", (call) => {
-            call.answer(stream);
-            setCurrentCall(call);
-            call.on("stream", (userVideoStream) => {
-              userVideo.current.srcObject = userVideoStream;
-            });
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to get user media", error);
-        });
-
-      peer.on("open", (id) => {
-        console.log(id);
-        setMyId(id);
-      });
-    }
-  }, []);
-
-  // Function to call another user by ID
-  const callUser = (userId) => {
-    if (peerInstance.current) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          const call = peerInstance.current.call(userId, stream);
-          setCurrentCall(call);
-          call.on("stream", (userVideoStream) => {
-            userVideo.current.srcObject = userVideoStream;
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to get user media", error);
-        });
-    } else {
-      console.error("Peer instance is not initialized");
-    }
-  };
-  // Function to end the current call
-  const endCall = () => {
-    if (currentCall) {
-      currentCall.close(); // Close the call
-      setCurrentCall(null); // Reset the current call state
-      userVideo.current.srcObject = null; // Clear the remote video stream
-    }
-  };
-
+  if (isLoading) return <Typography>Loading...</Typography>;
   return (
     <div>
       <ResponsiveAppBar />
       <Container>
-        <Button onClick={() => callUser(callId)} variant='contained'>
-          Call
-        </Button>
-        <Button
-          color='error'
-          // sx={{
-          //   backgroundColor: "red",
-          //   color: "white",
-          //   "&:hover": { backgroundColor: "red" },
-          // }}
-          onClick={endCall}
-          disabled={!currentCall}
-        >
-          End Call
-        </Button>{" "}
-        {/* End Call button */}
-        <div
-          style={{
-            display: "flex",
-
-            width: "100%",
-          }}
-        >
-          <div style={{ borderRadius: 5, overflow: "hidden" }}>
-            <video ref={myVideo} autoPlay playsInline muted />
-            {myVideo.current && (
-              <Typography mt={4} variant='h3'>
-                {loggedinUser.firstName}
-              </Typography>
-            )}
-          </div>
-          <div style={{ borderRadius: 5, overflow: "hidden" }}>
-            <video ref={userVideo} autoPlay playsInline />
-            {currentCall && (
-              <Typography mt={4} variant='h3'>
-                Supervisor
-              </Typography>
-            )}
-          </div>
-        </div>
+        {isConsultancyVerified ? (
+          <>
+            <Button
+              onClick={() => callUser(remoteUserPeerId)}
+              variant='contained'
+            >
+              Call
+            </Button>
+            <Button
+              color='error'
+              onClick={endCall}
+              disabled={!currentCall}
+              variant='contained'
+            >
+              End Call
+            </Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 20,
+              }}
+            >
+              <div
+                style={{
+                  borderRadius: 5,
+                  flex: 1,
+                  overflow: "hidden",
+                  width: "500px",
+                  height: "400px",
+                }}
+              >
+                <video
+                  ref={myVideo}
+                  autoPlay
+                  playsInline
+                  muted
+                  style={{ width: "100%", borderRadius: "5px", height: "100%" }}
+                />
+                <Typography mt={2} variant='h6'>
+                  {loggedinUser.firstName || "My Video"}
+                </Typography>
+              </div>
+              <div
+                style={{
+                  borderRadius: 5,
+                  flex: 1,
+                  overflow: "hidden",
+                  width: "500px",
+                  height: "400px",
+                }}
+              >
+                <video
+                  ref={userVideo}
+                  autoPlay
+                  playsInline
+                  style={{ width: "100%", borderRadius: "5px", height: "100%" }}
+                />
+                <Typography mt={2} variant='h6'>
+                  {currentCall ? "Supervisor" : "No Active Call"}
+                </Typography>
+              </div>
+            </div>
+          </>
+        ) : (
+          "Your consultancy is expired"
+        )}
       </Container>
     </div>
   );
