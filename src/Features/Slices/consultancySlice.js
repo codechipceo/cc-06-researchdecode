@@ -43,6 +43,32 @@ export const verifyConultancyPayment = createAsyncThunk(
   }
 );
 
+export const endConsultancy = createAsyncThunk(
+  "consultancy/end",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create("endConsultancy", payload);
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const verifyConsultancy = createAsyncThunk(
+  "consultancy/verify",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data, msg } = await apiFeature.create(
+        "verifyConsultancy",
+        payload
+      );
+      return { data, msg };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   totalCount: 0,
   consultancyData: [],

@@ -1,23 +1,41 @@
 export const FEATURE_ENUM_LIST = {
-  NEW_DASHBOARD: "newDashboard",
-  AI_RECOMMENDATIONS: "AIRecommendations",
-  BETA_FEATURE: "betaFeature",
+  NAVBAR: "NAVBAR",
+  RESEARCH_PAPERS:'RESEARCH_PAPERS',
+  COURSES:'COURSES',
+  EXPERTS: "EXPERTS",
+  COLLABORATION: 'COLLABORATION',
+  WEBINAR: 'WEBINAR',
 };
 
 export const FEATURE_ENUM_OBJ = Object.freeze({
-  [FEATURE_ENUM_LIST.NEW_DASHBOARD]: {
-    local: true,
-    test: true,
-    prod: false,
-  },
-  [FEATURE_ENUM_LIST.AI_RECOMMENDATIONS]: {
+  [FEATURE_ENUM_LIST.NAVBAR]: {
     local: true,
     test: false,
-    prod: true,
+    prod: false,
   },
-  [FEATURE_ENUM_LIST.BETA_FEATURE]: {
-    local: false,
-    test: true,
+  [FEATURE_ENUM_LIST.RESEARCH_PAPERS]: {
+    local: true,
+    test: false,
+    prod: false,
+  },
+  [FEATURE_ENUM_LIST.EXPERTS]: {
+    local: true,
+    test: false,
+    prod: false,
+  },
+  [FEATURE_ENUM_LIST.COURSES]: {
+    local: true,
+    test: false,
+    prod: false,
+  },
+  [FEATURE_ENUM_LIST.COLLABORATION]: {
+    local: true,
+    test: false,
+    prod: false,
+  },
+  [FEATURE_ENUM_LIST.WEBINAR]: {
+    local: true,
+    test: false,
     prod: false,
   },
 });
