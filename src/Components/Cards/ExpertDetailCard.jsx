@@ -1,8 +1,6 @@
-/** @jsxImportSource @emotion/react */
+
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
-import { css, keyframes } from "@emotion/react";
-import { Box, Card, CardContent, Typography, Button } from "@mui/material";
-import { FaStar } from "react-icons/fa";
 
 const ExpertDetailCard = ({
   name = "Jose Schnroder",
