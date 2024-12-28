@@ -1,4 +1,3 @@
-// SearchBar.scss
 .custom-search-bar {
   max-width: 1000px;
   width: 100%;
@@ -15,11 +14,9 @@
       color: #333;
       transition: border-color 0.3s ease;
 
-
       &::placeholder {
         color: #ACA5A5;
         font-style: italic;
-
       }
 
       &:disabled {
@@ -29,7 +26,6 @@
     }
 
     .rs-input-group-btn {
-
       &.search-button {
         &:hover:not(:disabled) {
           background-color: #009c95;
@@ -50,11 +46,18 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .rs-input {
+      &::placeholder {
+        font-size: medium;
+      }
+    }
+  }
 }
 
 .rs-input-group:focus-within,
 .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus,
 .rs-input-group:not(.rs-input-group-disabled):hover {
   border-color: #ACA5A5;
-  ;
 }

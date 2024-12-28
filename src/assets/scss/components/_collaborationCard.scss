@@ -17,9 +17,22 @@
   }
 }
 
+/* Collaboration.scss */
 .collaboration__cards_wrapper {
-    margin-bottom: 40px;
-}
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
+    gap: 20px; /* Spacing between grid items */
+    margin-top: 20px;
+  
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+  
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+  }
+  
 
 .collaboration__card_action_btn {
     margin-top: 10px;
