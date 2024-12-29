@@ -112,13 +112,19 @@ export const SuperVisorDetail = () => {
   return (
     <div>
       <HeaderThree
-        title='Supervisor Detail'
+        title="Supervisor Detail"
         breadcrumbPath={breadcrumbPath}
         // backgroundImage={bgImage}
       />
       <Container>
-        <Grid2 container spacing={3} sx={{ paddingTop: "2rem" }}>
-          <Grid2 item xs={4}>
+        <Grid2
+          container
+          spacing={3}
+          sx={{ paddingTop: "2rem" }}
+          columns={{ xs: 1, sm: 4, md: 12 }}
+        >
+          {/* Left Column */}
+          <Grid2 item xs={12} sm={4}>
             <Box>
               <ExpertDetailCard
                 name={name}
@@ -128,8 +134,10 @@ export const SuperVisorDetail = () => {
               />
             </Box>
           </Grid2>
-          <Grid2 item xs={4}>
-            {/* <Box
+
+          {/* Center Column */}
+          <Grid2 item xs={12} sm={4}>
+            <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -155,25 +163,9 @@ export const SuperVisorDetail = () => {
                 Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
                 in section 1.10.32.
               </Box>
-            </Box> */}
+            </Box>
           </Grid2>
-          <Grid2 item xs={4}>
-            <Box
-              sx={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-            >
-              <Tabs
-                value={tabValue}
-                onChange={(e, newValue) => {
-                  setTabValue(newValue);
-                  setAmount(Number(e.target.id));
-                }}
-                aria-label='course details tabs'
-              >
-                <Tab label='Single' id={single} />
-                {/* <Tab label='Project' id={project} /> */}
-                {/* <Tab label="Reviews" /> */}
-              </Tabs>
-              {/* <Box
+           {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -194,6 +186,23 @@ export const SuperVisorDetail = () => {
                   onChange={(date) => console.log("Selected Date:", date)}
                 />
               </Box> */}
+
+          {/* Right Column */}
+          <Grid2 item xs={12} sm={4}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+            >
+              <Tabs
+                value={tabValue}
+                onChange={(e, newValue) => {
+                  setTabValue(newValue);
+                  setAmount(Number(e.target.id));
+                }}
+                aria-label="course details tabs"
+              >
+                <Tab label="Single" id={single} />
+                {/* <Tab label="Project" id={project} /> */}
+              </Tabs>
               <Box
                 sx={{
                   display: "flex",
@@ -201,28 +210,30 @@ export const SuperVisorDetail = () => {
                   fontSize: "1rem",
                 }}
               >
-                {/* ON Click alignment of amount needs to be fixed later no */}
-                <Typography
-                  variant='body2'
-                  color='text.secondary'
-                  textAlign='center'
-                >
+                <Typography>
                   <strong>Project Cost:</strong>
                 </Typography>
 
-                <Typography>{tabValue === 0 && single}</Typography>
-                <Typography>{tabValue === 1 && project}</Typography>
+                <Typography
+                  sx={{
+                    marginLeft: "10px",
+                  }}
+                >
+                RS {tabValue === 0 && consultancyCardDetail?.pricing?.single} 
+                </Typography>
+
+                {/* <Typography>{tabValue === 1 && project}</Typography> */}
               </Box>
 
               <CustomButton
                 fullWidth
-                variant='primary'
+                variant="primary"
                 disabled={isConsultancyVerified}
                 onClick={handleConsultancy}
               >
                 {isConsultancyVerified ? "Currently Active" : "Buy"}
               </CustomButton>
-              <div className='supervisor-chat-video-btn'>
+              <div className="supervisor-chat-video-btn">
                 <CustomButton
                   variant={"primary"}
                   onClick={() => {
