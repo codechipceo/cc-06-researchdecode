@@ -20,7 +20,17 @@
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
+  .experts_mid_header1{
+    font-size: 24px;
+  }
+  .experts_mid_header2{
+    font-size: 20px;
+  }
+  .top_experts{
+    text-align: center;
+    font-size: 20px;
+  }
   .experts_header {
     font-size: 30px !important;
   }
