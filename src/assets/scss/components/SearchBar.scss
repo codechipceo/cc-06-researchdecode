@@ -1,4 +1,3 @@
-// SearchBar.scss
 .custom-search-bar {
   max-width: 1000px;
   width: 100%;
@@ -47,11 +46,20 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .rs-input {
+      &::placeholder {
+        font-size: medium;
+      }
+    }
+  }
 }
 
 .rs-input-group:focus-within,
 .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus,
 .rs-input-group:not(.rs-input-group-disabled):hover {
+
   border-color: #aca5a5;
 }
 
@@ -90,3 +98,4 @@
     }
   }
 }
+

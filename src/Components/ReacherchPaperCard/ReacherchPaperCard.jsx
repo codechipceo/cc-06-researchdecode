@@ -19,6 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import { useNavigate } from "react-router-dom";
+// import "./ResearchPaperCard.css"; // Add custom styles here
 
 const ResearchPaperCard = ({
   requestDetail,
@@ -27,20 +28,29 @@ const ResearchPaperCard = ({
   downloadicon: DownloadIcon,
   uploadicon: UploadIcon,
   sendicon: SendIcon,
-  viewicon: ViewIcon
+  viewicon: ViewIcon,
 }) => {
-  const { _id, requestBy, paperDetail, requestStatus, DOI_number, fileUrl, fulfilledBy} = requestDetail;
+  const {
+    _id,
+    requestBy,
+    paperDetail,
+    requestStatus,
+    DOI_number,
+    fileUrl,
+    fulfilledBy,
+  } = requestDetail;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
 
-  const fileInputRef = useRef(null); // Reference for the hidden file input
+  const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedinUser = useSelector(selectStudentInfo);
+
   const handlePanelClick = (e) => {
     if (fileUrl) {
       setOpen(true);
@@ -57,7 +67,7 @@ const ResearchPaperCard = ({
       formData.append("requestId", _id);
       dispatch(sendPaper(formData));
     } else {
-      fileInputRef.current.click(); // Opens file dialog if no file is selected
+      fileInputRef.current.click();
     }
   };
 
@@ -65,7 +75,7 @@ const ResearchPaperCard = ({
     const file = e.target.files[0];
     if (file) {
       setUploadFile(file);
-      handleUpload(); // Calls upload immediately after file is selected
+      handleUpload();
     }
   };
 
@@ -104,7 +114,12 @@ const ResearchPaperCard = ({
     }
   };
 
-  const { title, author, ["container-title"]: containerTitle, publisher } = paperDetail;
+  const {
+    title,
+    author,
+    ["container-title"]: containerTitle,
+    publisher,
+  } = paperDetail;
 
   return (
     <>
@@ -116,16 +131,29 @@ const ResearchPaperCard = ({
 
       <Panel className="panel-border" style={{ cursor: "pointer" }}>
         <div onClick={handleSend}>
-          <Typography size="lg" variant="bold">
+          <Typography
+            size={window.innerWidth < 768 ? "md" : "lg"}
+            variant="bold"
+          >
             {containerTitle && containerTitle[0]}
           </Typography>
-          <Typography size="sm">{title && title[0]}</Typography>
-          <Typography size="sm" variant="bold">Status:-{requestStatus}</Typography>
+          <Typography size={window.innerWidth < 768 ? "xm" : "sm"}>
+            {title && title[0]}
+          </Typography>
+          <Typography
+            size={window.innerWidth < 768 ? "xm" : "sm"}
+            variant="bold"
+          >
+            Status:-{requestStatus}
+          </Typography>
           <Divider />
           <FlexboxGrid className="details" align="middle">
             <FlexboxGrid.Item className="author-info">
               <Avatar circle icon={<PersonIcon />} size="md" />
-              <Typography className="name" size="sm">
+              <Typography
+                className="name"
+                size={window.innerWidth < 768 ? "xm" : "sm"}
+              >
                 By {requestBy?.firstName} {requestBy?.lastName}
               </Typography>
             </FlexboxGrid.Item>
@@ -151,7 +179,7 @@ const ResearchPaperCard = ({
                       <Button
                         appearance="link"
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevents expanding when card is clicked
+                          e.stopPropagation();
                           toggleExpand();
                         }}
                         className="toggle-button"
@@ -181,13 +209,19 @@ const ResearchPaperCard = ({
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
-              {UploadIcon && <UploadIcon onClick={handleUpload} style={{ cursor: "pointer" }} />}
+              {UploadIcon && (
+                <UploadIcon onClick={handleUpload} style={{ cursor: "pointer" }} />
+              )}
             </>
           )}
           {fileUrl && loggedinUser?._id === requestBy?._id && (
             <>
-              {ApproveIcon && <ApproveIcon className="firsticon" onClick={handleApprove} />}
-              {RejectIcon && <RejectIcon className="crossicon" onClick={handleReject} />}
+              {ApproveIcon && (
+                <ApproveIcon className="firsticon" onClick={handleApprove} />
+              )}
+              {RejectIcon && (
+                <RejectIcon className="crossicon" onClick={handleReject} />
+              )}
               {ViewIcon && <ViewIcon onClick={handlePanelClick} />}
               {DownloadIcon && <DownloadIcon onClick={handleDownload} />}
             </>
