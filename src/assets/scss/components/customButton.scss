@@ -36,6 +36,11 @@
   @include button-style($accent4, $neutral5, );
 }
 
+@media (max-width:600px) {
+  .primary-button{
+    font-size: $font-2xs !important;
+  }
+}
 .font-weight-medium {
   font-weight: $font-weight-medium;
 }
