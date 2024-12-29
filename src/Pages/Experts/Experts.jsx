@@ -40,8 +40,10 @@ const Experts = () => {
     <div>
       <HeaderThree title="EXPERTS" breadcrumbPath={breadcrumbPath} />
       <div className="default__layout_container">
-        <Typography size={"3xl"} variant={"bold"} className={"text-center experts_header"}>
-          Find your next research collaboration
+
+      <Typography size={window.innerWidth < 768 ? "2xl" : "3xl"} variant={"bold"} className={"text-center"}>
+      Find your next research collaboration
+
         </Typography>
 
         <SearchBar
