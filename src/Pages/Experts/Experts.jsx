@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
 import Consultancy_card from "../../Components/Consultant_card/Consultancy_card";
 import SearchBar from "../../Components/Searchbar/SearchBar";
@@ -40,7 +40,7 @@ const Experts = () => {
     <div>
       <HeaderThree title="EXPERTS" breadcrumbPath={breadcrumbPath} />
       <div className="default__layout_container">
-        <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
+        <Typography size={"3xl"} variant={"bold"} className={"text-center experts_header"}>
           Find your next research collaboration
         </Typography>
 
@@ -55,8 +55,8 @@ const Experts = () => {
           Loved by over 600 academics
         </Typography>
 
-        <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
-          <h3 style={{ paddingTop: "10px", paddingBottom: "30px", paddingLeft: "50px" }}>
+        <div className="experts_div">
+          <h3 className="top_experts">
             Top Experts
           </h3>
           <div className="cards-list">
