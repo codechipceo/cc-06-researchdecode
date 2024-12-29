@@ -58,6 +58,7 @@ const prodSettings = [
   { name: "Inbox", path: "inbox" },
   { name: "Paper Requests", path: "my-requests" },
   { name: "My Collaboration", path: "my-collaborations" },
+  { name: "My Webinars", path: "my-webinars" }
 ];
 const localSettings = [
 ...prodSettings,

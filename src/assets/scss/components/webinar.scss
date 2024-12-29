@@ -12,12 +12,19 @@
       color: $dark90;
     }
   }
-  .webinar-title {
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
-    font-size: 48px;
-    text-align: center;       /* Horizontally centers the text */
-  }
+  // .webinar-title {
+  //   font-family: "Inter", sans-serif;
+  //   font-weight: 600;
+  //   font-size: 48px;
+  //   text-align: center; // Horizontally center text
+  //   margin: 0 auto; // Ensures no extra margin pushes it off-center
+  //   display: flex; // Enables flexbox for vertical centering
+  //   align-items: center; // Vertically centers content
+  //   justify-content: center; // Horizontally centers content
+  //   min-height: 50vh; // Ensures the title occupies at least half the viewport height
+  //   color: $dark90; // Assuming `$dark90` is defined in your SCSS variables
+  // }
+  
   
   .courses-container {
     display: flex;

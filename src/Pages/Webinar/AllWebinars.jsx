@@ -1,17 +1,27 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { Panel } from 'rsuite';
 import Typography from '../../assets/scss/components/Typography';
 import WebinarCard from '../../Components/WebinarCard/WebinarCard';
 import '../../assets/scss/components/webinarCard.scss'
 import { useWebinar } from '../../Hooks/use-Webinar';
 const AllWebinars = () => {
+
+  const limit = 8;
+  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activePage, setActivePage] = useState(1);
+
   const {
     webinars,
     totalCount,
     webinarById,
     isError,
     isLoading,
-  } = useWebinar(5);
+  } = useWebinar(
+    limit,
+    (activePage - 1) * limit,
+    searchQuery
+  );
 
   return (
     <Panel className="recommended-courses">
