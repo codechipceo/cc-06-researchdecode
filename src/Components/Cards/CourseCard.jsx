@@ -1,14 +1,11 @@
-import React from "react";
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
-  Typography,
-  IconButton,
-  Box,
+  Typography
 } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import StarIcon from "@mui/icons-material/Star";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const CourseCard = ({ course }) => {
