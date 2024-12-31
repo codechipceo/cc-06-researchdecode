@@ -15,7 +15,7 @@ const AllCourses = () => {
   return (
     <Panel className="recommended-courses">
       <div className="recommended-header">
-        <Typography size="2xl" variant="medium">
+        <Typography size="2xl" variant="medium" className="all_courses_header">
           All Courses
         </Typography>
       </div>
