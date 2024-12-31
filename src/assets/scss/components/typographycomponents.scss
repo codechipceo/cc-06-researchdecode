@@ -1,4 +1,4 @@
-
+// Font size classes
 .font-2xs {
   font-size: $font-2xs;
 
@@ -17,8 +17,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-xs;
+  }
+}
 
 .font-xs {
   font-size: $font-xs;
@@ -38,8 +41,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-2xs;
+  }
+}
 
 .font-sm {
   font-size: $font-sm;
@@ -58,6 +64,10 @@
 
   &--bold {
     font-weight: $font-weight-bold;
+  }
+
+  @media (max-width: 600px) {
+    font-size: $font-xs;
   }
 }
 
@@ -79,8 +89,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-sm;
+  }
+}
 
 .font-lg {
   font-size: $font-lg;
@@ -100,8 +113,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-md;
+  }
+}
 
 .font-xl {
   font-size: $font-xl;
@@ -121,8 +137,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-lg;
+  }
+}
 
 .font-2xl {
   font-size: $font-2xl;
@@ -142,8 +161,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-xl;
+  }
+}
 
 .font-3xl {
   font-size: $font-3xl;
@@ -163,8 +185,11 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
-}
 
+  @media (max-width: 600px) {
+    font-size: $font-2xl;
+  }
+}
 
 .font-4xl {
   font-size: $font-4xl;
@@ -183,6 +208,10 @@
 
   &--bold {
     font-weight: $font-weight-bold;
+  }
+
+  @media (max-width: 600px) {
+    font-size: $font-3xl;
   }
 }
 
@@ -204,6 +233,10 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
+
+  @media (max-width: 600px) {
+    font-size: $font-4xl;
+  }
 }
 
 .font-5xl {
@@ -224,10 +257,13 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
+
+  @media (max-width: 600px) {
+    font-size: $font-24px; 
+  }
 }
 
-
-//font colors
-.font-primaryColor{
-  
+// Font colors
+.font-primaryColor {
+  // Add color styles here
 }

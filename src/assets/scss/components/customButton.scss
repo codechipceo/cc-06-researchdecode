@@ -36,8 +36,15 @@
   @include button-style($accent4, $neutral5, );
 }
 
-@media (max-width:600px) {
+@media (max-width:650px) {
   .primary-button{
+    font-size: $font-2xs !important;
+    padding: 8px 20px;
+  }
+  .secondary-button{
+    font-size: $font-2xs !important;
+  }
+  .preview-button{
     font-size: $font-2xs !important;
   }
 }

@@ -41,8 +41,8 @@ const Experts = () => {
       <HeaderThree title="EXPERTS" breadcrumbPath={breadcrumbPath} />
       <div className="default__layout_container">
 
-      <Typography size={window.innerWidth < 768 ? "2xl" : "3xl"} variant={"bold"} className={"text-center"}>
-      Find your next research collaboration
+        <Typography size={"3xl"} variant={"bold"} className={"text-center experts_mid_header1"}>
+          Find your next research collaboration
 
         </Typography>
 
@@ -53,7 +53,7 @@ const Experts = () => {
           placeholder="Enter Expert's Name"
         />
 
-        <Typography size={"md"} variant={"bold"} className={"text-center"}>
+        <Typography size={"md"} variant={"bold"} className={"text-center experts_mid_header2"}>
           Loved by over 600 academics
         </Typography>
 
@@ -68,7 +68,7 @@ const Experts = () => {
                   const { title, description, teacherId, _id } = d;
                   return (
                     <Consultancy_card
-                      data ={d}
+                      data={d}
                       key={teacherId}
                       image={image}
                       title={title}
