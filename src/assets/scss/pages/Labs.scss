@@ -65,7 +65,25 @@
     }
 
     .hero-image {
-      justify-content: center;
+      display: none;
+    }
+  }
+}
+
+@media (max-width:600px) {
+  .hero-section{
+    margin: 20px 60px;
+    .hero-content{
+      margin-bottom: 20px;
+      .hero-title{
+        font-size: 30px;
+      }
+      .hero-text{
+        font-size: 14px;
+      }
+    }
+    .hero-image{
+      display: none;
     }
   }
 }
