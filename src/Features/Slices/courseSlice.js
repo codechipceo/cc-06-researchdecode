@@ -30,6 +30,35 @@ export const getAllCourses = createAsyncThunk(
   }
 );
 
+export const getUserCourses = createAsyncThunk(
+  "course/getUserCourses",
+  async (payload1, { rejectWithValue }) => {
+    const studentInfo = JSON.parse(localStorage.getItem("studentInfo"));
+    const payload = {
+      decodedUser: {
+        _id: studentInfo._id,
+      },
+    };
+    const headers = {
+      headers: {
+        authToken: payload1.authToken,
+      },
+    };
+    try {
+      const { data, msg } = await apiFeature.getUserCourses(
+        "getUserCourses",
+        payload,
+        headers
+      );
+
+      return { data, msg };
+    } catch (error) {
+      const errMessage = error.response.data.msg;
+      return rejectWithValue(errMessage);
+    }
+  }
+);
+
 export const buyCourse = createAsyncThunk(
   "course/buy",
   async (payload, { rejectWithValue }) => {
@@ -69,7 +98,6 @@ export const getCourseById = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       console.log(payload);
-      
       const { data, msg } = await apiFeature.getById("getById", payload);
       return { data, msg };
     } catch (error) {
@@ -82,6 +110,7 @@ export const getCourseById = createAsyncThunk(
 const initialState = {
   totalCount: 0,
   courses: [],
+  userCourses: [],
   courseById: {},
   isLoading: false,
   isError: false,
@@ -123,11 +152,27 @@ export const courseSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = action.payload;
+      })
+
+      .addCase(getUserCourses.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
+      })
+      .addCase(getUserCourses.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userCourses = action.payload.data; // Save user-specific courses
+      })
+      .addCase(getUserCourses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = action.payload;
       });
   },
 }).reducer;
 
 export const selectCourses = (state) => state.course.courses;
+export const selectUserCourses = (state) => state.course.userCourses;
 export const selectCourseById = (state) => state.course.courseById;
 export const courseTotalCount = (state) => state.course.totalCount;
 export const selectCourseLoadingStatus = (state) => state.course.isLoading;

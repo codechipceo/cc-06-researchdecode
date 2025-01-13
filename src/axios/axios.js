@@ -17,3 +17,22 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      console.log("Token expired. Logging out...");
+      localStorage.removeItem("studentToken");
+      localStorage.removeItem("userData");
+
+      window.location.href = "/signin";
+
+      alert("Your session has expired. Please log in again.");
+    }
+
+    return Promise.reject(error);
+  }
+);

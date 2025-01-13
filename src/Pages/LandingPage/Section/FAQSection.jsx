@@ -35,8 +35,8 @@ const FAQSection = () => {
   return (
     <div className="faq-section">
       <div className="faq-header">
-        <Typography  variant={"semibold"} size={"3xl"}>Frequently Asked Questions</Typography>
-        <Typography variant={"regular"} size={"sm"}>
+        <Typography  variant={"semibold"} size={"3xl"} className={"headerFAQ"}>Frequently Asked Questions</Typography>
+        <Typography variant={"regular"} size={"sm"} className={"headerdescFAQ"}>
           Install our top-rated dropshipping app to your e-commerce site and get access to
           US Suppliers, AliExpress vendors, and the best.
         </Typography>
