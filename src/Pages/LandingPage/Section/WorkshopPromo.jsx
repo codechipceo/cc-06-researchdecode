@@ -30,7 +30,6 @@ const WorkshopPromo = () => {
           </ul>
           <CustomButton onClick={()=>{navigate('/consultancy')}} Icon={RightArrowIcon} variant="primary" fontWeight={"semibold"} className="btn-size-7">
             Know More
-            {/* <span className="arrow">→</span> */}
           </CustomButton>
         </Col>
       </Row>

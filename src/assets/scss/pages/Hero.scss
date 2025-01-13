@@ -71,12 +71,12 @@ body {
       position: relative;
 
       img {
-        // width: 80%;
+        width: 80%;
         /* Make image take up full width */
         height: 650px;
         /* Maintain aspect ratio */
         object-fit: cover;
-        margin-left: 200px;
+        margin-left: 150px;
         border-radius: 8px;
       }
 
@@ -147,7 +147,7 @@ body {
           }
 
           &.courses {
-            right: -7%;
+            right: -3%;
             top: 14%;
 
             &::before {
@@ -198,5 +198,174 @@ body {
     font-weight: 300;
     font-size: 25px;
     color: rgba(16, 24, 40, 1);
+  }
+}
+
+@media (max-width: 1300px) {
+  .landing-page {
+    padding: 30px;
+
+    .content {
+      .text-section {
+        .heading {
+          font-size: 50px;
+        }
+        .content-1{
+          font-size: 16px;
+        }
+      }
+
+      .image-section {
+        img {
+          margin-left: 100px;
+          width: 70%;
+        }
+
+        .stats {
+          .stat-item {
+            padding: 10px 16px;
+            font-size: 14px;
+            gap: 8px;
+
+            &.webinars {
+              top: 20%;
+              left: 20%;
+            }
+
+            &.consultancy {
+              top: 50%;
+              right: 0;
+            }
+
+            &.courses {
+              top: 10%;
+              right: 0;
+            }
+
+            .stat-content {
+              .number {
+                font-size: 16px;
+              }
+
+              .label {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .landing-page {
+    padding: 20px;
+
+    .content {
+      .text-section {
+        .heading {
+          font-size: 40px;
+          line-height: 60px;
+        }
+
+        .content-1 {
+          margin-bottom: 15px;
+        }
+        .features{
+          margin-bottom: 5rem;
+        }
+      }
+
+      .collaboration {
+        .partners {
+          gap: 10px !important;
+          font-size: 1rem;
+        }
+
+        .partners collaboration-stat, img {
+          width: 140px;
+        }
+        .collaboration-stat{
+          margin-right: 0px;
+        }
+      }
+
+      .image-section {
+        img {
+          margin-left: 90px;
+          width: 70%;
+        }
+
+        .stats {
+          .stat-item {
+            padding: 8px 12px; 
+            font-size: 12px;
+            gap: 6px;
+            border-radius: 10px;
+
+            &.webinars {
+              top: 18%;
+              left: 15%;
+            }
+
+            &.consultancy {
+              top: 48%; 
+              right: 5%;
+            }
+
+            &.courses {
+              top: 8%;
+              right: 5%;
+            }
+
+            .stat-content {
+              .number {
+                font-size: 14px;
+              }
+
+              .label {
+                font-size: 11px;
+              }
+            }
+
+            &::before {
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:600px) {
+  .landing-page{
+    .content{
+      .image-section{
+        display: none;
+      }
+      .text-section{
+        width: 80%;
+        margin-left: 50px;
+        .collaboration{
+          margin-left: -45px;
+          .partners div, img{
+            width: 20%;
+          }
+          .partners {
+            gap: 5px !important;
+            .collaboration-stat{
+              .collaboration-stat__number{
+                font-size: 15px;
+              }
+              .collaboration-stat__label{
+                font-size: 13px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
