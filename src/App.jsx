@@ -35,7 +35,7 @@ import CourseLecture from "./Pages/CourseLecture/CourseLecture";
 import Supervisorform from "./Pages/Supervisorform/Supervisorform";
 import WebinarPage from "./Pages/Webinar/Webinar";
 import WebinarDetail from "./Pages/WebinarDetails/WebinarDetails";
-import Mycourse from "./Pages/Mycourse/Mycourse";
+import MyWebinar from "./Pages/Webinar/MyWebinar";
 
 const router = createBrowserRouter([
   {
@@ -95,12 +95,16 @@ const router = createBrowserRouter([
     element: <GuardComponents component={Experts} />,
   },
   {
-    path: "/supervisor/:supervisorId",
+    path: "/supervisor",
+    element: <GuardComponents component={Experts} />,
+  },
+  {
+    path: "/supervisor/:supervisorCardId",
     element: <GuardComponents component={SuperVisorDetail} />,
   },
   {
     path: "/inbox",
-    element: <Inbox />,
+    element: <GuardComponents component={Inbox} />,
   },
   {
     path: "/inbox/:supervisorId",
@@ -111,15 +115,14 @@ const router = createBrowserRouter([
     element: <GuardComponents component={PaymentPage} />,
   },
   {
-    path: "/videocall/:peerId",
+    path: "/consultancyCard/:consultancyCardId/videocall/:peerId",
     element: <VideoCall />,
   },
   {
-
     path: "/course-lecture/:courseId",
     element: <CourseLecture />,
   },
-    {
+  {
     path: "/supervisorform",
     element: <Supervisorform />,
   },
@@ -132,9 +135,10 @@ const router = createBrowserRouter([
     element: <WebinarDetail/>,
   },
   {
-    path: "/my-courses",
-    element: <Mycourse/>,
+    path: "/my-webinars",
+    element: <MyWebinar/>,
   },
+
 ]);
 
 export default function App() {

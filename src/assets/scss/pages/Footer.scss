@@ -105,3 +105,14 @@ $hover-color: #00B4D8;
     }
   }
 }
+
+@media (max-width:950px) {
+  .footer{
+    padding: 2rem 8rem;
+    .footer-content{
+      .footer-links{
+        gap: 3rem;
+      }
+    }
+  }
+}

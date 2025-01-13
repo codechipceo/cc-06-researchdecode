@@ -146,3 +146,19 @@
   //   }
   // }
 }
+
+@media (max-width:600px) {
+  .consulting-section{
+    .overlay{
+      .content{
+        h1{
+          font-size: 2rem;
+        }
+        p{
+          font-size: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}

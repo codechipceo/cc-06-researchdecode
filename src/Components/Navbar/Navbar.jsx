@@ -18,7 +18,8 @@ import {
   selectStudentInfo,
   selectStudentToken,
 } from "../../Features/Slices/studentSlice";
-const pages = [
+import { featureFlag, features } from "../../Utils/featureFlag";
+const localPages = [
   {
     navLink: "Find Papers",
     navPath: "/searchPaper",
@@ -35,24 +36,39 @@ const pages = [
     navLink: "Courses",
     navPath: "/courses",
   },
-  // {
-  //   navLink: "Lab Requests",
-  //   navPath: "/lab-request",
-  // },
-
-  // {
-  //   navLink: "Request Data",
-  //   navPath: "/courses",
-  // },
 ];
-const settings = [
+
+const prodPages = [
+  {
+    navLink: "Find Papers",
+    navPath: "/searchPaper",
+  },
+  {
+    navLink: "Hire Expert",
+    navPath: "/experts",
+  },
+  {
+    navLink: "Collaboration",
+    navPath: "/collaboration",
+  },
+];
+
+const pages = featureFlag(features.NAVBAR) ? localPages : prodPages;
+const prodSettings = [
+  { name: "Inbox", path: "inbox" },
   { name: "Paper Requests", path: "my-requests" },
-  // { name: "Booked Consultancy", path: "my-consultancy" },
+  { name: "My Collaboration", path: "my-collaborations" },
+  { name: "My Webinars", path: "my-webinars" }
+];
+const localSettings = [
+...prodSettings,
+  { name: "Active Consultancy", path: "my-consultancy" },
   { name: "My Courses", path: "my-courses" },
-  { name: "My Collabs", path: "my-collaborations" },
-  // { name: "Payment History", path: "payment-history" },
 ];
 
+
+
+const settings = featureFlag(features.NAVBAR) ? [...localSettings] :[ ...prodSettings];
 function ResponsiveAppBar() {
   const token = useSelector(selectStudentToken);
   const studentInfo = useSelector(selectStudentInfo);

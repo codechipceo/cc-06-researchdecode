@@ -2,7 +2,7 @@
   padding: 24px;
   background: #ffffff;
   margin: 20px 0;
-  border-radius: 8px; // Optional: adds rounded corners for a smoother look
+  border-radius: 8px;
 
   .recommended-header {
     display: flex;
@@ -39,7 +39,6 @@
     overflow-x: auto;
     padding-bottom: 12px;
 
-    // Custom scrollbar styling
     &::-webkit-scrollbar {
       height: 6px;
     }
@@ -58,14 +57,12 @@
       }
     }
 
-    // Hide scrollbar in Firefox
     scrollbar-width: thin;
     scrollbar-color: var(--rs-gray-300) var(--rs-gray-100);
 
-    // Box shadow for course cards
     .course-card {
       transition: box-shadow 0.3s ease;
-      border-radius: 8px; // Optional: adds rounded corners to course cards
+      border-radius: 8px;
 
       &:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,27 +71,54 @@
   }
 }
 
-// Responsive styles
-@media (max-width: 768px) {
-  .recommended-courses {
-    padding: 16px;
+// @media (max-width: 768px) {
+//   .recommended-courses {
+//     padding: 16px;
 
-    .recommended-header {
-      margin-bottom: 16px;
+//     .recommended-header {
+//       margin-bottom: 16px;
 
-      h2 {
-        font-size: 18px;
+//       h2 {
+//         font-size: 18px;
+//       }
+//     }
+
+//     .courses-container {
+//       display: block;
+//       gap: 20px;
+//       padding-bottom: 0;
+
+//       .course-card {
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
+
+@media (max-width:665px) {
+  .recommended-courses{
+    padding: 10px;
+    margin: 10px 0;
+    .recommended-header{
+      margin-bottom: 10px;
+      justify-content: center;
+      .all_courses_header{
+        font-size: 24px;
+      }
+      .recommended-text{
+        font-size: 20px;
+      }
+      .see-all{
+        font-size: 13px;
       }
     }
-
     .courses-container {
-      display: block; // Stack the course cards vertically
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 20px;
-      padding-bottom: 0; // Optional: adjust padding for a more compact layout
-
-      .course-card {
-        width: 100%; // Make the course card take full width on smaller screens
-      }
     }
   }
 }

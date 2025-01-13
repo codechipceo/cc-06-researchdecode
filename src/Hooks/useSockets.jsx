@@ -5,7 +5,7 @@ const activeEnv = import.meta.env.VITE_NODE_ENV;
 const defaultUrl =
   activeEnv === "test"
     ? "https://api.researchdecode.com/"
-    : "http://localhost:5001";
+    : "http://localhost:5000";
 const defaultOptions = {
   reconnectionAttempts: 5,
   transports: ["websocket"],
@@ -23,7 +23,7 @@ export const useSockets = (url = defaultUrl, options = defaultOptions) => {
       console.log(socket);
       if (socket) {
         socket.emit("leaveroom", "left");
-        //  socket.disconnect();
+         socket.disconnect();
       }
     };
   }, [socket]);

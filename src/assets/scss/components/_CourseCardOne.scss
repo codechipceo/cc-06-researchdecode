@@ -137,3 +137,22 @@
     }
   }
 }
+@media (max-width: 665px) {
+  .course-card-one {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .course-card-one__title{
+    font-size: 14px !important;
+  }
+  .course-card-one__description{
+    font-size: 14px !important;
+  }
+  .course-card-one__instructor-name{
+    font-size: 14px !important;
+  }
+  .course-card-one__discounted-price{
+    font-size: 20px !important;
+  }
+}

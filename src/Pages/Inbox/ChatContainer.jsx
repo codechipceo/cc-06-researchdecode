@@ -6,13 +6,12 @@ import ChatList from "./ChatList"; // Assuming ChatList is your child component
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
+import { generateRoomId } from "../../Utils/utils";
+import { useSockets } from "../../Hooks/useSockets";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
-const generateRoomId = (user1, user2) => {
-  const [first, second] = [user1, user2].sort();
-  return `${first}_${second}`;
-};
+
 
 const ChatContainer = () => {
   /*
@@ -24,8 +23,11 @@ const ChatContainer = () => {
   const loggedinUser = useSelector(selectStudentInfo);
   const roomId = generateRoomId(activeUserId, loggedinUser?._id);
   const senderId = loggedinUser?._id;
+  const {socket } = useSockets()
 
   const { inbox, fetchInbox, fetchChatHistory, isLoading, isError } = useChat();
+
+
   /*
   ################################################################
           STATES

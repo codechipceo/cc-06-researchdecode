@@ -10,13 +10,10 @@ const RecommendedCourses = () => {
     isCourseError: isError,
   } = useCourse(5);
 
-
-
-
   return (
     <Panel className="recommended-courses">
       <div className="recommended-header">
-        <Typography size={"2xl"} variant={"medium"}>Recommended for you</Typography>
+        <Typography size={"2xl"} variant={"medium"} className={"recommended-text"}>Recommended for you</Typography>
         <a href="courses" className="see-all">
           See all
           <i className="rs-icon rs-icon-chevron-right"></i>

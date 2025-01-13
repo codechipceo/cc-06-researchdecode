@@ -1,6 +1,5 @@
 import React from 'react'
 import { MdSend } from "react-icons/md";
-import { AiOutlineMessage } from "react-icons/ai";
 import CustomButton from '../CustomButton/CustomButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,8 +21,7 @@ const Consultancy_card = ({ image, title, description, name, qualification, data
                     <p>{name}</p>
                     <p>Qualification : {qualification}</p>
                     <div className='buttons'>
-                        <CustomButton onClick={() =>navigate(`/supervisor/${_id}`)} variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Hire me <MdSend style={{ color: "white", marginLeft: "10px" }} /></CustomButton>
-                        <AiOutlineMessage size={50} onClick={() => navigate('/inbox/'+teacherId._id)} color="aqua" style={{ cursor: "pointer" }} />
+                        <CustomButton onClick={() =>navigate(`/supervisor/${_id}`)} fullWidth variant={"primary"} fontWeight={"semibold"}  className="">Hire me <MdSend style={{ color: "white", marginLeft: "10px" }} /></CustomButton>
                     </div>
                 </div>
             </div>

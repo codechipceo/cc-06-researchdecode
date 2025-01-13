@@ -163,3 +163,34 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .workshop-promo {
+    padding: 0px;
+    .workshop-container {
+      padding: 10px;
+      .image-section {
+        padding: 5px;
+      }
+      .content-section{
+        padding: 1rem 0.5rem;
+        margin-top: 10px;
+        h1{
+          margin-bottom: 5px;
+          font-size: 25px;
+          line-height: 50px;
+        }
+        h3{
+          line-height: 30px;
+          margin-bottom: 1.2rem;
+        }
+        .feature-list{
+          margin-bottom: 20px;
+          li{
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}

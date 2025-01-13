@@ -10,7 +10,8 @@ import {
   consultancySlice,
   collaborationSlice,
   supervisorSlice,
-  webinarSlice
+  webinarSlice,
+  webinarEnrollSlice
 } from "../Features/indexSlice";
 
 const reducers = combineReducers({
@@ -24,7 +25,8 @@ const reducers = combineReducers({
   consultancy: consultancySlice,
   supervisor: supervisorSlice,
   collaboration: collaborationSlice.reducer,
-  webinar:webinarSlice
+  webinar:webinarSlice,
+  webinarEnroll:webinarEnrollSlice
 });
 
 export const store = configureStore({
