@@ -11,6 +11,16 @@ function Supervisorform() {
     lastName: '',
     email: '',
     phoneNumber: '',
+    bankName: '',
+    accountNumber: '',
+    IFSC_Code: '',
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      country: '',
+      postalCode: '',
+    },
     experience: '',
   });
 
@@ -21,7 +31,14 @@ function Supervisorform() {
 
   // Handle input changes
   const handleChange = (key, value) => {
-    setFormData({ ...formData, [key]: value });
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleAddressChange = (key, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      address: { ...prev.address, [key]: value },
+    }));
   };
 
   // Handle form submission
@@ -30,14 +47,24 @@ function Supervisorform() {
 
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
+      if (key !== 'address' && !formData[key]) {
         newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`;
       }
     });
 
-    // Additional validation for experience field to be a number
+    // Validate address fields
+    Object.keys(formData.address).forEach((key) => {
+      if (!formData.address[key]) {
+        newErrors[`address.${key}`] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`;
+      }
+    });
+
+    // Additional validation for numeric fields
     if (formData.experience && isNaN(formData.experience)) {
-      newErrors.experience = "Experience must be a number";
+      newErrors.experience = 'Experience must be a number';
+    }
+    if (formData.accountNumber && isNaN(formData.accountNumber)) {
+      newErrors.accountNumber = 'Account Number must be a number';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -54,9 +81,7 @@ function Supervisorform() {
       <ResponsiveAppBar />
       <div className="about">
         <div className="about-inner">
-          <p>
-            Fill in your details below to submit your request. All fields are required.
-          </p>
+          <p>Fill in your details below to submit your request. All fields are required.</p>
         </div>
       </div>
 
@@ -118,14 +143,95 @@ function Supervisorform() {
           </InputGroup>
           {errors.phoneNumber && <p className="error-message">{errors.phoneNumber}</p>}
 
-          {/* Experience Field */}
+          {/* Bank Name */}
           <InputGroup inside className="input-field">
-            <InputGroup.Addon>
-              <AiOutlineUser className="icon" />
-            </InputGroup.Addon>
+            <Input
+              placeholder="Enter Your Bank Name"
+              type="text"
+              value={formData.bankName}
+              onChange={(value) => handleChange('bankName', value)}
+            />
+          </InputGroup>
+          {errors.bankName && <p className="error-message">{errors.bankName}</p>}
+
+          {/* Account Number */}
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="Enter Your Account Number"
+              type="number"
+              value={formData.accountNumber}
+              onChange={(value) => handleChange('accountNumber', value)}
+            />
+          </InputGroup>
+          {errors.accountNumber && <p className="error-message">{errors.accountNumber}</p>}
+
+          {/* IFSC Code */}
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="Enter Your IFSC Code"
+              type="text"
+              value={formData.IFSC_Code}
+              onChange={(value) => handleChange('IFSC_Code', value)}
+            />
+          </InputGroup>
+          {errors.IFSC_Code && <p className="error-message">{errors.IFSC_Code}</p>}
+
+          {/* Address Fields */}
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="Street"
+              type="text"
+              value={formData.address.street}
+              onChange={(value) => handleAddressChange('street', value)}
+            />
+          </InputGroup>
+          {errors['address.street'] && <p className="error-message">{errors['address.street']}</p>}
+
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="City"
+              type="text"
+              value={formData.address.city}
+              onChange={(value) => handleAddressChange('city', value)}
+            />
+          </InputGroup>
+          {errors['address.city'] && <p className="error-message">{errors['address.city']}</p>}
+
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="State"
+              type="text"
+              value={formData.address.state}
+              onChange={(value) => handleAddressChange('state', value)}
+            />
+          </InputGroup>
+          {errors['address.state'] && <p className="error-message">{errors['address.state']}</p>}
+
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="Country"
+              type="text"
+              value={formData.address.country}
+              onChange={(value) => handleAddressChange('country', value)}
+            />
+          </InputGroup>
+          {errors['address.country'] && <p className="error-message">{errors['address.country']}</p>}
+
+          <InputGroup inside className="input-field">
+            <Input
+              placeholder="Postal Code"
+              type="text"
+              value={formData.address.postalCode}
+              onChange={(value) => handleAddressChange('postalCode', value)}
+            />
+          </InputGroup>
+          {errors['address.postalCode'] && <p className="error-message">{errors['address.postalCode']}</p>}
+
+          {/* Experience */}
+          <InputGroup inside className="input-field">
             <Input
               placeholder="Enter Your Experience (in years)"
-              type="number"
+              type="text"
               value={formData.experience}
               onChange={(value) => handleChange('experience', value)}
             />
