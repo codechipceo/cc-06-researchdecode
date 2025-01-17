@@ -17,3 +17,22 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    if (response.status === 401) {
+      console.log(response);
+      // Unauthorized request
+      localStorage.removeItem("studentToken");
+      window.location.href = "/";
+    }
+    return response
+  },
+  (err) => {
+    if (err.status === 401) {
+      // Unauthorized request
+      localStorage.removeItem("studentToken");
+      window.location.href = "/";
+    }
+  }
+);

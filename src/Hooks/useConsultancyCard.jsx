@@ -25,15 +25,11 @@ export const useConsultancyCard = (limit = 9, skip = 0, search = "") => {
     dispatch(getAllConsultancyCard(payload));
   }, [skip, limit, search, dispatch]);
 
-  const filteredData = search
-    ? consultancyCardData.filter((card) =>
-        card.teacherId?.name?.toLowerCase().includes(search.toLowerCase())
-      )
-    : consultancyCardData;
+  
 
   return {
-    consultancyCardData: filteredData,
-    consultancyCount: search ? filteredData.length : consultancyCount,
+    consultancyCardData: consultancyCardData,
+    consultancyCount: consultancyCount,
     isLoading,
     isError,
   };

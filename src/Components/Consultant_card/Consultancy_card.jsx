@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { MdSend } from "react-icons/md";
-import { AiOutlineMessage } from "react-icons/ai";
-import CustomButton from '../CustomButton/CustomButton';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from '../CustomButton/CustomButton';
 
 const Consultancy_card = ({ image, title, description, name, qualification, data }) => {
     const navigate = useNavigate()
@@ -16,7 +15,7 @@ const Consultancy_card = ({ image, title, description, name, qualification, data
             <div className='card-right'>
                 <div className='card-right-upper'>
                     <p className='title'>{title}</p>
-                    <p className='description'>{description}</p>
+                    <p className='description'>{description && description?.substring(0,128)}</p>
                 </div>
                 <div className='card-right-low'>
                     <p>{name}</p>
