@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reduxStore } from "../Features/indexStates";
 
-export const useCourse = (limit , skip  ,search) => {
+export const useCourse = (limit , skip  ,search , authToken) => {
   // ###########################################
   //                 STATES
   // ###########################################
@@ -11,8 +11,10 @@ export const useCourse = (limit , skip  ,search) => {
   const throttleTimeout = useRef(null);
   const dispatch = useDispatch();
   const { getAllCourses } = reduxStore.sliceMethods;
+  const { getUserCourses } = reduxStore.sliceMethods;
   const {
     selectCourses,
+    selectUserCourses,
     selectCourseById,
     courseTotalCount,
     selectCourseLoadingStatus,
@@ -21,6 +23,7 @@ export const useCourse = (limit , skip  ,search) => {
   
   const courseData = useSelector(selectCourses);
   const courseById = useSelector(selectCourseById);
+  const courseOfUser = useSelector(selectUserCourses);
   const courseCount = useSelector(courseTotalCount);
   const isCourseLoading = useSelector(selectCourseLoadingStatus);
   const isCourseError = useSelector(selectCourseErrorStatus);
@@ -39,6 +42,10 @@ export const useCourse = (limit , skip  ,search) => {
       throttleTimeout.current = setTimeout(() => {
         dispatch(getAllCourses({ limit, skip, search }));
       }, 300); // Adjust delay as needed (300ms is a common throttle time)
+
+      throttleTimeout.current = setTimeout(() => {
+        dispatch(getUserCourses({ authToken}));
+      }, 300); // Adjust delay as needed (300ms is a common throttle time)
     
       // Cleanup timeout on unmount or when dependencies change
       return () => {
@@ -55,6 +62,7 @@ export const useCourse = (limit , skip  ,search) => {
   return {
     courseData,
     courseById,
+    courseOfUser,
     courseCount,
     isCourseLoading,
     isCourseError,

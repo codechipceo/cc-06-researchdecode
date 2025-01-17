@@ -48,3 +48,17 @@
     }
   }
 }
+
+@media (max-width:600px) {
+  .faq-section{
+    .faq-header{
+      margin-bottom: 30px;
+      .headerFAQ{
+        font-size: 25px;
+      }
+      .headerdescFAQ{
+        font-size: 14px;
+      }
+    }
+  }
+}

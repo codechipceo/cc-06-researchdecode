@@ -20,19 +20,19 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    if (response.status === 401) {
-      console.log(response);
-      // Unauthorized request
-      localStorage.removeItem("studentToken");
-      window.location.href = "/";
-    }
-    return response
+    return response;
   },
-  (err) => {
-    if (err.status === 401) {
-      // Unauthorized request
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      console.log("Token expired. Logging out...");
       localStorage.removeItem("studentToken");
-      window.location.href = "/";
+      localStorage.removeItem("userData");
+
+      window.location.href = "/signin";
+
+      alert("Your session has expired. Please log in again.");
     }
+
+    return Promise.reject(error);
   }
 );

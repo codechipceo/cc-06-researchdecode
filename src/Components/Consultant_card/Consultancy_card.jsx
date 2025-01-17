@@ -22,7 +22,6 @@ const Consultancy_card = ({ image, title, description, name, qualification, data
                     <p>Qualification : {qualification}</p>
                     <div className='buttons'>
                         <CustomButton onClick={() =>navigate(`/supervisor/${_id}`)} fullWidth variant={"primary"} fontWeight={"semibold"}  className="">Hire me <MdSend style={{ color: "white", marginLeft: "10px" }} /></CustomButton>
-                        {/* <AiOutlineMessage size={50} onClick={() => navigate('/inbox/'+teacherId._id)} color="aqua" style={{ cursor: "pointer" }} /> */}
                     </div>
                 </div>
             </div>

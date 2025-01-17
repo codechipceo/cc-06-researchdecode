@@ -20,11 +20,13 @@ import {
 import {
   getAllCourses,
   getCourseById,
+  getUserCourses,
   selectCourseById,
   selectCourseErrorMessage,
   selectCourseErrorStatus,
   selectCourseLoadingStatus,
   selectCourses,
+  selectUserCourses,
   courseTotalCount,
 } from "./Slices/courseSlice";
 import {
@@ -60,6 +62,7 @@ const reduxStore = {
     selectCourseErrorStatus,
     selectCourseLoadingStatus,
     selectCourses,
+    selectUserCourses,
     courseTotalCount,
 
     selectVideoById,
@@ -77,6 +80,7 @@ const reduxStore = {
     getByIdTeacher,
     getAllCourses,
     getCourseById,
+    getUserCourses,
     getAllVideos,
     getVideoById,
     resetState,

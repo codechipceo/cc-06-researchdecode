@@ -5,28 +5,35 @@ import { useCourse } from '../../Hooks/use-course';
 import Typography from '../../assets/scss/components/Typography';
 import '../../assets/scss/pages/RecommendedCourses.scss'; // Import the styles
 
-const AllCourses = () => {
+const Subscribed_courses = () => {
+  const authToken = localStorage.getItem("studentToken")
+
   const {
-    courseData: courses,
+    courseOfUser: courses,
     isLoading,
     isError,
-  } = useCourse(5);
+  } = useCourse(5, null, null, authToken);
+  
 
   return (
     <Panel className="recommended-courses">
       <div className="recommended-header">
-        <Typography size="2xl" variant="medium" className="all_courses_header">
-          All Courses
+        <Typography size="2xl" variant="medium">
+          My Courses
         </Typography>
       </div>
 
-      <div className="courses-container">
-        {courses.map(course => (
-          <CourseCard key={course.id} course={course} />
-        ))}
-      </div>
+      {
+        courses!=null ? <div className="courses-container">
+          {courses.map(course => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>:<div>
+           <p>NO PURCHASED COURSES YET</p>  
+        </div>
+      }
     </Panel>
   );
 };
 
-export default AllCourses;
+export default Subscribed_courses;
