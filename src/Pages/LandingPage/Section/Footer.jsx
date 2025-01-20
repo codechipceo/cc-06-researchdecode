@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../../assets/Icons/Logo.svg'
+import {Link} from 'react-router-dom'
 const Footer = () => {
   return (
     <footer className="footer">
@@ -14,20 +15,20 @@ const Footer = () => {
 
         <div className="footer-links">
           <div className="link-column">
-            <a href="/supervisorform">SuperVisor Form</a>
-            <a href="/searchPaper">Research</a>
+            <Link to="/supervisorform">SuperVisor Form</Link>
+            <Link to="/searchPaper">Research</Link>
           </div>
 
           <div className="link-column">
-            <a href="/experts">Labs</a>
-            <a href="/my-webinars">Webinar</a>
-            <a href="/collaboration">Collaboration</a>
+            <Link to="/experts">Labs</Link>
+            <Link to="/my-webinars">Webinar</Link>
+            <Link to="/collaboration">Collaboration</Link>
           </div>
 
           <div className="link-column">
-            <a href="/privacypolicy">Privacy</a>
-            <a href="/payment_policy">Payment policy</a>
-            <a href="/t&c">Terms & Conditions</a>
+            <Link to="/privacypolicy">Privacy</Link>
+            <Link to="/payment_policy">Payment policy</Link>
+            <Link to="/t&c">Terms & Conditions</Link>
           </div>
         </div>
       </div>

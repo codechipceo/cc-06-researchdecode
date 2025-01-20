@@ -10,6 +10,7 @@ import CustomModal from '../../../Components/Modal/Modal';
 import { Form } from "rsuite";
 import { Input } from "rsuite";
 import CustomButton from '../../../Components/CustomButton/CustomButton';
+import { sendMessage } from '../../../Features/Slices/chatSlice';
 
 function HomeCollaboration() {
 
