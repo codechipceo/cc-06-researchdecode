@@ -12,6 +12,7 @@ import {
   useResearchPaper,
 } from "../../Hooks/use-researchPaper";
 import { IsLoggedin } from '../../Utils/isLoggedin';
+import Footer from '../LandingPage/Section/Footer';
 
 const ResearchPaper = ({ studentInfo }) => {
   const { _id } = studentInfo ?? {};
@@ -103,6 +104,7 @@ const ResearchPaper = ({ studentInfo }) => {
           maxButtons={4}
         />
       </div>
+      <Footer/>
     </>
   );
 }

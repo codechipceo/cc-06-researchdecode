@@ -36,11 +36,26 @@ import Supervisorform from "./Pages/Supervisorform/Supervisorform";
 import WebinarPage from "./Pages/Webinar/Webinar";
 import WebinarDetail from "./Pages/WebinarDetails/WebinarDetails";
 import MyWebinar from "./Pages/Webinar/MyWebinar";
+import maintermscondition from "./Pages/T&C/MainTermsAndConditions"
+import Main_payment_policy from "./Pages/Payment_policy/Main_payment_policy";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/Main_PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PropProvider component={LandingPage} />,
+  },
+  {
+    path: "/t&c",
+    element: <PropProvider component={maintermscondition} />,
+  },
+  {
+    path: "/privacypolicy",
+    element: <PropProvider component={PrivacyPolicy} />,
+  },
+  {
+    path: "/payment_policy",
+    element: <PropProvider component={Main_payment_policy} />,
   },
   {
     path: "/collaboration",

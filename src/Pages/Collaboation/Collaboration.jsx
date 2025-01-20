@@ -14,6 +14,7 @@ import CustomButton from "../../Components/CustomButton/CustomButton";
 // import { createCollabConvo } from "../../Features/Slices/chatSlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import { sendMessage } from "../../Features/Slices/chatSlice";
+import Footer from "../LandingPage/Section/Footer";
 const breadcrumbPath = [
   {
     label: "Home",
@@ -174,6 +175,7 @@ const Collaboration = () => {
           </CustomModal.FooterRight>
         </CustomModal>
       </div>
+      <Footer/>
     </div>
   );
 };

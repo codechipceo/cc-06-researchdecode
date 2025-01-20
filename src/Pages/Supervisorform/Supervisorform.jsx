@@ -3,6 +3,7 @@ import ResponsiveAppBar from '../../Components/Navbar/Navbar';
 import { Input, InputGroup } from 'rsuite';
 import { AiOutlineMail, AiOutlineUser, AiOutlinePhone } from 'react-icons/ai';
 import { useSupervisor } from '../../Hooks/useSupervisor';
+import Footer from '../LandingPage/Section/Footer';
 
 function Supervisorform() {
   // State to store input values
@@ -249,6 +250,7 @@ function Supervisorform() {
           {error && <p className="error-message">Error: {error}</p>}
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }
