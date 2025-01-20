@@ -18,7 +18,7 @@ const LandingPage = () => {
       <HomeCollaboration />
       {/* <SearchResearch /> */}
       <WorkshopPromo />
-      <RecommendedCourses />
+      {/* <RecommendedCourses /> */}
       {/* <ConsultingServices /> */}
       {/* <Labs /> */}
       {/* <FAQSection /> */}

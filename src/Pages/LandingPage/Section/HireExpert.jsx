@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { Panel } from 'rsuite';
 import Typography from '../../../assets/scss/components/Typography';
-import { useConsultancyCard } from '../../../Hooks/useConsultancyCard';
 import Consultancy_card from '../../../Components/Consultant_card/Consultancy_card';
+import { useConsultancyCard } from '../../../Hooks/useConsultancyCard';
 const HireExpert = () => {
 
   const {
@@ -13,16 +13,16 @@ const HireExpert = () => {
   const qualification = "Btech";
 
   return (
-    <Panel className="recommended-courses">
-      <div className="recommended-header">
-        <Typography size={"2xl"} variant={"medium"} className={"recommended-text"}>Find Your Research eSupervisor</Typography>
-        <a href="experts" className="see-all">
-          See all
-          <i className="rs-icon rs-icon-chevron-right"></i>
-        </a>
+    <Panel className='recommended-courses'>
+      <div className='recommended-header' style={{display:'flex' , justifyContent:'center'}}>
+
+        <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
+          Find Your Research eSupervisor
+        </Typography>
+
       </div>
 
-      <div className="courses-container">
+      <div className='courses-container'>
         {consultancyCards.map((d) => {
           const { title, description, teacherId, _id } = d;
           return (
@@ -39,7 +39,7 @@ const HireExpert = () => {
         })}
       </div>
     </Panel>
-  )
+  );
 }
 
 export default HireExpert

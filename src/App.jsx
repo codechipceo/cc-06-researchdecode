@@ -107,7 +107,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/experts",
-    element: <GuardComponents component={Experts} />,
+    element: <Experts />,
   },
   {
     path: "/supervisor",
@@ -131,7 +131,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/consultancyCard/:consultancyCardId/videocall/:peerId",
-    element: <VideoCall />,
+    element: <GuardComponents component={VideoCall}/>,
   },
   {
     path: "/course-lecture/:courseId",
@@ -142,18 +142,17 @@ const router = createBrowserRouter([
     element: <Supervisorform />,
   },
   {
-    path: "/webinar",
-    element: <WebinarPage />,
+    path: "/webinars",
+    element: <GuardComponents component={WebinarPage} />,
   },
   {
     path: "/webinar/:webinarId",
-    element: <WebinarDetail/>,
+    element: <GuardComponents component={WebinarDetail} />,
   },
   {
     path: "/my-webinars",
-    element: <MyWebinar/>,
+    element: <GuardComponents component={MyWebinar} />,
   },
-
 ]);
 
 export default function App() {
