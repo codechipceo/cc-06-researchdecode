@@ -12,6 +12,7 @@ const CustomButton = ({
   onClick,
   disabled,
   isLoading,
+  fullWidth,
   ...props
 }) => {
   const buttonClassnames = classNames(className, {
@@ -21,6 +22,7 @@ const CustomButton = ({
     "font-weight-bold": fontWeight === "bold",
     "secondary-button": variant === "secondary",
     "preview-button": variant === "preview",
+    "full-width": fullWidth,
   });
 
 

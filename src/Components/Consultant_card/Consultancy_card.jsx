@@ -9,16 +9,16 @@ const Consultancy_card = ({ image, title, description, name, qualification, data
 
     return (
         <div className='card'>
-            <div className='card-left'>
+            <div className='card-top'>
                 <img src={image} alt="" className='user-img' />
             </div>
-            <div className='card-right'>
+            <div className='card-bottom'>
                 <div className='card-right-upper'>
                     <p className='title'>{title}</p>
                     <p className='description'>{description && description?.substring(0,128)}</p>
                 </div>
                 <div className='card-right-low'>
-                    <p>{name}</p>
+                    <h3>{name}</h3>
                     <p>Qualification : {qualification}</p>
                     <div className='buttons'>
                         <CustomButton onClick={() =>navigate(`/supervisor/${_id}`)} fullWidth variant={"primary"} fontWeight={"semibold"}  className="">Hire me <MdSend style={{ color: "white", marginLeft: "10px" }} /></CustomButton>

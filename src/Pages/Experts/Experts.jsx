@@ -5,6 +5,7 @@ import SearchBar from "../../Components/Searchbar/SearchBar";
 import PaginationComponent from "../../Components/Pagination/PaginationComponent";
 import Typography from "../../assets/scss/components/Typography";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import Footer from "../LandingPage/Section/Footer";
 
 const Experts = () => {
   const limit = 9;
@@ -94,6 +95,7 @@ const Experts = () => {
           setActivePage={setActivePage}
         />
       </div>
+      <Footer/>
     </div>
   );
 };
