@@ -1,0 +1,175 @@
+/* Root Variables */
+:root {
+    --primary-color: #3e8ed0;
+    --secondary-color: #f4f4f9;
+    --accent-color: #ff6584;
+    --text-color: #333;
+    --font-family: "Poppins", sans-serif;
+    --transition-speed: 0.3s;
+  }
+  
+  /* General Settings */
+  .outer-container {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, #dedcdc, #f4f4f9);
+    color: var(--text-color);
+    overflow-x: hidden;
+  }
+  
+  /* Terms Container */
+  .terms-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header Styling */
+  .terms-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .terms-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin: 0;
+    animation: slide-in-top 1s ease-out;
+  }
+  
+  .terms-date {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+  /* Content Section */
+  .terms-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Card Animation */
+  .terms-card {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    opacity: 0;
+    animation: slide-in-left 1s ease-out forwards;
+  }
+  
+  .terms-card:nth-child(even) {
+    animation: slide-in-right 1s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+  
+  .terms-card:nth-child(odd) {
+    animation-delay: 0.1s;
+  }
+  
+  .terms-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .terms-section-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .terms-paragraph {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .terms-list {
+    padding-left: 20px;
+    list-style: disc;
+  }
+  
+  /* Interactive Card Styling */
+  .interactive {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    color: white;
+  }
+  
+  .interactive::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: skewX(-30deg);
+    transition: left var(--transition-speed);
+  }
+  
+  .interactive:hover::before {
+    left: 100%;
+  }
+  
+  /* Footer Styling */
+  .terms-footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 2px solid var(--primary-color);
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+  
+  /* Keyframes for Header Animation */
+  @keyframes slide-in-top {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Keyframes for Cards */
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .terms-title {
+      font-size: 2rem;
+    }
+  
+    .terms-card {
+      padding: 15px;
+    }
+  }
+  

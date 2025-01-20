@@ -3,6 +3,7 @@ import CustomButton from "../../../Components/CustomButton/CustomButton";
 import SendMessage from "../../../assets/Icons/send_message_arrow.svg?react";
 import { selectStudentInfo } from "../../../Features/Slices/studentSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const CollaborationCard = ({
   title,
@@ -17,7 +18,8 @@ export const CollaborationCard = ({
   handleDelete
 }) => {
   const studentInfo = useSelector(selectStudentInfo);
-  const isOwner = userId === studentInfo._id;
+  const navigate  =  useNavigate()
+  const isOwner = userId === studentInfo?._id;
   return (
     <div className='collaboration__card__container'>
       <div className='collaboration__card__container--inner-wrapper'>
@@ -44,7 +46,7 @@ export const CollaborationCard = ({
           </div>
         </div>
 
-        {isOwner ? (
+        {isOwner && studentInfo ? (
           <div className='flex flex-between'>
             <CustomButton
               variant={"primary"}
@@ -69,7 +71,9 @@ export const CollaborationCard = ({
         ) : (
           <CustomButton
             variant={"primary"}
-            onClick={() => handleMessage({ ...cardInfo, userId })}
+            onClick={() =>
+              studentInfo ? handleMessage({ ...cardInfo, userId }) : navigate("/signin")
+            }
             className={"collaboration__card_action_btn"}
           >
             Send Message <SendMessage />

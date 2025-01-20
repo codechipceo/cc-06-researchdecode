@@ -8,6 +8,7 @@ import { selectAllEnrolledWebinars,getAllEnrolledWebinar } from '../../Features/
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationComponent from '../../Components/Pagination/PaginationComponent';
 import SearchBar from "../../Components/Searchbar/SearchBar";
+import Footer from '../LandingPage/Section/Footer';
 
 const AllWebinars = () => {
   const limit = 5;
@@ -76,6 +77,7 @@ const AllWebinars = () => {
           setActivePage={setActivePage}
         />
       </Panel>
+      <Footer/>
     </>
   );
 };

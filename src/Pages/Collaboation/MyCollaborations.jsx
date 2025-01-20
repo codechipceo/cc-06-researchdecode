@@ -16,6 +16,7 @@ import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomModal from "../../Components/Modal/Modal";
 import useModal from "../../Hooks/useModal";
 import { Form, Input } from "rsuite";
+import Footer from "../LandingPage/Section/Footer";
 
 const breadcrumbPath = [
   {
@@ -221,6 +222,7 @@ const MyCollaborations = () => {
           </CustomButton>
         </CustomModal.FooterRight>
       </CustomModal>
+      <Footer/>
     </>
   );
 };

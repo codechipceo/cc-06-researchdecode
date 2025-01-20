@@ -22,6 +22,10 @@ import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 
 import { useSockets } from "../../Hooks/useSockets";
+import useModal from "../../Hooks/useModal";
+import CustomModal from "../../Components/Modal/Modal";
+import { Form, Input } from "rsuite";
+import { sendMessage } from "../../Features/Slices/chatSlice";
 
 const breadcrumbPath = [
   { label: "Home", path: "/" },
@@ -108,11 +112,34 @@ export const SuperVisorDetail = () => {
   }, [supervisorCardId]);
 
   const [amount, setAmount] = useState(single);
+  const {
+    show: showChatBox,
+    hide: hideChatBox,
+    isOpen: isChatboxOpen,
+  } = useModal();
+  const [message, setMessage] = useState("");
+  const handleChatButton = () => {
+    setMessage("");
+    showChatBox();
+  };
+  const handleSubmitChat = () => {
+    const payload = {
+      content: message,
+      sender: loggedinUser._id,
+      senderModel: "Student",
+      recipient: _id,
+      recipientModel: "Profile",
+    };
+
+    dispatch(sendMessage(payload));
+    hideChatBox();
+    navigate(`/inbox/${_id}`);
+  };
 
   return (
     <div>
       <HeaderThree
-        title="Supervisor Detail"
+        title='Supervisor Detail'
         breadcrumbPath={breadcrumbPath}
         // backgroundImage={bgImage}
       />
@@ -146,26 +173,12 @@ export const SuperVisorDetail = () => {
               }}
             >
               <Box>
-                <h5>Heading of the teachers detail.</h5>
+                <h5>{consultancyCardDetail?.title}</h5>
               </Box>
-              <Box>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the Renaissance. The first line of
-                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
-                in section 1.10.32.
-              </Box>
+              <Box>{consultancyCardDetail?.description?.substring(0,128)}</Box>
             </Box>
           </Grid2>
-           {/* <Box
+          {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -198,9 +211,9 @@ export const SuperVisorDetail = () => {
                   setTabValue(newValue);
                   setAmount(Number(e.target.id));
                 }}
-                aria-label="course details tabs"
+                aria-label='course details tabs'
               >
-                <Tab label="Single" id={single} />
+                <Tab label='Single' id={single} />
                 {/* <Tab label="Project" id={project} /> */}
               </Tabs>
               <Box
@@ -219,7 +232,7 @@ export const SuperVisorDetail = () => {
                     marginLeft: "10px",
                   }}
                 >
-                RS {tabValue === 0 && consultancyCardDetail?.pricing?.single} 
+                  RS {tabValue === 0 && consultancyCardDetail?.pricing?.single}
                 </Typography>
 
                 {/* <Typography>{tabValue === 1 && project}</Typography> */}
@@ -227,17 +240,18 @@ export const SuperVisorDetail = () => {
 
               <CustomButton
                 fullWidth
-                variant="primary"
+                variant='primary'
                 disabled={isConsultancyVerified}
                 onClick={handleConsultancy}
               >
                 {isConsultancyVerified ? "Currently Active" : "Buy"}
               </CustomButton>
-              <div className="supervisor-chat-video-btn">
+              <div className='supervisor-chat-video-btn'>
                 <CustomButton
                   variant={"primary"}
                   onClick={() => {
-                    navigate(`/inbox/${_id}`);
+                    handleChatButton();
+                    // navigate(`/inbox/${_id}`);
                   }}
                 >
                   Chat{" "}
@@ -257,6 +271,36 @@ export const SuperVisorDetail = () => {
             </Box>
           </Grid2>
         </Grid2>
+        <CustomModal open={isChatboxOpen} handleClose={hideChatBox}>
+          <CustomModal.Header>
+            <Typography size={"xl"}>
+              Send Message. View Inbox to continue discussions
+            </Typography>
+          </CustomModal.Header>
+          <CustomModal.Body>
+            <div>
+              <Form fluid>
+                <Form.Group controlId='textarea-6'>
+                  <Form.ControlLabel>Write Message</Form.ControlLabel>
+                  <Input
+                    as='textarea'
+                    value={message}
+                    onChange={setMessage}
+                    name='message'
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          </CustomModal.Body>
+          <CustomModal.FooterLeft>
+            <CustomButton onClick={hideChatBox}>Cancel</CustomButton>
+          </CustomModal.FooterLeft>
+          <CustomModal.FooterRight>
+            <CustomButton variant={"primary"} onClick={handleSubmitChat}>
+              Submit
+            </CustomButton>
+          </CustomModal.FooterRight>
+        </CustomModal>
       </Container>
     </div>
   );

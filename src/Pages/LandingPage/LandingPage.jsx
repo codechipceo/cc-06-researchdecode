@@ -3,6 +3,8 @@ import ConsultingServices from './Section/ConsultingServices';
 import FAQSection from './Section/FAQSection';
 import Footer from './Section/Footer';
 import Hero from './Section/Hero';
+import HireExpert from './Section/HireExpert';
+import HomeCollaboration from './Section/HomeCollaboration';
 import Labs from './Section/Labs';
 import RecommendedCourses from './Section/RecommendedCourses';
 import SearchResearch from "./Section/SearchResearch";
@@ -12,13 +14,14 @@ const LandingPage = () => {
     <>
       <ResponsiveAppBar />
       <Hero />
-      <SearchResearch />
-      <RecommendedCourses />
+      <HireExpert/>
+      <HomeCollaboration />
+      {/* <SearchResearch /> */}
       <WorkshopPromo />
-      <ConsultingServices />
-      {/* <Collaboration/> */}
-      <Labs />
-      <FAQSection />
+      {/* <RecommendedCourses /> */}
+      {/* <ConsultingServices /> */}
+      {/* <Labs /> */}
+      {/* <FAQSection /> */}
       <Footer />
     </>
   );

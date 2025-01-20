@@ -1,5 +1,4 @@
-.card-left {
-  width: 35%;
+.card-top {
   height: auto;
 }
 .user-img {
@@ -8,14 +7,16 @@
 }
 .card {
   display: flex;
-  width: 600px;
+  flex-direction: column;
+  min-width: 300px;
+  width: 400px;
   height: auto;
   border: 4px solid $neutral10;
   margin: auto;
 }
-.card-right {
-  width: 65%;
+.card-bottom {
   height: 100%;
+  padding: 20px 20px;
 }
 .title {
   color: $primary40;
@@ -57,27 +58,8 @@
   justify-content: space-between;
 }
 
-@media (max-width: 1200px) {
-  .card {
-    width: 500px;
-  }
-}
-@media (max-width: 1000px) {
-  .card {
-    width: 400px;
-  }
-}
 
-@media (max-width: 800px) {
-  .card {
-    width: 500px;
-  }
-}
 @media (max-width: 600px) {
-  .card {
-    width: 90%;
-    max-width: 450px;
-  }
   .card-right {
     padding: 6px;
     padding-left: 15px;

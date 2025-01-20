@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ResponsiveAppBar from "../../Components/Navbar/Navbar";
-import { verifyConsultancy } from "../../Features/Slices/consultancySlice";
+import {
+  endConsultancy,
+  verifyConsultancy,
+} from "../../Features/Slices/consultancySlice";
 import { selectStudentInfo } from "../../Features/Slices/studentSlice";
 import { usePeerJs } from "../../Hooks/usePeerjs";
-
 
 const generatePeerId = (id, paramId) => {
   const myPeerId = `${id}_${paramId}`;
@@ -27,10 +29,13 @@ function Videocall() {
     remoteUserPeerId
   );
 
-  console.log(currentCall)
-
   const [isLoading, setIsLoading] = useState(false);
   const [isConsultancyVerified, setIsConsultancyVerified] = useState(false);
+
+  const handleEndCall = () => {
+    dispatch(endConsultancy({ consultancyCardId: consultancyCardId }));
+    endCall();
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -57,7 +62,7 @@ function Videocall() {
             </Button>
             <Button
               color='error'
-              onClick={endCall}
+              onClick={handleEndCall}
               disabled={!currentCall}
               variant='contained'
             >

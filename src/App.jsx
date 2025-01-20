@@ -36,11 +36,26 @@ import Supervisorform from "./Pages/Supervisorform/Supervisorform";
 import WebinarPage from "./Pages/Webinar/Webinar";
 import WebinarDetail from "./Pages/WebinarDetails/WebinarDetails";
 import MyWebinar from "./Pages/Webinar/MyWebinar";
+import maintermscondition from "./Pages/T&C/MainTermsAndConditions"
+import Main_payment_policy from "./Pages/Payment_policy/Main_payment_policy";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/Main_PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PropProvider component={LandingPage} />,
+  },
+  {
+    path: "/t&c",
+    element: <PropProvider component={maintermscondition} />,
+  },
+  {
+    path: "/privacypolicy",
+    element: <PropProvider component={PrivacyPolicy} />,
+  },
+  {
+    path: "/payment_policy",
+    element: <PropProvider component={Main_payment_policy} />,
   },
   {
     path: "/collaboration",
@@ -92,7 +107,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/experts",
-    element: <GuardComponents component={Experts} />,
+    element: <Experts />,
   },
   {
     path: "/supervisor",
@@ -116,7 +131,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/consultancyCard/:consultancyCardId/videocall/:peerId",
-    element: <VideoCall />,
+    element: <GuardComponents component={VideoCall}/>,
   },
   {
     path: "/course-lecture/:courseId",
@@ -127,18 +142,17 @@ const router = createBrowserRouter([
     element: <Supervisorform />,
   },
   {
-    path: "/webinar",
-    element: <WebinarPage />,
+    path: "/webinars",
+    element: <GuardComponents component={WebinarPage} />,
   },
   {
     path: "/webinar/:webinarId",
-    element: <WebinarDetail/>,
+    element: <GuardComponents component={WebinarDetail} />,
   },
   {
     path: "/my-webinars",
-    element: <MyWebinar/>,
+    element: <GuardComponents component={MyWebinar} />,
   },
-
 ]);
 
 export default function App() {
