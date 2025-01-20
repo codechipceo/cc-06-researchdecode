@@ -22,11 +22,10 @@ const WorkshopPromo = () => {
         </Col>
         <Col xs={24} md={12} className="content-section">
           <h1>Engage, Learn, Grow</h1>
-          <h3>Join Our Upcoming Workshops & Conferences</h3>
+          <h3>Collaborate with Research Experts from Leading Labs </h3>
           <ul className="feature-list">
-            <li>Teachers don't get lost in the grid view and have a dedicated Podium space.</li>
-            <li>TAs and presenters can be moved to the front of the class.</li>
-            <li>Teachers can easily see all students and class data at one time.</li>
+            <li>We feature renowned researchers from prestigious institutions worldwide, actively driving cutting-edge advancements. </li>
+            <li> Join our platform to connect with and learn from these experts, enhancing your knowledge and expertise.</li>
           </ul>
           <CustomButton onClick={()=>{navigate('/consultancy')}} Icon={RightArrowIcon} variant="primary" fontWeight={"semibold"} className="btn-size-7">
             Know More
@@ -35,12 +34,12 @@ const WorkshopPromo = () => {
       </Row>
       <Row >
         <Col xs={24} md={12} className="content-section">
-          <h1>Engage, Learn, Grow</h1>
+          <h1>One on One Discussion  </h1>
           <h3>Join Our Upcoming Workshops & Conferences</h3>
           <ul className="feature-list">
-            <li>Teachers don't get lost in the grid view and have a dedicated Podium space.</li>
-            <li>TAs and presenters can be moved to the front of the class.</li>
-            <li>Teachers can easily see all students and class data at one time.</li>
+            <li>Access a global network of professionals to broaden your research impact.</li>
+            <li>Gain mentorship and guidance from accomplished experts in your field.</li>
+            <li>Collaborate from leading research experts.</li>
           </ul>
           <CustomButton onClick={()=>{navigate('/consultancy')}} Icon={RightArrowIcon} variant="primary" fontWeight={"semibold"} className="btn-size-7">
             Know More

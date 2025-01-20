@@ -17,6 +17,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import Footer from "../LandingPage/Section/Footer";
 const breadcrumbPath = [{ label: "Home", path: "/" }];
 
 const Request = () => {
@@ -59,6 +60,7 @@ const Request = () => {
           <Typography>No request</Typography>
         )}
       </Container>
+      <Footer/>
     </div>
   );
 };
