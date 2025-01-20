@@ -127,7 +127,7 @@ const router = createBrowserRouter([
     element: <Supervisorform />,
   },
   {
-    path: "/webinar",
+    path: "/webinars",
     element: <WebinarPage />,
   },
   {

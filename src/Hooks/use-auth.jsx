@@ -22,22 +22,19 @@ const useAuth = () => {
   const isLoggedIn = useSelector(selectStudentIsLoggedIn);
   const studentToken = useSelector(selectStudentToken);
   const isSignUpError = useSelector(selectStudentIsSignUpError);
-  const navigate=useNavigate()
-  const handleLogin =  (data) => {
-
-    dispatch(studentLogin(data)).then(()=>{
-      if (isLoggedIn) {
-        navigate("/");
-      }
-    })
-
+  const navigate = useNavigate();
+  const handleLogin = (data) => {
+    dispatch(studentLogin(data)).then(() => {
+      navigate("/");
+    });
   };
-  const handleSignUp=(data)=>{
-    dispatch(studentSignUp(data))
-  }
+  const handleSignUp = (data) => {
+    dispatch(studentSignUp(data)).then(() => {
+      navigate("/signin");
+    });
+  };
 
   return {
-
     isLoading,
     errorMessage,
     isError,
@@ -45,7 +42,7 @@ const useAuth = () => {
     handleLogin,
     handleSignUp,
     studentToken,
-    isSignUpError
+    isSignUpError,
   };
 };
 
