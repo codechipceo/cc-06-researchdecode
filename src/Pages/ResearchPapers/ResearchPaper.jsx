@@ -11,7 +11,7 @@ import {
   usePendingRequests,
   useResearchPaper,
 } from "../../Hooks/use-researchPaper";
-import { IsLoggedin } from '../../Utils/isLoggedin.jsx';
+import { IsLoggedin } from '../../Utils/IsLoggedin.jsx';
 import Footer from '../LandingPage/Section/Footer';
 
 const ResearchPaper = ({ studentInfo }) => {
