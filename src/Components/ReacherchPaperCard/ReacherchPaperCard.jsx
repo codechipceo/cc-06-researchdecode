@@ -135,10 +135,11 @@ const ResearchPaperCard = ({
             size={window.innerWidth < 768 ? "md" : "lg"}
             variant="bold"
           >
-            {containerTitle && containerTitle[0]}
+             {title && title[0]}
           </Typography>
           <Typography size={window.innerWidth < 768 ? "xm" : "sm"}>
-            {title && title[0]}
+           
+            {containerTitle && containerTitle[0]}
           </Typography>
           <Typography
             size={window.innerWidth < 768 ? "xm" : "sm"}

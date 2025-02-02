@@ -26,7 +26,7 @@ const Hero = () => {
           {/* Buttons */}
           <div className="button-group">
             <CustomButton onClick={() => navigate(`/signin`)} variant={"primary"} fontWeight={"semibold"} className="get-started btn-size-11">Get Started</CustomButton>
-            {/* <CustomButton variant={"secondary"} fontWeight={"semibold"} className="free-trial btn-size-11">Get free trial</CustomButton> */}
+            <CustomButton onClick={()=> navigate('/supervisorform')} variant={"secondary"} fontWeight={"semibold"} className="free-trial btn-size-14"> Become an expert</CustomButton>
           </div>
 
           {/* Features */}

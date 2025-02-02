@@ -1,6 +1,6 @@
 .cards-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 40px;
   column-gap: 40px;
 }
@@ -10,8 +10,8 @@
   padding-bottom: 50px;
 }
 
-.top_experts{
-    padding: 10px 50px 30px;
+.top_experts {
+  padding: 10px 50px 30px;
 }
 
 @media (max-width: 1350px) {
@@ -19,52 +19,61 @@
     width: 350px;
   }
 }
+
 @media (max-width: 1250px) {
   .card {
     width: 330px;
   }
 }
+
 @media (max-width: 1080px) {
   .cards-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 }
+
 @media (max-width: 750px) {
   .cards-list {
     display: flex;
     flex-direction: column;
   }
+
   .card {
     width: 400px;
   }
 }
 
 @media (max-width: 600px) {
-  .experts_mid_header1{
+  .experts_mid_header1 {
     font-size: 24px;
   }
-  .experts_mid_header2{
+
+  .experts_mid_header2 {
     font-size: 20px;
   }
-  .top_experts{
+
+  .top_experts {
     text-align: center;
     font-size: 20px;
   }
+
   .experts_header {
     font-size: 30px !important;
   }
+
   .experts_div {
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  .top_experts{
+
+  .top_experts {
     padding: 5px 30px 15px;
   }
 }
 
 @media (max-width: 450px) {
-  .card{
+  .card {
     width: 300px;
   }
 }

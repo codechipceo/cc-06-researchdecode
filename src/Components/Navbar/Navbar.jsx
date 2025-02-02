@@ -14,6 +14,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Icons/Logo.svg";
+import LogoBlackText from "../../assets/Icons/LogoBlackText.svg";
 
 import {
   logout,
@@ -23,41 +24,52 @@ import {
 import { featureFlag, features } from "../../Utils/featureFlag";
 const localPages = [
   {
-    navLink: "Find Papers",
+    navLink: "Home",
+    navPath: "/",
+  },
+  {
+    navLink: "Research",
     navPath: "/searchPaper",
   },
   {
-    navLink: "Hire Expert",
+    navLink: "Consultancy",
     navPath: "/experts",
   },
-  {
-    navLink: "Collaboration",
-    navPath: "/collaboration",
-  },
-  {
+    {
     navLink: "Courses",
     navPath: "/courses",
   },
 
+  {
+    navLink: "Collaboration",
+    navPath: "/collaboration",
+  },
+
+
 ];
 
 const prodPages = [
+    {
+    navLink: "Home",
+    navPath: "/",
+  },
   {
-    navLink: "Find Papers",
+    navLink: "Research",
     navPath: "/searchPaper",
   },
   {
-    navLink: "Hire Expert",
+    navLink: "Consultancy",
     navPath: "/experts",
+  },
+    {
+    navLink: "Webinars",
+    navPath: "/webinars",
   },
   {
     navLink: "Collaboration",
     navPath: "/collaboration",
   },
-  {
-    navLink: "Webinars",
-    navPath: "/webinars",
-  },
+
 ];
 
 const pages = featureFlag(features.NAVBAR) ? localPages : prodPages;
@@ -119,12 +131,18 @@ function ResponsiveAppBar() {
     >
       <AppBar
         position=''
-        sx={{ backgroundColor: "black", color: "black", boxShadow: "0" }}
+        sx={{ backgroundColor: "#f4f4f4", color: "black", boxShadow: "0" }}
       >
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <img src={Logo} onClick={homePage} style={{cursor:'pointer'}} />
+           <Box 
+  component="img" 
+  src={LogoBlackText} 
+  onClick={homePage} 
+  sx={{ cursor: 'pointer', marginLeft: { xs: '0px', lg: '80px' } }} 
+/>
+
             {/* <Typography
               variant='h6'
               noWrap
@@ -181,7 +199,7 @@ function ResponsiveAppBar() {
                 {pages.map((page) => (
                   <MenuItem key={page.navLink} onClick={handleCloseNavMenu}>
                     <Link
-                      style={{ textDecoration: "none", color: "black" }}
+                      style={{ textDecoration: "none", color: "#484848" }}
                       to={page.navPath}
                     >
                       <Typography textAlign='center'>{page.navLink}</Typography>
@@ -207,7 +225,7 @@ function ResponsiveAppBar() {
                 color: "#40ba9b",
               }}
             >
-              LOGO
+              {/* LOGO */}
             </Typography>
             <div style={{ display: "flex", flex: 1 }}></div>
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -217,7 +235,7 @@ function ResponsiveAppBar() {
                   onClick={handleCloseNavMenu}
                   style={{
                     textDecoration: "none",
-                    color: "#74e6e8",
+                    color: "#484848",
                     marginRight: "20px",
                     fontWeight: "lighter",
                     padding: "1px 4px",

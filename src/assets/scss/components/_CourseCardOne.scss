@@ -1,4 +1,3 @@
-
 .course-card-one {
   width: 280px;
   border-radius: 20px !important;
@@ -7,6 +6,7 @@
   background: $neutral5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
   .rs-panel-body,
   .rs-panel-header {
     padding: 12px !important;
@@ -29,7 +29,7 @@
     padding: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     .course-card-one__header {
       margin-bottom: 12px;
@@ -122,11 +122,11 @@
         gap: 8px;
 
         .course-card-one__original-price {
-            color:$primary30;
-            text-decoration: line-through;
-            font-weight: 300;
-            font-style: italic;
-            // font-family: 'Poppins', sans-serif;
+          color: $primary30;
+          text-decoration: line-through;
+          font-weight: 300;
+          font-style: italic;
+          // font-family: 'Poppins', sans-serif;
         }
 
         .course-card-one__discounted-price {
@@ -137,22 +137,27 @@
     }
   }
 }
+
 @media (max-width: 665px) {
   .course-card-one {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
   }
-  .course-card-one__title{
+
+  .course-card-one__title {
     font-size: 14px !important;
   }
-  .course-card-one__description{
+
+  .course-card-one__description {
     font-size: 14px !important;
   }
-  .course-card-one__instructor-name{
+
+  .course-card-one__instructor-name {
     font-size: 14px !important;
   }
-  .course-card-one__discounted-price{
+
+  .course-card-one__discounted-price {
     font-size: 20px !important;
   }
 }

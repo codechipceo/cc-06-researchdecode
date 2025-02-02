@@ -6,7 +6,7 @@ import PaginationComponent from "../../Components/Pagination/PaginationComponent
 import Typography from "../../assets/scss/components/Typography";
 import { HeaderThree } from "../../Components/Headers/HeaderThree";
 import Footer from "../LandingPage/Section/Footer";
-
+import ConsultCard from '../../Components/Consultant_card/ConsultCard';
 const Experts = () => {
   const limit = 9;
   const [searchInput, setSearchInput] = useState("");
@@ -43,7 +43,7 @@ const Experts = () => {
       <div className="default__layout_container">
 
         <Typography size={"3xl"} variant={"bold"} className={"text-center experts_mid_header1"}>
-          Find your next research collaboration
+          Find your next research eSupervisor
 
         </Typography>
 
@@ -68,7 +68,7 @@ const Experts = () => {
                 consultancyCards.map((d) => {
                   const { title, description, teacherId, _id } = d;
                   return (
-                    <Consultancy_card
+                    <ConsultCard
                       data={d}
                       key={teacherId}
                       image={image}
@@ -87,6 +87,8 @@ const Experts = () => {
             )}
           </div>
         </div>
+
+        {/* <ConsultCard/> */}
 
         <PaginationComponent
           total={consultancyCount}
