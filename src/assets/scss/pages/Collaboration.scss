@@ -1,44 +1,69 @@
 .default__layout_container {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    .collaboration__cards_wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-  
-      @media (max-width: 600px) {
-        gap: 10px;
-      }
-    }
-  
-    .text-center {
-      text-align: center;
-      margin-top: 20px;
-  
-      @media (max-width: 600px) {
-        font-size: 24px;
-      }
-    }
-  }
-  
-  .collaboration-card {
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .collaboration__cards_wrapper {
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-    @media (max-width: 600px) {
-      width: 100%;
-      padding: 15px;
-    }
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
 
+    @media (max-width: 600px) {
+      gap: 10px;
+    }
   }
-  
+
+  .text-center {
+    text-align: center;
+    margin-top: 20px;
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+}
+
+.collaboration-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    width: 100%;
+    padding: 15px;
+  }
+
+}
+
+.test-center-hire {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 1380px) {
+  .test-center-hire {
+    margin-left: 340px;
+    margin-bottom: 20px;
+  }
+}
+
+.link-text {
+  position: relative;
+  left: 0;
+  /* No left offset for mobile or tablet */
+}
+
+/* Apply styles for laptops and larger screens */
+@media screen and (min-width: 1024px) {
+  .link-text {
+    position: relative;
+    left: 200px;
+    /* 200px left margin for laptops and larger devices */
+  }
+}
