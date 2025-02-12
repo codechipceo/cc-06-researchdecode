@@ -9,6 +9,13 @@ export default defineConfig({
   define: {
     global: {},
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ["legacy-js-api"],
+      },
+    },
+  },
 });
 
 

@@ -11,6 +11,7 @@ import { Form } from "rsuite";
 import { Input } from "rsuite";
 import CustomButton from '../../../Components/CustomButton/CustomButton';
 import { sendMessage } from '../../../Features/Slices/chatSlice';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 function HomeCollaboration() {
 
@@ -71,16 +72,24 @@ function HomeCollaboration() {
 
     return (
         <div className="default__layout_container">
-            <Typography size={"3xl"} variant={"bold"} className={"text-center"}>
-                Find Your Next Research Collaboration
-            </Typography>
+            <div  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                 <Typography size={"3xl"} variant={"bold"} className={""}>
+                     Find Your Next Research Collaboration
+                 </Typography>
+                  <Link to="/collaboration" style={{ textDecoration: 'underline', color: '#49BBBD', }} className='link-text'  >
+                    <Typography size={"lg"}   variant={"bold"} className={""}>
+                    View All
+                    </Typography>
+                 </Link>
+            </div>
+           
 
-            <SearchBar
+            {/* <SearchBar
                 value={search}
                 handleChange={handleInputChange}
                 handleSearch={handleSearch}
                 placeholder="Search Collaboration"
-            />
+            /> */}
 
             <div className="flex collaboration__cards_wrapper flex-wrap">
                 {allCollaborations.length && !loading
