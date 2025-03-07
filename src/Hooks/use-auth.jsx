@@ -11,6 +11,7 @@ import {
   selectStudentToken,
 } from "../Features/Slices/studentSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const useAuth = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,11 @@ const useAuth = () => {
     });
   };
   const handleSignUp = (data) => {
-    dispatch(studentSignUp(data)).then(() => {
+    dispatch(studentSignUp(data)).then((res) => {
+      if(res?.error?.message ==="Rejected"){
+        toast.error("Signup Error")
+        return;
+      }
       navigate("/signin");
     });
   };

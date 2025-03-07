@@ -1,14 +1,14 @@
 @import "../root.scss";
 .recommended-courses {
   padding: 16px;
-  
+
   .recommended-header {
     margin-bottom: 24px;
     text-align: center;
     h1 {
       font-size: 2rem;
       font-weight: 600;
-    
+
       color: $dark90;
     }
   }
@@ -24,13 +24,13 @@
   //   min-height: 50vh; // Ensures the title occupies at least half the viewport height
   //   color: $dark90; // Assuming `$dark90` is defined in your SCSS variables
   // }
-  
-  
+
+
   .courses-container {
     display: flex;
     flex-wrap: wrap;
     gap: 24px; // Spacing between cards
-    justify-content: space-between;
+    justify-content: start;
     .courses-item {
       flex: 1 1 calc(50% - 12px); // Two cards in a row
       max-width: calc(50% - 12px); // Max width to maintain spacing

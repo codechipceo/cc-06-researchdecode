@@ -10,6 +10,9 @@ import {
   Col,
   SelectPicker,
   Grid,
+  Radio,
+  RadioGroup,
+  DatePicker,
 } from "rsuite";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,11 +37,10 @@ export const SignUp = () => {
     gender: "",
     countryCode: "",
     phoneNumber: "",
-    city: "",
-    state: "",
-    country: "",
-    street: "",
-    postalCode: "",
+    collegeName: '',
+    department: '',
+    graduationStatus: '',
+    dob:'',
   });
 
   const { isLoading, errorMessage, isError, handleSignUp } = useAuth();
@@ -79,7 +81,7 @@ export const SignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSignUp(signUpObj);
+    handleSignUp(formData);
   };
 
   return (
@@ -207,53 +209,42 @@ export const SignUp = () => {
 
           <InputGroup inside className='input-field'>
             <Input
-              placeholder='Street'
-              name='street'
-              value={formData.street}
-              onChange={(value) => handleChange("street", value)}
+              placeholder='College Name'
+              name='collegeName'
+              value={formData.collegeName}
+              onChange={(value) => handleChange("collegeName", value)}
               error={isError}
             />
           </InputGroup>
 
           <InputGroup inside className='input-field'>
             <Input
-              placeholder='City'
-              name='city'
-              value={formData.city}
-              onChange={(value) => handleChange("city", value)}
+              placeholder='Department'
+              name='department'
+              value={formData.department}
+              onChange={(value) => handleChange("department", value)}
               error={isError}
             />
           </InputGroup>
 
-          <InputGroup inside className='input-field'>
-            <Input
-              placeholder='State/Province'
-              name='state'
-              value={formData.state}
-              onChange={(value) => handleChange("state", value)}
-              error={isError}
-            />
-          </InputGroup>
+          <DatePicker
+            name='dob'
+            value={formData.dob}
+            onChange={(value) => handleChange("dob", value)}
+            placeholder='Date Of Birth'
+          />
+          <RadioGroup
+            name='graduationStatus'
+            inline
+            value={formData.graduationStatus}
+            onChange={(value) => handleChange("graduationStatus", value)}
+          >
+            <Radio value='UG'>UG Student</Radio>
+            <Radio value='PG'>PG Student</Radio>
+            <Radio value='PHD'>PHD Student</Radio>
+            <Radio value='Other'>Other</Radio>
+          </RadioGroup>
 
-          <InputGroup inside className='input-field'>
-            <Input
-              placeholder='Postal Code'
-              name='postalCode'
-              value={formData.postalCode}
-              onChange={(value) => handleChange("postalCode", value)}
-              error={isError}
-            />
-          </InputGroup>
-
-          <InputGroup inside className='input-field'>
-            <Input
-              placeholder='Country'
-              name='country'
-              value={formData.country}
-              onChange={(value) => handleChange("country", value)}
-              error={isError}
-            />
-          </InputGroup>
           <Row>
             <Col xs={24}>
               <Button

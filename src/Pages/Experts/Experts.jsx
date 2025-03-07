@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
-import Consultancy_card from "../../Components/Consultant_card/Consultancy_card";
-import SearchBar from "../../Components/Searchbar/SearchBar";
-import PaginationComponent from "../../Components/Pagination/PaginationComponent";
 import Typography from "../../assets/scss/components/Typography";
-import { HeaderThree } from "../../Components/Headers/HeaderThree";
-import Footer from "../LandingPage/Section/Footer";
 import ConsultCard from '../../Components/Consultant_card/ConsultCard';
+import { HeaderThree } from "../../Components/Headers/HeaderThree";
+import PaginationComponent from "../../Components/Pagination/PaginationComponent";
+import SearchBar from "../../Components/Searchbar/SearchBar";
+import { useConsultancyCard } from "../../Hooks/useConsultancyCard";
+import Footer from "../LandingPage/Section/Footer";
 const Experts = () => {
   const limit = 9;
   const [searchInput, setSearchInput] = useState("");
