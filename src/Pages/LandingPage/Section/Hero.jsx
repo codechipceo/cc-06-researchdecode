@@ -21,7 +21,6 @@ const Hero = () => {
           <Typography size={"4xl"} variant={"bold"} className="heading">
             Up Your <span className="highlight">Skills</span> <br /> To <span className="highlight">Advance</span> Your <span className="highlight">Career</span> & Research Path
           </Typography>
-          <Typography size={"sm"} variant={"regular"} className="primary-text content-1">Lorem Ipsum is simply simply dummy text of the printing and typesetting industry.</Typography>
 
           {/* Buttons */}
           <div className="button-group">
@@ -59,10 +58,10 @@ const Hero = () => {
                 <span className="collaboration-stat__number">250+</span>
                 <span className="collaboration-stat__label">Collaboration</span>
               </div>
-              <img src={dulingo} alt="" />
+              {/* <img src={dulingo} alt="" />
               <img src={codecov} alt="" />
               <img src={usertesting} alt="" />
-              <img src={magicleap} alt="" />
+              <img src={magicleap} alt="" /> */}
 
             </div>
           </div>

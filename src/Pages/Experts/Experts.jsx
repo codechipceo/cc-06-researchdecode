@@ -66,7 +66,9 @@ const Experts = () => {
             {!isLoading && !isError ? (
               consultancyCards.length > 0 ? (
                 consultancyCards.map((d) => {
+                  console.log(d)
                   const { title, description, teacherId, _id } = d;
+                  const { name, qualification, experience} = teacherId
                   return (
                     <ConsultCard
                       data={d}

@@ -47,11 +47,11 @@ const ExpertDetailCard = ({
         >
           {name}
         </Typography>
-        <Typography variant="body2" color="text.secondary" textAlign="center">
+        {/* <Typography variant="body2" color="text.secondary" textAlign="center">
           <strong>Email:</strong> {email}
-        </Typography>
+        </Typography> */}
         <Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -64,7 +64,7 @@ const ExpertDetailCard = ({
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <strong>Experience:</strong> {experience}
             </Box>
-        </Box>
+        </Box> */}
           </Typography>
       </CardContent>
     </Card>

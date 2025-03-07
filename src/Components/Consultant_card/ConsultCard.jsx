@@ -12,7 +12,7 @@ const ConsultCard = ({image, title, description, name, qualification, data }) =>
 
   const navigate = useNavigate();
    const { _id , teacherId } = data
-  
+
 
   const maxDescriptionLength = 80;
   const shortDescription = description.length > maxDescriptionLength
@@ -55,9 +55,9 @@ const ConsultCard = ({image, title, description, name, qualification, data }) =>
               variant="medium"
               className="course-card-one__duration-text"
             >
-              
+
             </Typography>
-          </FlexboxGrid.Item> 
+          </FlexboxGrid.Item>
         </FlexboxGrid> */}
 
         <Typography
@@ -66,7 +66,7 @@ const ConsultCard = ({image, title, description, name, qualification, data }) =>
           className="course-card-one__title"
         >
           {title}
-        
+
         </Typography>
 
         <Typography
@@ -94,21 +94,21 @@ const ConsultCard = ({image, title, description, name, qualification, data }) =>
               className="course-card-one__instructor-name"
             >
               {name}
-              
+
             </Typography>
           </FlexboxGrid.Item>
 
         </FlexboxGrid>
-          <Typography
+          {/* <Typography
               size="14px"
               variant="bold"
               className="card-right-low"
             >
              Qualification :  {qualification}
-            </Typography>
-        <CustomButton 
-          variant="primary" 
-          fontWeight="semibold" 
+            </Typography> */}
+        <CustomButton
+          variant="primary"
+          fontWeight="semibold"
           onClick={() =>navigate(`/supervisor/${_id}`)}
           style={{ marginTop: "16px" }} // Adjust as needed
         >

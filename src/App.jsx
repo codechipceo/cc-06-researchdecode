@@ -39,6 +39,7 @@ import MyWebinar from "./Pages/Webinar/MyWebinar";
 import maintermscondition from "./Pages/T&C/MainTermsAndConditions"
 import Main_payment_policy from "./Pages/Payment_policy/Main_payment_policy";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/Main_PrivacyPolicy";
+import PaymentHistory from "./Pages/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
   {
     path: "/supervisorform",
     element: <Supervisorform />,
+  },
+  {
+    path: "/payment-history",
+    element:<GuardComponents component={PaymentHistory} />,
   },
   {
     path: "/webinars",
